@@ -1,6 +1,6 @@
 # FragOut
 
-**Find your element.** A mobile-first fragrance wardrobe, personal recommendation engine, and transparent layering lab.
+A mobile-first fragrance collection, recommendation engine, and layering tool.
 
 This is a working **local first edition** built from the supplied FragOut product specification. It runs on your computer, with real private local accounts and SQLite persistence. It is not a production-hosted service and has no paid API dependency.
 

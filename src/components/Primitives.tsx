@@ -5,7 +5,7 @@ import type {Bottle} from '@/lib/types';
 export const iconMap={dumbbell:Dumbbell,heart:Heart,briefcase:BriefcaseBusiness,wine:Wine,shopping:ShoppingBag,coffee:Coffee,sun:Sun,sparkles:Sparkles};
 export function ShortcutIcon({name,size=22}:{name:string;size?:number}){const Icon=iconMap[name as keyof typeof iconMap]??Sparkles;return <Icon size={size} strokeWidth={1.65}/>;}
 export function Arrow({diagonal=false}:{diagonal?:boolean}){return diagonal?<ArrowUpRight size={18}/>:<ArrowRight size={18}/>;}
-export function BrandMark({small=false}:{small?:boolean}){return <span className={'brand-mark '+(small?'small':'')} aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M18 0 21 12 31 5 24 15 36 18 24 21 31 31 21 24 18 36 15 24 5 31 12 21 0 18 12 15 5 5 15 12Z" fill="currentColor"/></svg></span>;}
+export function BrandMark({small=false}:{small?:boolean}){return <span className={'brand-mark '+(small?'small':'')} aria-hidden="true"><svg viewBox="0 0 36 36"><rect x="11" y="3" width="14" height="6" rx="1" fill="currentColor"/><rect x="8" y="11" width="20" height="23" rx="3" fill="none" stroke="currentColor" strokeWidth="2.4"/><path d="M13 18h10v8H13z" fill="currentColor"/></svg></span>;}
 export function BottleArt({bottle,hero=false}:{bottle:Pick<Bottle,'name'|'color'|'shape'>&{concentration?:string};hero?:boolean}){
  const uid=useId().replace(/:/g,'');const round=bottle.shape==='round',tall=bottle.shape==='tall';const x=round?36:tall?57:43,w=round?128:tall?86:114,y=tall?70:86,h=tall?164:148;
  return <svg className={'bottle-art '+(hero?'hero-art':'')} viewBox="0 0 200 270" role="img" aria-label={`Illustration of ${bottle.name}`}>
@@ -33,4 +33,4 @@ export function Modal({title,children,onClose,wide=false}:{title:string;children
  },[onClose]);
  return <div className="modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}><div className={'modal '+(wide?'wide':'')} ref={ref} role="dialog" aria-modal="true" aria-labelledby={titleId}><div className="modal-heading"><h2 id={titleId}>{title}</h2><button className="icon-button" aria-label="Close dialog" onClick={onClose}><X size={22}/></button></div>{children}</div></div>;
 }
-export function Empty({title,detail,action,onAction}:{title:string;detail:string;action?:string;onAction?:()=>void}){return <div className="empty-state"><span className="empty-symbol"><Sparkles size={28} strokeWidth={1.4}/></span><h3>{title}</h3><p>{detail}</p>{action&&<button className="button primary" onClick={onAction}><Plus size={17}/>{action}</button>}</div>;}
+export function Empty({title,detail,action,onAction}:{title:string;detail:string;action?:string;onAction?:()=>void}){return <div className="empty-state"><h3>{title}</h3><p>{detail}</p>{action&&<button className="button primary" onClick={onAction}><Plus size={17}/>{action}</button>}</div>;}
