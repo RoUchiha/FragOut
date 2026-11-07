@@ -1,5 +1,7 @@
 # Mobile and provider verification
 
+Historical build record. The later [security assessment](SECURITY_REPORT.md) supersedes session, image retention, expiry and test counts below. The current run uses 87 regressions, 173 isolated security assertions, 20 companion HTTP checks and 17 mobile/API checks; the model integration is also smoke-tested separately.
+
 Verified locally on 6 November 2026. This extends the original local-edition verification; the mobile features and provider behavior in this file supersede earlier statements that vision/model integrations were unavailable.
 
 ## Automated evidence

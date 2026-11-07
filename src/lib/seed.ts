@@ -1,5 +1,5 @@
 import type { Bottle, Preferences, Shortcut, WearContext } from './types.ts';
-export const defaultPreferences:Preferences={likedNotes:[],dislikedNotes:[],excludedIds:[],maxStrength:3,sensitivity:false,units:'F'};
+export const defaultPreferences:Preferences={likedNotes:[],dislikedNotes:[],excludedIds:[],maxStrength:3,sensitivity:false,units:'F',archiveOutfits:false};
 export const defaultContext:WearContext={city:'Your location',tempC:22,humidity:50,setting:'MIXED',indoorTempC:22,occasion:'GENERAL',policy:'FREE',eventAtLocal:'',timezone:'America/Chicago',latitude:41.8,source:'manual'};
 export const defaultShortcuts:Shortcut[]=[
   {id:'gym',title:'Gym',icon:'dumbbell',occasion:'GYM',setting:'INDOOR',durationHours:1,maxStrength:1,hidden:false},

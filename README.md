@@ -44,13 +44,13 @@ ollama serve
 
 If Ollama is already running, skip `serve`. **Start Qwen.cmd** can start an installed Ollama or the portable runtime prepared beside this workspace. Model weights and runtime binaries are deliberately excluded from the source archive. This workspace's portable model data is under `work/qwen-runtime`, two directories above this project.
 
-In mobile **Settings → Model connection**, users can connect their own OpenAI or Claude API key and select that provider. Keys are encrypted per user on the backend. They never enter the app bundle or exports. Key entry requires HTTPS or a loopback connection. Signing into the mobile preview on the backend computer also allows connecting a key for that same account on the phone.
+In mobile **Settings → Model connection**, users can connect their own OpenAI or Claude API key and select that provider. These are API-key connections; OAuth and chat-subscription login are not implemented. Keys are encrypted per user on the backend. They never enter the app bundle or exports. Key entry requires HTTPS or a loopback connection. Signing into the mobile preview on the backend computer also allows connecting a key for that same account on the phone.
 
 Photos/descriptions go only to the explicitly selected provider. The server rejects analysis if that selection changed after the screen loaded. There is no automatic paid fallback. Provider API charges belong to the user's account; a ChatGPT or Claude chat subscription is separate from API access. Users can test, switch, replace or disconnect a connection. Disconnecting the active paid connection returns to Qwen.
 
 If Qwen is unavailable, typed descriptions can use clearly labeled offline clothing rules. Photos never receive a fabricated offline result. OpenAI/Claude adapters were verified with fixtures; live paid inference was not tested with a real key. Local Qwen text and image calls were tested.
 
-Optional backend settings are documented in `.env.example`: `FRAGOUT_DB`, `FRAGOUT_OLLAMA_URL`, `FRAGOUT_QWEN_MODEL`, `FRAGOUT_VAULT_KEY`, and HTTPS cookie configuration. A model override must support images and the structured contract.
+Optional backend settings are documented in `.env.example`, including a dedicated private data directory and the explicit HTTPS public origin. A model override must support images and the structured contract.
 
 ## Collection and wearing
 
@@ -63,13 +63,17 @@ Optional backend settings are documented in `.env.example`: `FRAGOUT_DB`, `FRAGO
 
 ## Photos, keys and account data
 
-Native bearer sessions use SecureStore; the browser preview keeps its token in memory. The companion uses HttpOnly SameSite cookies. Passwords use salted scrypt hashes. Sessions are hashed at rest and expire in seven days. Owner isolation applies to bottles, settings, journal, model connections and outfit receipts.
+Native bearer sessions use origin-bound SecureStore envelopes; the browser preview keeps its token in memory and stays on its own origin. Signing out clears active credentials immediately; old responses and exports cannot install or share another account's data. The companion uses HttpOnly SameSite cookies, automatically Secure with a `__Host-` name on HTTPS. Passwords use salted scrypt hashes. Sessions are hashed at rest and expire in seven days. Owner isolation applies to bottles, settings, journal, model connections, outfit receipts, saved looks and photos.
 
-Photos are resized, stripped of metadata and processed temporarily. They are not written to the backend database. Temporary app picker copies are discarded after success, removal or screen exit; originals in the user's library are retained. Speech recognition uses the device/browser service; FragOut receives the transcript, not recorded audio. See device/provider policies for their processing and retention.
+**Archiving is off by default.** Default selfies are processed in memory without backend photo storage. App-owned picker files and previews are removed when the selfie is submitted, including when analysis fails. Bottle scan copies are removed after label reading, before the user confirms the exact identity and adds the bottle. New scan suggestions require an accuracy confirmation. Gallery originals are retained. Startup/session changes also sweep known app-owned orphan files and revoke browser photo URLs.
 
-Structured outfit descriptions expire after 24 hours and are purged on the next API activity or startup. Expired descriptions cannot be read, recommended from or exported. Recommendation snapshots are pruned on startup. Real account data remains until deletion. Export includes the full journal and unexpired descriptions, without passwords, tokens, provider keys or photos.
+Enable **Settings → Photo privacy → Archive outfit-fragrance looks** to keep selected looks. Sanitized photos are held encrypted for up to 15 minutes while reviewing; only **Archive look** attaches a photo to the confirmed fragrance/pair. Journal → Saved looks reads photos through authenticated endpoints, never public image URLs. Delete a look to remove its photo. Turning archiving off atomically deletes all saved looks/photos, removes recommendation clothing copies, and invalidates previous upload consent even after a rapid off/on toggle.
 
-The SQLite database is `data/fragout.sqlite`. Its ordinary account data is not encrypted at rest. Provider credentials use AES-256-GCM and a separate generated `data/credential-key`, or an installation key supplied through `FRAGOUT_VAULT_KEY`. Preserve that key securely with database backups; changing it makes existing provider connections unreadable. People with filesystem access are outside the app's account boundary. Deletion removes active records, not backups or forensic traces in SQLite free pages. This local edition has no email verification or password recovery.
+Unsaved clothing descriptions and their recommendation copies expire after 15 minutes. Pending photos and expired descriptions are purged on access/startup and by a 60-second timer while the server runs. Saved looks remain until deletion or archive opt-out. Export includes the full journal, current descriptions and saved-look metadata, without passwords, tokens, provider keys or photo bytes. Native export copies use separate operation filenames, are removed after sharing, and cannot continue across account/server changes.
+
+Images are resized and stripped of EXIF before reaching the selected model. Qwen requests unload their local model context after use. OpenAI requests use `store:false`; cloud processing still follows the provider's separate retention policy. Speech recognition uses the device/browser service; FragOut receives the transcript, not a recorded audio upload.
+
+The SQLite database is `data/fragout.sqlite`. Use a dedicated data directory: startup rejects unrelated files/leaf links and restricts permissions to the service user plus Windows SYSTEM/Administrators (700/600 on POSIX). Ordinary account metadata is not encrypted at rest. Provider credentials and archived photos use AES-256-GCM with separated keys and owner-bound authentication. The installation secret is a generated `data/credential-key`, or `FRAGOUT_VAULT_KEY`. Preserve it securely with backups; changing it makes existing encrypted data unreadable. A compromised service account/administrator is outside the app's account boundary. Deletion removes live records and enables SQLite secure deletion; it cannot promise erasure of backups, WAL history, OS caches or forensic traces. This local edition has no email verification or password recovery.
 
 ## Verification and limits
 
@@ -83,12 +87,14 @@ npm.cmd run export:native --prefix mobile
 # With the backend running:
 node tests/http.mjs
 node tests/http-mobile.mjs
+# Isolated attack lab: synthetic accounts, images, keys and local model stub only
+node scripts/security-lab.mjs --test
 # Optional real local-model smoke checks:
 node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
 ```
 
-See [verification evidence](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md). Automated checks cover ownership, exclusions, evidence tiers, encrypted connections, native sessions, temporary image validation and expiry. The browser flow is tested separately from native code compilation. A synthetic outfit image establishes a working integration, not a photo-accuracy benchmark.
+See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md). The security run passed 87 regressions, 173 attack assertions and 37 existing HTTP checks. Production builds also reject private files in deployment traces/public assets. The browser flow is tested separately from native code compilation. A synthetic outfit image establishes a working integration, not a photo-accuracy benchmark.
 
 Remaining production work includes signed phone builds and device acceptance, licensed real catalog/variant research, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. The local database requires a persistent single-host Node process; it is not suitable for an ephemeral serverless filesystem. No app-store or web publication was performed.
 

@@ -22,6 +22,12 @@ test('expired outfit descriptions are purged during reads, exports and writes',(
   db.saveOutfit(a.id,receipt());
   assert.equal(db.db.prepare('SELECT COUNT(*) AS n FROM outfit_analyses').get()!.n,1);db.close();
 });
+
+test('unsaved outfit descriptions expire after fifteen minutes',()=>{
+ const db=new Store(':memory:'),user=db.createDemo(),receipt={id:randomUUID(),profile:parseOutfitText('White shirt and jeans'),provider:'qwen' as const,model:'test',method:'model' as const,createdAt:new Date().toISOString()};
+ db.saveOutfit(user.id,receipt);db.db.prepare('UPDATE outfit_analyses SET created=?').run(Date.now()-16*60000);
+ assert.equal(db.getOutfit(user.id,receipt.id),null);db.close();
+});
 test('real SQLite accounts isolate CRUD, preferences and feedback',()=>{
   const db=new Store(':memory:');
   const a=db.register('Alice','alice@example.test','very-secure-pass');

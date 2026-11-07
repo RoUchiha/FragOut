@@ -3,7 +3,10 @@ import {randomUUID,randomBytes,scryptSync,timingSafeEqual,createHash} from 'node
 import {mkdirSync} from 'node:fs';
 import {dirname,join} from 'node:path';
 import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './seed.ts';
-import type {AppState,Bottle,OutfitReceipt,Preferences,Shortcut,User,WearContext,WearEvent} from './types.ts';
+import {privateDataPath} from './private-path.ts';
+import {protectPrivateDirectory} from './private-directory.ts';
+import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
+const OUTFIT_ANALYSIS_MS=15*60*1000;
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 type UserRow={id:string;name:string;email:string|null;demo:number;password:string|null};
 const publicUser=(u:UserRow):User=>({id:u.id,name:u.name,email:u.email,demo:!!u.demo});
@@ -11,18 +14,22 @@ const identity=(b:Pick<Bottle,'brand'|'name'|'concentration'>)=>hash([b.brand,b.
 export class Store {
   db:DatabaseSync;
   constructor(path:string){
+    if(path!==':memory:'){path=privateDataPath(path);protectPrivateDirectory(path);}
     if(path!==':memory:')mkdirSync(dirname(path),{recursive:true});
-    this.db=new DatabaseSync(path);this.db.exec(`PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL;
+    this.db=new DatabaseSync(path);this.db.exec(`PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA secure_delete=ON;
     CREATE TABLE IF NOT EXISTS schema_migrations(version INTEGER PRIMARY KEY,applied_at TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,name TEXT NOT NULL,email TEXT UNIQUE,password TEXT,demo INTEGER NOT NULL DEFAULT 0,created INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,expires INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS bottles(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL);
     CREATE INDEX IF NOT EXISTS bottles_owner ON bottles(user_id);
     CREATE TABLE IF NOT EXISTS settings(user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS archive_consents(user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,epoch INTEGER NOT NULL DEFAULT 0);
     CREATE TABLE IF NOT EXISTS wear_events(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
     CREATE INDEX IF NOT EXISTS events_owner ON wear_events(user_id,created);
     CREATE TABLE IF NOT EXISTS recommendation_runs(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS outfit_analyses(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS saved_looks(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,analysis_id TEXT NOT NULL,body TEXT NOT NULL,created INTEGER NOT NULL,UNIQUE(user_id,analysis_id));
+    CREATE TABLE IF NOT EXISTS private_photos(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,analysis_id TEXT NOT NULL,look_id TEXT REFERENCES saved_looks(id) ON DELETE CASCADE,sealed BLOB NOT NULL,expires INTEGER,UNIQUE(user_id,analysis_id),CHECK((look_id IS NULL AND expires IS NOT NULL) OR (look_id IS NOT NULL AND expires IS NULL)));
     CREATE TABLE IF NOT EXISTS rate_limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);
     INSERT OR IGNORE INTO schema_migrations VALUES(1,datetime('now'));`);
     this.db.prepare('DELETE FROM sessions WHERE expires<?').run(Date.now());
@@ -59,12 +66,20 @@ export class Store {
     const setting=this.db.prepare('SELECT body FROM settings WHERE user_id=?').get(userId) as {body:string};
     const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as Bottle);
     const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
-    return {user,bottles,history,...JSON.parse(setting.body)};
+    const saved=JSON.parse(setting.body);return {user,bottles,history,...saved,preferences:{...defaultPreferences,...saved.preferences}};
   }
-  pruneOutfits(){this.db.prepare('DELETE FROM outfit_analyses WHERE created<=?').run(Date.now()-86400000);}
-  exportState(userId:string){this.pruneOutfits();return {...this.state(userId,true),outfitAnalyses:(this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND created>?').all(userId,Date.now()-86400000) as {body:string}[]).map(r=>JSON.parse(r.body) as OutfitReceipt)};}
+  pruneOutfits(){
+    this.db.prepare('DELETE FROM outfit_analyses WHERE created<=?').run(Date.now()-OUTFIT_ANALYSIS_MS);
+    this.db.prepare(`UPDATE recommendation_runs SET body=json_remove(body,'$.outfit') WHERE json_type(body,'$.outfit') IS NOT NULL AND NOT EXISTS (SELECT 1 FROM outfit_analyses a WHERE a.user_id=recommendation_runs.user_id AND a.id=json_extract(recommendation_runs.body,'$.outfit.analysisId'))`).run();
+    this.db.prepare('DELETE FROM private_photos WHERE expires IS NOT NULL AND expires<=?').run(Date.now());
+  }
+  archiveConsent(userId:string):number|null{
+    if(!this.user(userId)||!this.state(userId).preferences.archiveOutfits)return null;
+    return (this.db.prepare('SELECT epoch FROM archive_consents WHERE user_id=?').get(userId) as {epoch:number}|undefined)?.epoch??0;
+  }
+  exportState(userId:string){this.pruneOutfits();return {...this.state(userId,true),outfitAnalyses:(this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND created>?').all(userId,Date.now()-OUTFIT_ANALYSIS_MS) as {body:string}[]).map(r=>JSON.parse(r.body) as OutfitReceipt),savedLooks:(this.db.prepare('SELECT body FROM saved_looks WHERE user_id=?').all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as SavedLook)};}
   saveOutfit(userId:string,receipt:OutfitReceipt){this.pruneOutfits();this.db.prepare('INSERT INTO outfit_analyses VALUES(?,?,?,?)').run(receipt.id,userId,JSON.stringify(receipt),Date.now());}
-  getOutfit(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-86400000) as {body:string}|undefined;return row?JSON.parse(row.body) as OutfitReceipt:null;}
+  getOutfit(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-OUTFIT_ANALYSIS_MS) as {body:string}|undefined;return row?JSON.parse(row.body) as OutfitReceipt:null;}
   addBottle(userId:string,input:Bottle):Bottle{
     const b={...input,id:randomUUID(),variantId:input.provenance==='demo'&&input.variantId?input.variantId:identity(input)};
     this.db.prepare('INSERT INTO bottles VALUES(?,?,?)').run(b.id,userId,JSON.stringify(b));return b;
@@ -78,12 +93,21 @@ export class Store {
     this.db.prepare('UPDATE bottles SET body=? WHERE id=? AND user_id=?').run(JSON.stringify(b),id,userId);return b;
   }
   removeBottle(userId:string,id:string){return this.db.prepare('DELETE FROM bottles WHERE id=? AND user_id=?').run(id,userId).changes>0;}
-  saveSettings(userId:string,patch:{preferences?:Preferences;context?:WearContext;shortcuts?:Shortcut[]}){
-    const s=this.state(userId);this.db.prepare('UPDATE settings SET body=? WHERE user_id=?').run(JSON.stringify({preferences:patch.preferences??s.preferences,context:patch.context??s.context,shortcuts:patch.shortcuts??s.shortcuts}),userId);
+  saveSettings(userId:string,patch:{preferences?:(Omit<Preferences,'archiveOutfits'>&{archiveOutfits?:boolean});context?:WearContext;shortcuts?:Shortcut[]}){
+    const s=this.state(userId);this.db.exec('BEGIN IMMEDIATE');try{
+      this.db.prepare('UPDATE settings SET body=? WHERE user_id=?').run(JSON.stringify({preferences:{...s.preferences,...patch.preferences},context:patch.context??s.context,shortcuts:patch.shortcuts??s.shortcuts}),userId);
+      if(patch.preferences?.archiveOutfits===false){
+        this.db.prepare('INSERT INTO archive_consents VALUES(?,1) ON CONFLICT(user_id) DO UPDATE SET epoch=epoch+1').run(userId);
+        this.db.prepare('DELETE FROM saved_looks WHERE user_id=?').run(userId);this.db.prepare('DELETE FROM private_photos WHERE user_id=?').run(userId);
+        this.db.prepare("UPDATE recommendation_runs SET body=json_remove(body,'$.outfit') WHERE user_id=? AND json_type(body,'$.outfit') IS NOT NULL").run(userId);
+      }
+      this.db.exec('COMMIT');
+    }catch(error){this.db.exec('ROLLBACK');throw error;}
   }
-  recordRecommendation(userId:string,context:WearContext,bottleIds:string[]){
-    const id=randomUUID();this.db.prepare('INSERT INTO recommendation_runs VALUES(?,?,?,?)').run(id,userId,JSON.stringify({context,bottleIds}),Date.now());return id;
+  recordRecommendation(userId:string,context:WearContext,bottleIds:string[],outfit?:OutfitSnapshot){
+    const id=randomUUID();this.db.prepare('INSERT INTO recommendation_runs VALUES(?,?,?,?)').run(id,userId,JSON.stringify({context,bottleIds,...(outfit?{outfit}:{})}),Date.now());return id;
   }
+  getRecommendation(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM recommendation_runs WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-86400000) as {body:string}|undefined;return row?JSON.parse(row.body) as RecommendationSnapshot:null;}
   feedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){
     const state=this.state(userId);const bs=ids.map(id=>state.bottles.find(b=>b.id===id&&b.ownership==='OWNED'));
     if(ids.length<1||ids.length>2||new Set(ids).size!==ids.length||bs.some(b=>!b))throw new Error('Choose one or two bottles you own.');
@@ -109,4 +133,7 @@ export class Store {
   }
 }
 const singleton=globalThis as typeof globalThis&{fragoutStore?:Store};
-export function getStore(){return singleton.fragoutStore??=(new Store(process.env.FRAGOUT_DB??join(process.cwd(),'data','fragout.sqlite')));}
+export function getStore(){
+ if(!singleton.fragoutStore){const store=new Store(privateDataPath());singleton.fragoutStore=store;setInterval(()=>store.pruneOutfits(),60000).unref();}
+ return singleton.fragoutStore;
+}

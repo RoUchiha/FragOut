@@ -3,6 +3,7 @@ import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import {dirname,join} from 'node:path';
 import type {DatabaseSync} from 'node:sqlite';
 import type {AiProvider} from './types.ts';
+import {privateDataPath} from './private-path.ts';
 type Paid=Exclude<AiProvider,'qwen'>;
 export const DEFAULT_MODELS={qwen:'qwen3-vl:2b-instruct',openai:'gpt-4.1-mini',claude:'claude-haiku-4-5'} as const;
 export class CredentialVault {
@@ -28,6 +29,6 @@ export class CredentialVault {
 }
 export function installationKey(){
  const env=process.env.FRAGOUT_VAULT_KEY;if(env){const b=Buffer.from(env,'base64');if(b.length!==32)throw new Error('Invalid vault configuration.');return b;}
- const file=join(dirname(process.env.FRAGOUT_DB??join(process.cwd(),'data','fragout.sqlite')),'credential-key');mkdirSync(dirname(file),{recursive:true});
+ const file=join(dirname(privateDataPath()),'credential-key');mkdirSync(dirname(file),{recursive:true});
  try{return readFileSync(file);}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;const key=randomBytes(32);try{writeFileSync(file,key,{mode:0o600,flag:'wx'});return key;}catch(e){if((e as NodeJS.ErrnoException).code==='EEXIST')return readFileSync(file);throw e;}}
 }

@@ -2,7 +2,22 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {buildProviderRequest,runVision,prepareImage,ProviderError} from '../src/lib/providers.ts';
 import {parseOutfitText} from '../src/lib/outfit.ts';
+import sharp from 'sharp';
 const profile=parseOutfitText('White shirt and black trousers');
+
+test('local vision unloads context and cloud requests do not enable response or prompt storage',()=>{
+ const qwen=buildProviderRequest('qwen','synthetic',undefined,'outfit',{text:'white shirt'});
+ assert.equal(qwen.body.keep_alive,0);
+ assert.equal(buildProviderRequest('openai','synthetic','synthetic-key','outfit',{text:'shirt'}).body.store,false);
+ assert.ok(!JSON.stringify(buildProviderRequest('claude','synthetic','synthetic-key','outfit',{text:'shirt'}).body).includes('cache_control'));
+});
+
+test('image preprocessing strips original EXIF and camera metadata',async()=>{
+ const source=await sharp({create:{width:8,height:6,channels:3,background:'#829b62'}}).jpeg().withMetadata({exif:{IFD0:{Artist:'synthetic-private-photo-metadata'}}}).toBuffer();
+ assert.ok((await sharp(source).metadata()).exif);
+ const prepared=await prepareImage({mime:'image/jpeg',data:source.toString('base64')}),bytes=Buffer.from(prepared.data,'base64'),metadata=await sharp(bytes).metadata();
+ assert.equal(metadata.exif,undefined);assert.equal(metadata.icc,undefined);assert.equal(metadata.xmp,undefined);assert.ok(!bytes.includes(Buffer.from('synthetic-private-photo-metadata')));
+});
 
 test('image validation errors produce a reviewable client error, not a server failure',async()=>{
  await assert.rejects(()=>prepareImage({mime:'image/png',data:Buffer.from('bad photo').toString('base64')}),e=>e instanceof ProviderError&&e.status===400);

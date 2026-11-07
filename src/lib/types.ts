@@ -9,7 +9,7 @@ export interface Bottle {
 }
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];
-  maxStrength:number; sensitivity:boolean; units:'C'|'F';
+  maxStrength:number; sensitivity:boolean; units:'C'|'F'; archiveOutfits:boolean;
 }
 export interface WearContext {
   city:string; tempC:number; humidity:number; setting:'INDOOR'|'OUTDOOR'|'MIXED';
@@ -37,7 +37,15 @@ export interface OutfitProfile {
  formality:'casual'|'smart'|'formal'; palette:'light'|'dark'|'bright'|'neutral'|'mixed';
  hasOutfit:boolean; uncertainty:string[];
 }
-export interface OutfitReceipt {id:string;profile:OutfitProfile;provider:AiProvider;model:string;method:'model'|'offline_rules';createdAt:string}
+export interface OutfitReceipt {id:string;profile:OutfitProfile;provider:AiProvider;model:string;method:'model'|'offline_rules';createdAt:string;photoRetained?:boolean}
 export interface AiStatus {selected:AiProvider;connections:{provider:AiProvider;model:string;configured:boolean}[];local:{reachable:boolean;installed:boolean;model:string}}
 export interface OutfitMatches {solo:SoloResult[];combos:ComboResult[];requestId:string;context:WearContext;outfit:OutfitProfile}
 export interface BottleCandidate {brand:string;name:string;concentration:string;confidence:'likely'|'uncertain';clue:string}
+export interface OutfitSnapshot {analysisId:string;profile:OutfitProfile;choices:string[][];variants:Record<string,string>}
+export interface RecommendationSnapshot {context:WearContext;bottleIds:string[];outfit?:OutfitSnapshot}
+export interface SavedLook {
+ id:string;analysisId:string;profile:OutfitProfile;
+ bottles:Pick<Bottle,'id'|'variantId'|'brand'|'name'|'concentration'|'color'|'shape'>[];
+ context:Pick<WearContext,'occasion'|'setting'|'tempC'|'indoorTempC'|'policy'>;
+ photoAvailable:boolean;createdAt:string;
+}
