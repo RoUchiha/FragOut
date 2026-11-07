@@ -6,9 +6,11 @@ The primary FragOut app for iOS and Android, built with Expo 58 / React Native 0
 
 Start the backend with the launcher in the parent folder. It serves the exported mobile preview and the desktop companion. The preview has its own session; signing into the same FragOut account links the same collection.
 
-Today, outfit matching, collection, bottle label suggestions, pairing, journal, account settings, export and provider connections are implemented. Take an outfit selfie, choose an image, type, or use dictation. Review the description, choose an occasion, then request a fragrance, pair, or both. Detailed clothing edits are optional. Pair experiments require explicit selection.
+Use **Home** to search your collection, add a fragrance or scan a bottle. Journal and Settings are available in the header.
 
-Use **Mood** and **Vibe** on Today, pairing or outfit review. Swipe each row for more choices. Pick either or both, or use **Any** to clear. Selections rank your known, eligible owned scent profiles and reset with the account session. They are never inferred from photos or sent to a model. A wear log or saved look keeps the choices from that match.
+Use **Suggester** to search by fragrance, house, note, mood, vibe or occasion. Compact picks sit beneath search. Open **Filters** for mood, vibe and pairing. Pair experiments require explicit selection. **Match outfit** accepts a selfie, another image, typed text or dictation. Wear logs and saved looks keep the choices from their match.
+
+Colors shift with the season and the device's local time. Choose your hemisphere in **Settings → Conditions**.
 
 Qwen runs through Ollama on the backend computer/server. It has no API fee. Optional OpenAI/Claude API keys belong to each user and are saved encrypted by that backend. Photos go only to the selected destination when analysis is requested. A chat subscription is separate from API access.
 

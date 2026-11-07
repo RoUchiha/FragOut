@@ -8,13 +8,14 @@ import {Store} from '../src/lib/store.ts';
 import * as validation from '../src/lib/validation.ts';
 import * as engine from '../src/lib/engine.ts';
 import * as security from '../src/lib/security.ts';
+import * as search from '../src/lib/scent-search.ts';
 const require=createRequire(import.meta.url),next=require('next/server');
 function harness(){
  const db=new Store(':memory:'),module={exports:{} as any};
  const source=readFileSync(new URL('../src/app/api/[...path]/route.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
   if(name==='next/server')return next;if(name==='zod')return require('zod');
-  if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
+  if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/scent-search')return search;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
  }});
  async function call(path:string,{method='GET',body,raw,token,cookie,origin='http://localhost:3237',url='http://localhost:3237',headers={}}:{method?:string;body?:unknown;raw?:string;token?:string;cookie?:string;origin?:string|null;url?:string;headers?:Record<string,string>}={}){
   const req=new next.NextRequest(url+'/api/'+path,{method,headers:{...((body===undefined&&raw===undefined)?{}:{'content-type':'application/json'}),...(origin?{origin}:{}),...(token?{authorization:'Bearer '+token}:{}),...(cookie?{cookie}:{}),...headers},...((body===undefined&&raw===undefined)?{}:{body:raw??JSON.stringify(body)})});
@@ -38,6 +39,21 @@ test('recommendations validate mood/vibe and preserve selected context in an own
   const worn=h.db.feedback(a.id,[response.body.solo[0].bottle.id],'wore','GENERAL',response.body.requestId);assert.equal(worn.context.vibe,'CLEAN');
   for(const patch of [{mood:'unsupported'},{vibe:'unsupported'},{mood:['HAPPY']},{vibe:{value:'CLEAN'}}])assert.equal((await h.call('recommend',{method:'POST',token,body:{occasion:'GENERAL',mode:'solo',...patch}})).status,400);
   assert.equal(h.db.state(a.id).context.mood,undefined,'Request choices must not change persistent account conditions');
+ }finally{h.db.close();}
+});
+
+test('recommendation search remains owned-only and can anchor a pair with one matching bottle',async()=>{
+ const h=harness();try{
+  const a=h.db.createDemo(),token=h.db.createSession(a.id);
+  const call=(search:string,mode='solo')=>h.call('recommend',{method:'POST',token,body:{occasion:'GENERAL',mode,evidenceMode:'experimental',search}});
+  const solo=await call('golden-hour');
+  assert.equal(solo.status,200);
+  assert.deepEqual(Array.from(solo.body.solo,(r:{bottle:{name:string}})=>r.bottle.name),['Golden Hour']);
+  const pairs=await call('salt air','combo');
+  assert.ok(pairs.body.combos.length>0);
+  assert.ok(pairs.body.combos.every((r:{a:{name:string};b:{name:string}})=>[r.a.name,r.b.name].includes('Salt Air')));
+  for (const query of ['Midnight Ink','fictional scent']) assert.equal((await call(query)).body.solo.length,0);
+  assert.equal((await call('s'.repeat(121))).status,400);
  }finally{h.db.close();}
 });
 

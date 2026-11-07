@@ -2,9 +2,10 @@ import React,{useCallback,useEffect,useRef,useState} from 'react';
 import {Image,Text,View} from 'react-native';
 import {api,type SavedLook} from './api';
 import {intentSummary} from '../../src/lib/intent';
-import {BottleArt,Btn,Empty,Sheet,Spinner,styles} from './ui';
+import {BottleArt,Btn,Empty,Sheet,Spinner,useUi} from './ui';
 
 export default function SavedLooks({enabled,notify}:{enabled:boolean;notify:(message:string)=>void}){
+ const {styles} = useUi();
  const [looks,setLooks]=useState<SavedLook[]>([]),[selected,setSelected]=useState<SavedLook|null>(null),[photo,setPhoto]=useState<string|null>(null),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[confirmDelete,setConfirmDelete]=useState(false);
  const active=useRef(true),selection=useRef<string|null>(null);
  const load=useCallback(async()=>{const data=await api<SavedLook[]>('looks');if(active.current)setLooks(data);},[]);

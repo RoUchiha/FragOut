@@ -3,6 +3,7 @@ import {z} from 'zod';
 import {getStore} from '@/lib/store';
 import {bottleSchema,settingsSchema,intentFields} from '@/lib/validation';
 import {rankCombos,rankSolo,ENGINE_VERSION} from '@/lib/engine';
+import {matchesBottleSearch,scentSearchLimit} from '@/lib/scent-search';
 import type {Bottle} from '@/lib/types';
 import {handleAiApi} from '@/lib/ai-api';
 import {requestPolicy} from '@/lib/security';
@@ -68,12 +69,23 @@ async function handle(req:NextRequest){
     }
     if(path.length===1&&path[0]==='settings'&&method==='PUT'){db.saveSettings(user.id,settingsSchema.parse(body));return reply(db.state(user.id));}
     if(path.length===1&&path[0]==='recommend'&&method==='POST'){
-      const data=z.object({occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']),mode:z.enum(['solo','combo']),evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),shortcutId:z.string().max(100).optional(),...intentFields}).strict().parse(body);
+      const data=z.object({
+        occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']),
+        mode:z.enum(['solo','combo']),
+        evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),
+        shortcutId:z.string().max(100).optional(),
+        search:z.string().trim().max(scentSearchLimit).optional(),
+        ...intentFields,
+      }).strict().parse(body);
       const s=db.state(user.id);const shortcut=data.shortcutId?s.shortcuts.find(c=>c.id===data.shortcutId):undefined;
       const context={...s.context,occasion:shortcut?.occasion??data.occasion,...(shortcut?{setting:shortcut.setting}:{}),mood:data.mood,vibe:data.vibe};
       const prefs={...s.preferences,maxStrength:Math.min(s.preferences.maxStrength,shortcut?.maxStrength??3)};
-      const solo=data.mode==='solo'?rankSolo(s.bottles,context,prefs):[];
-      const combos=data.mode==='combo'?rankCombos(s.bottles,context,prefs,data.evidenceMode,[],s.history.filter(h=>h.reaction==='disliked'&&h.bottleIds.length===2).map(h=>h.bottleIds)):[];
+      const search = data.search;
+      const matching = search ? new Set(s.bottles.filter(bottle => matchesBottleSearch(bottle,search)).map(bottle => bottle.id)) : null;
+      const soloPool = matching ? s.bottles.filter(bottle => matching.has(bottle.id)) : s.bottles;
+      const solo = data.mode==='solo' ? rankSolo(soloPool,context,prefs) : [];
+      const rejectedPairs = s.history.filter(event => event.reaction==='disliked' && event.bottleIds.length===2).map(event => event.bottleIds);
+      const combos = data.mode==='combo' ? rankCombos(s.bottles,context,prefs,data.evidenceMode,[],rejectedPairs,3,matching??undefined) : [];
       const requestId=db.recordRecommendation(user.id,context,[...new Set([...solo.map(r=>r.bottle.id),...combos.flatMap(r=>[r.a.id,r.b.id])])]);
       return reply({solo,combos,context,requestId,engine:ENGINE_VERSION});
     }

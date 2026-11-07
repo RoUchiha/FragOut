@@ -1,9 +1,10 @@
 import React,{useCallback,useEffect,useRef,useState} from 'react';
 import {Text,View} from 'react-native';
 import {api,supportsKeys,type AiStatus} from './api';
-import {Btn,Choices,Field,Spinner,styles} from './ui';
+import {Btn,Choices,Field,Spinner,useUi} from './ui';
 import type {AiProvider} from '../../src/lib/types';
 export default function Connections({notify}:{notify:(s:string)=>void}){
+ const {styles} = useUi();
  const active=useRef(true);
  const [status,setStatus]=useState<AiStatus|null>(null),[provider,setProvider]=useState<AiProvider>('qwen'),[key,setKey]=useState(''),[model,setModel]=useState(''),[busy,setBusy]=useState(false);
  const accept=useCallback((s:AiStatus)=>{if(!active.current)return;setStatus(s);setProvider(s.selected);setModel(s.connections.find(c=>c.provider===s.selected)?.model??'');},[]);

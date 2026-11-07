@@ -22,9 +22,11 @@ The server binds to loopback. It is not a hosted service. See [the mobile guide]
 
 ## Mood and vibe
 
-On **Today**, choose a **Mood** (Happy, Tired, Sad, Calm, Stressed or Confident) and a **Vibe** (Clean, Mysterious, Warm, Fresh, Cozy, Bold or Romantic). Either is optional; **Any** clears that choice. The top pick updates as you choose. The same controls are available in pairing and after outfit review.
+In the mobile app, **Home** holds your collection, bottle scanning and Add. **Suggester** shows compact picks beneath its search bar. Type a cue such as **tired clean work**, or search by fragrance, house or note. Open **Filters** to choose mood, vibe, occasion or pairs. **Match outfit** opens the photo, text and dictation flow.
 
-Matches use the notes and families you recorded for owned bottles. Your desired vibe has more influence than mood. Venue rules, exclusions and pair evidence still apply. **Why?** explains the matching note or family. These choices do not go to the image model or change account settings. Wear logs and explicitly saved looks keep the choices from the recommendation.
+The mobile palette follows the device's local time and the hemisphere in **Settings → Conditions**. Each season has morning, day, evening and night variations.
+
+Matches use the notes and families you recorded for owned bottles. Your desired vibe has more influence than mood. Venue rules, exclusions and pair evidence still apply. Tap a suggestion to see the matching note or family. Wear logs and saved looks keep the choices from the recommendation.
 
 ## Outfit matching
 
@@ -102,7 +104,7 @@ node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
 ```
 
-See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md). The mood/vibe build passed 111 regressions, 7 feature HTTP checks, 173 attack assertions and 37 existing HTTP checks. Production builds also reject private files in deployment traces/public assets. The browser flow is tested separately from native code compilation. A synthetic outfit image establishes a working integration, not a photo-accuracy benchmark.
+The current build passed 117 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
 Remaining production work includes signed phone builds and device acceptance, licensed real catalog/variant research, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. The local database requires a persistent single-host Node process; it is not suitable for an ephemeral serverless filesystem. No app-store or web publication was performed.
 
