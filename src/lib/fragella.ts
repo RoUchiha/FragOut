@@ -1,0 +1,116 @@
+import {z} from 'zod';
+import {findCatalogProfile} from './catalog.ts';
+import type {CatalogRating,FragranceFacet} from './catalog-ratings.ts';
+import type {CatalogProfile,CatalogSource} from './types.ts';
+
+const concentrations = new Map([
+ ['eau de toilette','EDT'],['edt','EDT'],['eau de parfum','EDP'],['edp','EDP'],
+ ['parfum','PARFUM'],['elixir','ELIXIR'],['perfume oil','OIL'],
+]);
+const voted = new Set(['medium','high','very high']);
+const rowSchema=z.object({
+ _id:z.string().regex(/^[a-z\d][a-z\d_-]{0,119}$/i),Name:z.string().min(1).max(160),Brand:z.string().min(1).max(160),
+ OilType:z.string().max(60),Year:z.string().max(8).optional(),
+ rating:z.string().max(8).optional(),Confidence:z.string().max(25),Popularity:z.string().max(25),
+ Longevity:z.string().max(40).optional(),Sillage:z.string().max(40).optional(),
+ 'Price Value':z.string().max(30).optional(),
+});
+type LiveRatings={ratings:CatalogRating[];source:CatalogSource};
+const maxRatingResponseBytes=1024*1024;
+const longevityBands=['poor','weak','moderate','long lasting','very long lasting'];
+const projectionBands=['intimate','soft','moderate','strong','enormous'];
+const valueBands=['overpriced','okay','good_value'];
+
+export function pickFragellaRatings(profile:CatalogProfile,payload:unknown):LiveRatings|null {
+ if(!profile.releaseYear||!Array.isArray(payload)||payload.length>10) return null;
+ const editions=payload.filter(row=>{
+  if(typeof row?.Name!=='string'||typeof row?.Brand!=='string'||typeof row?.OilType!=='string') return false;
+  const concentration=concentrations.get(row.OilType.trim().toLowerCase());
+  return concentration===profile.concentration&&Number(row.Year)===profile.releaseYear&&
+   findCatalogProfile({name:row.Name,brand:row.Brand,concentration})?.id===profile.id;
+ });
+ if(editions.length!==1) return null;
+ const parsed=rowSchema.safeParse(editions[0]);
+ if(!parsed.success) return null;
+ const row=parsed.data;
+ if(payload.filter(item=>item?._id===row._id).length!==1) return null;
+ if(!['high','medium'].includes(row.Confidence.trim().toLowerCase())||!voted.has(row.Popularity.trim().toLowerCase())) return null;
+ const sourceId='fragella';
+ const ratings:CatalogRating[]=[];
+ const score=Number(row.rating);
+ if(row.rating&&/^[0-5](?:\.\d{1,2})?$/.test(row.rating)&&score>0&&score<=5)
+  ratings.push({facet:'overall',sourceId,score,kind:'published',basis:'Weighted community rating'});
+ const bands:[FragranceFacet,string|undefined,string[],number][]=[
+  ['longevity',row.Longevity,longevityBands,1],
+  // Fragella defines its Sillage scale by projection distance from the wearer.
+  ['projection',row.Sillage,projectionBands,1],
+  ['value',row['Price Value'],valueBands,2],
+ ];
+ for(const [facet,value,labels,minimum] of bands) {
+  if(!value) continue;
+  const rank=labels.indexOf(value.trim().toLowerCase());
+  if(rank>=0) ratings.push({facet,sourceId,score:rank+minimum,kind:'estimate',basis:value.trim().replace(/_/g,' ')});
+ }
+ if(!ratings.length) return null;
+ return {
+  ratings,
+  source:{id:sourceId,publisher:'Fragella',kind:'community',url:'https://app.fragella.com/fragrance/'+row._id},
+ };
+}
+
+async function readRatings(response:Response):Promise<unknown> {
+ const reader=response.body?.getReader();
+ if(!reader) return null;
+ const decoder=new TextDecoder();
+ let text='',bytes=0;
+ try {
+  while(true) {
+   const {done,value}=await reader.read();
+   if(done) return JSON.parse(text+decoder.decode());
+   bytes+=value.byteLength;
+   if(bytes>maxRatingResponseBytes) {
+    await reader.cancel();
+    return null;
+   }
+   text+=decoder.decode(value,{stream:true});
+  }
+ } finally {
+  reader.releaseLock();
+ }
+}
+
+export function createFragellaLookup(request:typeof fetch=fetch) {
+ const pending=new Map<string,Promise<LiveRatings|null>>();
+ let retryAt=0;
+ async function load(profile:CatalogProfile,key:string) {
+  const url=new URL('https://api.fragella.com/api/v1/fragrances');
+  url.searchParams.set('search',[profile.brand,profile.name,profile.concentration].join(' '));
+  url.searchParams.set('limit','10');
+  try {
+   const response=await request(url,{
+    headers:{'x-api-key':key,accept:'application/json'},redirect:'error',cache:'no-store',
+    signal:AbortSignal.timeout(2400),
+   });
+   if(!response.ok) {
+    // Avoid repeatedly calling an unavailable or quota-limited provider.
+    retryAt=Date.now()+60_000;
+    return null;
+   }
+   return pickFragellaRatings(profile,await readRatings(response));
+  } catch {
+   retryAt=Date.now()+60_000;
+   return null;
+  }
+ }
+ return async (profile:CatalogProfile,key:string,admit:()=>boolean=()=>true):Promise<LiveRatings|null>=>{
+  if(!key||Date.now()<retryAt) return null;
+  const existing=pending.get(profile.id);
+  if(existing) return existing;
+  if(!admit()) return null;
+  const lookup=load(profile,key).finally(()=>pending.delete(profile.id));
+  pending.set(profile.id,lookup);
+  return lookup;
+ };
+}
+
+export const lookupFragellaRatings=createFragellaLookup();

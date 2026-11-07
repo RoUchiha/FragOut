@@ -39,11 +39,11 @@ Outfit style is a heuristic, not measured fragrance compatibility. The model int
 
 The mobile collection reads bottle labels through the selected vision provider and presents up to three candidates. Confirm the exact house, edition and concentration before adding.
 
-## Fragrance profiles
+## FragDex
 
-Save a fragrance or tap one in Collection to open its profile. FragOut matches the exact house, release and concentration against a local reference catalog. Profiles show cross-checked notes, separate wear estimates and credited reference photos where available. Open **Sources & credits** for links and the check date. Catalog lookup runs locally on the FragOut server. Your personal observations remain separate.
+Save a fragrance or tap one in Collection to open FragDex. It matches the exact house, release and concentration against a local reference catalog. Profiles show cross-checked notes, credited bottle photos and five-star ratings where evidence is available. Tap a score to open its source in a browser sheet. Fragrance and retailer links sit below the ratings.
 
-The starter catalog has 67 exact editions, with notes for 66, licensed photos for six and two-source wear comparisons for two. See the [catalog sources and update process](catalog/README.md).
+The starter catalog has 67 exact editions, with notes for 66, licensed photos for six and wear estimates for 63. Unsupported facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [catalog sources, scoring, and setup](catalog/README.md).
 
 ## Free default, optional personal providers
 
@@ -110,7 +110,7 @@ node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
 ```
 
-The current build passed 123 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
+The current build passed 128 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
 Remaining production work includes signed phone builds and device acceptance, broader catalog evidence and photo coverage, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database. This build runs locally.
 

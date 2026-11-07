@@ -1,13 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import {Image,Pressable,Text,View} from 'react-native';
-import {openURL} from 'expo-linking';
+import {openBrowserAsync,WebBrowserPresentationStyle} from 'expo-web-browser';
 import {ChevronDown,ExternalLink} from 'lucide-react-native';
 import {api,sessionScope} from './api';
 import {BottleArt,Btn,catalogPhotoUrl,Section,Sheet,Spinner,useUi} from './ui';
+import FragDexLink from './FragDexLink';
+import FragDexRatings from './FragDexRatings';
 import type {Bottle,CatalogProfile} from '../../src/lib/types';
 
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
-const metrics={longevity:'Longevity',sillage:'Sillage / throw',projection:'Projection'} as const;
 type ProfileReply={variantId:string;profile:CatalogProfile|null};
 type Lookup=ProfileReply|{error:string};
 
@@ -35,20 +36,20 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const profile=changed?null:reply?.profile;
  const photo=profile?.photo;
  const photoUrl=photoFailed?undefined:catalogPhotoUrl(photo?.path);
- const sourceById=new Map(profile?.sources.map(source=>[source.id,source]));
  const official=profile?.sources.find(source=>source.kind==='house');
- const community=profile?.sources.find(source=>source.kind==='community');
  const noteGroups=stages.map(([stage,label])=>({
   label,names:profile?.notes.filter(note=>note.stage===stage).map(note=>note.name)??[],
  })).filter(group=>group.names.length>0);
 
  function visit(url:string) {
-  if(!url.startsWith('https://')) return;
   setLinkError('');
-  void openURL(url).catch(()=>setLinkError('Could not open this source.'));
+  void openBrowserAsync(url,{
+   presentationStyle:WebBrowserPresentationStyle.PAGE_SHEET,dismissButtonStyle:'close',
+   showTitle:true,toolbarColor:colors.surface,
+  }).catch(()=>setLinkError('Could not open this source.'));
  }
 
- return <Sheet title="Fragrance profile" onClose={onClose}>
+ return <Sheet title="FragDex" onClose={onClose}>
   <View style={[styles.row,{alignItems:'center',gap:14}]}>
    <View style={{width:91,alignItems:'center',gap:4}}>
     {photoUrl ? <Image accessible source={{uri:photoUrl}} resizeMode="contain"
@@ -56,9 +57,9 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
      style={{width:88,height:114,borderRadius:5,backgroundColor:colors.wash}}/> :
      <BottleArt bottle={{name:bottle.name,color:bottle.color,shape:bottle.shape}} size={94}/>}
     {photoUrl&&<Text style={[styles.small,{textAlign:'center'}]}>{photo?.caption}</Text>}
-    {!photoUrl&&official&&<Pressable accessibilityRole="link" onPress={()=>visit(official.url)} hitSlop={6}>
+    {!photoUrl&&official&&<FragDexLink url={official.url} visit={visit} hitSlop={6}>
      <Text style={styles.link}>Official bottle</Text>
-    </Pressable>}
+    </FragDexLink>}
    </View>
    <View style={{flex:1,minWidth:0,gap:4}}>
     <Text style={styles.small}>{profile?.brand??bottle.brand}</Text>
@@ -90,21 +91,15 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
      <Text style={[styles.text,{flex:1}]}>{group.names.join(' · ')}</Text>
     </View>)}
    </View>
-   <View style={{gap:6}}>
-    <Section title="Wear estimates"/>
-    {profile.performance.length===0&&<Text style={styles.muted}>Awaiting comparable reports.</Text>}
-    {profile.performance.map(metric=><View key={metric.kind} style={{gap:2}}>
-     <Text style={styles.label}>{metrics[metric.kind]}</Text>
-     {metric.reports.map(report=><View key={report.sourceId} style={styles.spread}>
-      <Text style={[styles.muted,{flexShrink:1}]}>{sourceById.get(report.sourceId)?.publisher}</Text>
-      <Text style={styles.text}>{report.value}</Text>
-     </View>)}
-    </View>)}
-    {profile.performance.length>0&&<Text style={styles.small}>Wear varies with skin and application.</Text>}
-    {community&&<Pressable accessibilityRole="link" onPress={()=>visit(community.url)} style={{alignSelf:'flex-start',minHeight:32,justifyContent:'center'}}>
-     <Text style={styles.link}>Community ratings on {community.publisher}</Text>
-    </Pressable>}
-   </View>
+  </>}
+  {reply&&!changed&&<FragDexRatings profile={profile} visit={visit}/>}
+  {profile&&<>
+   {!!profile.links?.length&&<View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
+    {profile.links.map(link=><FragDexLink key={link.url} url={link.url} visit={visit}
+     style={[styles.row,{minHeight:38,gap:4,paddingHorizontal:9,borderWidth:1,borderColor:colors.line,borderRadius:6}]}>
+     <Text style={styles.link}>{link.label}</Text><ExternalLink size={11} color={colors.link}/>
+    </FragDexLink>)}
+   </View>}
    <View style={styles.separator}/>
    <Pressable accessibilityRole="button" accessibilityLabel="Sources and credits" accessibilityState={{expanded:showSources}}
     onPress={()=>setShowSources(current=>!current)} style={[styles.spread,{minHeight:44}]}>
@@ -114,17 +109,17 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
    {showSources&&<View style={{gap:8}}>
     <Text style={styles.small}>Checked {profile.checkedAt}</Text>
     {profile.sources.map(source=><View key={source.id} style={{gap:2}}>
-     <Pressable accessibilityRole="link" onPress={()=>visit(source.url)} style={[styles.row,{minHeight:32}]}>
+     <FragDexLink url={source.url} visit={visit} style={[styles.row,{minHeight:32}]}>
       <Text style={styles.link}>{source.publisher}{source.kind==='house'?' · Official':source.kind==='photo'?' · Photo':''}</Text>
       <ExternalLink size={12} color={colors.link}/>
-     </Pressable>
+     </FragDexLink>
      {source.credit&&<Text style={styles.small}>{source.credit}</Text>}
-     {source.license&&<Pressable accessibilityRole="link" onPress={()=>visit(source.license?.url??'')} style={{minHeight:30,justifyContent:'center'}}>
+     {source.license&&<FragDexLink url={source.license.url} visit={visit} style={{minHeight:30,justifyContent:'center'}}>
       <Text style={styles.link}>{source.license.name}</Text>
-     </Pressable>}
+     </FragDexLink>}
     </View>)}
    </View>}
-   {linkError&&<Text accessibilityRole="alert" style={styles.muted}>{linkError}</Text>}
   </>}
+  {linkError&&<Text accessibilityRole="alert" style={styles.muted}>{linkError}</Text>}
  </Sheet>;
 }

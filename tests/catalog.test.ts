@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {catalogProfiles,findCatalogProfile} from '../src/lib/catalog.ts';
+import {catalogReferenceUrl,fragranceFacets} from '../src/lib/catalog-ratings.ts';
 
 test('catalog matches exact concentration and flanker with common label formatting',()=>{
  const edt=findCatalogProfile({brand:'Christian Dior',name:'Dior Sauvage Eau de Toilette',concentration:'EDT'});
@@ -46,4 +47,38 @@ test('catalog retains wear-source disagreement and uses only credited local phot
   assert.ok(source?.credit&&source.license);
   assert.ok(existsSync(new URL('../public'+photo.path,import.meta.url)));
  }
+});
+
+test('FragDex ratings retain distinct sourced estimates, leaving absent facets empty',()=>{
+ const naxos=findCatalogProfile({brand:'Xerjoff',name:'Naxos',concentration:'EDP'})!;
+ assert.deepEqual(naxos.ratings.filter(r=>r.facet==='longevity').map(r=>[r.sourceId,r.score]),[
+  ['mysecretcart',5],['gouttes',4.5],
+ ]);
+ assert.deepEqual(naxos.ratings.filter(r=>['sillage','projection'].includes(r.facet)).map(r=>[r.facet,r.sourceId,r.score]),[
+  ['sillage','mysecretcart',4],['projection','gouttes',5],
+ ]);
+ const santal=findCatalogProfile({brand:'Le Labo',name:'Santal 33',concentration:'EDP'})!;
+ assert.ok(santal.ratings.some(r=>r.facet==='longevity'&&r.kind==='estimate'));
+ assert.ok(!santal.ratings.some(r=>r.facet==='projection'));
+ const facets=new Set(fragranceFacets.map(([key])=>key));
+ for(const entry of catalogProfiles) for(const rating of entry.ratings) {
+  assert.ok(facets.has(rating.facet));
+  assert.ok(rating.score>=1&&rating.score<=5);
+  assert.ok(entry.sources.some(source=>source.id===rating.sourceId&&source.license));
+ }
+});
+
+test('FragDex links use reviewed edition pages and reject unsafe destinations',()=>{
+ const edt=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDT'})!;
+ const edp=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'})!;
+ for(const entry of [edt,edp]){
+  assert.ok(entry.links.some(link=>link.label==='View on Fragrantica'));
+  assert.ok(entry.links.some(link=>link.label==='View on Jomashop'));
+  assert.ok(entry.links.every(link=>catalogReferenceUrl(link.url)));
+ }
+ assert.notEqual(edt.links[0].url,edp.links[0].url);
+ for(const url of [
+  'javascript:alert(1)','file:///C:/secret','https://user:secret@example.test/',
+  'http://www.fragrantica.com/','https://localhost/','https://127.0.0.1/','https://[::1]/',
+ ]) assert.equal(catalogReferenceUrl(url),null);
 });

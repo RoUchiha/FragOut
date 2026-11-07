@@ -1,14 +1,25 @@
 # Fragrance catalog
 
-Checked November 7, 2026. The compiled snapshot contains 67 exact releases. Sixty-six have corroborated notes, six have reference photographs, and two have comparable wear reports. Seventeen releases have direct house references.
+Checked November 7, 2026. The snapshot contains 67 exact releases. Sixty-six have corroborated notes, six have reference photographs, and 63 have at least one wear estimate. Fifteen have exact Fragrantica links and thirteen have exact Jomashop listings.
 
-The app compares the saved house, release and concentration with this snapshot on the FragOut server. The lookup sends zero requests to outside services. It serves licensed catalog photography from a dedicated static directory. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their existing private flows.
+The app compares the saved house, release and concentration with this snapshot on the FragOut server. It serves licensed catalog photography from a dedicated static directory. Saved bottles and their profile lookups require the owner's session. The optional live rating lookup sends only the public catalog identity. Label scans and personal observations follow their private flows.
 
 ## Evidence
 
 - The compiler retains note names found in two or more source records for the same edition. It standardizes selected synonyms at the shared level of detail. A note gets a top, heart or base label when two references agree on the stage and every published placement agrees. Otherwise it appears in the general notes list.
 - For Green Irish Tweed EDP and Naxos EDP, the profile shows the two wear estimates side by side. MySecretCart compiles typical wear from published information and wearer reports. Gouttes Rares publishes in-house ranges and uses its sillage field for assessed throw. Different wear methods and scales keep their own labels. Oud for Greatness was held out of the performance comparison because the Gouttes listing and the house use different concentration descriptions.
 - Official pages corroborate short note names and exact identity. Parfumo links open the exact edition as a community reference. Publisher ratings, review text and product photography remain on those sites unless the specific item has reuse permission.
+
+## Five-star ratings
+
+- Every entry has Overall, Longevity, Projection, Sillage, Scent, Versatility, Value and Bottle rows. A facet without supported data shows **N/A**. A linked overall row opens the source even when FragDex has no licensed score for display.
+- MySecretCart's published summary of wear reports supplies duration and sillage estimates. The duration midpoint maps to one star per two hours, rounded to a half-star and bounded from one to five. Reported trail strength maps from one for intimate to five for very strong. The separate Gouttes Rares assessment maps its throw band to projection and keeps its longevity result separate.
+- The optional Fragella API supplies its weighted overall score on the publisher's five-point scale. FragDex can also map its documented duration and projection bands to one through five stars and its three value categories to two through four stars when local wear estimates are absent. These mappings carry an **Est.** label and preserve the source category. [Fragella data methodology](https://api.fragella.com/docs.html#data-methodology)
+- **View on Fragrantica** and **View on Jomashop** point to reviewed editions in the [link list](links.json). Where a Jomashop product link is unavailable, **Search Jomashop** sends the public catalog label only when tapped.
+
+## Enable live scores
+
+Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart FragOut. Fragella's developer account and API terms apply. The provider key stays on the server. Lookups require a signed-in non-demo account and a reviewed release year. The app checks the returned house, release, concentration, year and community-signal fields. It coalesces simultaneous lookups for the same release and limits outbound calls per account and installation. [Fragella developer portal](https://api.fragella.com/) · [API terms](https://api.fragella.com/terms-of-use.html)
 
 ## Data and permissions
 

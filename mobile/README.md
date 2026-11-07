@@ -8,7 +8,7 @@ Start the backend with the launcher in the parent folder. It serves the exported
 
 Use **Home** to search your collection, add a fragrance or scan a bottle. Journal and Settings are available in the header.
 
-Confirm the house, release and concentration when you add or scan a bottle. Its profile opens after saving. Tap a bottle in Collection to return to it. **Sources & credits** lists the references and **Edit bottle** opens your personal notes.
+Confirm the house, release and concentration when you add or scan a bottle. FragDex opens after saving. Tap a bottle in Collection to return to it. Tap a rating or a site link to open the in-app browser. **Sources & credits** lists the references and **Edit bottle** opens your personal notes. Install a new native build to pick up the browser component.
 
 Tap the lightbulb to open **Find a scent**. Search by fragrance, house, note, mood, vibe or occasion. Compact picks sit beneath search. Open **Filters** for mood, vibe and pairing. Pair experiments require explicit selection. **Match outfit** accepts a selfie, another image, typed text or dictation. Wear logs and saved looks keep the choices from their match.
 

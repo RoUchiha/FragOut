@@ -7,6 +7,7 @@
   },
   {
     "brand": "Dior", "name": "Sauvage", "concentration": "EDP",
+    "release": {"year": 2018, "publisher": "Dior 2018 annual report", "url": "https://www.dior-finance.com/pdf/d/1/252/Rapport-annuel-au-31-decembre-2018.pdf"},
     "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html",
     "notes": {"listed": ["Calabrian bergamot", "Woody patchouli", "Papua New Guinean vanilla extract"]},
     "communityUrl": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum",
@@ -20,6 +21,7 @@
   },
   {
     "brand": "Dior", "name": "Sauvage Elixir", "concentration": "ELIXIR",
+    "release": {"year": 2021, "publisher": "Accademia del Profumo", "url": "https://accademiadelprofumo.it/dior-sauvage-elixir/"},
     "url": "https://www.dior.com/en_ie/beauty/products/sauvage-elixir-Y0996460.html",
     "notes": {"top": ["Grapefruit", "Spice", "Cinnamon", "Nutmeg", "Cardamom"], "heart": ["Lavender"], "base": ["Wood", "Amber", "Licorice"]}
   },
@@ -67,6 +69,7 @@
   },
   {
     "brand": "Calvin Klein", "name": "Euphoria", "concentration": "EDP",
+    "release": {"year": 2005, "publisher": "Coty", "url": "https://investors.coty.com/news-events-and-presentations/news/news-details/2015/Euphoria-Calvin-Klein-Announces-New-Global-Advertising-Campaign-Featuring-Supermodel-Natalia-Vodianova-To-Celebrate-Fragrances-10th-Anniversary/default.aspx"},
     "url": "https://www.calvinklein.com.au/euphoria-women-eau-de-parfum-50ml-65102303000000",
     "notes": {"top": ["Pomegranate"], "heart": ["Lotus blossom", "Black orchid"], "base": ["Liquid amber", "Black violet", "Mahogany"]},
     "photo": {
@@ -133,6 +136,7 @@
   },
   {
     "brand": "Jean Paul Gaultier", "name": "Ultra Male", "concentration": "EDT", "aliases": ["Ultra Male Intense", "Ultra Male Eau de Toilette Intense"],
+    "release": {"year": 2015, "publisher": "DIARY directory", "url": "https://www.diarydirectory.com/newsarticle/jean-paul-gaultier-launches-ultra-male-fragrance/171"},
     "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male/ultra-male-eau-de-toilette-intense-000000000065119981",
     "notes": {},
     "photo": {

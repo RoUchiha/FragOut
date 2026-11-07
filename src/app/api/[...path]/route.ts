@@ -8,6 +8,7 @@ import type {Bottle} from '@/lib/types';
 import {handleAiApi} from '@/lib/ai-api';
 import {requestPolicy} from '@/lib/security';
 import {findCatalogProfile} from '@/lib/catalog';
+import {lookupFragellaRatings} from '@/lib/fragella';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
@@ -67,7 +68,22 @@ async function handle(req:NextRequest){
       if(method==='POST'&&path.length===1)return reply(db.addBottle(user.id,{...bottleSchema.parse(body),id:'',variantId:''} as Bottle),201);
       if(method==='GET'&&path.length===3&&path[1]&&path[2]==='profile'){
         const bottle=db.getBottle(user.id,path[1]);
-        return bottle?reply({variantId:bottle.variantId,profile:findCatalogProfile(bottle)}):reply({error:'Bottle not found.'},404);
+        if(!bottle)return reply({error:'Bottle not found.'},404);
+        const profile=findCatalogProfile(bottle);
+        const key=process.env.FRAGOUT_FRAGELLA_API_KEY?.trim();
+        if(!profile?.releaseYear||!key||user.demo)
+          return reply({variantId:bottle.variantId,profile});
+        const live=await lookupFragellaRatings(profile,key,()=>
+          db.limit('fragella-user:'+user.id,4,60000)&&db.limit('fragella-installation',20,60000));
+        if(db.sessionUser(token)?.id!==user.id)return reply({error:'Please sign in to continue.'},401);
+        const current=db.getBottle(user.id,bottle.id);
+        if(!current)return reply({error:'Bottle not found.'},404);
+        if(current.variantId!==bottle.variantId)
+          return reply({variantId:current.variantId,profile:findCatalogProfile(current)});
+        const liveRatings=live?.ratings.filter(rating=>rating.kind==='published'||!profile.ratings.some(existing=>existing.facet===rating.facet));
+        return reply({variantId:bottle.variantId,profile:live&&liveRatings?.length?{
+          ...profile,ratings:[...liveRatings,...profile.ratings],sources:[...profile.sources,live.source],
+        }:profile});
       }
       if(method==='PATCH'&&path.length===2&&path[1]){const b=db.updateBottle(user.id,path[1],bottleSchema.partial().parse(body));return b?reply(b):reply({error:'Bottle not found.'},404);}
       if(method==='DELETE'&&path.length===2&&path[1])return db.removeBottle(user.id,path[1])?reply({ok:true}):reply({error:'Bottle not found.'},404);

@@ -10,13 +10,15 @@ import * as engine from '../src/lib/engine.ts';
 import * as security from '../src/lib/security.ts';
 import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
+import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
 const require=createRequire(import.meta.url),next=require('next/server');
-function harness(){
+function harness({key='',lookup=async()=>null}:{key?:string;lookup?:typeof lookupFragellaRatings}={}){
  const db=new Store(':memory:'),module={exports:{} as any};
  const source=readFileSync(new URL('../src/app/api/[...path]/route.ts',import.meta.url),'utf8');
- vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
+ vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{FRAGOUT_FRAGELLA_API_KEY:key}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
   if(name==='next/server')return next;if(name==='zod')return require('zod');
   if(name==='@/lib/catalog')return catalog;
+  if(name==='@/lib/fragella')return {lookupFragellaRatings:lookup};
   if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/scent-search')return search;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
  }});
  async function call(path:string,{method='GET',body,raw,token,cookie,origin='http://localhost:3237',url='http://localhost:3237',headers={}}:{method?:string;body?:unknown;raw?:string;token?:string;cookie?:string;origin?:string|null;url?:string;headers?:Record<string,string>}={}){
@@ -110,6 +112,43 @@ test('fragrance profiles require bottle ownership and resolve the current editio
   assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{concentration:'UNKNOWN'}})).status,200);
   assert.equal((await h.call(path,{token})).body.profile,null);
  } finally { h.db.close(); }
+});
+
+test('live FragDex ratings are owner-scoped and discarded after edition or session changes',async()=>{
+ let lookups=0,change=()=>{};
+ const h=harness({key:'server-only-test-key',lookup:async(profile,key)=>{
+  assert.equal(key,'server-only-test-key');
+  assert.equal(profile.id,'dior-sauvage-edp');
+  lookups++;
+  change();
+  return {
+   ratings:[{facet:'overall',sourceId:'fragella',score:4.23,kind:'published',basis:'Weighted community rating'}],
+   source:{id:'fragella',publisher:'Fragella',kind:'community',url:'https://app.fragella.com/fragrance/Sauvage-Eau-De-Parfum'},
+  };
+ }});
+ try {
+  const owner=h.db.register('Catalog QA','catalog-test@example.test','synthetic-password');
+  const other=h.db.createDemo();
+  const token=h.db.createSession(owner.id),otherToken=h.db.createSession(other.id);
+  const owned=h.db.addBottle(owner.id,{...h.db.state(other.id).bottles[0],
+   brand:'Dior',name:'Sauvage',concentration:'EDP',memo:'private-entry-note'});
+  const demoBottle=h.db.addBottle(other.id,owned);
+  const path='bottles/'+owned.id+'/profile';
+  assert.equal((await h.call(path,{token:otherToken})).status,404);
+  assert.equal((await h.call('bottles/'+demoBottle.id+'/profile',{token:otherToken})).status,200);
+  assert.equal(lookups,0);
+  const result=await h.call(path,{token});
+  assert.equal(result.body.profile.ratings[0].score,4.23);
+  assert.ok(!JSON.stringify(result.body).includes('server-only-test-key'));
+  assert.ok(!JSON.stringify(result.body).includes('private-entry-note'));
+  change=()=>{h.db.updateBottle(owner.id,owned.id,{concentration:'EDT'});};
+  const edited=await h.call(path,{token});
+  assert.equal(edited.body.profile.concentration,'EDT');
+  assert.ok(!edited.body.profile.ratings.some((rating:{sourceId:string})=>rating.sourceId==='fragella'));
+  h.db.updateBottle(owner.id,owned.id,{concentration:'EDP'});
+  change=()=>{h.db.revokeSession(token);};
+  assert.equal((await h.call(path,{token})).status,401);
+ } finally {h.db.close();}
 });
 
 test('HTTPS login issues Secure, HttpOnly and SameSite cookies without an opt-in flag',async()=>{

@@ -7,18 +7,23 @@ import unicodedata
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlencode, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "catalog"
 IDENTITY = json.loads((CATALOG / "identity.json").read_text(encoding="utf-8"))
+LINKS = json.loads((CATALOG / "links.json").read_text(encoding="utf-8"))
 CC_BY = {"name": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/"}
 STAGES = ("top", "heart", "base")
 SOURCE_STAGES = (*STAGES, "listed")
 CONCENTRATIONS = {
     "eau de toilette": "EDT", "edt": "EDT", "eau de parfum": "EDP",
     "edp": "EDP", "parfum": "PARFUM", "elixir": "ELIXIR", "oil": "OIL",
+}
+THROW_STARS = {
+    "intimate": 1, "soft intimate": 1.5, "soft": 2, "soft moderate": 2.5,
+    "moderate": 3, "moderate strong": 3.5, "strong": 4, "very strong": 5, "enormous": 5,
 }
 NOTE_ALIASES = {
     "calabrian bergamot": "bergamot", "sicilian lemon": "lemon",
@@ -100,11 +105,67 @@ def checked_notes(lists):
     return sorted(checked, key=lambda note: SOURCE_STAGES.index(note["stage"]))
 
 
-def hours(value):
+def hour_band(value):
     band = re.search(r"(\d+)\s*[-–]\s*(\d+)\s*h", value, re.IGNORECASE)
     if not band or not 0 < int(band[1]) <= int(band[2]) <= 48:
         return None
-    return f"{band[1]}–{band[2]} h"
+    return int(band[1]), int(band[2])
+
+
+def hours(value):
+    band = hour_band(value)
+    return f"{band[0]}–{band[1]} h" if band else None
+
+
+def wear_ratings(csv_row, index_row):
+    ratings = []
+    sources = (
+        (csv_row, "mysecretcart", "typical_wear", "sillage"),
+        (index_row, "gouttes", "longevity", "projection"),
+    )
+    for row, source, duration_key, throw_facet in sources:
+        if not row:
+            continue
+        band = hour_band(row[duration_key])
+        if band:
+            # Two hours per star, in half-star steps with one- and five-star bounds.
+            midpoint_hours = (band[0] + band[1] + 1) // 2
+            ratings.append({"facet": "longevity", "sourceId": source, "kind": "estimate",
+                            "score": min(5, max(1, midpoint_hours / 2)),
+                            "basis": f"{band[0]}–{band[1]} h"})
+        # The Gouttes index calls its projection assessment "sillage" in the JSON.
+        throw = row["sillage"].strip()
+        score = THROW_STARS.get(normalize(throw))
+        if score:
+            ratings.append({"facet": throw_facet, "sourceId": source, "kind": "estimate",
+                            "score": score, "basis": throw.capitalize()})
+    return ratings
+
+
+def quick_links(profile_id, brand, name, concentration, sources):
+    reviewed = LINKS.get(profile_id, {})
+    links = []
+    if reviewed.get("fragrantica"):
+        url = reviewed["fragrantica"]
+        parsed = urlsplit(url)
+        if parsed.netloc != "www.fragrantica.com" or not parsed.path.startswith("/perfume/") or parsed.scheme != "https":
+            raise ValueError(f"Invalid Fragrantica product page: {url}")
+        links.append({"label": "View on Fragrantica", "url": url})
+    jomashop = reviewed.get("jomashop")
+    if jomashop:
+        parsed = urlsplit(jomashop)
+        if parsed.netloc != "www.jomashop.com" or not parsed.path.endswith(".html") or parsed.scheme != "https":
+            raise ValueError(f"Invalid Jomashop product page: {jomashop}")
+        links.append({"label": "View on Jomashop", "url": jomashop})
+    else:
+        query = urlencode({"q": f"{brand} {name} {concentration}"})
+        links.append({"label": "Search Jomashop", "url": "https://www.jomashop.com/search?" + query})
+    for source in sources:
+        if source["id"] == "community":
+            links.append({"label": f"View on {source['publisher']}", "url": source["url"]})
+        if source["kind"] == "house":
+            links.append({"label": "View official page", "url": source["url"]})
+    return links
 
 
 def wear_reports(csv_row, index_row):
@@ -128,6 +189,9 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
     if reviewed:
         sources.append(make_source("house", reviewed["brand"], reviewed["url"], "house"))
         lists["house"] = reviewed["notes"]
+    release = reviewed.get("release")
+    if release:
+        sources.append(make_source("release", release["publisher"], release["url"], "reference"))
     if scento:
         sources.append(make_source("scento", "Scento", scento["url"], "reference", CC_BY,
                                    "Scento — Perfume Database. Matching notes selected and standardized."))
@@ -140,7 +204,8 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
         lists["mysecretcart"] = {stage: csv_row[f"{stage}_notes"].split(";") for stage in STAGES}
     notes = checked_notes(lists)
     performance = wear_reports(csv_row, index_row)
-    if performance:
+    ratings = wear_ratings(csv_row, index_row)
+    if any(rating["sourceId"] == "gouttes" for rating in ratings):
         sources.append(make_source("gouttes", "Gouttes Rares",
                                    "https://gouttesrares.com/pages/fragrance-longevity-sillage-index",
                                    "wear", CC_BY, "Gouttes Rares Longevity & Sillage Index, 2026. In-house wear assessments reformatted."))
@@ -162,7 +227,14 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
     name = reviewed.get("name") or scento["name"]
     id_ = "-".join(key).replace(" ", "-").lower()
     entry = {"id": id_, "brand": brand, "name": name, "concentration": key[2], "checkedAt": checked_at,
-             "notes": notes, "performance": performance, "sources": sources}
+             "notes": notes, "performance": performance, "ratings": ratings,
+             "links": quick_links(id_, brand, name, key[2], sources), "sources": sources}
+    years = {int(year) for year in [(release or {}).get("year"), (csv_row or {}).get("year"), (scento or {}).get("year")]
+             if year and re.fullmatch(r"\d{4}", str(year))}
+    if len(years) > 1:
+        raise ValueError(f"Recheck conflicting launch years for {key}")
+    if years:
+        entry["releaseYear"] = years.pop()
     if photo:
         entry["photo"] = {"path": path, "caption": photo["caption"], "sourceId": "photo"}
     if reviewed.get("aliases"):
@@ -191,8 +263,6 @@ def main():
     for key in sorted(scento.keys() & csv_rows.keys() | reviewed.keys()):
         review = reviewed.get(key, {})
         note_row, csv_row = scento.get(key), csv_rows.get(key)
-        if note_row and csv_row and note_row["year"] and csv_row["year"] and str(note_row["year"]) != csv_row["year"]:
-            raise ValueError(f"Recheck conflicting launch years for {key}")
         reference = review.get("wear")
         index_row = None
         if reference:
@@ -210,6 +280,9 @@ def main():
         "with_performance": sum(bool(p["performance"]) for p in profiles),
         "with_photo": sum("photo" in p for p in profiles),
         "with_official_reference": sum(any(s["kind"] == "house" for s in p["sources"]) for p in profiles),
+        "with_ratings": sum(bool(p["ratings"]) for p in profiles),
+        "with_fragrantica": sum(any(l["label"] == "View on Fragrantica" for l in p["links"]) for p in profiles),
+        "with_jomashop_product": sum(any(l["label"] == "View on Jomashop" for l in p["links"]) for p in profiles),
     }))
 
 

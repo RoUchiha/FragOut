@@ -1,3 +1,5 @@
+import type {CatalogRating} from './catalog-ratings.ts';
+
 export type Ownership = 'OWNED' | 'WISHLIST' | 'REMOVED';
 export type Provenance = 'demo' | 'personal' | 'unknown';
 export interface Bottle {
@@ -17,6 +19,9 @@ export interface CatalogProfile {
  id:string; brand:string; name:string; concentration:string; checkedAt:string;
  notes:{name:string;stage:'top'|'heart'|'base'|'listed';sourceIds:string[]}[];
  performance:{kind:'longevity'|'sillage'|'projection';reports:{sourceId:string;value:string}[]}[];
+ ratings:CatalogRating[];
+ links:{label:string;url:string}[];
+ releaseYear?:number;
  photo?:{path:string;caption:string;sourceId:string};
  sources:CatalogSource[];
 }
