@@ -3,7 +3,7 @@ import {Pressable,ScrollView,Text,View} from 'react-native';
 import {SafeAreaProvider,SafeAreaView} from 'react-native-safe-area-context';
 import {router,useLocalSearchParams} from 'expo-router';
 import {StatusBar} from 'expo-status-bar';
-import {ArrowLeft,BookOpen,Home,Settings2,X} from 'lucide-react-native';
+import {ArrowLeft,BookOpen,Home,Lightbulb,Settings2,X} from 'lucide-react-native';
 import {api,restoreSession,serverUrl,sessionScope,setServer,signIn,type AppState} from './src/api';
 import {Btn,Field,IconButton,Spinner,UiProvider,useSeasonalUi} from './src/ui';
 import Outfit from './src/Outfit';
@@ -11,13 +11,12 @@ import Collection from './src/Collection';
 import Journal from './src/Journal';
 import Settings from './src/Settings';
 import Suggester from './src/Suggester';
-import SuggesterIcon from './src/SuggesterIcon';
 import type {Feedback} from './src/Results';
 import {defaultIntent} from '../src/lib/intent';
 import type {ScentIntent} from '../src/lib/types';
 
 type ViewId = 'home'|'suggester'|'outfit'|'journal'|'settings';
-const tabs = [['home','Home',Home],['suggester','Suggester',SuggesterIcon]] as const;
+const tabs = [['home','Home',Home],['suggester','Find a scent',Lightbulb]] as const;
 
 export default function App() {
  return <SafeAreaProvider><Workspace/></SafeAreaProvider>;
@@ -106,7 +105,7 @@ function Workspace() {
     <>
      <View style={styles.topbar}>
       <View style={styles.row}>
-       {view!==activeTab&&<IconButton label={activeTab==='home'?'Back to Home':'Back to Suggester'}
+       {view!==activeTab&&<IconButton label={activeTab==='home'?'Back to Home':'Back to scent search'}
         icon={<ArrowLeft size={19} color={colors.link}/>} onPress={()=>navigate(activeTab)}/>}
        <Text style={styles.brand}>FragOut.</Text>
       </View>
@@ -141,8 +140,7 @@ function Workspace() {
        const selected = activeTab===id;
        return <Pressable key={id} accessibilityRole="tab" accessibilityLabel={label}
         accessibilityState={{selected}} onPress={()=>navigate(id)} style={[styles.tab,selected&&styles.activeTab]}>
-        <Icon color={selected?colors.accentInk:colors.muted}/>
-        <Text style={[styles.tabText,selected&&{color:colors.accentInk,fontWeight:'600'}]}>{label}</Text>
+        <Icon size={22} color={selected?colors.accentInk:colors.muted} strokeWidth={1.75}/>
        </Pressable>;
       })}
      </View>

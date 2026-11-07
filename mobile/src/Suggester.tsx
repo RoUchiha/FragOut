@@ -85,7 +85,7 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
  }
 
  return <View style={{gap:11}}>
-  <Text accessibilityRole="header" style={styles.h1}>Suggester</Text>
+  <Text accessibilityRole="header" style={styles.h1}>Find a scent</Text>
   <SearchBox label="Search fragrance suggestions" placeholder="Clean, tired, or a fragrance" value={query}
    onChange={editQuery} onSubmit={()=>submit()} onClear={()=>submit('')} maxLength={scentSearchLimit}/>
   <View style={[styles.row,{justifyContent:'space-between',gap:6}]}>

@@ -22,7 +22,7 @@ The server binds to loopback. It is not a hosted service. See [the mobile guide]
 
 ## Mood and vibe
 
-In the mobile app, **Home** holds your collection, bottle scanning and Add. **Suggester** shows compact picks beneath its search bar. Type a cue such as **tired clean work**, or search by fragrance, house or note. Open **Filters** to choose mood, vibe, occasion or pairs. **Match outfit** opens the photo, text and dictation flow.
+In the mobile app, the home icon opens your collection, bottle scanning and Add. The lightbulb opens **Find a scent**, with compact picks beneath its search bar. Type a cue such as **tired clean work**, or search by fragrance, house or note. Open **Filters** to choose mood, vibe, occasion or pairs. **Match outfit** opens the photo, text and dictation flow.
 
 The mobile palette follows the device's local time and the hemisphere in **Settings → Conditions**. Each season has morning, day, evening and night variations.
 
