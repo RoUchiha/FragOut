@@ -1,7 +1,19 @@
 {
+  "armaf-club-de-nuit-woman-edp": {
+    "jomashop": "https://www.jomashop.com/armaf-ladies-club-de-nuit-edp-spray-3-6-oz-fragrances-6085010094151.html"
+  },
+  "burberry-her-edp": {
+    "jomashop": "https://www.jomashop.com/burberry-ladies-burberry-her-edp-spray-5-0-oz-fragrances-3616302017003.html"
+  },
+  "burberry-hero-edp": {
+    "jomashop": "https://www.jomashop.com/burberry-mens-hero-edp-spray-3-4-oz-fragrances-3614228838016.html"
+  },
   "calvin-klein-euphoria-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Calvin-Klein/Euphoria-253.html",
     "jomashop": "https://www.jomashop.com/calvin-klein-fragrances-eupes34es-3-4oz.html"
+  },
+  "carolina-herrera-good-girl-edp": {
+    "jomashop": "https://www.jomashop.com/carolina-herrera-ladies-good-girl-edp-spray-2-7-oz-fragrances-8411061026342.html"
   },
   "chanel-bleu-de-chanel-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Chanel/Bleu-de-Chanel-Eau-de-Parfum-25967.html"
@@ -17,6 +29,12 @@
     "fragrantica": "https://www.fragrantica.com/perfume/Creed/Green-Irish-Tweed-474.html",
     "jomashop": "https://www.jomashop.com/creed-fragrances-cgimes33-a.html"
   },
+  "creed-silver-mountain-water-edp": {
+    "jomashop": "https://www.jomashop.com/creed-perfume-csmes33.html"
+  },
+  "dior-jadore-edp": {
+    "jomashop": "https://www.jomashop.com/dior-ladies-jadore-edp-spray-3-4-oz-fragrances-3348901681056.html"
+  },
   "dior-sauvage-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Dior/Dior-Sauvage-Eau-de-Parfum-48100.html",
     "jomashop": "https://www.jomashop.com/christian-dior-fragrances-svgmes34-3-4oz.html"
@@ -29,9 +47,52 @@
     "fragrantica": "https://www.fragrantica.com/perfume/Christian-Dior/Sauvage-Elixir-68415.html",
     "jomashop": "https://www.jomashop.com/christian-dior-mens-sauvage-elixir-spray-fragrances-3348901567572.html"
   },
+  "dolce-and-gabbana-light-blue-edt": {
+    "jomashop": "https://www.jomashop.com/dolce-and-gabbana-ladies-light-blue-edt-spray-3-4-oz-fragrances-8057971188192.html",
+    "jomashopBottleEdition": "2025 bottle"
+  },
+  "dolce-and-gabbana-the-one-for-men-edp": {
+    "jomashop": "https://www.jomashop.com/dolce-and-gabbana-perfume-thomes34-a.html"
+  },
+  "giorgio-armani-acqua-di-gio-edt": {
+    "jomashop": "https://www.jomashop.com/giorgio-armani-perfume-acumts67-a.html"
+  },
+  "giorgio-armani-armani-code-edt": {
+    "jomashop": "https://www.jomashop.com/giorgio-armani-abcmts25.html"
+  },
+  "gucci-bamboo-edp": {
+    "jomashop": "https://www.jomashop.com/gucci-perfume-gbaes25.html"
+  },
+  "gucci-bloom-edp": {
+    "jomashop": "https://www.jomashop.com/gucci-bloom-gucci-edp-spray-1-7-oz-50-ml-w-8005610481043.html"
+  },
+  "gucci-flora-gorgeous-gardenia-edp": {
+    "jomashop": "https://www.jomashop.com/gucci-ladies-flora-by-gucci-gorgeous-gardenia-edp-spray-3-3-oz-fragrances-3616302022472.html"
+  },
+  "hugo-boss-boss-bottled-edp": {
+    "jomashop": "https://www.jomashop.com/hugo-boss-mens-boss-bottled-edp-spray-1-6-oz-fragrances-3614229828559.html"
+  },
+  "initio-oud-for-greatness-edp": {
+    "jomashop": "https://www.jomashop.com/initio-parfums-prives-oud-for-greatness-edp-spray-3-0-oz-fragrances-3701415901377.html"
+  },
+  "jean-paul-gaultier-le-beau-edt": {
+    "jomashop": "https://www.jomashop.com/jean-paul-gaultier-le-beau-eau-de-toilette-spray-125ml-4-2oz-8435415017206.html"
+  },
+  "jean-paul-gaultier-le-male-edt": {
+    "jomashop": "https://www.jomashop.com/jean-paul-gaultier-mens-le-male-edt-spray-4-2-oz-fragrances-3423470317534-jegmts42.html"
+  },
+  "jean-paul-gaultier-scandal-edp": {
+    "jomashop": "https://www.jomashop.com/j-p-gaultier-scandal-j-p-g-edp-spray-2-7-oz-80-ml-w-jpces27.html"
+  },
   "jean-paul-gaultier-ultra-male-edt": {
     "fragrantica": "https://www.fragrantica.com/perfume/Jean-Paul-Gaultier/Ultra-Male-30947.html",
     "jomashop": "https://www.jomashop.com/jean-paul-gaultier-mens-ultra-male-edt-spray-4-2-oz-fragrances-8435415012027.html"
+  },
+  "lancome-idole-edp": {
+    "jomashop": "https://www.jomashop.com/lancome-ladies-idole-edp-spray-1-7-oz-fragrances-3614272629370.html"
+  },
+  "lancome-la-vie-est-belle-edp": {
+    "jomashop": "https://www.jomashop.com/lancome-perfume-lvbes25-a.html"
   },
   "le-labo-santal-33-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Le-Labo/Santal-33-12201.html",
@@ -41,17 +102,104 @@
     "fragrantica": "https://www.fragrantica.com/perfume/Maison-Francis-Kurkdjian/Baccarat-Rouge-540-33519.html",
     "jomashop": "https://www.jomashop.com/maison-francis-kurkdjian-unisex-baccarat-rouge-540-edp-spray-1-2-oz-fragrances-3700559608654.html"
   },
+  "maison-francis-kurkdjian-grand-soir-edp": {
+    "jomashop": "https://www.jomashop.com/maison-francis-kurkdjian-unisex-grand-soir-edp-spray-1-2-oz-fragrances-3700559615973.html"
+  },
+  "marc-jacobs-daisy-edt": {
+    "jomashop": "https://www.jomashop.com/marc-jacobs-mrdts34f.html"
+  },
+  "marc-jacobs-perfect-edp": {
+    "jomashop": "https://www.jomashop.com/marc-jacobs-ladies-perfect-edp-spray-5-0-oz-fragrances-3616304254215.html"
+  },
+  "montblanc-explorer-edp": {
+    "jomashop": "https://www.jomashop.com/explorer-mont-blanc-edp-spray-3-3-oz-100-ml-m-exlmes33.html"
+  },
+  "mugler-alien-edp": {
+    "jomashop": "https://www.jomashop.com/thierry-mugler-perfume-alnes3rn.html"
+  },
+  "mugler-angel-edp": {
+    "jomashop": "https://www.jomashop.com/angel-mugler-edp-spray-refillable-star-new-packaging-3-4-oz-w-anges33rn-3439600041217.html"
+  },
+  "nautica-voyage-edt": {
+    "jomashop": "https://www.jomashop.com/nautica-mens-voyage-edt-spray-3-3-oz-fragrances-843711240897.html"
+  },
+  "parfums-de-marly-herod-edp": {
+    "jomashop": "https://www.jomashop.com/herod-by-parfums-de-marly-for-men-4-2-oz-edp-spray-3700578507006.html"
+  },
+  "parfums-de-marly-layton-edp": {
+    "jomashop": "https://www.jomashop.com/parfums-de-marly-mens-layton-edp-spray-4-2-oz-fragrances-3700578518002.html"
+  },
+  "parfums-de-marly-pegasus-edp": {
+    "jomashop": "https://www.jomashop.com/parfums-de-marly-mens-pegasus-edp-spray-4-2-oz-fragrances-3700578506009.html"
+  },
+  "prada-paradoxe-edp": {
+    "jomashop": "https://www.jomashop.com/prada-ladies-paradoxe-edp-spray-3-04-oz-fragrances-3614273760164.html"
+  },
   "rabanne-1-million-edt": {
     "fragrantica": "https://www.fragrantica.com/perfume/Paco-Rabanne/1-Million-3747.html",
     "jomashop": "https://www.jomashop.com/paco-rabanne-perfume-1mimts33.html"
+  },
+  "rabanne-1-million-lucky-edt": {
+    "jomashop": "https://www.jomashop.com/1-million-lucky-paco-rabanne-edt-spray-3-4-oz-100-ml-m-1mlmts34.html"
+  },
+  "rabanne-fame-edp": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-ladies-fame-edp-spray-2-71-oz-fragrances-3349668594412.html"
+  },
+  "rabanne-fame-parfum": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-ladies-fame-parfum-parfum-spray-2-7-oz-fragrances-3349668614660.html"
+  },
+  "rabanne-invictus-edt": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-perfume-ivcmts34-a.html"
+  },
+  "rabanne-million-gold-for-her-edp": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-ladies-million-gold-edp-spray-3-0-oz-fragrances-3349668630264.html"
+  },
+  "rabanne-million-gold-for-her-le-parfum": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-ladies-million-gold-edp-spray-1-7-oz-fragrances-3349668645213.html"
+  },
+  "rabanne-olympea-edp": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-ladies-olympea-edp-spray-80-ml-fragrances-3349668612635.html"
+  },
+  "rabanne-phantom-parfum": {
+    "jomashop": "https://www.jomashop.com/paco-rabanne-mens-phantom-parfum-spray-3-4-oz-fragrances-3349668614592.html"
+  },
+  "tom-ford-black-orchid-edp": {
+    "jomashop": "https://www.jomashop.com/tom-ford-bldes34.html"
+  },
+  "tom-ford-lost-cherry-edp": {
+    "jomashop": "https://www.jomashop.com/tom-ford-lost-cherry-eau-de-parfum-1-7oz-888066082341.html"
+  },
+  "tom-ford-noir-extreme-edp": {
+    "jomashop": "https://www.jomashop.com/tom-ford-fragrances-tnemes34-3-4oz.html"
+  },
+  "tom-ford-oud-wood-edp": {
+    "jomashop": "https://www.jomashop.com/tom-ford-private-blend-oud-wood-eau-de-parfum-spray-100ml-3-4oz-888066004510.html"
+  },
+  "tom-ford-tobacco-vanille-edp": {
+    "jomashop": "https://www.jomashop.com/tom-ford-unisex-tobacco-vanille-edp-spray-1-0-oz-fragrances-888066080705.html"
+  },
+  "versace-dylan-blue-edt": {
+    "jomashop": "https://www.jomashop.com/versace-perfume-vdbmts34.html"
+  },
+  "versace-eros-edt": {
+    "jomashop": "https://www.jomashop.com/versace-eros-eau-de-toilette-spray-100ml-3-4oz-8011003814749.html"
+  },
+  "viktor-and-rolf-flowerbomb-edp": {
+    "jomashop": "https://www.jomashop.com/viktor-rolph-flbes34.html"
   },
   "xerjoff-naxos-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Xerjoff/Xerjoff-Naxos-30529.html",
     "jomashop": "https://www.jomashop.com/xerjoff-unisex-1861-naxos-edp-spray-3-4-oz-fragrances-8033488155070.html"
   },
+  "yves-saint-laurent-black-opium-edp": {
+    "jomashop": "https://www.jomashop.com/yves-saint-laurent-ladies-black-opium-edp-spray-5-oz-fragrances-3614271969477.html"
+  },
   "yves-saint-laurent-libre-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Libre-56077.html",
     "jomashop": "https://www.jomashop.com/libre-ysl-edp-spray-3-0-oz-90-ml-w-3614272648425.html"
+  },
+  "yves-saint-laurent-mon-paris-edp": {
+    "jomashop": "https://www.jomashop.com/yves-saint-laurent-ladies-mon-paris-edp-spray-3-oz-fragrances-3614271655110.html"
   },
   "yves-saint-laurent-y-edp": {
     "fragrantica": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Y-Eau-de-Parfum-50757.html",

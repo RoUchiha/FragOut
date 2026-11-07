@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "catalog"
 IDENTITY = json.loads((CATALOG / "identity.json").read_text(encoding="utf-8"))
 LINKS = json.loads((CATALOG / "links.json").read_text(encoding="utf-8"))
+PHOTOS = json.loads((CATALOG / "photos.json").read_text(encoding="utf-8"))
 CC_BY = {"name": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/"}
 STAGES = ("top", "heart", "base")
 SOURCE_STAGES = (*STAGES, "listed")
@@ -153,10 +154,12 @@ def quick_links(profile_id, brand, name, concentration, sources):
         links.append({"label": "View on Fragrantica", "url": url})
     jomashop = reviewed.get("jomashop")
     if jomashop:
-        parsed = urlsplit(jomashop)
-        if parsed.netloc != "www.jomashop.com" or not parsed.path.endswith(".html") or parsed.scheme != "https":
+        if not re.fullmatch(r"https://www\.jomashop\.com/[a-z0-9-]+\.html", jomashop):
             raise ValueError(f"Invalid Jomashop product page: {jomashop}")
-        links.append({"label": "View on Jomashop", "url": jomashop})
+        link = {"label": "View on Jomashop", "url": jomashop, "kind": "jomashop-listing"}
+        if reviewed.get("jomashopBottleEdition"):
+            link["bottleEdition"] = reviewed["jomashopBottleEdition"]
+        links.append(link)
     else:
         query = urlencode({"q": f"{brand} {name} {concentration}"})
         links.append({"label": "Search Jomashop", "url": "https://www.jomashop.com/search?" + query})
@@ -166,6 +169,25 @@ def quick_links(profile_id, brand, name, concentration, sources):
         if source["kind"] == "house":
             links.append({"label": "View official page", "url": source["url"]})
     return links
+
+
+def profile_photos(profile_id, sources):
+    photos = []
+    files = set()
+    for number, photo in enumerate(PHOTOS.get(profile_id, []), start=1):
+        filename = photo["file"]
+        belongs_to_edition = filename == profile_id or filename.startswith(f"{profile_id}-")
+        if not belongs_to_edition or not re.fullmatch(r"[a-z0-9-]+", filename) or filename in files:
+            raise ValueError(f"Invalid or duplicate photo name for {profile_id}: {filename}")
+        files.add(filename)
+        path = f"/catalog/bottles/{filename}.jpg"
+        if not (ROOT / "public" / path.lstrip("/")).is_file():
+            raise ValueError(f"Missing catalog photo: {path}")
+        source_id = "photo" if number == 1 else f"photo-{number}"
+        sources.append(make_source(source_id, photo.get("publisher", "Wikimedia Commons"), photo["url"], "photo",
+                                   photo["license"], photo["credit"]))
+        photos.append({"path": path, "caption": photo["caption"], "sourceId": source_id})
+    return photos
 
 
 def wear_reports(csv_row, index_row):
@@ -209,23 +231,14 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
         sources.append(make_source("gouttes", "Gouttes Rares",
                                    "https://gouttesrares.com/pages/fragrance-longevity-sillage-index",
                                    "wear", CC_BY, "Gouttes Rares Longevity & Sillage Index, 2026. In-house wear assessments reformatted."))
-    photo = reviewed.get("photo")
-    if photo:
-        filename = photo["file"]
-        if not re.fullmatch(r"[a-z0-9-]+", filename):
-            raise ValueError(f"Invalid photo name: {filename}")
-        path = f"/catalog/bottles/{filename}.jpg"
-        if not (ROOT / "public" / path.lstrip("/")).is_file():
-            raise ValueError(f"Missing catalog photo: {path}")
-        sources.append(make_source("photo", photo.get("publisher", "Wikimedia Commons"), photo["url"], "photo",
-                                   photo["license"], photo["credit"]))
+    id_ = "-".join(key).replace(" ", "-").lower()
+    photos = profile_photos(id_, sources)
     if reviewed.get("communityUrl"):
         sources.append(make_source("community", "Parfumo", reviewed["communityUrl"], "community"))
-    if not (notes or performance or photo):
+    if not (notes or performance or photos):
         return None
     brand = reviewed.get("brand") or scento["house"]
     name = reviewed.get("name") or scento["name"]
-    id_ = "-".join(key).replace(" ", "-").lower()
     entry = {"id": id_, "brand": brand, "name": name, "concentration": key[2], "checkedAt": checked_at,
              "notes": notes, "performance": performance, "ratings": ratings,
              "links": quick_links(id_, brand, name, key[2], sources), "sources": sources}
@@ -235,8 +248,10 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
         raise ValueError(f"Recheck conflicting launch years for {key}")
     if years:
         entry["releaseYear"] = years.pop()
-    if photo:
-        entry["photo"] = {"path": path, "caption": photo["caption"], "sourceId": "photo"}
+    if photos:
+        entry["photo"] = photos[0]
+    if len(photos) > 1:
+        entry["additionalPhotos"] = photos[1:]
     if reviewed.get("aliases"):
         entry["aliases"] = reviewed["aliases"]
     return entry
@@ -273,12 +288,16 @@ def main():
         entry = build_entry(key, note_row, csv_row, review, index_row, args.checked_at.isoformat())
         if entry:
             profiles.append(entry)
+    unused = (PHOTOS.keys() | LINKS.keys()) - {entry["id"] for entry in profiles}
+    if unused:
+        raise ValueError(f"References for unknown editions: {sorted(unused)}")
     output = "[\n" + ",\n".join("  " + json.dumps(row, ensure_ascii=False) for row in profiles) + "\n]\n"
     (CATALOG / "fragrances.json").write_text(output, encoding="utf-8", newline="\n")
     print(json.dumps({
         "editions": len(profiles), "with_notes": sum(bool(p["notes"]) for p in profiles),
         "with_performance": sum(bool(p["performance"]) for p in profiles),
         "with_photo": sum("photo" in p for p in profiles),
+        "photos": sum(("photo" in p) + len(p.get("additionalPhotos", [])) for p in profiles),
         "with_official_reference": sum(any(s["kind"] == "house" for s in p["sources"]) for p in profiles),
         "with_ratings": sum(bool(p["ratings"]) for p in profiles),
         "with_fragrantica": sum(any(l["label"] == "View on Fragrantica" for l in p["links"]) for p in profiles),

@@ -40,12 +40,21 @@ test('catalog retains wear-source disagreement and uses only credited local phot
  const santal=findCatalogProfile({brand:'Le Labo',name:'Santal 33',concentration:'EDP'});
  assert.ok(santal?.notes.some(note=>note.name.toLowerCase()==='cardamom'));
  assert.ok(santal?.photo);
- for(const {photo,sources} of catalogProfiles) {
-  if(!photo) continue;
-  assert.match(photo.path,/^\/catalog\/bottles\/[a-z0-9-]+\.jpg$/);
-  const source=sources.find(source=>source.id===photo.sourceId);
-  assert.ok(source?.credit&&source.license);
-  assert.ok(existsSync(new URL('../public'+photo.path,import.meta.url)));
+ const sauvage=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'});
+ assert.equal(sauvage?.additionalPhotos?.length,1);
+ const paths=new Set<string>();
+ for(const {id,photo,additionalPhotos,sources} of catalogProfiles) {
+  const photos=photo?[photo,...(additionalPhotos??[])]:[];
+  if(additionalPhotos) assert.ok(photo);
+  assert.equal(new Set(photos.map(photo=>photo.sourceId)).size,photos.length);
+  for(const image of photos) {
+   assert.match(image.path,new RegExp('^/catalog/bottles/'+id+'(?:-[a-z0-9-]+)?\\.jpg$'));
+   assert.ok(!paths.has(image.path));
+   paths.add(image.path);
+   const source=sources.find(source=>source.id===image.sourceId);
+   assert.ok(source?.kind==='photo'&&source.credit&&source.license);
+   assert.ok(existsSync(new URL('../public'+image.path,import.meta.url)));
+  }
  }
 });
 
@@ -81,4 +90,24 @@ test('FragDex links use reviewed edition pages and reject unsafe destinations',(
   'javascript:alert(1)','file:///C:/secret','https://user:secret@example.test/',
   'http://www.fragrantica.com/','https://localhost/','https://127.0.0.1/','https://[::1]/',
  ]) assert.equal(catalogReferenceUrl(url),null);
+});
+
+test('Jomashop galleries point only to distinct, exact listing pages',()=>{
+ const productUrls=new Set<string>();
+ for(const profile of catalogProfiles) {
+  const product=profile.links.find(link=>link.label==='View on Jomashop');
+  const galleries=profile.links.filter(link=>link.kind==='jomashop-listing');
+  assert.deepEqual(galleries,product?[product]:[]);
+  if(!product) continue;
+  assert.match(product.url,/^https:\/\/www\.jomashop\.com\/[a-z0-9-]+\.html$/);
+  assert.ok(!productUrls.has(product.url));
+  productUrls.add(product.url);
+ }
+ assert.ok(productUrls.size>=60);
+ const lightBlue=findCatalogProfile({brand:'Dolce & Gabbana',name:'Light Blue',concentration:'EDT'})!;
+ assert.equal(lightBlue.releaseYear,2025);
+ const lightBlueListing=lightBlue.links.find(link=>link.kind==='jomashop-listing');
+ assert.ok(lightBlueListing);
+ assert.ok(lightBlueListing.url.endsWith('-8057971188192.html'));
+ assert.equal(lightBlueListing.bottleEdition,'2025 bottle');
 });

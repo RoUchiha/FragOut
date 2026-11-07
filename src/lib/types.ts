@@ -15,14 +15,16 @@ export interface CatalogSource {
  kind:'house'|'reference'|'wear'|'photo'|'community';
  credit?:string; license?:{name:string;url:string};
 }
+interface CatalogPhoto {path:string;caption:string;sourceId:string}
 export interface CatalogProfile {
  id:string; brand:string; name:string; concentration:string; checkedAt:string;
  notes:{name:string;stage:'top'|'heart'|'base'|'listed';sourceIds:string[]}[];
  performance:{kind:'longevity'|'sillage'|'projection';reports:{sourceId:string;value:string}[]}[];
  ratings:CatalogRating[];
- links:{label:string;url:string}[];
+ links:{label:string;url:string;kind?:'jomashop-listing';bottleEdition?:string}[];
  releaseYear?:number;
- photo?:{path:string;caption:string;sourceId:string};
+ photo?:CatalogPhoto;
+ additionalPhotos?:CatalogPhoto[];
  sources:CatalogSource[];
 }
 export interface Preferences {

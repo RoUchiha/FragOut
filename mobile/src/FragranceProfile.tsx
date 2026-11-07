@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react';
 import {Image,Pressable,Text,View} from 'react-native';
 import {openBrowserAsync,WebBrowserPresentationStyle} from 'expo-web-browser';
-import {ChevronDown,ExternalLink} from 'lucide-react-native';
+import {ChevronDown,ChevronLeft,ChevronRight,ExternalLink,Images,Maximize2} from 'lucide-react-native';
 import {api,sessionScope} from './api';
-import {BottleArt,Btn,catalogPhotoUrl,Section,Sheet,Spinner,useUi} from './ui';
+import {BottleArt,Btn,catalogPhotoUrl,IconButton,Section,Sheet,Spinner,useUi} from './ui';
 import FragDexLink from './FragDexLink';
 import FragDexRatings from './FragDexRatings';
 import type {Bottle,CatalogProfile} from '../../src/lib/types';
@@ -18,7 +18,8 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const {styles,colors}=useUi();
  const [lookup,setLookup]=useState<Lookup|null>(null);
  const [attempt,setAttempt]=useState(0);
- const [photoFailed,setPhotoFailed]=useState(false);
+ const [photoIndex,setPhotoIndex]=useState<number|null>(null);
+ const [failedPhotos,setFailedPhotos]=useState<string[]>([]);
  const [showSources,setShowSources]=useState(false);
  const [linkError,setLinkError]=useState('');
 
@@ -34,8 +35,11 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const reply=lookup&&'profile' in lookup?lookup:null;
  const changed=!!reply&&reply.variantId!==bottle.variantId;
  const profile=changed?null:reply?.profile;
- const photo=profile?.photo;
- const photoUrl=photoFailed?undefined:catalogPhotoUrl(photo?.path);
+ const photos=profile?.photo?[profile.photo,...(profile.additionalPhotos??[])]:[];
+ const featured=photos.find(photo=>!failedPhotos.includes(photo.path)&&catalogPhotoUrl(photo.path));
+ const featuredUrl=catalogPhotoUrl(featured?.path);
+ const jomashop=profile?.links?.find(link=>link.kind==='jomashop-listing');
+ const jomashopLabel=jomashop?.bottleEdition?'Jomashop photos · '+jomashop.bottleEdition:'Jomashop photos';
  const official=profile?.sources.find(source=>source.kind==='house');
  const noteGroups=stages.map(([stage,label])=>({
   label,names:profile?.notes.filter(note=>note.stage===stage).map(note=>note.name)??[],
@@ -49,15 +53,44 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
   }).catch(()=>setLinkError('Could not open this source.'));
  }
 
+ function markPhotoFailed(path:string) {
+  setFailedPhotos(current=>current.includes(path)?current:[...current,path]);
+ }
+
+ if(photoIndex!==null&&photos[photoIndex]) {
+  const photo=photos[photoIndex];
+  const uri=failedPhotos.includes(photo.path)?undefined:catalogPhotoUrl(photo.path);
+  return <Sheet title="Bottle photos" onClose={()=>setPhotoIndex(null)}>
+   {uri?<Image key={photo.path} accessible accessibilityLabel={bottle.name+' · '+photo.caption}
+    source={{uri}} resizeMode="contain" onError={()=>markPhotoFailed(photo.path)}
+    style={[styles.image,{height:340}]}/>:
+    <Text style={styles.notice}>Photo unavailable.</Text>}
+   {photos.length>1&&<View style={[styles.spread,{alignSelf:'center',gap:16}]}>
+    <IconButton label="Previous photo" icon={<ChevronLeft size={20} color={colors.ink}/>}
+     disabled={photoIndex===0} onPress={()=>setPhotoIndex(photoIndex-1)}/>
+    <Text accessibilityLiveRegion="polite" style={styles.small}>{photoIndex+1} / {photos.length}</Text>
+    <IconButton label="Next photo" icon={<ChevronRight size={20} color={colors.ink}/>}
+     disabled={photoIndex===photos.length-1} onPress={()=>setPhotoIndex(photoIndex+1)}/>
+   </View>}
+   {uri&&<Text style={[styles.small,{textAlign:'center'}]}>{photo.caption}</Text>}
+  </Sheet>;
+ }
+
  return <Sheet title="FragDex" onClose={onClose}>
   <View style={[styles.row,{alignItems:'center',gap:14}]}>
    <View style={{width:91,alignItems:'center',gap:4}}>
-    {photoUrl ? <Image accessible source={{uri:photoUrl}} resizeMode="contain"
-     accessibilityLabel={'Reference bottle photo of '+bottle.name} onError={()=>setPhotoFailed(true)}
-     style={{width:88,height:114,borderRadius:5,backgroundColor:colors.wash}}/> :
+    {featured&&featuredUrl?<Pressable accessibilityRole="button" accessibilityLabel="Open bottle photos"
+     onPress={()=>setPhotoIndex(photos.indexOf(featured))}>
+     <Image key={featured.path} source={{uri:featuredUrl}} resizeMode="contain"
+      onError={()=>markPhotoFailed(featured.path)}
+      style={{width:88,height:114,borderRadius:5,backgroundColor:colors.wash}}/>
+     <View pointerEvents="none" style={{position:'absolute',right:4,bottom:4,padding:4,
+      borderRadius:4,backgroundColor:colors.surface}}>
+      <Maximize2 size={12} color={colors.ink}/>
+     </View>
+    </Pressable>:
      <BottleArt bottle={{name:bottle.name,color:bottle.color,shape:bottle.shape}} size={94}/>}
-    {photoUrl&&<Text style={[styles.small,{textAlign:'center'}]}>{photo?.caption}</Text>}
-    {!photoUrl&&official&&<FragDexLink url={official.url} visit={visit} hitSlop={6}>
+    {!featuredUrl&&!jomashop&&official&&<FragDexLink url={official.url} visit={visit} hitSlop={6}>
      <Text style={styles.link}>Official bottle</Text>
     </FragDexLink>}
    </View>
@@ -69,6 +102,13 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
      onPress={onEdit} style={{alignSelf:'flex-start',marginTop:3}}/>
    </View>
   </View>
+  {jomashop&&<FragDexLink url={jomashop.url} visit={visit} accessibilityLabel={'See all '+jomashopLabel}
+   style={[styles.row,{minHeight:44,paddingLeft:11,paddingRight:11,borderWidth:1,borderStyle:'solid',borderColor:colors.line,
+    borderRadius:6,backgroundColor:colors.surface}]}>
+   <Images size={16} color={colors.link}/>
+   <Text style={[styles.link,{flex:1}]}>{jomashopLabel}</Text>
+   <ExternalLink size={13} color={colors.link}/>
+  </FragDexLink>}
   {!lookup&&<Spinner label="Checking catalog…"/>}
   {lookup&&'error' in lookup&&<View style={styles.notice}>
    <Text style={styles.muted}>{lookup.error}</Text>
@@ -97,7 +137,8 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
    {!!profile.links?.length&&<View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
     {profile.links.map(link=><FragDexLink key={link.url} url={link.url} visit={visit}
      style={[styles.row,{minHeight:38,gap:4,paddingHorizontal:9,borderWidth:1,borderColor:colors.line,borderRadius:6}]}>
-     <Text style={styles.link}>{link.label}</Text><ExternalLink size={11} color={colors.link}/>
+     <Text style={styles.link}>{link.bottleEdition?link.label+' · '+link.bottleEdition:link.label}</Text>
+     <ExternalLink size={11} color={colors.link}/>
     </FragDexLink>)}
    </View>}
    <View style={styles.separator}/>

@@ -10,14 +10,7 @@
     "release": {"year": 2018, "publisher": "Dior 2018 annual report", "url": "https://www.dior-finance.com/pdf/d/1/252/Rapport-annuel-au-31-decembre-2018.pdf"},
     "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html",
     "notes": {"listed": ["Calabrian bergamot", "Woody patchouli", "Papua New Guinean vanilla extract"]},
-    "communityUrl": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum",
-    "photo": {
-      "file": "dior-sauvage-edp", "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-dior-sauvage-eau-de-parfum-bgrM9NxKLRQ",
-      "credit": "Farhan Chohan · resized",
-      "license": {"name": "Unsplash License", "url": "https://unsplash.com/license"},
-      "caption": "Reference bottle"
-    }
+    "communityUrl": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum"
   },
   {
     "brand": "Dior", "name": "Sauvage Elixir", "concentration": "ELIXIR",
@@ -35,14 +28,7 @@
     "brand": "Chanel", "name": "No. 5", "concentration": "EDP",
     "aliases": ["N°5", "Nº5", "No5", "Number 5", "Chanel 5", "5"],
     "url": "https://www.chanel.com/us/fragrance/p/125530/n5-eau-de-parfum-spray/",
-    "notes": {"top": ["Citrus"], "listed": ["Aldehydes", "May rose", "Jasmine", "Bourbon vanilla"]},
-    "photo": {
-      "file": "chanel-no-5-edp",
-      "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg",
-      "credit": "Arz · public-domain photograph, resized",
-      "license": {"name": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg"},
-      "caption": "Reference bottle"
-    }
+    "notes": {"top": ["Citrus"], "listed": ["Aldehydes", "May rose", "Jasmine", "Bourbon vanilla"]}
   },
   {
     "brand": "Yves Saint Laurent", "name": "Y", "concentration": "EDP",
@@ -58,27 +44,13 @@
     "brand": "Le Labo", "name": "Santal 33", "concentration": "EDP",
     "url": "https://www.lelabofragrances.com/santal-33-147.html",
     "notes": {"listed": ["Cardamom", "Iris", "Violet", "Australian sandalwood", "Cedarwood", "Leather", "Musk"]},
-    "communityUrl": "https://www.parfumo.com/Perfumes/Le_Labo/Santal_33_Eau_de_Parfum",
-    "photo": {
-      "file": "le-labo-santal-33-edp",
-      "url": "https://commons.wikimedia.org/wiki/File:Le_Labo_Santal_33_in_a_50_milliliter_bottle_(cropped).jpg",
-      "credit": "The Honest Channel · Commons crop, resized",
-      "license": {"name": "CC BY 3.0", "url": "https://creativecommons.org/licenses/by/3.0/"},
-      "caption": "50 mL reference bottle"
-    }
+    "communityUrl": "https://www.parfumo.com/Perfumes/Le_Labo/Santal_33_Eau_de_Parfum"
   },
   {
     "brand": "Calvin Klein", "name": "Euphoria", "concentration": "EDP",
     "release": {"year": 2005, "publisher": "Coty", "url": "https://investors.coty.com/news-events-and-presentations/news/news-details/2015/Euphoria-Calvin-Klein-Announces-New-Global-Advertising-Campaign-Featuring-Supermodel-Natalia-Vodianova-To-Celebrate-Fragrances-10th-Anniversary/default.aspx"},
     "url": "https://www.calvinklein.com.au/euphoria-women-eau-de-parfum-50ml-65102303000000",
-    "notes": {"top": ["Pomegranate"], "heart": ["Lotus blossom", "Black orchid"], "base": ["Liquid amber", "Black violet", "Mahogany"]},
-    "photo": {
-      "file": "calvin-klein-euphoria-edp",
-      "url": "https://commons.wikimedia.org/wiki/File:CK_Euphoria_Bottle.jpg",
-      "credit": "ggjsmith · edited by Bruce The Deus, resized",
-      "license": {"name": "CC BY 2.0", "url": "https://creativecommons.org/licenses/by/2.0/"},
-      "caption": "30 mL reference bottle"
-    }
+    "notes": {"top": ["Pomegranate"], "heart": ["Lotus blossom", "Black orchid"], "base": ["Liquid amber", "Black violet", "Mahogany"]}
   },
   {
     "brand": "Creed", "name": "Aventus", "concentration": "EDP",
@@ -125,26 +97,62 @@
   {
     "brand": "Rabanne", "name": "1 Million", "concentration": "EDT", "aliases": ["One Million"],
     "url": "https://www.rabanne.com/uk/en_GB/fragrance/c/frag-men-onemillion",
-    "notes": {"top": ["Blood mandarin", "Grapefruit", "Mint"], "heart": ["Cinnamon", "Rose"], "base": ["Leather", "Amber", "Patchouli"]},
-    "photo": {
-      "file": "rabanne-1-million-edt",
-      "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_toaletowa_Paco_Rabanne_1_Million.jpg",
-      "credit": "Jacek Halicki · resized",
-      "license": {"name": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/"},
-      "caption": "Reference bottle"
-    }
+    "notes": {"top": ["Blood mandarin", "Grapefruit", "Mint"], "heart": ["Cinnamon", "Rose"], "base": ["Leather", "Amber", "Patchouli"]}
   },
   {
     "brand": "Jean Paul Gaultier", "name": "Ultra Male", "concentration": "EDT", "aliases": ["Ultra Male Intense", "Ultra Male Eau de Toilette Intense"],
     "release": {"year": 2015, "publisher": "DIARY directory", "url": "https://www.diarydirectory.com/newsarticle/jean-paul-gaultier-launches-ultra-male-fragrance/171"},
     "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male/ultra-male-eau-de-toilette-intense-000000000065119981",
-    "notes": {},
-    "photo": {
-      "file": "jean-paul-gaultier-ultra-male-edt",
-      "url": "https://commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_Ultra_Male.jpg",
-      "credit": "Amin · resized",
-      "license": {"name": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/"},
-      "caption": "Reference bottle"
-    }
+    "notes": {}
+  },
+  {
+    "brand": "Marc Jacobs", "name": "Daisy", "concentration": "EDT",
+    "url": "https://www.marcjacobs.com/us-en/daisy-eau-de-toilette-100-ml/31655513034-000.html",
+    "notes": {}
+  },
+  {
+    "brand": "Giorgio Armani", "name": "Acqua di Giò Eau de Toilette", "concentration": "EDT",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/mens-cologne/acqua-di-gio/acqua-di-gio-eau-de-toilette/A005.html",
+    "notes": {}
+  },
+  {
+    "brand": "Gucci", "name": "Bloom", "concentration": "EDP",
+    "url": "https://www.gucci.com/us/en/pr/beauty/fragrances/fragrances-for-women/gucci-bloom-100ml-eau-de-parfum-p-488830999990099",
+    "notes": {}
+  },
+  {
+    "brand": "Versace", "name": "Eros Eau de Toilette", "concentration": "EDT",
+    "url": "https://www.versace.com/us/en/men/accessories/fragrances-body-care/eros/eros-edt-100-ml-blue/R740010-R100MLS_RNUL.html",
+    "notes": {}
+  },
+  {
+    "brand": "Dolce&Gabbana", "name": "Light Blue", "concentration": "EDT",
+    "url": "https://www.dolcegabbana.com/en-us/beauty/perfumes-for-her/light-blue/new-lb-edt-100ml---158057971188192.html?keeplocale=true",
+    "notes": {}
+  },
+  {
+    "brand": "Jean Paul Gaultier", "name": "Le Male", "concentration": "EDT",
+    "url": "https://www.jeanpaulgaultier.com/ww/en/p/range-le-male/le-male-eau-de-toilette-000000000065120122",
+    "notes": {}
+  },
+  {
+    "brand": "Nautica", "name": "Voyage", "concentration": "EDT",
+    "url": "https://www.nautica.com/nautica-voyage-3.4-oz.-eau-de-toilette/99350078119.html",
+    "notes": {}
+  },
+  {
+    "brand": "Givenchy", "name": "Gentleman", "concentration": "EDP",
+    "url": "https://www.givenchybeauty.com/int/en/p/gentleman-givenchy-F10100026.html",
+    "notes": {}
+  },
+  {
+    "brand": "Narciso Rodriguez", "name": "For Her Eau de Parfum", "concentration": "EDP",
+    "url": "https://www.narcisorodriguezparfums.com/en/narciso-rodriguez-for-her/for-her-edp.html",
+    "notes": {}
+  },
+  {
+    "brand": "Phlur", "name": "Missing Person", "concentration": "EDP",
+    "url": "https://phlur.com/products/missing-person-50ml",
+    "notes": {}
   }
 ]
