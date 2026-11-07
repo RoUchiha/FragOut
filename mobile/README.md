@@ -8,6 +8,8 @@ Start the backend with the launcher in the parent folder. It serves the exported
 
 Today, outfit matching, collection, bottle label suggestions, pairing, journal, account settings, export and provider connections are implemented. Take an outfit selfie, choose an image, type, or use dictation. Review the description, choose an occasion, then request a fragrance, pair, or both. Detailed clothing edits are optional. Pair experiments require explicit selection.
 
+Use **Mood** and **Vibe** on Today, pairing or outfit review. Swipe each row for more choices. Pick either or both, or use **Any** to clear. Selections rank your known, eligible owned scent profiles and reset with the account session. They are never inferred from photos or sent to a model. A wear log or saved look keeps the choices from that match.
+
 Qwen runs through Ollama on the backend computer/server. It has no API fee. Optional OpenAI/Claude API keys belong to each user and are saved encrypted by that backend. Photos go only to the selected destination when analysis is requested. A chat subscription is separate from API access.
 
 ## Run on a phone

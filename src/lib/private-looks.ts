@@ -44,7 +44,7 @@ export class PrivateLooks {
   const previous=this.store.db.prepare('SELECT id FROM saved_looks WHERE user_id=? AND analysis_id=?').get(userId,outfit.analysisId) as {id:string}|undefined;
   const id=previous?.id??randomUUID(),photo=this.store.db.prepare('SELECT id,look_id,sealed FROM private_photos WHERE user_id=? AND analysis_id=? AND (expires IS NULL OR expires>?)').get(userId,outfit.analysisId,Date.now()) as PhotoRow|undefined;
   const context=run.context;
-  const look:SavedLook={id,analysisId:outfit.analysisId,profile:outfitSchema.parse(outfit.profile),bottles:bottles.map(b=>({id:b!.id,variantId:b!.variantId,brand:b!.brand,name:b!.name,concentration:b!.concentration,color:b!.color,shape:b!.shape})),context:{occasion:context.occasion,setting:context.setting,tempC:context.tempC,indoorTempC:context.indoorTempC,policy:context.policy},photoAvailable:!!photo,createdAt:new Date().toISOString()};
+  const look:SavedLook={id,analysisId:outfit.analysisId,profile:outfitSchema.parse(outfit.profile),bottles:bottles.map(b=>({id:b!.id,variantId:b!.variantId,brand:b!.brand,name:b!.name,concentration:b!.concentration,color:b!.color,shape:b!.shape})),context:{occasion:context.occasion,setting:context.setting,tempC:context.tempC,indoorTempC:context.indoorTempC,policy:context.policy,mood:context.mood,vibe:context.vibe},photoAvailable:!!photo,createdAt:new Date().toISOString()};
   const bytes=photo&&!photo.look_id?this.unseal(userId,'pending|'+outfit.analysisId,photo.sealed):null;
   this.store.db.exec('BEGIN IMMEDIATE');try{
    this.store.db.prepare('INSERT INTO saved_looks VALUES(?,?,?,?,?) ON CONFLICT(user_id,analysis_id) DO UPDATE SET body=excluded.body,created=excluded.created').run(id,userId,outfit.analysisId,JSON.stringify(look),Date.now());

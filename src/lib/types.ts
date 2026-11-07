@@ -11,10 +11,14 @@ export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];
   maxStrength:number; sensitivity:boolean; units:'C'|'F'; archiveOutfits:boolean;
 }
+export type Mood='ANY'|'HAPPY'|'TIRED'|'SAD'|'CALM'|'STRESSED'|'CONFIDENT';
+export type Vibe='ANY'|'CLEAN'|'MYSTERIOUS'|'WARM'|'FRESH'|'COZY'|'BOLD'|'ROMANTIC';
+export interface ScentIntent {mood:Mood;vibe:Vibe}
 export interface WearContext {
   city:string; tempC:number; humidity:number; setting:'INDOOR'|'OUTDOOR'|'MIXED';
   indoorTempC:number; occasion:string; policy:'FREE'|'LOW_SCENT'|'NO_FRAGRANCE';
   eventAtLocal:string; timezone:string; latitude:number; source:'manual';
+  mood?:Mood; vibe?:Vibe;
 }
 export interface Shortcut {
   id:string; title:string; icon:string; occasion:string; setting:'INDOOR'|'OUTDOOR'|'MIXED';
@@ -46,6 +50,6 @@ export interface RecommendationSnapshot {context:WearContext;bottleIds:string[];
 export interface SavedLook {
  id:string;analysisId:string;profile:OutfitProfile;
  bottles:Pick<Bottle,'id'|'variantId'|'brand'|'name'|'concentration'|'color'|'shape'>[];
- context:Pick<WearContext,'occasion'|'setting'|'tempC'|'indoorTempC'|'policy'>;
+ context:Pick<WearContext,'occasion'|'setting'|'tempC'|'indoorTempC'|'policy'|'mood'|'vibe'>;
  photoAvailable:boolean;createdAt:string;
 }

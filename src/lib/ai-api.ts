@@ -7,6 +7,7 @@ import {CredentialVault,installationKey,DEFAULT_MODELS} from './vault.ts';
 import {PrivateLooks} from './private-looks.ts';
 import {imageSchema,outfitSchema,parseOutfitText,rankForOutfit} from './outfit.ts';
 import {LOCAL_MODEL,ProviderError,localModelStatus,prepareImage,runVision,testProvider} from './providers.ts';
+import {intentFields} from './validation.ts';
 const json=(data:unknown,status=200)=>NextResponse.json(data,{status,headers:{'Cache-Control':'no-store','Vary':'Cookie, Authorization','Referrer-Policy':'no-referrer'}});
 const providerSchema=z.enum(['qwen','openai','claude']);
 const occasionSchema=z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']);
@@ -68,9 +69,9 @@ export async function handleAiApi(req:NextRequest,path:string[],body:unknown,use
    }
   }
   if(route==='outfit/recommend'&&method==='POST'){
-   const d=z.object({analysisId:z.string().uuid(),profile:outfitSchema,mode:z.enum(['solo','combo','both']),evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),occasion:occasionSchema}).strict().parse(body);
+   const d=z.object({analysisId:z.string().uuid(),profile:outfitSchema,mode:z.enum(['solo','combo','both']),evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),occasion:occasionSchema,...intentFields}).strict().parse(body);
    if(!db.getOutfit(user.id,d.analysisId))return json({error:'Outfit analysis not found or expired. Analyze the outfit again.'},404);
-   const state=db.state(user.id),context={...state.context,occasion:d.occasion};
+   const state=db.state(user.id),context={...state.context,occasion:d.occasion,mood:d.mood,vibe:d.vibe};
    const result=rankForOutfit(state.bottles,context,state.preferences,d.profile,d.mode,d.evidenceMode,[],state.history.filter(h=>h.reaction==='disliked'&&h.bottleIds.length===2).map(h=>h.bottleIds));
    const offered=[...result.solo.map(r=>r.bottle),...result.combos.flatMap(r=>[r.a,r.b])];
    const choices=[...result.solo.map(r=>[r.bottle.id]),...result.combos.map(r=>[r.a.id,r.b.id])];

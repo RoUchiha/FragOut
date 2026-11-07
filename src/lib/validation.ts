@@ -1,4 +1,6 @@
 import {z} from 'zod';
+import {moodOptions,vibeOptions} from './intent.ts';
+export const intentFields={mood:z.enum(moodOptions.map(([id])=>id)).default('ANY'),vibe:z.enum(vibeOptions.map(([id])=>id)).default('ANY')};
 const text=(max=120)=>z.string().trim().max(max);
 export const bottleSchema=z.object({
   brand:text().min(1),name:text().min(1),concentration:z.enum(['EDT','EDP','PARFUM','ELIXIR','OIL','OTHER','UNKNOWN']),ownership:z.enum(['OWNED','WISHLIST','REMOVED']),

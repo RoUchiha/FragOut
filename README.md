@@ -20,6 +20,12 @@ npm.cmd run start
 
 The server binds to loopback. It is not a hosted service. See [the mobile guide](mobile/README.md) for running on a physical phone, development-network setup, and signed native builds. Native iOS/Android code exports have been compiled; an installable, signed APK/IPA and physical-device acceptance are still required.
 
+## Mood and vibe
+
+On **Today**, choose a **Mood** (Happy, Tired, Sad, Calm, Stressed or Confident) and a **Vibe** (Clean, Mysterious, Warm, Fresh, Cozy, Bold or Romantic). Either is optional; **Any** clears that choice. The top pick updates as you choose. The same controls are available in pairing and after outfit review.
+
+Matches use the notes and families you recorded for owned bottles. Your desired vibe has more influence than mood. Venue rules, exclusions and pair evidence still apply. **Why?** explains the matching note or family. These choices do not go to the image model or change account settings. Wear logs and explicitly saved looks keep the choices from the recommendation.
+
 ## Outfit matching
 
 1. Choose **Match outfit**, **Take selfie**, or a gallery photo. You can also type a description or dictate it.
@@ -89,12 +95,14 @@ node tests/http.mjs
 node tests/http-mobile.mjs
 # Isolated attack lab: synthetic accounts, images, keys and local model stub only
 node scripts/security-lab.mjs --test
+# With the isolated lab running separately (default port 3210):
+node tests/http-intent.mjs
 # Optional real local-model smoke checks:
 node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
 ```
 
-See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md). The security run passed 87 regressions, 173 attack assertions and 37 existing HTTP checks. Production builds also reject private files in deployment traces/public assets. The browser flow is tested separately from native code compilation. A synthetic outfit image establishes a working integration, not a photo-accuracy benchmark.
+See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md). The mood/vibe build passed 111 regressions, 7 feature HTTP checks, 173 attack assertions and 37 existing HTTP checks. Production builds also reject private files in deployment traces/public assets. The browser flow is tested separately from native code compilation. A synthetic outfit image establishes a working integration, not a photo-accuracy benchmark.
 
 Remaining production work includes signed phone builds and device acceptance, licensed real catalog/variant research, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. The local database requires a persistent single-host Node process; it is not suitable for an ephemeral serverless filesystem. No app-store or web publication was performed.
 

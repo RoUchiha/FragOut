@@ -30,6 +30,17 @@ test('malformed anonymous login requests cannot exhaust another account login bu
  }finally{h.db.close();}
 });
 
+test('recommendations validate mood/vibe and preserve selected context in an owner snapshot',async()=>{
+ const h=harness();try{const a=h.db.createDemo(),b=h.db.createDemo(),token=h.db.createSession(a.id);
+  const response=await h.call('recommend',{method:'POST',token,body:{occasion:'GENERAL',mode:'solo',mood:'TIRED',vibe:'CLEAN'}});
+  assert.equal(response.status,200);assert.equal(response.body.context.mood,'TIRED');assert.equal(response.body.context.vibe,'CLEAN');
+  const run=h.db.getRecommendation(a.id,response.body.requestId);assert.equal(run?.context.mood,'TIRED');assert.equal(h.db.getRecommendation(b.id,response.body.requestId),null);
+  const worn=h.db.feedback(a.id,[response.body.solo[0].bottle.id],'wore','GENERAL',response.body.requestId);assert.equal(worn.context.vibe,'CLEAN');
+  for(const patch of [{mood:'unsupported'},{vibe:'unsupported'},{mood:['HAPPY']},{vibe:{value:'CLEAN'}}])assert.equal((await h.call('recommend',{method:'POST',token,body:{occasion:'GENERAL',mode:'solo',...patch}})).status,400);
+  assert.equal(h.db.state(a.id).context.mood,undefined,'Request choices must not change persistent account conditions');
+ }finally{h.db.close();}
+});
+
 test('HTTPS login issues Secure, HttpOnly and SameSite cookies without an opt-in flag',async()=>{
  const h=harness();try{const r=await h.call('auth',{method:'POST',body:{action:'demo'},url:'https://localhost:3237',origin:'https://localhost:3237'});
   assert.equal(r.status,200);assert.match(r.cookie!,/^__Host-fragout_session=/);assert.match(r.cookie!,/; Secure/i);assert.match(r.cookie!,/HttpOnly/i);assert.match(r.cookie!,/SameSite=Lax/i);

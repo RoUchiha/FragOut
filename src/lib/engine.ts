@@ -1,5 +1,6 @@
 import type {Bottle,ComboResult,Evidence,PairRecord,Preferences,SoloResult,Tier,WearContext} from './types.ts';
-export const ENGINE_VERSION='1.0.0';
+import {intentFit,intentSummary} from './intent.ts';
+export const ENGINE_VERSION='1.1.0';
 const normal=(s:string)=>s.toLowerCase().trim();
 export function seasonFor(month:number,latitude:number){const seasons=['Winter','Spring','Summer','Autumn'];const i=Math.floor((month%12)/3);return seasons[(i+(latitude<0?2:0))%4];}
 export function effectiveTemperature(c:WearContext){return c.setting==='INDOOR'?c.indoorTempC:c.tempC;}
@@ -23,7 +24,8 @@ export function rankSolo(bottles:Bottle[],context:WearContext,prefs:Preferences,
     const reasons=[{ruleId:'v1.venue',text:context.occasion==='GYM'?'Your light-projection profile is a cautious fit for a shared gym.':b.strength===1?'Your light-projection profile keeps things close and unobtrusive.':context.occasion==='PARTY'?'Your fuller scent profile fits a more expressive occasion.':'Your moderate scent profile suits this setting.'},
       {ruleId:'v1.climate',text:b.climate==='UNKNOWN'?'Climate character is unknown; this choice relies on your other preferences.':climateFit===1?`Your ${b.climate.toLowerCase()} profile fits the ${Math.round(temp)}°C ${context.setting==='INDOOR'?'indoor':'manual'} conditions.`:'A flexible option under your selected conditions.'},
       {ruleId:'v1.affinity',text:liked.length?`Matches your preference for ${liked.join(' and ')}.`:b.favorite?'A favorite from your own collection.':'Selected using your personal scent profile.'}];
-    return {bottle:b,score,reasons,confidence:b.provenance==='demo'?'Illustrative demo fit':'Based on your observations',caution:context.occasion==='GYM'?'Consider going scent-free at the gym; respect venue policy.':'Start with a light application. Perception varies by skin and setting.'};
+    const intent=intentFit(b,context);
+    return {bottle:b,score:score+intent.score,reasons:[...reasons,...intent.reasons],confidence:b.provenance==='demo'?'Illustrative demo fit':'Based on your observations',caution:context.occasion==='GYM'?'Consider going scent-free at the gym; respect venue policy.':'Start with a light application. Perception varies by skin and setting.'};
   }).sort((a,b)=>b.score-a.score||a.bottle.id.localeCompare(b.bottle.id)).slice(0,limit);
 }
 export function evidenceTier(e:Evidence):Tier|null{
@@ -47,9 +49,10 @@ export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preference
     if(mode==='evidence'&&!['brand_guidance','community_corroborated'].includes(tier))continue;
     if(mode==='single'&&!['brand_guidance','community_corroborated','single_anecdote'].includes(tier))continue;
     const shared=a.notes.filter(n=>b.notes.includes(n));
+    const fits=[...solo[i].reasons,...solo[j].reasons],direction=intentSummary({mood:fits.some(r=>r.ruleId==='v1.mood')?context.mood:undefined,vibe:fits.some(r=>r.ruleId==='v1.vibe')?context.vibe:undefined});
     results.push({a,b,score:(solo[i].score+solo[j].score)/2+(tier==='brand_guidance'||tier==='community_corroborated'?20:0),tier,
       sources:record&&tier!=='model_hypothesis'?record.reports.filter(r=>r.rights==='approved'&&r.firsthand).map(r=>r.url):[],
-      reason:shared.length?`Your profiles share ${shared.join(', ')}. That overlap suggests a starting point, not proof of compatibility.`:`Your ${a.family.toLowerCase()} and ${b.family.toLowerCase()} profiles offer contrast. This combination has not been wear-tested.`,
+      reason:(shared.length?`Your profiles share ${shared.join(', ')}. That overlap suggests a starting point, not proof of compatibility.`:`Your ${a.family.toLowerCase()} and ${b.family.toLowerCase()} profiles offer contrast. This combination has not been wear-tested.`)+(direction?` Scent direction: ${direction}, using your profiles.`:''),
       caution:'Try a small application of each separately. Do not mix liquids in a bottle. Stop if the combination feels overwhelming.',reviewedAt:record?.reviewedAt});
   }
   return results.sort((a,b)=>b.score-a.score).slice(0,limit);

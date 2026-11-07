@@ -1,7 +1,7 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {z} from 'zod';
 import {getStore} from '@/lib/store';
-import {bottleSchema,settingsSchema} from '@/lib/validation';
+import {bottleSchema,settingsSchema,intentFields} from '@/lib/validation';
 import {rankCombos,rankSolo,ENGINE_VERSION} from '@/lib/engine';
 import type {Bottle} from '@/lib/types';
 import {handleAiApi} from '@/lib/ai-api';
@@ -68,9 +68,9 @@ async function handle(req:NextRequest){
     }
     if(path.length===1&&path[0]==='settings'&&method==='PUT'){db.saveSettings(user.id,settingsSchema.parse(body));return reply(db.state(user.id));}
     if(path.length===1&&path[0]==='recommend'&&method==='POST'){
-      const data=z.object({occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']),mode:z.enum(['solo','combo']),evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),shortcutId:z.string().max(100).optional()}).strict().parse(body);
+      const data=z.object({occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']),mode:z.enum(['solo','combo']),evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),shortcutId:z.string().max(100).optional(),...intentFields}).strict().parse(body);
       const s=db.state(user.id);const shortcut=data.shortcutId?s.shortcuts.find(c=>c.id===data.shortcutId):undefined;
-      const context={...s.context,occasion:shortcut?.occasion??data.occasion,...(shortcut?{setting:shortcut.setting}:{})};
+      const context={...s.context,occasion:shortcut?.occasion??data.occasion,...(shortcut?{setting:shortcut.setting}:{}),mood:data.mood,vibe:data.vibe};
       const prefs={...s.preferences,maxStrength:Math.min(s.preferences.maxStrength,shortcut?.maxStrength??3)};
       const solo=data.mode==='solo'?rankSolo(s.bottles,context,prefs):[];
       const combos=data.mode==='combo'?rankCombos(s.bottles,context,prefs,data.evidenceMode,[],s.history.filter(h=>h.reaction==='disliked'&&h.bottleIds.length===2).map(h=>h.bottleIds)):[];

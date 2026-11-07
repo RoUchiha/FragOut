@@ -78,6 +78,9 @@ p { line-height: 1.6; }
 .icon-button:hover { background: #edf1e6; }
 .context-strip { display: flex; align-items: center; gap: 18px; min-height: 36px; width: 100%; margin-bottom: 14px; padding: 8px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; color: #747d6c; font-size: 11px; }
 .context-strip > span { display: inline-flex; gap: 5px; align-items: center; }
+.intent-controls { display: flex; flex-wrap: wrap; gap: 9px 14px; margin: 0 0 12px; }
+.intent-controls label { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
+.intent-controls select { min-width: 103px; min-height: 35px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: var(--ink); padding: 5px 8px; }
 .context-place { color: #516648; }
 .context-manual { margin-left: auto; font-size: 10px; }
 .daily-pick { min-height: 184px; display: flex; align-items: stretch; justify-content: space-between; overflow: hidden; border: 1px solid #dfe4d6; border-radius: 8px; background: #f0f3e9; margin-bottom: 22px; }
