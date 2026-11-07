@@ -52,4 +52,3 @@ export default function Outfit({onError,onFeedback,feedbackBusy,autoCamera=false
  </View>;
 
 }
-
