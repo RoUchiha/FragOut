@@ -10,6 +10,8 @@ Use **Home** to search your collection, add a fragrance or scan a bottle. Journa
 
 Tap the lightbulb to open **Find a scent**. Search by fragrance, house, note, mood, vibe or occasion. Compact picks sit beneath search. Open **Filters** for mood, vibe and pairing. Pair experiments require explicit selection. **Match outfit** accepts a selfie, another image, typed text or dictation. Wear logs and saved looks keep the choices from their match.
 
+Tap the heart on a layering suggestion to like it. **Liked combos** on Home opens every liked pair, including earlier saves. Tap a filled heart to remove the like.
+
 Colors shift with the season and the device's local time. Choose your hemisphere in **Settings → Conditions**.
 
 Qwen runs through Ollama on the backend computer/server. It has no API fee. Optional OpenAI/Claude API keys belong to each user and are saved encrypted by that backend. Photos go only to the selected destination when analysis is requested. A chat subscription is separate from API access.

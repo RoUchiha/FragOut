@@ -1,14 +1,14 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Pressable,Switch,Text,View} from 'react-native';
-import {Camera,Heart,Plus} from 'lucide-react-native';
+import {Camera,ChevronRight,Heart,Plus} from 'lucide-react-native';
 import {api,sessionScope,type AiStatus,type AppState,type BottleCandidate} from './api';
 import {capturePhoto,discardPhoto,type Capture} from './capture';
 import {BottleArt,Btn,Choices,Empty,Field,IconButton,SearchBox,Sheet,Spinner,useUi} from './ui';
 import {matchesBottleSearch,scentSearchLimit} from '../../src/lib/scent-search';
 import type {Bottle} from '../../src/lib/types';
 
-export default function Collection({state,refresh,notify}:{
- state:AppState; refresh:()=>Promise<void>; notify:(message:string)=>void;
+export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
+ state:AppState; refresh:()=>Promise<void>; notify:(message:string)=>void; onOpenLikedCombos:()=>void;
 }) {
  const {styles,colors} = useUi();
  const [query,setQuery] = useState('');
@@ -86,6 +86,15 @@ export default function Collection({state,refresh,notify}:{
   </Text>}
   <SearchBox label="Search collection" placeholder="Name, brand, or note" value={query}
    onChange={setQuery} onClear={()=>setQuery('')} maxLength={scentSearchLimit}/>
+  <Pressable accessibilityRole="button" accessibilityLabel="Liked combos" onPress={onOpenLikedCombos}
+   style={[styles.spread,{minHeight:40,borderBottomWidth:1,borderBottomColor:colors.line,paddingHorizontal:3}]}>
+   <View style={styles.row}>
+    <Heart size={16} color={colors.link}/><Text style={styles.text}>Liked combos</Text>
+   </View>
+   <View style={styles.row}>
+    <Text style={styles.small}>{state.likedCombos?.length??0}</Text><ChevronRight size={16} color={colors.muted}/>
+   </View>
+  </Pressable>
   <Choices value={filter} items={[[ 'OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned'],['ALL','All']]}
    onChange={setFilter}/>
   {busy&&<Spinner label="Reading bottle label…"/>}

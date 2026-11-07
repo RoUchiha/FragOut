@@ -11,11 +11,11 @@ import Collection from './src/Collection';
 import Journal from './src/Journal';
 import Settings from './src/Settings';
 import Suggester from './src/Suggester';
-import type {Feedback} from './src/Results';
+import {LikedCombos,type ComboLikes,type Feedback} from './src/Results';
 import {defaultIntent} from '../src/lib/intent';
 import type {ScentIntent} from '../src/lib/types';
 
-type ViewId = 'home'|'suggester'|'outfit'|'journal'|'settings';
+type ViewId = 'home'|'suggester'|'outfit'|'journal'|'settings'|'liked-combos';
 const tabs = [['home','Home',Home],['suggester','Find a scent',Lightbulb]] as const;
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
 function Workspace() {
  const params = useLocalSearchParams<{view?:string}>();
  const requested = params.view;
- const view:ViewId = requested==='suggester'||requested==='outfit'||requested==='settings'||requested==='journal' ? requested : 'home';
+ const view:ViewId = requested==='suggester'||requested==='outfit'||requested==='settings'||requested==='journal'||requested==='liked-combos' ? requested : 'home';
  const activeTab = view==='suggester'||view==='outfit' ? 'suggester' : 'home';
  const navigate = useCallback((target:ViewId)=>router.setParams({view:target}),[]);
  const [state,setState] = useState<AppState|null>(null);
@@ -91,6 +91,22 @@ function Workspace() {
   }
  };
 
+ const comboLikes:ComboLikes = {
+  items:state?.likedCombos??[],
+  set:async (ids,liked,occasion,requestId)=>{
+   const stillCurrent = sessionScope();
+   setFeedbackBusy(true);
+   try {
+    await api('liked-combos','PUT',{bottleIds:ids,liked,occasion,requestId});
+    if (stillCurrent()) await refresh();
+   } catch (problem) {
+    if (stillCurrent()) notify((problem as Error).message);
+   } finally {
+    if (stillCurrent()) setFeedbackBusy(false);
+   }
+  },
+ };
+
  return <UiProvider value={theme}>
   <SafeAreaView style={styles.screen} edges={['top','bottom']}>
    <StatusBar style={colors.isDark?'light':'dark'}/>
@@ -127,11 +143,12 @@ function Workspace() {
      <ScrollView key={state.user.id+':'+view} style={{flex:1,minHeight:0}}
       contentContainerStyle={[styles.content,{width:'100%',maxWidth:620,alignSelf:'center'}]}
       keyboardShouldPersistTaps="handled">
-      {view==='home'&&<Collection state={state} refresh={refresh} notify={notify}/>}
+      {view==='home'&&<Collection state={state} refresh={refresh} notify={notify} onOpenLikedCombos={()=>navigate('liked-combos')}/>}
       {view==='suggester'&&<Suggester state={state} intent={intent} onIntentChange={setIntent}
-       onOutfit={()=>navigate('outfit')} onFeedback={feedback} feedbackBusy={feedbackBusy}/>}
+       onOutfit={()=>navigate('outfit')} onFeedback={feedback} comboLikes={comboLikes} feedbackBusy={feedbackBusy}/>}
       {view==='outfit'&&<Outfit onError={notify} onFeedback={feedback} feedbackBusy={feedbackBusy}
-       archiveEnabled={state.preferences.archiveOutfits} intent={intent} onIntentChange={setIntent}/>}
+       archiveEnabled={state.preferences.archiveOutfits} intent={intent} onIntentChange={setIntent} comboLikes={comboLikes}/>}
+      {view==='liked-combos'&&<LikedCombos comboLikes={comboLikes} busy={feedbackBusy}/>}
       {view==='settings'&&<Settings state={state} refresh={refresh} onSession={onSession} notify={notify}/>}
       {view==='journal'&&<Journal state={state} busy={feedbackBusy} refresh={refresh} notify={notify}/>}
      </ScrollView>

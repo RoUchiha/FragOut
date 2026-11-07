@@ -57,6 +57,32 @@ test('recommendation search remains owned-only and can anchor a pair with one ma
  }finally{h.db.close();}
 });
 
+test('combo likes are private, order independent and separate from wear history',async()=>{
+ const h=harness();
+ try {
+  const owner=h.db.createDemo(),other=h.db.createDemo();
+  const ownerToken=h.db.createSession(owner.id),otherToken=h.db.createSession(other.id);
+  const ids=h.db.state(owner.id).bottles.slice(0,2).map(bottle=>bottle.id);
+  const setLike=(token:string,bottleIds:string[],liked:boolean)=>
+   h.call('liked-combos',{method:'PUT',token,body:{bottleIds,liked}});
+  assert.equal((await setLike(ownerToken,ids,true)).status,200);
+  assert.equal((await setLike(ownerToken,[...ids].reverse(),true)).status,200);
+  assert.equal((await setLike(ownerToken,[ids[0],ids[0]],true)).status,400);
+  assert.equal((await setLike(otherToken,ids,true)).status,400);
+  assert.equal((await setLike(otherToken,ids,false)).status,200);
+  assert.equal((await h.call('state',{token:otherToken})).body.likedCombos.length,0);
+  const ownerState=(await h.call('state',{token:ownerToken})).body;
+  assert.equal(ownerState.likedCombos.length,1);
+  assert.equal(ownerState.history.filter((event:{reaction:string})=>event.reaction==='saved').length,1);
+  h.db.feedback(owner.id,ids,'wore','WORK');
+  h.db.feedback(owner.id,[...ids].reverse(),'saved','GENERAL');
+  assert.equal((await setLike(ownerToken,[...ids].reverse(),false)).status,200);
+  const after=(await h.call('state',{token:ownerToken})).body;
+  assert.equal(after.likedCombos.length,0);
+  assert.deepEqual(Array.from(after.history,(event:{reaction:string})=>event.reaction),['wore']);
+ } finally { h.db.close(); }
+});
+
 test('HTTPS login issues Secure, HttpOnly and SameSite cookies without an opt-in flag',async()=>{
  const h=harness();try{const r=await h.call('auth',{method:'POST',body:{action:'demo'},url:'https://localhost:3237',origin:'https://localhost:3237'});
   assert.equal(r.status,200);assert.match(r.cookie!,/^__Host-fragout_session=/);assert.match(r.cookie!,/; Secure/i);assert.match(r.cookie!,/HttpOnly/i);assert.match(r.cookie!,/SameSite=Lax/i);

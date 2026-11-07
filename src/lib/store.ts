@@ -11,6 +11,7 @@ const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 type UserRow={id:string;name:string;email:string|null;demo:number;password:string|null};
 const publicUser=(u:UserRow):User=>({id:u.id,name:u.name,email:u.email,demo:!!u.demo});
 const identity=(b:Pick<Bottle,'brand'|'name'|'concentration'>)=>hash([b.brand,b.name,b.concentration].map(s=>s.trim().toLowerCase().replace(/\s+/g,' ')).join('|'));
+const comboKey=(ids:string[])=>JSON.stringify([...ids].sort());
 export class Store {
   db:DatabaseSync;
   constructor(path:string){
@@ -61,12 +62,26 @@ export class Store {
   createSession(userId:string){const token=randomBytes(32).toString('hex');this.db.prepare('INSERT INTO sessions VALUES(?,?,?)').run(hash(token),userId,Date.now()+7*86400000);return token;}
   sessionUser(token:string){if(!token||token.length!==64)return null;const row=this.db.prepare('SELECT user_id FROM sessions WHERE token_hash=? AND expires>?').get(hash(token),Date.now()) as {user_id:string}|undefined;return row?this.user(row.user_id):null;}
   revokeSession(token:string){this.db.prepare('DELETE FROM sessions WHERE token_hash=?').run(hash(token));}
+  private savedComboEvents(userId:string) {
+    const rows=this.db.prepare(`
+      SELECT body FROM wear_events WHERE user_id=?
+      AND json_extract(body,'$.reaction')='saved' AND json_array_length(body,'$.bottleIds')=2
+      ORDER BY created DESC, rowid DESC
+    `).all(userId) as {body:string}[];
+    return rows.map(row=>JSON.parse(row.body) as WearEvent);
+  }
   state(userId:string,allHistory=false):AppState{
     const user=this.user(userId);if(!user)throw new Error('Account not found.');
     const setting=this.db.prepare('SELECT body FROM settings WHERE user_id=?').get(userId) as {body:string};
     const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as Bottle);
     const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
-    const saved=JSON.parse(setting.body);return {user,bottles,history,...saved,preferences:{...defaultPreferences,...saved.preferences}};
+    const likes=new Map<string,WearEvent>();
+    for(const event of this.savedComboEvents(userId)) {
+      const key=comboKey(event.bottleIds);
+      if(!likes.has(key)) likes.set(key,event);
+    }
+    const saved=JSON.parse(setting.body);
+    return {user,bottles,history,...saved,likedCombos:[...likes.values()],preferences:{...defaultPreferences,...saved.preferences}};
   }
   pruneOutfits(){
     this.db.prepare('DELETE FROM outfit_analyses WHERE created<=?').run(Date.now()-OUTFIT_ANALYSIS_MS);
@@ -123,6 +138,23 @@ export class Store {
     this.db.prepare('INSERT INTO wear_events VALUES(?,?,?,?)').run(event.id,userId,JSON.stringify(event),Date.now());
     if(ids.length===1&&(reaction==='loved'||reaction==='disliked'))for(const b of bs)this.updateBottle(userId,b!.id,{rating:reaction==='loved'?5:1,favorite:reaction==='loved'});
     return event;
+  }
+  setComboLike(userId:string,ids:string[],liked:boolean,occasion:string,requestId?:string) {
+    if(ids.length!==2||ids[0]===ids[1]) throw new Error('Choose two distinct bottles you own.');
+    const key=comboKey(ids);
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      const matches=this.savedComboEvents(userId).filter(event=>comboKey(event.bottleIds)===key);
+      if(liked) {
+        if(!matches.length) this.feedback(userId,ids,'saved',occasion,requestId);
+      } else {
+        for(const event of matches) this.deleteEvent(userId,event.id);
+      }
+      this.db.exec('COMMIT');
+    } catch(error) {
+      this.db.exec('ROLLBACK');
+      throw error;
+    }
   }
   deleteEvent(userId:string,id:string){return this.db.prepare('DELETE FROM wear_events WHERE id=? AND user_id=?').run(id,userId).changes>0;}
   deleteUser(userId:string){this.db.prepare('DELETE FROM users WHERE id=?').run(userId);}

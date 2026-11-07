@@ -89,6 +89,16 @@ async function handle(req:NextRequest){
       const requestId=db.recordRecommendation(user.id,context,[...new Set([...solo.map(r=>r.bottle.id),...combos.flatMap(r=>[r.a.id,r.b.id])])]);
       return reply({solo,combos,context,requestId,engine:ENGINE_VERSION});
     }
+    if(path.length===1&&path[0]==='liked-combos'&&method==='PUT'){
+      const data=z.object({
+        bottleIds:z.array(z.string().max(100)).length(2),
+        liked:z.boolean(),
+        occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']).default('GENERAL'),
+        requestId:z.string().uuid().optional(),
+      }).strict().parse(body);
+      db.setComboLike(user.id,data.bottleIds,data.liked,data.occasion,data.requestId);
+      return reply({ok:true});
+    }
     if(path.length===1&&path[0]==='feedback'&&method==='POST'){
       const data=z.object({bottleIds:z.array(z.string().max(100)).min(1).max(2),reaction:z.enum(['wore','loved','disliked','saved']),occasion:z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']),requestId:z.string().uuid().optional()}).strict().parse(body);
       return reply(db.feedback(user.id,data.bottleIds,data.reaction,data.occasion,data.requestId),201);

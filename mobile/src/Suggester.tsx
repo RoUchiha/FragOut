@@ -6,7 +6,7 @@ import {intentSummary} from '../../src/lib/intent';
 import type {ComboResult,ScentIntent,SoloResult,WearContext} from '../../src/lib/types';
 import {api,type AppState} from './api';
 import IntentPicker from './IntentPicker';
-import {Results,type Feedback} from './Results';
+import {Results,type ComboLikes,type Feedback} from './Results';
 import {Btn,Choices,SearchBox,Section,Spinner,useUi} from './ui';
 
 type Options = {
@@ -19,12 +19,13 @@ type Request = Options & ScentIntent & {search?:string};
 type Picks = {solo:SoloResult[];combos:ComboResult[];context:WearContext;requestId:string};
 type Reply = {request:Request;value:Picks} | {request:Request;error:string};
 
-export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedback,feedbackBusy}:{
+export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedback,comboLikes,feedbackBusy}:{
  state:AppState;
  intent:ScentIntent;
  onIntentChange:(value:ScentIntent)=>void;
  onOutfit:()=>void;
  onFeedback:Feedback;
+ comboLikes:ComboLikes;
  feedbackBusy:boolean;
 }) {
  const {styles,colors} = useUi();
@@ -128,7 +129,7 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
    </Text>}
    <Results key={result.requestId} solo={result.solo} combos={result.combos}
     occasion={result.context.occasion} requestId={result.requestId}
-    onFeedback={onFeedback} busy={feedbackBusy}/>
+    onFeedback={onFeedback} comboLikes={comboLikes} busy={feedbackBusy}/>
   </>}
  </View>;
 }

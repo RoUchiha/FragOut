@@ -89,3 +89,20 @@ test('export includes all journal events beyond the UI history limit',()=>{
  for(let i=0;i<203;i++)db.feedback(a.id,[b.id],'wore','GENERAL');
  assert.equal(db.state(a.id).history.length,200);assert.equal(db.exportState(a.id).history.length,203);db.close();
 });
+
+test('liked combos include older saves and collapse reversed duplicate pairs',()=>{
+ const db=new Store(':memory:');
+ try {
+  const user=db.createDemo();
+  const [a,b]=db.state(user.id).bottles;
+  const first=db.feedback(user.id,[a.id,b.id],'saved','GENERAL');
+  const second=db.feedback(user.id,[b.id,a.id],'saved','WORK');
+  const age=db.db.prepare('UPDATE wear_events SET created=? WHERE id=?');
+  age.run(1,first.id);
+  age.run(2,second.id);
+  for(let i=0;i<201;i++) db.feedback(user.id,[a.id],'wore','GENERAL');
+  const state=db.state(user.id);
+  assert.equal(state.history.some(event=>event.reaction==='saved'),false);
+  assert.deepEqual(state.likedCombos.map(event=>event.id),[second.id]);
+ } finally { db.close(); }
+});

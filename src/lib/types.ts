@@ -33,7 +33,7 @@ export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:str
 export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string}
 export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
 export interface User {id:string; name:string; email:string|null; demo:boolean}
-export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]}
+export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[]}
 export type AiProvider='qwen'|'openai'|'claude';
 export interface OutfitProfile {
  summary:string; garments:string[]; colors:string[];
