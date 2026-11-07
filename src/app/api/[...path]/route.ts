@@ -7,6 +7,7 @@ import {matchesBottleSearch,scentSearchLimit} from '@/lib/scent-search';
 import type {Bottle} from '@/lib/types';
 import {handleAiApi} from '@/lib/ai-api';
 import {requestPolicy} from '@/lib/security';
+import {findCatalogProfile} from '@/lib/catalog';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
@@ -64,6 +65,10 @@ async function handle(req:NextRequest){
     if(path.length===1&&path[0]==='state'&&method==='GET')return reply(db.state(user.id));
     if(path[0]==='bottles'){
       if(method==='POST'&&path.length===1)return reply(db.addBottle(user.id,{...bottleSchema.parse(body),id:'',variantId:''} as Bottle),201);
+      if(method==='GET'&&path.length===3&&path[1]&&path[2]==='profile'){
+        const bottle=db.getBottle(user.id,path[1]);
+        return bottle?reply({variantId:bottle.variantId,profile:findCatalogProfile(bottle)}):reply({error:'Bottle not found.'},404);
+      }
       if(method==='PATCH'&&path.length===2&&path[1]){const b=db.updateBottle(user.id,path[1],bottleSchema.partial().parse(body));return b?reply(b):reply({error:'Bottle not found.'},404);}
       if(method==='DELETE'&&path.length===2&&path[1])return db.removeBottle(user.id,path[1])?reply({ok:true}):reply({error:'Bottle not found.'},404);
     }

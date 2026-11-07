@@ -1,0 +1,19 @@
+{
+  "houseAliases": {
+    "christian dior": "dior",
+    "ysl": "yves saint laurent",
+    "ysl beauty": "yves saint laurent",
+    "paco rabanne": "rabanne",
+    "mfk": "maison francis kurkdjian",
+    "pdm": "parfums de marly",
+    "jean paul gaultier parfums": "jean paul gaultier",
+    "initio parfums prives": "initio"
+  },
+  "suffixes": {
+    "EDT": ["eau de toilette", "edt"],
+    "EDP": ["eau de parfum", "edp"],
+    "PARFUM": ["parfum"],
+    "ELIXIR": ["elixir"],
+    "OIL": ["perfume oil"]
+  }
+}

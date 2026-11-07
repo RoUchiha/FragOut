@@ -9,12 +9,14 @@ import * as validation from '../src/lib/validation.ts';
 import * as engine from '../src/lib/engine.ts';
 import * as security from '../src/lib/security.ts';
 import * as search from '../src/lib/scent-search.ts';
+import * as catalog from '../src/lib/catalog.ts';
 const require=createRequire(import.meta.url),next=require('next/server');
 function harness(){
  const db=new Store(':memory:'),module={exports:{} as any};
  const source=readFileSync(new URL('../src/app/api/[...path]/route.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
   if(name==='next/server')return next;if(name==='zod')return require('zod');
+  if(name==='@/lib/catalog')return catalog;
   if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/scent-search')return search;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
  }});
  async function call(path:string,{method='GET',body,raw,token,cookie,origin='http://localhost:3237',url='http://localhost:3237',headers={}}:{method?:string;body?:unknown;raw?:string;token?:string;cookie?:string;origin?:string|null;url?:string;headers?:Record<string,string>}={}){
@@ -80,6 +82,33 @@ test('combo likes are private, order independent and separate from wear history'
   const after=(await h.call('state',{token:ownerToken})).body;
   assert.equal(after.likedCombos.length,0);
   assert.deepEqual(Array.from(after.history,(event:{reaction:string})=>event.reaction),['wore']);
+ } finally { h.db.close(); }
+});
+
+test('fragrance profiles require bottle ownership and resolve the current edition',async()=>{
+ const h=harness();
+ try {
+  const a=h.db.createDemo(),b=h.db.createDemo();
+  const token=h.db.createSession(a.id),other=h.db.createSession(b.id);
+  const owned=h.db.addBottle(a.id,{...h.db.state(a.id).bottles[0],
+   brand:'Dior',name:'Sauvage',concentration:'EDP',memo:'private-catalog-canary'});
+  const path='bottles/'+owned.id+'/profile';
+  assert.equal((await h.call(path)).status,401);
+  assert.equal((await h.call(path,{token:other})).status,404);
+  const edp=await h.call(path,{token});
+  assert.equal(edp.status,200);
+  assert.equal(edp.body.variantId,owned.variantId);
+  assert.equal(edp.body.profile.concentration,'EDP');
+  assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhoto,edp.body.profile.photo.path);
+  assert.ok(!JSON.stringify(edp.body).includes('private-catalog-canary'));
+  assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{concentration:'EDT'}})).status,200);
+  const edt=await h.call(path,{token});
+  assert.equal(edt.body.profile.concentration,'EDT');
+  assert.notEqual(edt.body.variantId,edp.body.variantId);
+  assert.notEqual(edt.body.profile.id,edp.body.profile.id);
+  assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhoto,undefined);
+  assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{concentration:'UNKNOWN'}})).status,200);
+  assert.equal((await h.call(path,{token})).body.profile,null);
  } finally { h.db.close(); }
 });
 

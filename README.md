@@ -37,7 +37,13 @@ Matches use the notes and families you recorded for owned bottles. Your desired 
 
 Outfit style is a heuristic, not measured fragrance compatibility. The model interprets clothing; it never chooses arbitrary catalog IDs or creates pair evidence. Experimental pairs require deliberate opt-in and remain labeled untested. Unknown scent profiles stay unknown.
 
-The mobile collection also reads bottle labels through the selected vision provider and presents up to three uncertain suggestions. Users confirm the exact house, edition and concentration before adding. Scent facts are not inferred from a label. Real catalog data remains manual; the demo contains original fictional fragrances.
+The mobile collection reads bottle labels through the selected vision provider and presents up to three candidates. Confirm the exact house, edition and concentration before adding.
+
+## Fragrance profiles
+
+Save a fragrance or tap one in Collection to open its profile. FragOut matches the exact house, release and concentration against a local reference catalog. Profiles show cross-checked notes, separate wear estimates and credited reference photos where available. Open **Sources & credits** for links and the check date. Catalog lookup runs locally on the FragOut server. Your personal observations remain separate.
+
+The starter catalog has 67 exact editions, with notes for 66, licensed photos for six and two-source wear comparisons for two. See the [catalog sources and update process](catalog/README.md).
 
 ## Free default, optional personal providers
 
@@ -104,8 +110,8 @@ node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
 ```
 
-The current build passed 117 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
+The current build passed 123 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
-Remaining production work includes signed phone builds and device acceptance, licensed real catalog/variant research, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. The local database requires a persistent single-host Node process; it is not suitable for an ephemeral serverless filesystem. No app-store or web publication was performed.
+Remaining production work includes signed phone builds and device acceptance, broader catalog evidence and photo coverage, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database. This build runs locally.
 
 Provider references: [Ollama chat API](https://docs.ollama.com/api/chat), [Qwen model](https://ollama.com/library/qwen3-vl:2b-instruct), [OpenAI image input](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses), [Claude vision](https://platform.claude.com/docs/en/build-with-claude/vision).

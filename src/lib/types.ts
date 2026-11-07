@@ -6,6 +6,19 @@ export interface Bottle {
   climate:'FRESH'|'BALANCED'|'WARM'|'UNKNOWN'; profileKnown:boolean;
   provenance:Provenance; color:string; shape:'square'|'round'|'tall';
   sizeMl:number; fillPct:number; rating:number; favorite:boolean; memo:string;
+  catalogPhoto?:string;
+}
+export interface CatalogSource {
+ id:string; publisher:string; url:string;
+ kind:'house'|'reference'|'wear'|'photo'|'community';
+ credit?:string; license?:{name:string;url:string};
+}
+export interface CatalogProfile {
+ id:string; brand:string; name:string; concentration:string; checkedAt:string;
+ notes:{name:string;stage:'top'|'heart'|'base'|'listed';sourceIds:string[]}[];
+ performance:{kind:'longevity'|'sillage'|'projection';reports:{sourceId:string;value:string}[]}[];
+ photo?:{path:string;caption:string;sourceId:string};
+ sources:CatalogSource[];
 }
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];

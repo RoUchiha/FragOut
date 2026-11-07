@@ -1,6 +1,6 @@
 import React,{createContext,useContext,useEffect,useMemo,useState} from 'react';
 import {
- ActivityIndicator, AppState as NativeAppState, KeyboardAvoidingView, Modal, Platform,
+ ActivityIndicator, AppState as NativeAppState, Image, KeyboardAvoidingView, Modal, Platform,
  Pressable, ScrollView, StyleSheet, Text, TextInput, View, type TextInputProps, type ViewStyle,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -8,6 +8,7 @@ import {ArrowRight,Search,X} from 'lucide-react-native';
 import Svg,{Rect,Ellipse,Text as SvgText} from 'react-native-svg';
 import {paletteFor,themePeriod,type Palette} from '../../src/lib/palette';
 import type {Bottle} from '../../src/lib/types';
+import {serverUrl} from './api';
 
 function createUi(colors:Palette) {
  const styles = StyleSheet.create({
@@ -181,8 +182,17 @@ export function Sheet({title,children,onClose}:{title:string;children:React.Reac
  </Modal>;
 }
 
-export function BottleArt({bottle,size=125}:{bottle:Pick<Bottle,'name'|'color'|'shape'>;size?:number}) {
+export function catalogPhotoUrl(path?:string) {
+ return path&&/^\/catalog\/bottles\/[a-z0-9-]+\.jpg$/.test(path)?serverUrl()+path:undefined;
+}
+
+export function BottleArt({bottle,size=125}:{bottle:Pick<Bottle,'name'|'color'|'shape'|'catalogPhoto'>;size?:number}) {
  const {colors} = useUi();
+ const [failedPhoto,setFailedPhoto]=useState<string>();
+ const uri=catalogPhotoUrl(bottle.catalogPhoto);
+ if(uri&&uri!==failedPhoto) return <Image accessible accessibilityLabel={'Reference bottle photo of '+bottle.name}
+  source={{uri}} resizeMode="contain" style={{width:size*.88,height:size,borderRadius:4}}
+  onError={()=>setFailedPhoto(uri)}/>;
  const round = bottle.shape==='round';
  const tall = bottle.shape==='tall';
  const cap = colors.isDark ? colors.muted : colors.ink;

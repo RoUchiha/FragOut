@@ -5,6 +5,7 @@ import {dirname,join} from 'node:path';
 import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './seed.ts';
 import {privateDataPath} from './private-path.ts';
 import {protectPrivateDirectory} from './private-directory.ts';
+import {findCatalogProfile} from './catalog.ts';
 import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
 const OUTFIT_ANALYSIS_MS=15*60*1000;
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
@@ -73,7 +74,11 @@ export class Store {
   state(userId:string,allHistory=false):AppState{
     const user=this.user(userId);if(!user)throw new Error('Account not found.');
     const setting=this.db.prepare('SELECT body FROM settings WHERE user_id=?').get(userId) as {body:string};
-    const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as Bottle);
+    const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(row=>{
+      const bottle=JSON.parse(row.body) as Bottle;
+      const catalogPhoto=findCatalogProfile(bottle)?.photo?.path;
+      return catalogPhoto?{...bottle,catalogPhoto}:bottle;
+    });
     const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
     const likes=new Map<string,WearEvent>();
     for(const event of this.savedComboEvents(userId)) {
@@ -99,9 +104,13 @@ export class Store {
     const b={...input,id:randomUUID(),variantId:input.provenance==='demo'&&input.variantId?input.variantId:identity(input)};
     this.db.prepare('INSERT INTO bottles VALUES(?,?,?)').run(b.id,userId,JSON.stringify(b));return b;
   }
+  getBottle(userId:string,id:string):Bottle|null{
+    const row=this.db.prepare('SELECT body FROM bottles WHERE id=? AND user_id=?').get(id,userId) as {body:string}|undefined;
+    return row?JSON.parse(row.body) as Bottle:null;
+  }
   updateBottle(userId:string,id:string,patch:Partial<Bottle>):Bottle|null{
-    const row=this.db.prepare('SELECT body FROM bottles WHERE id=? AND user_id=?').get(id,userId) as {body:string}|undefined;if(!row)return null;
-    const before=JSON.parse(row.body) as Bottle;const b={...before,...patch,id};
+    const before=this.getBottle(userId,id);if(!before)return null;
+    const b={...before,...patch,id};
     if(identity(b)!==identity(before)){
       b.variantId=identity(b);b.profileKnown=false;b.notes=[];b.family='';b.climate='UNKNOWN';b.strength=1;b.provenance='unknown';
     }

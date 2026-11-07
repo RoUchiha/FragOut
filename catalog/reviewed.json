@@ -1,0 +1,146 @@
+[
+  {
+    "brand": "Dior", "name": "Sauvage", "concentration": "EDT",
+    "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-toilette-Y0685240.html",
+    "notes": {"listed": ["Calabrian bergamot", "Sichuan pepper", "Ambery marine wood"]},
+    "communityUrl": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Toilette"
+  },
+  {
+    "brand": "Dior", "name": "Sauvage", "concentration": "EDP",
+    "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html",
+    "notes": {"listed": ["Calabrian bergamot", "Woody patchouli", "Papua New Guinean vanilla extract"]},
+    "communityUrl": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum",
+    "photo": {
+      "file": "dior-sauvage-edp", "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/a-bottle-of-dior-sauvage-eau-de-parfum-bgrM9NxKLRQ",
+      "credit": "Farhan Chohan · resized",
+      "license": {"name": "Unsplash License", "url": "https://unsplash.com/license"},
+      "caption": "Reference bottle"
+    }
+  },
+  {
+    "brand": "Dior", "name": "Sauvage Elixir", "concentration": "ELIXIR",
+    "url": "https://www.dior.com/en_ie/beauty/products/sauvage-elixir-Y0996460.html",
+    "notes": {"top": ["Grapefruit", "Spice", "Cinnamon", "Nutmeg", "Cardamom"], "heart": ["Lavender"], "base": ["Wood", "Amber", "Licorice"]}
+  },
+  {
+    "brand": "Chanel", "name": "Bleu de Chanel", "concentration": "EDP",
+    "url": "https://www.chanel.com/us/fragrance/p/107360/bleu-de-chanel-eau-de-parfum-spray/",
+    "notes": {"listed": ["Ambery cedar", "Musk", "New Caledonian sandalwood"]},
+    "communityUrl": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Eau_de_Parfum"
+  },
+  {
+    "brand": "Chanel", "name": "No. 5", "concentration": "EDP",
+    "aliases": ["N°5", "Nº5", "No5", "Number 5", "Chanel 5", "5"],
+    "url": "https://www.chanel.com/us/fragrance/p/125530/n5-eau-de-parfum-spray/",
+    "notes": {"top": ["Citrus"], "listed": ["Aldehydes", "May rose", "Jasmine", "Bourbon vanilla"]},
+    "photo": {
+      "file": "chanel-no-5-edp",
+      "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg",
+      "credit": "Arz · public-domain photograph, resized",
+      "license": {"name": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg"},
+      "caption": "Reference bottle"
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent", "name": "Y", "concentration": "EDP",
+    "url": "https://www.yslbeauty.ca/en_CA/perfumes/fragrances-for-him/y/y-eau-de-parfum/WW-50194YSL.html",
+    "notes": {"top": ["Apple"], "heart": ["Geranium", "Sage"], "base": ["Wood"]}
+  },
+  {
+    "brand": "Yves Saint Laurent", "name": "Libre", "concentration": "EDP",
+    "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/libre/libre-eau-de-parfum/109YSL.html",
+    "notes": {"listed": ["Lavender", "Orange blossom", "Musk", "Vanilla"]}
+  },
+  {
+    "brand": "Le Labo", "name": "Santal 33", "concentration": "EDP",
+    "url": "https://www.lelabofragrances.com/santal-33-147.html",
+    "notes": {"listed": ["Cardamom", "Iris", "Violet", "Australian sandalwood", "Cedarwood", "Leather", "Musk"]},
+    "communityUrl": "https://www.parfumo.com/Perfumes/Le_Labo/Santal_33_Eau_de_Parfum",
+    "photo": {
+      "file": "le-labo-santal-33-edp",
+      "url": "https://commons.wikimedia.org/wiki/File:Le_Labo_Santal_33_in_a_50_milliliter_bottle_(cropped).jpg",
+      "credit": "The Honest Channel · Commons crop, resized",
+      "license": {"name": "CC BY 3.0", "url": "https://creativecommons.org/licenses/by/3.0/"},
+      "caption": "50 mL reference bottle"
+    }
+  },
+  {
+    "brand": "Calvin Klein", "name": "Euphoria", "concentration": "EDP",
+    "url": "https://www.calvinklein.com.au/euphoria-women-eau-de-parfum-50ml-65102303000000",
+    "notes": {"top": ["Pomegranate"], "heart": ["Lotus blossom", "Black orchid"], "base": ["Liquid amber", "Black violet", "Mahogany"]},
+    "photo": {
+      "file": "calvin-klein-euphoria-edp",
+      "url": "https://commons.wikimedia.org/wiki/File:CK_Euphoria_Bottle.jpg",
+      "credit": "ggjsmith · edited by Bruce The Deus, resized",
+      "license": {"name": "CC BY 2.0", "url": "https://creativecommons.org/licenses/by/2.0/"},
+      "caption": "30 mL reference bottle"
+    }
+  },
+  {
+    "brand": "Creed", "name": "Aventus", "concentration": "EDP",
+    "url": "https://www.creedfragrances.co.uk/products/aventus",
+    "notes": {"top": ["Calabrian bergamot", "Sicilian lemon", "Blackcurrant leaf accord"], "heart": ["Pineapple", "Pink pepper", "Jasmine"], "base": ["Birch", "Patchouli", "Musk"]}
+  },
+  {
+    "brand": "Maison Francis Kurkdjian", "name": "Baccarat Rouge 540", "concentration": "EDP",
+    "url": "https://www.franciskurkdjian.com/us-en/p/baccarat-rouge-540-eau-de-parfum-RA12232.html",
+    "notes": {"top": ["Jasmine", "Saffron"], "listed": ["Ambergris", "Dry woods", "Ethyl maltol"]}
+  },
+  {
+    "brand": "Creed", "name": "Green Irish Tweed", "concentration": "EDP",
+    "url": "https://www.creedfragrances.co.uk/products/green-irish-tweed",
+    "notes": {"top": ["Peppermint", "Verbena", "Lemon", "Bergamot", "Galbanum"], "heart": ["Geranium", "Lavender", "Violet"], "base": ["Sandalwood", "Cedarwood", "Ambroxan", "Oakmoss"]},
+    "wear": {
+      "url": "https://gouttesrares.com/products/creed-green-irish-tweed",
+      "concentration": "EDP",
+      "editionEvidence": "The retailer identifies the original 1985 Green Irish Tweed. Creed lists that release as Eau de Parfum.",
+      "editionUrl": "https://creedboutique.com/products/green-irish-tweed"
+    }
+  },
+  {
+    "brand": "Xerjoff", "name": "Naxos", "concentration": "EDP", "aliases": ["1861 Naxos", "XJ 1861 Naxos"],
+    "url": "https://www.xerjoff.com/products/naxos-eau-de-parfum",
+    "notes": {"top": ["Lemon", "Bergamot", "Lavender", "Omani incense"], "heart": ["Jasmine sambac", "Honey", "Cinnamon", "Cashmere"], "base": ["Vanilla", "Tobacco leaf", "Tonka bean"]},
+    "wear": {
+      "url": "https://gouttesrares.com/products/xerjoff-naxos",
+      "concentration": "EDP",
+      "editionEvidence": "The retailer listing depicts the 1861 Naxos bottle and identifies Eau de Parfum in the image description. Xerjoff's product URL identifies the same release.",
+      "editionUrl": "https://www.xerjoff.com/products/naxos-eau-de-parfum"
+    }
+  },
+  {
+    "brand": "Lancôme", "name": "La Vie Est Belle", "concentration": "EDP",
+    "url": "https://www.lancome-usa.com/fragrance/fragrance-by-collection/la-vie-est-belle/la-vie-est-belle-eau-de-parfum/3614273694797.html",
+    "notes": {"listed": ["Iris", "Patchouli", "Vanilla"]}
+  },
+  {
+    "brand": "Parfums de Marly", "name": "Layton", "concentration": "EDP",
+    "url": "https://uk.parfums-de-marly.com/products/layton",
+    "notes": {"top": ["Apple", "Bergamot", "Cardamom"], "heart": ["Lavender"], "base": ["Patchouli", "Vanilla", "Guaiac wood", "Praline"]}
+  },
+  {
+    "brand": "Rabanne", "name": "1 Million", "concentration": "EDT", "aliases": ["One Million"],
+    "url": "https://www.rabanne.com/uk/en_GB/fragrance/c/frag-men-onemillion",
+    "notes": {"top": ["Blood mandarin", "Grapefruit", "Mint"], "heart": ["Cinnamon", "Rose"], "base": ["Leather", "Amber", "Patchouli"]},
+    "photo": {
+      "file": "rabanne-1-million-edt",
+      "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_toaletowa_Paco_Rabanne_1_Million.jpg",
+      "credit": "Jacek Halicki · resized",
+      "license": {"name": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/"},
+      "caption": "Reference bottle"
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier", "name": "Ultra Male", "concentration": "EDT", "aliases": ["Ultra Male Intense", "Ultra Male Eau de Toilette Intense"],
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male/ultra-male-eau-de-toilette-intense-000000000065119981",
+    "notes": {},
+    "photo": {
+      "file": "jean-paul-gaultier-ultra-male-edt",
+      "url": "https://commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_Ultra_Male.jpg",
+      "credit": "Amin · resized",
+      "license": {"name": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/"},
+      "caption": "Reference bottle"
+    }
+  }
+]
