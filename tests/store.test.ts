@@ -2,6 +2,26 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {Store} from '../src/lib/store.ts';
 import {demoBottles} from '../src/lib/seed.ts';
+import {parseOutfitText} from '../src/lib/outfit.ts';
+import {randomUUID} from 'node:crypto';
+
+test('expired outfit descriptions are purged during reads, exports and writes',()=>{
+  const db=new Store(':memory:'),a=db.createDemo(),b=db.createDemo();
+  const receipt=()=>({id:randomUUID(),profile:parseOutfitText('White shirt and blue jeans'),provider:'qwen' as const,model:'test',method:'model' as const,createdAt:new Date().toISOString()});
+  const old=receipt();db.saveOutfit(a.id,old);
+  db.db.prepare('UPDATE outfit_analyses SET created=? WHERE id=?').run(Date.now()-48*3600000,old.id);
+  assert.deepEqual(db.exportState(a.id).outfitAnalyses,[]);
+  assert.equal(db.db.prepare('SELECT COUNT(*) AS n FROM outfit_analyses').get()!.n,0);
+  const fresh=receipt();db.saveOutfit(a.id,fresh);
+  assert.equal(db.getOutfit(b.id,fresh.id),null);assert.equal(db.getOutfit(a.id,fresh.id)?.id,fresh.id);
+  db.db.prepare('UPDATE outfit_analyses SET created=? WHERE id=?').run(Date.now()-48*3600000,fresh.id);
+  assert.equal(db.getOutfit(a.id,fresh.id),null);
+  assert.equal(db.db.prepare('SELECT COUNT(*) AS n FROM outfit_analyses').get()!.n,0);
+  const aged=receipt();db.saveOutfit(b.id,aged);
+  db.db.prepare('UPDATE outfit_analyses SET created=? WHERE id=?').run(Date.now()-48*3600000,aged.id);
+  db.saveOutfit(a.id,receipt());
+  assert.equal(db.db.prepare('SELECT COUNT(*) AS n FROM outfit_analyses').get()!.n,1);db.close();
+});
 test('real SQLite accounts isolate CRUD, preferences and feedback',()=>{
   const db=new Store(':memory:');
   const a=db.register('Alice','alice@example.test','very-secure-pass');

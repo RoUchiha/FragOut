@@ -58,7 +58,7 @@ export function Learn() {
   ['Weather & venues','Set the temperature where you will wear the scent. Indoor conditions may differ from outside. Fragrance-free venue rules always take priority.'],
   ['Concentrations & variants','EDT, EDP, Parfum and flankers are separate variants. A stronger concentration does not guarantee longer wear or greater projection.'],
   ['Layering labels','Brand-suggested means direct guidance for the exact pair. Community corroborated needs independent first-hand reports. A single report is one person’s experience. Dupe substitutions and generated pairings remain experimental.'],
-  ['Data in this edition','Real collections use manual entries and personal profiles. Demo fragrances are fictional. Live weather, automatic photo identification and licensed catalog feeds are not connected.']
+  ['Data in this edition','Real collections use manual entries and personal profiles. Demo fragrances are fictional. Live weather and licensed catalog feeds are not connected. Outfit and bottle photo analysis are available in the mobile app with Qwen or your own provider.']
  ];
  return <><div className="page-heading"><h1>Guide</h1></div><div className="guide-list">{topics.map(([title,body])=><details key={title}><summary>{title}</summary><p>{body}</p></details>)}</div></>;
 }

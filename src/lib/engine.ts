@@ -33,7 +33,7 @@ export function evidenceTier(e:Evidence):Tier|null{
   if(e.kind==='brand')return 'brand_guidance';
   return new Set(valid.map(r=>r.author)).size>=2&&new Set(valid.map(r=>r.url)).size>=2?'community_corroborated':'single_anecdote';
 }
-export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preferences,mode:'evidence'|'single'|'experimental',records:PairRecord[],excludedPairs:string[][]=[]):ComboResult[]{
+export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preferences,mode:'evidence'|'single'|'experimental',records:PairRecord[],excludedPairs:string[][]=[],limit=3):ComboResult[]{
   const solo=rankSolo(bottles,context,prefs,100);const results:ComboResult[]=[];
   for(let i=0;i<solo.length;i++)for(let j=i+1;j<solo.length;j++){
     const a=solo[i].bottle,b=solo[j].bottle;
@@ -52,5 +52,5 @@ export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preference
       reason:shared.length?`Your profiles share ${shared.join(', ')}. That overlap suggests a starting point, not proof of compatibility.`:`Your ${a.family.toLowerCase()} and ${b.family.toLowerCase()} profiles offer contrast. This combination has not been wear-tested.`,
       caution:'Try a small application of each separately. Do not mix liquids in a bottle. Stop if the combination feels overwhelming.',reviewedAt:record?.reviewedAt});
   }
-  return results.sort((a,b)=>b.score-a.score).slice(0,3);
+  return results.sort((a,b)=>b.score-a.score).slice(0,limit);
 }

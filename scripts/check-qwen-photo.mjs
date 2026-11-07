@@ -1,0 +1,10 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import sharp from 'sharp';
+import {runVision,prepareImage,LOCAL_MODEL} from '../src/lib/providers.ts';
+const bytes=await sharp(await readFile(new URL('../tests/fixtures/outfit.svg',import.meta.url))).png().toBuffer();
+if(process.env.FRAGOUT_FIXTURE_PATH)await writeFile(process.env.FRAGOUT_FIXTURE_PATH,bytes);
+const image=await prepareImage({mime:'image/png',data:bytes.toString('base64')});
+const start=Date.now();
+const profile=await runVision('qwen',LOCAL_MODEL,undefined,'outfit',{image,text:'Describe the clothing in this original illustrated outfit fixture.'});
+if(!profile.hasOutfit||!profile.garments.length)throw new Error('Qwen did not identify clothing in the fixture.');
+console.log(JSON.stringify({test:'synthetic photo smoke test, not accuracy evaluation',model:LOCAL_MODEL,elapsedMs:Date.now()-start,profile}));

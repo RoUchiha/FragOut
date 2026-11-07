@@ -30,3 +30,14 @@ export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sourc
 export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
 export interface User {id:string; name:string; email:string|null; demo:boolean}
 export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]}
+export type AiProvider='qwen'|'openai'|'claude';
+export interface OutfitProfile {
+ summary:string; garments:string[]; colors:string[];
+ styleTags:('casual'|'tailored'|'minimal'|'sporty'|'evening'|'streetwear'|'romantic'|'outdoors')[];
+ formality:'casual'|'smart'|'formal'; palette:'light'|'dark'|'bright'|'neutral'|'mixed';
+ hasOutfit:boolean; uncertainty:string[];
+}
+export interface OutfitReceipt {id:string;profile:OutfitProfile;provider:AiProvider;model:string;method:'model'|'offline_rules';createdAt:string}
+export interface AiStatus {selected:AiProvider;connections:{provider:AiProvider;model:string;configured:boolean}[];local:{reachable:boolean;installed:boolean;model:string}}
+export interface OutfitMatches {solo:SoloResult[];combos:ComboResult[];requestId:string;context:WearContext;outfit:OutfitProfile}
+export interface BottleCandidate {brand:string;name:string;concentration:string;confidence:'likely'|'uncertain';clue:string}

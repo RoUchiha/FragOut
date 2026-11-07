@@ -3,7 +3,7 @@ import {randomUUID,randomBytes,scryptSync,timingSafeEqual,createHash} from 'node
 import {mkdirSync} from 'node:fs';
 import {dirname,join} from 'node:path';
 import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './seed.ts';
-import type {AppState,Bottle,Preferences,Shortcut,User,WearContext,WearEvent} from './types.ts';
+import type {AppState,Bottle,OutfitReceipt,Preferences,Shortcut,User,WearContext,WearEvent} from './types.ts';
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 type UserRow={id:string;name:string;email:string|null;demo:number;password:string|null};
 const publicUser=(u:UserRow):User=>({id:u.id,name:u.name,email:u.email,demo:!!u.demo});
@@ -22,11 +22,13 @@ export class Store {
     CREATE TABLE IF NOT EXISTS wear_events(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
     CREATE INDEX IF NOT EXISTS events_owner ON wear_events(user_id,created);
     CREATE TABLE IF NOT EXISTS recommendation_runs(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS outfit_analyses(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS rate_limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);
     INSERT OR IGNORE INTO schema_migrations VALUES(1,datetime('now'));`);
     this.db.prepare('DELETE FROM sessions WHERE expires<?').run(Date.now());
     this.db.prepare('DELETE FROM users WHERE demo=1 AND created<?').run(Date.now()-7*86400000);
     this.db.prepare('DELETE FROM recommendation_runs WHERE created<?').run(Date.now()-86400000);
+    this.pruneOutfits();
   }
   close(){this.db.close();}
   register(name:string,email:string,password:string){
@@ -59,7 +61,10 @@ export class Store {
     const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
     return {user,bottles,history,...JSON.parse(setting.body)};
   }
-  exportState(userId:string){return this.state(userId,true);}
+  pruneOutfits(){this.db.prepare('DELETE FROM outfit_analyses WHERE created<=?').run(Date.now()-86400000);}
+  exportState(userId:string){this.pruneOutfits();return {...this.state(userId,true),outfitAnalyses:(this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND created>?').all(userId,Date.now()-86400000) as {body:string}[]).map(r=>JSON.parse(r.body) as OutfitReceipt)};}
+  saveOutfit(userId:string,receipt:OutfitReceipt){this.pruneOutfits();this.db.prepare('INSERT INTO outfit_analyses VALUES(?,?,?,?)').run(receipt.id,userId,JSON.stringify(receipt),Date.now());}
+  getOutfit(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-86400000) as {body:string}|undefined;return row?JSON.parse(row.body) as OutfitReceipt:null;}
   addBottle(userId:string,input:Bottle):Bottle{
     const b={...input,id:randomUUID(),variantId:input.provenance==='demo'&&input.variantId?input.variantId:identity(input)};
     this.db.prepare('INSERT INTO bottles VALUES(?,?,?)').run(b.id,userId,JSON.stringify(b));return b;

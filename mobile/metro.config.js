@@ -1,0 +1,9 @@
+const {getDefaultConfig}=require('expo/metro-config');
+const path=require('path');
+const config=getDefaultConfig(__dirname);
+config.maxWorkers=2;
+config.watchFolders=[path.resolve(__dirname,'..')];
+config.resolver.nodeModulesPaths=[path.resolve(__dirname,'node_modules'),path.resolve(__dirname,'../node_modules')];
+config.resolver.disableHierarchicalLookup=false;
+config.resolver.blockList=[/[\\/]\.next[\\/]/,/[\\/]data[\\/]/];
+module.exports=config;
