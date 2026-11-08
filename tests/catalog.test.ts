@@ -111,3 +111,16 @@ test('Jomashop galleries point only to distinct, exact listing pages',()=>{
  assert.ok(lightBlueListing.url.endsWith('-8057971188192.html'));
  assert.equal(lightBlueListing.bottleEdition,'2025 bottle');
 });
+
+test('web-sourced photos distinguish lookalike releases and retain their credits',()=>{
+ const edt=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDT'})!;
+ const edp=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'})!;
+ assert.equal(edt.photo?.path,'/catalog/bottles/dior-sauvage-edt.jpg');
+ assert.equal(edp.photo?.path,'/catalog/bottles/dior-sauvage-edp.jpg');
+ const prada=findCatalogProfile({brand:'Prada',name:'Paradoxe',concentration:'EDP'})!;
+ assert.ok(prada.photo);
+ assert.equal(prada.additionalPhotos?.length,1);
+ const narciso=findCatalogProfile({brand:'Narciso Rodriguez',name:'For Her',concentration:'EDP'})!;
+ assert.equal(narciso.releaseYear,2006);
+ assert.ok(narciso.sources.some(source=>source.kind==='photo'&&source.license?.name==='CC BY 3.0'));
+});

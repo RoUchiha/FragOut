@@ -244,6 +244,8 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
              "links": quick_links(id_, brand, name, key[2], sources), "sources": sources}
     years = {int(year) for year in [(release or {}).get("year"), (csv_row or {}).get("year"), (scento or {}).get("year")]
              if year and re.fullmatch(r"\d{4}", str(year))}
+    if release:
+        years.difference_update(release.get("correctsYears", []))
     if len(years) > 1:
         raise ValueError(f"Recheck conflicting launch years for {key}")
     if years:

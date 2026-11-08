@@ -32,7 +32,7 @@
   },
   {
     "brand": "Yves Saint Laurent", "name": "Y", "concentration": "EDP",
-    "url": "https://www.yslbeauty.ca/en_CA/perfumes/fragrances-for-him/y/y-eau-de-parfum/WW-50194YSL.html",
+    "url": "https://www.yslbeauty.com/int/fragrance/fragrance-for-him/y/y--eau-de-parfum/WW-50194YSL.html",
     "notes": {"top": ["Apple"], "heart": ["Geranium", "Sage"], "base": ["Wood"]}
   },
   {
@@ -148,11 +148,42 @@
   {
     "brand": "Narciso Rodriguez", "name": "For Her Eau de Parfum", "concentration": "EDP",
     "url": "https://www.narcisorodriguezparfums.com/en/narciso-rodriguez-for-her/for-her-edp.html",
+    "release": {"year": 2006, "correctsYears": [2003], "publisher": "Shiseido Japan", "url": "https://prtimes.jp/main/html/rd/p/000000661.000034058.html"},
     "notes": {}
   },
   {
     "brand": "Phlur", "name": "Missing Person", "concentration": "EDP",
     "url": "https://phlur.com/products/missing-person-50ml",
+    "notes": {}
+  },
+  {
+    "brand": "Prada", "name": "Paradoxe", "concentration": "EDP",
+    "url": "https://www.prada-beauty.com/hidden/paradoxe-eau-de-parfum/3614273760683.html",
+    "notes": {}
+  },
+  {
+    "brand": "Rabanne", "name": "1 Million Lucky", "concentration": "EDT",
+    "url": "https://www.rabanne.com/uk/en_GB/fragrance/p/1-million-lucky--000000000065131403",
+    "notes": {}
+  },
+  {
+    "brand": "Giorgio Armani", "name": "Armani Code Eau de Toilette", "concentration": "EDT",
+    "url": "https://www.giorgioarmanibeauty-usa.com/armani-navigation/armani-code-homme-edt-v30ml-24/3614274298017.html",
+    "notes": {}
+  },
+  {
+    "brand": "Viktor&Rolf", "name": "Flowerbomb", "concentration": "EDP",
+    "url": "https://us.viktor-rolf.com/fragrance/flowerbomb-eau-de-parfum-VKR_002.html",
+    "notes": {}
+  },
+  {
+    "brand": "Dolce&Gabbana", "name": "The One for Men Eau de Parfum", "concentration": "EDP",
+    "url": "https://www.dolcegabbana.com/en-us/beauty/perfumes-for-him/the-one-for-men/eau-de-parfum---158057971180561.html",
+    "notes": {}
+  },
+  {
+    "brand": "Yves Saint Laurent", "name": "Black Opium", "concentration": "EDP",
+    "url": "https://www.yslbeauty.ca/en_CA/perfumes/perfumes-for-her/black-opium/black-opium-eau-de-parfum/WW-40701YSL.html",
     "notes": {}
   }
 ]

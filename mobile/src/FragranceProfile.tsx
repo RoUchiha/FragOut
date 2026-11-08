@@ -102,7 +102,7 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
      onPress={onEdit} style={{alignSelf:'flex-start',marginTop:3}}/>
    </View>
   </View>
-  {jomashop&&<FragDexLink url={jomashop.url} visit={visit} accessibilityLabel={'See all '+jomashopLabel}
+  {!featuredUrl&&jomashop&&<FragDexLink url={jomashop.url} visit={visit} accessibilityLabel={'See all '+jomashopLabel}
    style={[styles.row,{minHeight:44,paddingLeft:11,paddingRight:11,borderWidth:1,borderStyle:'solid',borderColor:colors.line,
     borderRadius:6,backgroundColor:colors.surface}]}>
    <Images size={16} color={colors.link}/>

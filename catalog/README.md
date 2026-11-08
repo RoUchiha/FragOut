@@ -1,6 +1,6 @@
 # Fragrance catalog
 
-Checked November 7, 2026. The snapshot contains 67 releases. Sixty-six have corroborated notes, 63 have a wear estimate, and 13 have licensed bottle photography. Fifteen have exact Fragrantica links and 62 have exact Jomashop listings.
+Catalog snapshot from November 7, 2026. It contains 67 releases. Sixty-six have corroborated notes and 63 have a wear estimate. Fifteen have exact Fragrantica links and 62 have exact Jomashop listings. The November 8 photo update brings licensed bottle photography to 23 releases.
 
 The app compares the saved house, release and concentration with this snapshot on the FragOut server. It serves licensed catalog photography from a dedicated static directory. Saved bottles and their profile lookups require the owner's session. The optional live rating lookup sends only the public catalog identity. Label scans and personal observations follow their private flows.
 
@@ -34,9 +34,9 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 ## Bottle galleries
 
-Tap a bottle photo to enlarge it and browse available views. The 16 photos are resized JPEGs with camera metadata removed. Edition checks compare each label or documented bottle design with the exact house product page. The [photo registry](photos.json) records the photographer, source, license and caption for each file. FragDex shows these credits in **Sources & credits**.
+Tap a bottle photo to enlarge it and browse available views. FragOut serves 31 JPEGs with camera metadata removed. Edition checks compare each label, barcode or documented bottle design with the exact house product page. The [photo registry](photos.json) records the photographer, source, license and caption for each file. FragDex shows these credits in **Sources & credits**.
 
-**Jomashop photos** opens the full retailer page for a reviewed standalone bottle. The checks compare the house, release, concentration and, when packaging or naming is ambiguous, the product barcode. The 2025 Light Blue EDT points to the matching 100 mL bottle. Profiles without a confirmed match offer **Search Jomashop**, using the public catalog label when tapped.
+Without an in-app photo, **Jomashop photos** opens the full retailer page for a reviewed standalone bottle. The same listing appears under **View on Jomashop** below the ratings. The checks compare the house, release, concentration and, when packaging or naming is ambiguous, the product barcode. The 2025 Light Blue EDT points to the matching 100 mL bottle. Profiles without a confirmed retailer match offer **Search Jomashop**, using the public catalog label when tapped.
 
 Jomashop requires written authorization to reuse its photos. Its images are served by the original listing in the browser. [Jomashop terms](https://help.jomashop.com/hc/en-us/articles/11923120092571-Terms-Conditions)
 

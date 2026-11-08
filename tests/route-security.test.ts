@@ -113,8 +113,8 @@ test('fragrance profiles require bottle ownership and resolve the current editio
   assert.notEqual(edt.body.variantId,edp.body.variantId);
   assert.notEqual(edt.body.profile.id,edp.body.profile.id);
   assert.notEqual(product(edt.body.profile),product(edp.body.profile));
-  assert.equal(edt.body.profile.additionalPhotos,undefined);
-  assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhoto,undefined);
+  assert.equal(edt.body.profile.photo.path,'/catalog/bottles/dior-sauvage-edt.jpg');
+  assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhoto,edt.body.profile.photo.path);
   assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{concentration:'UNKNOWN'}})).status,200);
   assert.equal((await h.call(path,{token})).body.profile,null);
  } finally { h.db.close(); }
