@@ -7,13 +7,19 @@
     "mfk": "maison francis kurkdjian",
     "pdm": "parfums de marly",
     "jean paul gaultier parfums": "jean paul gaultier",
-    "initio parfums prives": "initio"
+    "initio parfums prives": "initio",
+    "jo malone": "jo malone london",
+    "kilian": "kilian paris",
+    "by kilian": "kilian paris"
   },
   "suffixes": {
     "EDT": ["eau de toilette", "edt"],
     "EDP": ["eau de parfum", "edp"],
+    "EDC": ["eau de cologne", "cologne", "edc"],
     "PARFUM": ["parfum"],
+    "EXTRAIT": ["extrait de parfum", "extrait"],
     "ELIXIR": ["elixir"],
+    "MIST": ["hair and body fragrance mist", "hair and body perfume mist", "fragrance mist", "perfume mist", "body mist", "mist"],
     "OIL": ["perfume oil"]
   }
 }

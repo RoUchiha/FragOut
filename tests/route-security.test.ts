@@ -120,6 +120,25 @@ test('fragrance profiles require bottle ownership and resolve the current editio
  } finally { h.db.close(); }
 });
 
+test('manual saves accept cologne, extrait and mist without conflating editions',async()=>{
+ const h=harness();
+ try {
+  const user=h.db.createDemo(),token=h.db.createSession(user.id);
+  const {id,variantId,catalogPhoto,...fields}=h.db.state(user.id).bottles[0]!;
+  for(const [brand,name,concentration] of [
+   ['Jo Malone','Wood Sage & Sea Salt Cologne','EDC'],
+   ['Nishane','Hacivat','EXTRAIT'],
+   ['Sol de Janeiro','Cheirosa 62','MIST'],
+  ]) {
+   const saved=await h.call('bottles',{method:'POST',token,body:{...fields,brand,name,concentration,provenance:'unknown'}});
+   assert.equal(saved.status,201);
+   const dex=await h.call('bottles/'+saved.body.id+'/profile',{token});
+   assert.equal(dex.body.profile.concentration,concentration);
+   assert.ok(dex.body.profile.notes.length>=2);
+  }
+ } finally {h.db.close();}
+});
+
 test('live FragDex ratings are owner-scoped and discarded after edition or session changes',async()=>{
  let lookups=0,change=()=>{};
  const h=harness({key:'server-only-test-key',lookup:async(profile,key)=>{

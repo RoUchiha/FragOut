@@ -103,7 +103,12 @@
     "brand": "Jean Paul Gaultier", "name": "Ultra Male", "concentration": "EDT", "aliases": ["Ultra Male Intense", "Ultra Male Eau de Toilette Intense"],
     "release": {"year": 2015, "publisher": "DIARY directory", "url": "https://www.diarydirectory.com/newsarticle/jean-paul-gaultier-launches-ultra-male-fragrance/171"},
     "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male/ultra-male-eau-de-toilette-intense-000000000065119981",
-    "notes": {}
+    "notes": {"listed": ["Lavender", "Pear", "Vanilla", "Mint"]},
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/jean-paul-gaultier-ultra-male-eau-de-toilette-intense/5880377",
+      "notes": {"listed": ["Lavender", "Pear", "Vanilla", "Mint"]}
+    }
   },
   {
     "brand": "Marc Jacobs", "name": "Daisy", "concentration": "EDT",
@@ -185,5 +190,2799 @@
     "brand": "Yves Saint Laurent", "name": "Black Opium", "concentration": "EDP",
     "url": "https://www.yslbeauty.ca/en_CA/perfumes/perfumes-for-her/black-opium/black-opium-eau-de-parfum/WW-40701YSL.html",
     "notes": {}
+  },
+  {
+    "brand": "Dior",
+    "name": "Sauvage Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.dior.com/en_us/beauty/products/sauvage-parfum-Y0998004.html",
+    "notes": {
+      "listed": [
+        "Mandarin",
+        "Tonka Bean",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Dior",
+    "name": "Miss Dior Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.dior.com/en_us/beauty/products/miss-dior-parfum-Y0997166.html",
+    "notes": {
+      "listed": [
+        "Mandarin",
+        "Jasmine"
+      ]
+    }
+  },
+  {
+    "brand": "Dior",
+    "name": "Miss Dior Blooming Bouquet",
+    "concentration": "EDT",
+    "url": "https://www.dior.com/en_int/beauty/products/miss-dior-blooming-bouquet-Y0996612.html",
+    "notes": {
+      "listed": [
+        "Rose",
+        "Peony",
+        "White Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Stronger With You",
+    "concentration": "EDT",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/view-all-fragrances/stronger-with-you-eau-de-toilette/A2061.html",
+    "notes": {
+      "top": [
+        "Cardamom",
+        "Pink Pepper"
+      ],
+      "listed": [
+        "Chestnut"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Emporio Armani Stronger With You Intensely",
+    "concentration": "EDP",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/stronger-with-you-intensely-eau-de-parfum/ww-00180-arm.html",
+    "notes": {
+      "top": [
+        "Pink Pepper"
+      ],
+      "listed": [
+        "Chestnut",
+        "Lavender",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Armani Code Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/mens-cologne/armani-code-parfum---refillable/ww-00650-arm.html",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Iris",
+        "Tonka Bean",
+        "Clary Sage"
+      ]
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier",
+    "name": "Le Male Le Parfum",
+    "concentration": "EDP",
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male-le-parfum/le-male-le-parfum-eau-de-parfum-intense-000000000065249874",
+    "notes": {
+      "top": [
+        "Cardamom"
+      ],
+      "heart": [
+        "Lavender",
+        "Iris"
+      ],
+      "base": [
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier",
+    "name": "Le Beau Le Parfum",
+    "concentration": "EDP",
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-beau/le-beau-le-parfum-eau-de-parfum-intense-000000000065245300",
+    "notes": {
+      "listed": [
+        "Coconut",
+        "Tonka Bean"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "Black Opium Le Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/black-opium/black-opium-le-parfum/WW-51036YSL.html",
+    "notes": {
+      "listed": [
+        "Coffee",
+        "Vanilla",
+        "Floral Notes"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "Black Opium Pink Glaze",
+    "concentration": "EDP",
+    "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/black-opium/black-opium-eau-de-parfum-pink-glaze/WW-51572YSL.html",
+    "notes": {
+      "listed": [
+        "Strawberry",
+        "Vanilla",
+        "Coffee",
+        "Jasmine"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "Libre Intense",
+    "concentration": "EDP",
+    "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/libre/libre-eau-de-parfum-intense/306YSL.html",
+    "notes": {
+      "listed": [
+        "Lavender",
+        "Orange Blossom",
+        "Orchid",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "Libre Le Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/libre/libre-le-parfum/WW-51020YSL.html",
+    "notes": {
+      "listed": [
+        "Lavender",
+        "Orange Blossom",
+        "Saffron"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "MYSLF Eau de Parfum",
+    "concentration": "EDP",
+    "url": "https://www.yslbeautyus.com/fragrance/featured/refillable-fragrance/myslf-eau-de-parfum/3614273852807.html",
+    "notes": {
+      "top": [
+        "Bergamot"
+      ],
+      "heart": [
+        "Orange Blossom"
+      ],
+      "base": [
+        "Wood",
+        "Patchouli",
+        "Ambrofix"
+      ]
+    }
+  },
+  {
+    "brand": "Valentino",
+    "name": "Donna Born in Roma",
+    "concentration": "EDP",
+    "url": "https://www.valentino-beauty.us/fragrances/fragrances-women/fragrances-women-born-in-roma/born-in-roma-donna-eau-de-parfum-MPL00468.html",
+    "notes": {
+      "listed": [
+        "Jasmine Sambac",
+        "Cashmeran",
+        "Bourbon Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Valentino",
+    "name": "Uomo Born in Roma Intense",
+    "concentration": "EDP",
+    "url": "https://www.valentino-beauty.us/fragrances/fragrances-men/born-in-roma-uomo-intense/born-in-roma-uomo-eau-de-parfum-intense-MPL01907.html",
+    "notes": {
+      "listed": [
+        "Vanilla",
+        "Lavandin",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Valentino",
+    "name": "Born In Roma Uomo",
+    "concentration": "EDT",
+    "url": "https://www.valentino-beauty.us/fragrances/fragrances-men/fragrances-men-born-in-roma/born-in-roma-uomo-eau-de-toilette-3614274632811.html",
+    "notes": {
+      "listed": [
+        "Violet Leaf",
+        "Sage",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Burberry",
+    "name": "Goddess",
+    "concentration": "EDP",
+    "url": "https://us.burberry.com/burberry-goddess-eau-de-parfum-for-women-100ml-p40835981",
+    "notes": {
+      "listed": [
+        "Vanilla",
+        "Lavender"
+      ]
+    }
+  },
+  {
+    "brand": "Azzaro",
+    "name": "The Most Wanted Eau de Parfum Intense",
+    "concentration": "EDP",
+    "url": "https://www.azzaro.com/en/fragrances/azzaro-the-most-wanted/eau-de-parfum-intense",
+    "notes": {
+      "listed": [
+        "Cardamom",
+        "Caramel"
+      ]
+    }
+  },
+  {
+    "brand": "Carolina Herrera",
+    "name": "Good Girl Blush",
+    "concentration": "EDP",
+    "url": "https://www.carolinaherrera.com/us/en/p-fragrance/good-girl-blush",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Peony",
+        "Ylang-Ylang",
+        "Madagascar Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Viktor&Rolf",
+    "name": "Spicebomb Extreme",
+    "concentration": "EDP",
+    "url": "https://us.viktor-rolf.com/fragrance/spicebomb-extreme-eau-de-parfum-VKR_034.html",
+    "notes": {
+      "listed": [
+        "Pepper",
+        "Saffron"
+      ]
+    }
+  },
+  {
+    "brand": "Chanel",
+    "name": "Coco Mademoiselle",
+    "concentration": "EDP",
+    "url": "https://www.chanel.com/us/fragrance/p/116570/coco-mademoiselle-eau-de-parfum-spray/",
+    "notes": {
+      "top": [
+        "Orange"
+      ],
+      "heart": [
+        "Jasmine",
+        "May Rose"
+      ],
+      "base": [
+        "Patchouli",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Guerlain",
+    "name": "Shalimar",
+    "concentration": "EDP",
+    "url": "https://www.guerlain.com/us/en-us/p/shalimar-eau-de-parfum-G011355.html",
+    "notes": {
+      "top": [
+        "Floral Notes",
+        "Bergamot"
+      ],
+      "heart": [
+        "Iris",
+        "Jasmine",
+        "Rose"
+      ],
+      "base": [
+        "Vanilla",
+        "Tonka Bean"
+      ]
+    }
+  },
+  {
+    "brand": "Givenchy",
+    "name": "L'Interdit",
+    "concentration": "EDP",
+    "url": "https://www.givenchybeauty.com/us/p/l-interdit-P069321.html",
+    "notes": {
+      "heart": [
+        "Orange Blossom",
+        "Jasmine Sambac",
+        "Tuberose"
+      ],
+      "base": [
+        "Patchouli",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Acqua di Giò",
+    "concentration": "EDP",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/mens-cologne/acqua-di-gio-eau-de-parfum----refillable/ww-00631-arm.html",
+    "notes": {
+      "listed": [
+        "Sea Notes",
+        "Mandarin",
+        "Sage"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Acqua di Gio Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/mens-cologne/acqua-di-gio/acqua-di-gio-parfum/A2608.html",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Rosemary",
+        "Wood"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Stronger With You Absolutely",
+    "concentration": "PARFUM",
+    "url": "https://www.armanibeauty.co.uk/perfume/mens-perfumes/stronger-with-you/emporio-armani-stronger-with-you-absolutely-parfum/ww-00424-arm.html",
+    "notes": {
+      "top": [
+        "Rum"
+      ],
+      "heart": [
+        "Lavender"
+      ],
+      "base": [
+        "Cedarwood",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Azzaro",
+    "name": "The Most Wanted Parfum",
+    "concentration": "PARFUM",
+    "url": "https://www.azzaro.com/en/fragrances/azzaro-the-most-wanted/parfum",
+    "notes": {
+      "listed": [
+        "Wood",
+        "Bourbon Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier",
+    "name": "Le Beau Paradise Garden",
+    "concentration": "EDP",
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-beau/le-beau-paradise-garden-eau-de-parfum-000000000065199798",
+    "notes": {
+      "top": [
+        "Coconut"
+      ],
+      "heart": [
+        "Fig"
+      ],
+      "base": [
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier",
+    "name": "La Belle",
+    "concentration": "EDP",
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-la-belle/la-belle-eau-de-parfum-000000000065132212",
+    "notes": {
+      "top": [
+        "Bergamot"
+      ],
+      "heart": [
+        "Green Pear"
+      ],
+      "base": [
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Jean Paul Gaultier",
+    "name": "Le Male Elixir",
+    "concentration": "ELIXIR",
+    "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-le-male/le-male-elixir-parfum-000000000065189083",
+    "notes": {
+      "listed": [
+        "Lavender",
+        "Tonka Bean",
+        "Benzoin"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "Y Eau de Toilette",
+    "concentration": "EDT",
+    "url": "https://www.yslbeautyus.com/fragrance/mens-fragrance/y/y-eau-de-toilette/WW-42200YSL.html",
+    "notes": {
+      "listed": [
+        "Geranium",
+        "Lavender",
+        "Incense"
+      ]
+    }
+  },
+  {
+    "brand": "Valentino",
+    "name": "Donna Born in Roma Intense",
+    "concentration": "EDP",
+    "url": "https://www.valentino-beauty.us/fragrances/fragrances-women/born-in-roma-donna-intense/born-in-roma-donna-eau-de-parfum-intense-3614273790864.html",
+    "notes": {
+      "listed": [
+        "Bourbon Vanilla",
+        "Jasmine",
+        "Benzoin"
+      ]
+    }
+  },
+  {
+    "brand": "Dolce&Gabbana",
+    "name": "Devotion",
+    "concentration": "EDP",
+    "url": "https://www.dolcegabbana.com/en-us/beauty/perfumes-for-her/devotion/devotion-eau-de-parfum---VT0063VT0009V000.html",
+    "notes": {
+      "listed": [
+        "Lemon",
+        "Orange Blossom",
+        "Madagascar Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Hermès",
+    "name": "Twilly d'Hermès",
+    "concentration": "EDP",
+    "url": "https://www.hermes.com/us/en/product/twilly-d-hermes-eau-de-parfum-V107264V0/",
+    "notes": {
+      "listed": [
+        "Ginger",
+        "Tuberose",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Narciso Rodriguez",
+    "name": "For Her",
+    "concentration": "EDT",
+    "url": "https://www.narcisorodriguezparfums.com/en/narciso-rodriguez-for-her/for-her-edt.html",
+    "notes": {
+      "listed": [
+        "Orange Blossom",
+        "Osmanthus",
+        "Musk",
+        "Amber"
+      ]
+    }
+  },
+  {
+    "brand": "Chanel",
+    "name": "Bleu de Chanel",
+    "concentration": "EDT",
+    "url": "https://www.chanel.com/us/fragrance/p/107460/bleu-de-chanel-eau-de-toilette-spray/",
+    "notes": {
+      "listed": [
+        "Citrus",
+        "Cedar",
+        "New Caledonian Sandalwood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/chanel-bleu-de-chanel-eau-de-toilette-spray/3118978",
+      "notes": {
+        "listed": [
+          "Citrus",
+          "Cedar",
+          "Sandalwood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Chanel",
+    "name": "Bleu de Chanel",
+    "concentration": "PARFUM",
+    "url": "https://www.chanel.com/us/fragrance/p/107190/bleu-de-chanel-parfum-spray/",
+    "notes": {
+      "listed": [
+        "Cedar",
+        "New Caledonian Sandalwood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/bleu-de-chanel-parfum-spray/4953678",
+      "notes": {
+        "listed": [
+          "Cedar",
+          "New Caledonian Sandalwood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Byredo",
+    "name": "Gypsy Water",
+    "concentration": "EDP",
+    "url": "https://www.byredo.com/uk_en/p/gypsy-water-eau-de-parfum",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Juniper berries",
+        "Lemon",
+        "Pepper"
+      ],
+      "heart": [
+        "Incense",
+        "Iris",
+        "Pine needle"
+      ],
+      "base": [
+        "Amber",
+        "Sandalwood",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Kilian Paris",
+    "name": "Angels' Share",
+    "concentration": "EDP",
+    "url": "https://m.bykilian.com/product/19797/82905/perfume/angels-share/the-liquors",
+    "notes": {
+      "top": [
+        "Cognac"
+      ],
+      "heart": [
+        "Oak",
+        "Cinnamon"
+      ],
+      "base": [
+        "Tonka Bean",
+        "Sandalwood"
+      ]
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/kilian-paris-angels-share",
+      "concentration": "EDP",
+      "editionEvidence": "Gouttes identifies the original Angels’ Share as eau de parfum. Kilian’s product page confirms the named original cognac release.",
+      "editionUrl": "https://www.bykilian.com/product/19797/82905/perfume/angels-share/the-liquors"
+    }
+  },
+  {
+    "brand": "Le Labo",
+    "name": "Another 13",
+    "concentration": "EDP",
+    "url": "https://www.lelabofragrances.com/another-13-463.html?size=50ml",
+    "notes": {
+      "listed": [
+        "Ambroxyde",
+        "Jasmine",
+        "Moss"
+      ]
+    }
+  },
+  {
+    "brand": "Parfums de Marly",
+    "name": "Delina",
+    "concentration": "EDP",
+    "url": "https://us.parfums-de-marly.com/products/delina?variant=40036836081858",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Lychee",
+        "Rhubarb"
+      ],
+      "heart": [
+        "Damascena rose",
+        "Nutmeg"
+      ],
+      "base": [
+        "Cashmeran",
+        "Musks",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Armaf",
+    "name": "Club de Nuit Milestone",
+    "concentration": "EDP",
+    "url": "https://armaf.com/products/club-de-nuit-milestone",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Red fruits",
+        "Marine accords"
+      ],
+      "heart": [
+        "Violet",
+        "Sandalwood",
+        "White wood"
+      ],
+      "base": [
+        "Vetiver",
+        "Musk",
+        "Ambroxan"
+      ]
+    }
+  },
+  {
+    "brand": "Afnan",
+    "name": "Turathi Blue",
+    "concentration": "EDP",
+    "url": "https://us.afnan.com/products/turathi-blue-homme",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Mandarin"
+      ],
+      "heart": [
+        "Amber",
+        "Woody"
+      ],
+      "base": [
+        "Musk",
+        "Patchouli",
+        "Fresh spicy"
+      ]
+    }
+  },
+  {
+    "brand": "Juliette Has a Gun",
+    "name": "Not a Perfume",
+    "concentration": "EDP",
+    "url": "https://www.juliettehasagun.com/en/products/not-a-perfume-parfum",
+    "notes": {
+      "listed": [
+        "Cetalox"
+      ]
+    }
+  },
+  {
+    "brand": "Byredo",
+    "name": "Bal d'Afrique",
+    "concentration": "EDP",
+    "url": "https://www.byredo.com/us_en/p/bal-d-afrique-eau-de-parfum?sku=0065204843",
+    "notes": {
+      "top": [
+        "Buchu",
+        "African marigold",
+        "Bergamot",
+        "Blackcurrant"
+      ],
+      "heart": [
+        "Cyclamen",
+        "Jasmine petals",
+        "Violet"
+      ],
+      "base": [
+        "Tonka bean",
+        "Cedarwood",
+        "Musk",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Initio Parfums Prives",
+    "name": "Side Effect",
+    "concentration": "EDP",
+    "url": "https://us.initioparfums.com/products/side-effect",
+    "notes": {
+      "listed": [
+        "Cinnamon",
+        "Rum",
+        "Tobacco",
+        "Saffron",
+        "Sandalwood",
+        "Hedione"
+      ]
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/initio-parfums-prives-side-effect",
+      "concentration": "EDP",
+      "editionEvidence": "The exact named Gouttes product and Initio’s Eau de Parfum page describe the same Side Effect release with rum.",
+      "editionUrl": "https://us.initioparfums.com/products/side-effect"
+    }
+  },
+  {
+    "brand": "Diptyque",
+    "name": "Tam Dao",
+    "concentration": "EDT",
+    "url": "https://us.diptyqueparis.com/en-us/products/eau-de-toilette-tam-dao-tamdao100v2",
+    "notes": {
+      "listed": [
+        "Sandalwood",
+        "Cedar",
+        "Cypress",
+        "Myrtle"
+      ]
+    }
+  },
+  {
+    "brand": "Montale",
+    "name": "Arabians Tonka",
+    "concentration": "EDP",
+    "url": "https://www.montaleparfums.com/en/oriental/282-arabians-tonka.html",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Saffron"
+      ],
+      "heart": [
+        "Rose",
+        "Oud"
+      ],
+      "base": [
+        "Amber",
+        "Oakmoss",
+        "Tonka bean",
+        "Leather",
+        "Brown sugar",
+        "White musk"
+      ]
+    }
+  },
+  {
+    "brand": "Amouage",
+    "name": "Guidance",
+    "concentration": "EDP",
+    "url": "https://amouage.com/products/100ml-guidance",
+    "notes": {
+      "top": [
+        "Pear",
+        "Frankincense",
+        "Hazelnut"
+      ],
+      "heart": [
+        "Saffron",
+        "Rose",
+        "Jasmine sambac",
+        "Osmanthus"
+      ],
+      "base": [
+        "Cistus",
+        "Sandalwood",
+        "Akigalawood",
+        "Ambergris",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Kayali",
+    "name": "Vanilla 28",
+    "concentration": "EDP",
+    "url": "https://us.kayali.com/products/vanilla-28",
+    "notes": {
+      "listed": [
+        "Vanilla",
+        "Tonka bean",
+        "Brown sugar",
+        "Amber woods",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Armaf",
+    "name": "Club de Nuit Intense Man",
+    "concentration": "EDP",
+    "url": "https://armaf.com/products/club-de-nuit-intense-for-man",
+    "notes": {
+      "top": [
+        "Apple",
+        "Bergamot",
+        "Blackcurrant",
+        "Pineapple",
+        "Lemon"
+      ],
+      "heart": [
+        "Rose",
+        "Birch",
+        "Jasmine"
+      ],
+      "base": [
+        "Musk",
+        "Ambergris",
+        "Patchouli",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Armaf",
+    "name": "Odyssey Mega",
+    "concentration": "EDP",
+    "url": "https://armaf.com/products/odyssey-mega-man",
+    "notes": {
+      "top": [
+        "Ginger",
+        "Bergamot",
+        "Orange",
+        "Lemon",
+        "Mint"
+      ],
+      "heart": [
+        "Pineapple",
+        "Sage",
+        "Juniper",
+        "Geranium"
+      ],
+      "base": [
+        "Musk",
+        "Cedar",
+        "Vetiver",
+        "Tonka bean"
+      ]
+    }
+  },
+  {
+    "brand": "Lattafa",
+    "name": "Fakhar Black",
+    "concentration": "EDP",
+    "url": "https://www.lattafa-usa.com/products/fakhar-men",
+    "notes": {
+      "top": [
+        "Apple",
+        "Bergamot",
+        "Ginger"
+      ],
+      "heart": [
+        "Lavender",
+        "Sage",
+        "Juniper berries",
+        "Geranium"
+      ],
+      "base": [
+        "Tonka bean",
+        "Cedarwood",
+        "Amberwood",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Rasasi",
+    "name": "Hawas for Him",
+    "concentration": "EDP",
+    "url": "https://rasasistore.com/products/hawas-for-him",
+    "notes": {
+      "top": [
+        "Apple",
+        "Bergamot",
+        "Lemon",
+        "Cinnamon"
+      ],
+      "heart": [
+        "Orange blossom",
+        "Cardamom",
+        "Plum"
+      ],
+      "base": [
+        "Patchouli",
+        "Ambergris",
+        "Driftwood",
+        "Musk"
+      ]
+    },
+    "release": {
+      "year": 2015,
+      "publisher": "Rasasi",
+      "url": "https://rasasistore.com/products/hawas-for-him"
+    }
+  },
+  {
+    "brand": "Al Haramain",
+    "name": "Amber Oud Gold Edition",
+    "concentration": "EDP",
+    "url": "https://shop.alharamainperfumes.com/default/haramain-amber-oud-gold-edition-75ml-eau-de-parfum.html",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Green notes"
+      ],
+      "heart": [
+        "Melon",
+        "Pineapple",
+        "Gourmand",
+        "Amber"
+      ],
+      "base": [
+        "Woody notes",
+        "Vanilla",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Afnan",
+    "name": "Turathi Electric",
+    "concentration": "EDP",
+    "url": "https://pt.afnan.com/en/products/turathi-electric",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Pink grapefruit",
+        "Pear",
+        "Mandarin orange"
+      ],
+      "heart": [
+        "Apple",
+        "Cedarwood",
+        "Orange blossom"
+      ],
+      "base": [
+        "Vanilla",
+        "Amber dry",
+        "Musk",
+        "Ambroxan"
+      ]
+    }
+  },
+  {
+    "brand": "Ormonde Jayne",
+    "name": "Ormonde Woman",
+    "concentration": "EDP",
+    "url": "https://ormondejayne.com/en-us/products/ormonde-woman",
+    "notes": {
+      "top": [
+        "Cardamom",
+        "Coriander",
+        "Grass oil"
+      ],
+      "heart": [
+        "Black hemlock",
+        "Violet",
+        "Jasmine"
+      ],
+      "base": [
+        "Vetiver",
+        "Cedarwood",
+        "Amber",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Tauer Perfumes",
+    "name": "Lonestar Memories",
+    "concentration": "EDT",
+    "url": "https://tauerperfumes.com/products/lonestar-memories",
+    "notes": {
+      "top": [
+        "Geranium",
+        "Carrot seed",
+        "Clary sage"
+      ],
+      "heart": [
+        "Leather",
+        "Cistus",
+        "Jasmine"
+      ],
+      "base": [
+        "Myrrh",
+        "Tonka bean",
+        "Vetiver",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Memo Paris",
+    "name": "Irish Leather",
+    "concentration": "EDP",
+    "url": "https://us.memoparis.com/products/irish-leather-eau-de-parfum-75ml",
+    "notes": {
+      "top": [
+        "Pepper",
+        "Mandarin",
+        "Juniper berry"
+      ],
+      "heart": [
+        "Iris",
+        "Clary sage",
+        "Green maté"
+      ],
+      "base": [
+        "Green leather",
+        "Cedarwood",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Memo Paris",
+    "name": "African Leather",
+    "concentration": "EDP",
+    "url": "https://us.memoparis.com/products/african-leather-eau-de-parfum-75ml",
+    "notes": {
+      "top": [
+        "Cardamom",
+        "Geranium",
+        "Pink pepper"
+      ],
+      "heart": [
+        "Rose",
+        "Patchouli",
+        "Cinnamon"
+      ],
+      "base": [
+        "Leather",
+        "Oud",
+        "Amber"
+      ]
+    }
+  },
+  {
+    "brand": "Lattafa",
+    "name": "Khamrah",
+    "concentration": "EDP",
+    "url": "https://www.lattafa-usa.com/products/khamrah",
+    "notes": {
+      "top": [
+        "Cinnamon",
+        "Nutmeg",
+        "Bergamot"
+      ],
+      "heart": [
+        "Dates",
+        "Praline",
+        "Tuberose"
+      ],
+      "base": [
+        "Vanilla",
+        "Tonka bean",
+        "Amberwood",
+        "Myrrh",
+        "Benzoin",
+        "Akigalawood"
+      ]
+    },
+    "scentoId": "lattafa-khamrah",
+    "release": {
+      "year": 2022,
+      "publisher": "Lattafa",
+      "url": "https://lattafa.com/product/khamrah/"
+    }
+  },
+  {
+    "brand": "Lattafa",
+    "name": "Yara",
+    "concentration": "EDP",
+    "url": "https://lattafa.com/product/yara/",
+    "notes": {
+      "top": [
+        "Tangerine",
+        "Heliotrope",
+        "Orchid"
+      ],
+      "heart": [
+        "Gourmand accord",
+        "Tropical fruits"
+      ],
+      "base": [
+        "Vanilla",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    "scentoId": "lattafa-yara",
+    "release": {
+      "year": 2020,
+      "publisher": "Lattafa",
+      "url": "https://lattafa.com/product/yara/"
+    }
+  },
+  {
+    "brand": "Lattafa",
+    "name": "Asad",
+    "concentration": "EDP",
+    "url": "https://lattafa.com/product/asad/",
+    "notes": {
+      "top": [
+        "Black pepper",
+        "Pineapple",
+        "Tobacco"
+      ],
+      "heart": [
+        "Patchouli",
+        "Coffee",
+        "Iris"
+      ],
+      "base": [
+        "Vanilla",
+        "Amber",
+        "Dry woods",
+        "Benzoin",
+        "Labdanum"
+      ]
+    },
+    "scentoId": "lattafa-asad",
+    "release": {
+      "year": 2021,
+      "publisher": "Lattafa",
+      "url": "https://lattafa.com/product/asad/"
+    }
+  },
+  {
+    "brand": "Nishane",
+    "name": "Hacivat",
+    "concentration": "EXTRAIT",
+    "url": "https://nishane.com/product/hacivat/",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Pineapple",
+        "Grapefruit"
+      ],
+      "heart": [
+        "Jasmine",
+        "Patchouli",
+        "Cedarwood"
+      ],
+      "base": [
+        "Clearwood",
+        "Oakmoss",
+        "Dry timberwood"
+      ]
+    }
+  },
+  {
+    "brand": "Nishane",
+    "name": "Ani",
+    "concentration": "EXTRAIT",
+    "url": "https://nishane.com/product/ani/",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Green notes",
+        "Blue ginger",
+        "Pink pepper"
+      ],
+      "heart": [
+        "Blackcurrant",
+        "Turkish rose",
+        "Cardamom"
+      ],
+      "base": [
+        "Patchouli",
+        "Cedarwood",
+        "Vanilla",
+        "Benzoin",
+        "Ambergris",
+        "Musk",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Nishane",
+    "name": "Wūlóng Chá",
+    "concentration": "EXTRAIT",
+    "url": "https://nishane.com/product/wulong-cha/",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Orange",
+        "Litsea",
+        "Mandarin"
+      ],
+      "heart": [
+        "Oolong tea",
+        "Nutmeg"
+      ],
+      "base": [
+        "Musk",
+        "Fig"
+      ]
+    }
+  },
+  {
+    "brand": "Nishane",
+    "name": "Hundred Silent Ways",
+    "concentration": "EXTRAIT",
+    "url": "https://nishane.com/product/hundred-silent-ways/",
+    "notes": {
+      "top": [
+        "Tuberose",
+        "Mandarin",
+        "Peach"
+      ],
+      "heart": [
+        "White jasmine",
+        "Gardenia",
+        "Orris"
+      ],
+      "base": [
+        "Vanilla",
+        "Sandalwood",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Amouage",
+    "name": "Guidance 46",
+    "concentration": "EXTRAIT",
+    "url": "https://amouage.com/en-eu/products/new-guidance-46",
+    "notes": {
+      "top": [
+        "Pear",
+        "Frankincense",
+        "Hazelnut",
+        "Rose water",
+        "Pink pepper",
+        "Bitter almond"
+      ],
+      "heart": [
+        "Saffron",
+        "Rose",
+        "Sambac jasmine",
+        "Osmanthus"
+      ],
+      "base": [
+        "Cistus",
+        "Sandalwood",
+        "Akigalawood",
+        "Ambergris",
+        "Vanilla",
+        "Ambrette",
+        "Georgywood",
+        "Cypriol"
+      ]
+    }
+  },
+  {
+    "brand": "Amouage",
+    "name": "Interlude 53 Man",
+    "concentration": "EXTRAIT",
+    "url": "https://amouage.com/en-ap/products/interlude53-man",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Oregano",
+        "Pimento berry"
+      ],
+      "heart": [
+        "Amber",
+        "Frankincense",
+        "Cistus",
+        "Opoponax"
+      ],
+      "base": [
+        "Leather",
+        "Agarwood",
+        "Patchouli",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Initio Parfums Prives",
+    "name": "Rehab",
+    "concentration": "EXTRAIT",
+    "url": "https://initioparfums.com/products/rehab",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Lavender",
+        "Cedarwood",
+        "Patchouli",
+        "Sandalwood",
+        "Hedione",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Initio Parfums Prives",
+    "name": "Musk Therapy",
+    "concentration": "EXTRAIT",
+    "url": "https://us.initioparfums.com/products/musk-therapy",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Mandarin",
+        "White magnolia",
+        "Blackcurrant",
+        "White sandalwood",
+        "White musk",
+        "Pink musk"
+      ]
+    }
+  },
+  {
+    "brand": "Maison Francis Kurkdjian",
+    "name": "Baccarat Rouge 540",
+    "concentration": "EXTRAIT",
+    "url": "https://www.franciskurkdjian.com/int-en/p/baccarat-rouge-540-extrait-de-parfum-RA142381.html",
+    "notes": {
+      "listed": [
+        "Grandiflorum jasmine",
+        "Saffron",
+        "Bitter almond",
+        "Ambroxan",
+        "Ethyl maltol",
+        "Musky woody accord"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/maison-francis-kurkdjian-paris-baccarat-rouge-540-extrait-de-parfum/5495553",
+      "notes": {
+        "listed": [
+          "Grandiflorum jasmine",
+          "Saffron",
+          "Bitter almond",
+          "Ambroxan",
+          "Ethyl maltol",
+          "Musky woody accord"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Maison Francis Kurkdjian",
+    "name": "Oud Satin Mood",
+    "concentration": "EXTRAIT",
+    "url": "https://www.franciskurkdjian.com/int-en/p/oud-satin-mood-extrait-de-parfum-10422021.html",
+    "notes": {
+      "listed": [
+        "Violet",
+        "Geranium",
+        "Cinnamon",
+        "Centifolia rose",
+        "Oud",
+        "Vanilla amber accord"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/maison-francis-kurkdjian-oud-satin-mood-extrait-de-parfum/5495634",
+      "notes": {
+        "listed": [
+          "Violet",
+          "Geranium",
+          "Cinnamon",
+          "Centifolia rose",
+          "Oud",
+          "Vanilla amber accord"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Wood Sage & Sea Salt",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/32241/colognes/wood-sage-sea-salt-cologne",
+    "notes": {
+      "listed": [
+        "Ambrette seeds",
+        "Sea salt",
+        "Sage"
+      ]
+    },
+    "scentoId": "jo-malone-wood-sage-and-sea-salt"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "English Pear & Freesia",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/12553/colognes/english-pear-freesia-cologne",
+    "notes": {
+      "listed": [
+        "King William pear",
+        "Freesia",
+        "Patchouli"
+      ]
+    },
+    "scentoId": "jo-malone-english-pear-and-freesia"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Peony & Blush Suede",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/27028/colognes/peony-blush-suede-cologne",
+    "notes": {
+      "listed": [
+        "Red apple",
+        "Peony",
+        "Suede"
+      ]
+    },
+    "scentoId": "jo-malone-peony-and-blush-suede"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Blackberry & Bay",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/23540/colognes/blackberry-bay-cologne",
+    "notes": {
+      "listed": [
+        "Blackberry",
+        "Bay leaves",
+        "Cedarwood"
+      ]
+    },
+    "scentoId": "jo-malone-blackberry-and-bay"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Nectarine Blossom & Honey",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/10079/colognes/nectarine-blossom-honey-cologne",
+    "notes": {
+      "listed": [
+        "Cassis",
+        "Acacia honey",
+        "Peach"
+      ]
+    },
+    "scentoId": "jo-malone-nectarine-blossom-and-honey"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Wild Bluebell",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/18848/colognes/wild-bluebell-cologne",
+    "notes": {
+      "listed": [
+        "Bluebell",
+        "Persimmon",
+        "White musk"
+      ]
+    },
+    "scentoId": "jo-malone-wild-bluebell"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Red Roses",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25778/10066/new-products/red-roses-cologne",
+    "notes": {
+      "listed": [
+        "Lemon",
+        "Rose",
+        "Honeycomb"
+      ]
+    },
+    "scentoId": "jo-malone-red-roses"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Oud & Bergamot",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/110449/colognes/oud-bergamot-cologne-intense",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Cedarwood",
+        "Oud"
+      ]
+    },
+    "scentoId": "jo-malone-oud-and-bergamot",
+    "aliases": [
+      "Oud & Bergamot Cologne Intense"
+    ]
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Earl Grey & Cucumber",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.co.uk/product/25946/15968/colognes/earl-grey-cucumber-cologne",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Cucumber",
+        "Beeswax"
+      ]
+    },
+    "scentoId": "jo-malone-earl-grey-and-cucumber"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Basil & Neroli",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/43297/colognes/basil-neroli-cologne",
+    "notes": {
+      "listed": [
+        "Basil",
+        "Neroli",
+        "White musk"
+      ]
+    },
+    "scentoId": "jo-malone-basil-and-neroli"
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Lime Basil & Mandarin",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/10101/colognes/lime-basil-mandarin-cologne",
+    "notes": {
+      "listed": [
+        "Mandarin",
+        "Basil",
+        "Amberwood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/jo-malone-london-lime-basil-mandarin-cologne/3010414",
+      "notes": {
+        "listed": [
+          "Mandarin",
+          "Basil",
+          "Amber wood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Jo Malone London",
+    "name": "Pomegranate Noir",
+    "concentration": "EDC",
+    "url": "https://www.jomalone.com/product/25946/9900/colognes/pomegranate-noir-cologne",
+    "notes": {
+      "listed": [
+        "Pomegranate",
+        "Pink pepper",
+        "Casablanca lily",
+        "Guaiacwood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/jo-malone-pomegranate-noir-cologne/3010422",
+      "notes": {
+        "listed": [
+          "Pomegranate",
+          "Pink pepper",
+          "Casablanca lily",
+          "Guaiacwood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Sol de Janeiro",
+    "name": "Cheirosa 62",
+    "concentration": "MIST",
+    "url": "https://soldejaneiro.com/products/cheirosa-62-hair-body-fragrance-mist",
+    "notes": {
+      "listed": [
+        "Pistachio",
+        "Salted caramel",
+        "Vanilla"
+      ]
+    },
+    "aliases": [
+      "Brazilian Crush Cheirosa 62",
+      "Cheirosa 62 Bum Bum",
+      "Cheirosa 62 Bum Bum Hair & Body Refillable Perfume Mist"
+    ],
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/brazilian-crush-body-fragrance-mist-P417312",
+      "notes": {
+        "listed": [
+          "Pistachio",
+          "Salted caramel",
+          "Vanilla"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Sol de Janeiro",
+    "name": "Cheirosa 68",
+    "concentration": "MIST",
+    "url": "https://soldejaneiro.com/products/cheirosa-68-perfume-mist",
+    "notes": {
+      "listed": [
+        "Pink dragonfruit",
+        "Brazilian jasmine",
+        "Sheer vanilla"
+      ]
+    },
+    "aliases": [
+      "Cheirosa 68 Beija Flor"
+    ],
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/sol-de-janeiro-beija-flor-body-hair-mist-P483156",
+      "notes": {
+        "listed": [
+          "Pink dragonfruit",
+          "Brazilian jasmine",
+          "Sheer vanilla"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Sol de Janeiro",
+    "name": "Cheirosa 40",
+    "concentration": "MIST",
+    "url": "https://soldejaneiro.com/products/cheirosa-40-hair-body-fragrance-mist",
+    "notes": {
+      "listed": [
+        "Black amber plum",
+        "Jasmine blooms",
+        "Vanilla woods"
+      ]
+    },
+    "aliases": [
+      "Cheirosa 40 Bom Dia Bright"
+    ],
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/sol-de-janeiro-brazilian-crush-cheriosa-40-hair-body-fragrance-mist-P472072",
+      "notes": {
+        "listed": [
+          "Black amber plum",
+          "Jasmine blooms",
+          "Vanilla woods"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Sol de Janeiro",
+    "name": "Cheirosa 59",
+    "concentration": "MIST",
+    "url": "https://soldejaneiro.com/products/cheirosa-59-perfume-mist",
+    "notes": {
+      "listed": [
+        "Sugared violet",
+        "Vanilla orchid",
+        "Sandalwood"
+      ]
+    },
+    "aliases": [
+      "Cheirosa 59 Delícia Drench"
+    ],
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/sol-de-janeiro-cheirosa-59-perfume-mist-P509438",
+      "notes": {
+        "listed": [
+          "Sugared violet",
+          "Vanilla orchid",
+          "Sandalwood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Afnan",
+    "name": "9PM",
+    "concentration": "EDP",
+    "url": "https://us.afnan.com/products/9-pm",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Lavandin",
+        "Cinnamon",
+        "Apple",
+        "Orange blossom",
+        "Lily of the valley",
+        "Vanilla",
+        "Amber",
+        "Patchouli",
+        "Tonka bean"
+      ]
+    },
+    "aliases": [
+      "9 PM",
+      "9 PM Pour Homme"
+    ]
+  },
+  {
+    "brand": "Armaf",
+    "name": "Club de Nuit Intense Man",
+    "concentration": "EDT",
+    "url": "https://armaf.com/products/club-de-nuit-intense-man-4",
+    "notes": {
+      "listed": [
+        "Apple",
+        "Bergamot",
+        "Blackcurrant",
+        "Pineapple",
+        "Lemon",
+        "Rose",
+        "Birch",
+        "Jasmine",
+        "Musk",
+        "Ambergris",
+        "Patchouli",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Glossier",
+    "name": "You",
+    "concentration": "EDP",
+    "url": "https://www.glossier.com/products/glossier-you",
+    "notes": {
+      "listed": [
+        "Pink pepper",
+        "Iris",
+        "Ambrette",
+        "Ambrox"
+      ]
+    }
+  },
+  {
+    "brand": "Ariana Grande",
+    "name": "Cloud",
+    "concentration": "EDP",
+    "url": "https://arianagrandefragrances.com/collections/all-products-new/products/cloud",
+    "notes": {
+      "listed": [
+        "Lavender",
+        "Pear",
+        "Bergamot",
+        "Coconut",
+        "Praline",
+        "Vanilla orchid",
+        "Musk",
+        "Woods"
+      ]
+    }
+  },
+  {
+    "brand": "BDK Parfums",
+    "name": "Gris Charnel",
+    "concentration": "EDP",
+    "url": "https://us.bdkparfums.com/products/gris-charnel",
+    "notes": {
+      "listed": [
+        "Fig",
+        "Black tea",
+        "Cardamom",
+        "Iris",
+        "Vetiver",
+        "Sandalwood",
+        "Tonka bean"
+      ]
+    }
+  },
+  {
+    "brand": "Maison Margiela",
+    "name": "Replica Jazz Club",
+    "concentration": "EDT",
+    "url": "https://www.maisonmargiela-fragrances.us/fragrances/replica-eau-de-toilette/replica-jazz-club/MM008.html",
+    "notes": {
+      "listed": [
+        "Pink pepper",
+        "Rum absolute",
+        "Tobacco leaf absolute",
+        "Vanilla bean"
+      ]
+    },
+    "aliases": [
+      "Jazz Club"
+    ]
+  },
+  {
+    "brand": "Maison Margiela",
+    "name": "Replica By the Fireplace",
+    "concentration": "EDT",
+    "url": "https://www.maisonmargiela-fragrances.us/fragrances/replica-eau-de-toilette/replica-by-the-fireplace/MM005.html",
+    "notes": {
+      "listed": [
+        "Clove",
+        "Chestnut",
+        "Guaiac wood",
+        "Vanilla",
+        "Cashmeran"
+      ]
+    },
+    "aliases": [
+      "By the Fireplace"
+    ]
+  },
+  {
+    "brand": "Maison Margiela",
+    "name": "Replica Lazy Sunday Morning",
+    "concentration": "EDT",
+    "url": "https://www.maisonmargiela-fragrances.us/en/product/484374/replica-lazy-sunday-morning",
+    "notes": {
+      "listed": [
+        "Lily of the valley",
+        "Iris",
+        "White musk"
+      ]
+    },
+    "aliases": [
+      "Lazy Sunday Morning"
+    ]
+  },
+  {
+    "brand": "Maison Margiela",
+    "name": "Replica Bubble Bath",
+    "concentration": "EDT",
+    "url": "https://www.maisonmargiela-fragrances.us/fragrances/replica/replica-bubble-bath/MM004.html",
+    "notes": {
+      "listed": [
+        "Soap",
+        "Coconut",
+        "White musk"
+      ]
+    },
+    "aliases": [
+      "Bubble Bath"
+    ]
+  },
+  {
+    "brand": "Frédéric Malle",
+    "name": "Portrait of a Lady",
+    "concentration": "EDP",
+    "url": "https://m.fredericmalle.com/product/19566/50241/parfums/portrait-of-a-lady/by-dominique-ropion",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/frederic-malle-portrait-of-a-lady",
+      "concentration": "EDP",
+      "editionEvidence": "The exact named Gouttes product is Portrait of a Lady. The house labels Dominique Ropion’s matching rose fragrance Eau de Parfum.",
+      "editionUrl": "https://m.fredericmalle.com/product/19566/50241/parfums/portrait-of-a-lady/by-dominique-ropion"
+    }
+  },
+  {
+    "brand": "Frédéric Malle",
+    "name": "Musc Ravageur",
+    "concentration": "EDP",
+    "url": "https://m.fredericmalle.com/product/19566/50126/parfums/musc-ravageur/by-maurice-roucel",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/frederic-malle-musc-ravageur",
+      "concentration": "EDP",
+      "editionEvidence": "Both product pages identify Musc Ravageur Eau de Parfum.",
+      "editionUrl": "https://m.fredericmalle.com/product/19566/50126/parfums/musc-ravageur/by-maurice-roucel"
+    }
+  },
+  {
+    "brand": "Marc-Antoine Barrois",
+    "name": "Ganymede",
+    "concentration": "EDP",
+    "url": "https://marcantoinebarrois.com/products/ganymede",
+    "notes": {
+      "listed": ["Mandarin", "Osmanthus", "Leather", "Akigalawood", "Immortelle"]
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/marc-antoine-barrois-ganymede",
+      "concentration": "EDP",
+      "editionEvidence": "Both product pages identify original Ganymede Eau de Parfum. The Gouttes record does not name the Extrait.",
+      "editionUrl": "https://marcantoinebarrois.com/products/ganymede"
+    }
+  },
+  {
+    "brand": "Parfums de Marly",
+    "name": "Valaya",
+    "concentration": "EDP",
+    "url": "https://us.parfums-de-marly.com/products/valaya",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/parfums-de-marly-valaya",
+      "concentration": "EDP",
+      "editionEvidence": "The Gouttes listing names Valaya and specifies a white peach opening. The house confirms this original is Eau de Parfum. Valaya Exclusif is a separately named release.",
+      "editionUrl": "https://us.parfums-de-marly.com/products/valaya"
+    }
+  },
+  {
+    "brand": "Creed",
+    "name": "Carmina",
+    "concentration": "EDP",
+    "url": "https://creedboutique.com/products/carmina",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/creed-carmina",
+      "concentration": "EDP",
+      "editionEvidence": "The exact named Gouttes product and Creed's Carmina Eau de Parfum page share the black cherry and saffron opening.",
+      "editionUrl": "https://creedboutique.com/products/carmina"
+    }
+  },
+  {
+    "brand": "Creed",
+    "name": "Bois du Portugal",
+    "concentration": "EDP",
+    "url": "https://creedboutique.com/products/bois-du-portugal",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/creed-bois-du-portugal",
+      "concentration": "EDP",
+      "editionEvidence": "Creed identifies the exact named Bois Du Portugal release as Eau de Parfum with a bergamot opening. The Gouttes listing describes the same Creed fragrance.",
+      "editionUrl": "https://creedboutique.com/products/bois-du-portugal"
+    }
+  },
+  {
+    "brand": "Creed",
+    "name": "Absolu Aventus",
+    "concentration": "EDP",
+    "url": "https://creedboutique.com/products/absolu-aventus?variant=42060743671905",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/creed-absolu-aventus",
+      "concentration": "EDP",
+      "editionEvidence": "The source explicitly names the Absolu Aventus flanker. Creed labels that exact flanker Eau de Parfum.",
+      "editionUrl": "https://creedboutique.com/products/absolu-aventus?variant=42060743671905"
+    }
+  },
+  {
+    "brand": "Sospiro",
+    "name": "Il Padrino",
+    "concentration": "EDP",
+    "url": "https://sospirointernational.com/products/il-padrino",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/sospiro-il-padrino",
+      "concentration": "EDP",
+      "editionEvidence": "The official Il Padrino page labels the exact named Gouttes product Eau de Parfum (EDP).",
+      "editionUrl": "https://sospirointernational.com/products/il-padrino"
+    }
+  },
+  {
+    "brand": "Amouage",
+    "name": "Decision",
+    "concentration": "EDP",
+    "url": "https://amouage.com/products/decision-gift-set",
+    "notes": {
+      "listed": []
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/amouage-decision",
+      "concentration": "EDP",
+      "editionEvidence": "Amouage names the base Decision fragrance Eau de Parfum. The Gouttes record names the base Decision release without the distinct Decision 42 Extrait suffix.",
+      "editionUrl": "https://amouage.com/products/decision-gift-set"
+    }
+  },
+  {
+    "brand": "Louis Vuitton",
+    "name": "Imagination",
+    "concentration": "EDP",
+    "url": "https://us.louisvuitton.com/eng-us/products/imagination-nvprod2970067v/LP0219",
+    "notes": {
+      "listed": [
+        "Calabrian bergamot",
+        "Citron"
+      ]
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/louis-vuitton-imagination",
+      "concentration": "EDP",
+      "editionEvidence": "Gouttes identifies Imagination Eau de Parfum on its named decant page. The official Imagination product page confirms the named citrus release.",
+      "editionUrl": "https://us.louisvuitton.com/eng-us/products/imagination-nvprod2970067v/LP0219"
+    }
+  },
+  {
+    "brand": "Louis Vuitton",
+    "name": "Ombre Nomade",
+    "concentration": "EDP",
+    "url": "https://us.louisvuitton.com/eng-us/products/ombre-nomade-nvprod990245v/LP0095",
+    "notes": {
+      "listed": [
+        "Raspberry"
+      ]
+    },
+    "wear": {
+      "url": "https://gouttesrares.com/products/louis-vuitton-ombre-nomade",
+      "concentration": "EDP",
+      "editionEvidence": "Gouttes identifies Ombre Nomade Eau de Parfum on its named decant page. The official Ombre Nomade product page confirms the named oud release.",
+      "editionUrl": "https://us.louisvuitton.com/eng-us/products/ombre-nomade-nvprod990245v/LP0095"
+    }
+  },
+  {
+    "brand": "Guerlain",
+    "name": "Mitsouko",
+    "concentration": "EDP",
+    "url": "https://www.guerlain.com/us/en-us/p/les-legendaires-mitsouko---eau-de-parfum-P024104.html",
+    "notes": {
+      "listed": [
+        "Peach",
+        "Jasmine",
+        "May Rose",
+        "Spice",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Guerlain",
+    "name": "L'Heure Bleue 1912",
+    "concentration": "EDP",
+    "url": "https://www.guerlain.com/int/en-int/p/les-legendaires-lheure-bleue-1912---eau-de-parfum-P025108.html",
+    "notes": {
+      "top": [
+        "Anise",
+        "Bergamot"
+      ],
+      "base": [
+        "Iris",
+        "Vanilla",
+        "Tonka Bean"
+      ],
+      "listed": [
+        "Violet"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nocibé",
+      "url": "https://www.nocibe.fr/fr/p/3000045262",
+      "notes": {
+        "top": [
+          "Anise",
+          "Bergamot"
+        ],
+        "base": [
+          "Iris",
+          "Vanilla",
+          "Tonka Bean"
+        ],
+        "listed": [
+          "Violet"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Guerlain",
+    "name": "L'Heure Bleue",
+    "concentration": "EDP",
+    "url": "https://www.guerlain.com/us/en-us/p/l%E2%80%99heure-bleue-eau-de-parfum-G062453.html",
+    "notes": {
+      "heart": [
+        "Iris"
+      ],
+      "base": [
+        "Vanilla"
+      ]
+    },
+    "aliases": [
+      "L'Heure Bleue 2026"
+    ]
+  },
+  {
+    "brand": "Guerlain",
+    "name": "Jicky",
+    "concentration": "EDP",
+    "url": "https://www.guerlain.com/fr/fr-fr/p/les-legendaires-jicky---eau-de-parfum-G014315.html",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Lavender",
+        "Rosemary",
+        "Fern",
+        "Wood",
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Giorgio Armani",
+    "name": "Armani Code",
+    "concentration": "EDP",
+    "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/armani-code-eau-de-parfum/3614274298000.html",
+    "notes": {
+      "top": [
+        "Mandarin"
+      ],
+      "listed": [
+        "Bergamot",
+        "Tarragon"
+      ]
+    }
+  },
+  {
+    "brand": "Chloé",
+    "name": "Nomade",
+    "concentration": "EDP",
+    "url": "https://www.chloe.com/en-us/p/fragrances/eau-de-parfum/CHCA64994090.html",
+    "notes": {
+      "top": [
+        "Plum"
+      ],
+      "heart": [
+        "Freesia"
+      ],
+      "base": [
+        "Oakmoss"
+      ]
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "La Nuit de L'Homme (2019)",
+    "concentration": "EDP",
+    "url": "https://www.yslbeauty.fr/Collection-La-Nuit-de-L-Homme.html",
+    "notes": {
+      "top": [
+        "Grapefruit",
+        "Cardamom"
+      ],
+      "listed": [
+        "Leather",
+        "Sandalwood",
+        "Patchouli"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Jomashop",
+      "url": "https://www.jomashop.com/yves-saint-laurent-mens-la-nuit-de-lhomme-edp-stick-3-3-oz-tester-fragrances-3614272648357.html",
+      "notes": {
+        "top": [
+          "Grapefruit",
+          "Cardamom"
+        ],
+        "heart": [
+          "Leather"
+        ],
+        "base": [
+          "Sandalwood",
+          "Patchouli"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "La Nuit de L'Homme (2026)",
+    "concentration": "EDP",
+    "url": "https://www.yslbeauty.com/int/fragrance/fragrance-for-him/la-nuit-de-l-homme/la-nuit-de-l-homme-eau-de-parfum/WW-50356YSL.html",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Red Apple"
+      ],
+      "heart": [
+        "Red Pepper",
+        "Tobacco"
+      ],
+      "base": [
+        "Amber"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Sephora France",
+      "url": "https://www.sephora.fr/p/l-homme-la-nuit-de-l-homme---eau-de-parfum-ambree-epicee-pour-homme-817599.html",
+      "notes": {
+        "top": [
+          "Bergamot",
+          "Red Apple"
+        ],
+        "heart": [
+          "Red Pepper",
+          "Tobacco"
+        ],
+        "base": [
+          "Amber"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Carolina Herrera",
+    "name": "212 VIP",
+    "concentration": "EDP",
+    "url": "https://www.carolinaherrera.com/ww/en/p-fragrance/212-vip",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Passion Fruit"
+      ],
+      "heart": [
+        "Gardenia",
+        "Rum"
+      ],
+      "base": [
+        "Benzoin",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Dior",
+    "name": "Hypnotic Poison",
+    "concentration": "EDT",
+    "url": "https://www.dior.com/en_us/beauty/products/hypnotic-poison-eau-de-toilette-Y0063401.html",
+    "notes": {
+      "top": [
+        "Almond"
+      ],
+      "heart": [
+        "Jasmine Sambac"
+      ],
+      "base": [
+        "Vanilla"
+      ]
+    }
+  },
+  {
+    "brand": "Dior",
+    "name": "Dior Homme Intense",
+    "concentration": "EDP",
+    "url": "https://www.dior.com/en_us/beauty/products/dior-homme-intense-Y0479201.html",
+    "notes": {
+      "listed": [
+        "Iris",
+        "Ambrette",
+        "Cedarwood"
+      ]
+    }
+  },
+  {
+    "brand": "Prada",
+    "name": "L'Homme Prada",
+    "concentration": "EDT",
+    "url": "https://www.prada-beauty.com/fragrance/lhomme-prada/lhomme-prada-eau-de-toilette/MPL01352.html",
+    "notes": {
+      "listed": [
+        "Iris",
+        "Amber",
+        "Geranium",
+        "Patchouli"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/lhomme-prada-eau-de-toilette/4414819",
+      "notes": {
+        "listed": [
+          "Iris",
+          "Amber",
+          "Geranium",
+          "Patchouli"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Hermès",
+    "name": "Un Jardin sur le Nil",
+    "concentration": "EDT",
+    "url": "https://www.hermes.com/us/en/product/un-jardin-sur-le-nil-eau-de-toilette-V20396/",
+    "notes": {
+      "listed": [
+        "Green Mango",
+        "Lotus",
+        "Calamus",
+        "Sycamore Wood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/un-jardin-sur-le-nil-P375126",
+      "notes": {
+        "listed": [
+          "Green Mango",
+          "Lotus",
+          "Calamus",
+          "Sycamore Wood"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Maison Francis Kurkdjian",
+    "name": "Aqua Universalis",
+    "concentration": "EDT",
+    "url": "https://www.franciskurkdjian.com/us-en/p/aqua-universalis-eau-de-toilette-RA130311.html",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Lemon",
+        "White flowers",
+        "Musk"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/maison-francis-kurkdjian-paris-aqua-universalis-eau-de-toilette/7054839",
+      "notes": {
+        "listed": [
+          "Bergamot",
+          "Lemon",
+          "Musk"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Maison Francis Kurkdjian",
+    "name": "Oud Satin Mood",
+    "concentration": "EDP",
+    "url": "https://www.franciskurkdjian.com/eu-en/p/oud-satin-mood-eau-de-parfum-RA12221.html",
+    "notes": {
+      "listed": [
+        "Violet",
+        "Rose",
+        "Oud",
+        "Benzoin",
+        "Vanilla amber accord"
+      ]
+    }
+  },
+  {
+    "brand": "Byredo",
+    "name": "Mojave Ghost",
+    "concentration": "EDP",
+    "url": "https://www.byredo.com/us_en/p/mojaveghost-eau-de-parfum-50ml",
+    "notes": {
+      "top": [
+        "Ambrette",
+        "Naseberry"
+      ],
+      "heart": [
+        "Magnolia",
+        "Sandalwood",
+        "Violet"
+      ],
+      "base": [
+        "Cedarwood",
+        "Musk",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Byredo",
+    "name": "Blanche",
+    "concentration": "EDP",
+    "url": "https://www.byredo.com/ca_en/p/blanche-eau-de-parfum?sku=0065204847",
+    "notes": {
+      "top": [
+        "Aldehydes",
+        "Rose"
+      ],
+      "heart": [
+        "Peony",
+        "Violet"
+      ],
+      "base": [
+        "Musk",
+        "Sandalwood"
+      ]
+    }
+  },
+  {
+    "brand": "Initio Parfums Prives",
+    "name": "Atomic Rose",
+    "concentration": "EDP",
+    "url": "https://us.initioparfums.com/products/atomic-rose",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Turkish rose",
+        "Rose",
+        "Jasmine",
+        "Vanilla",
+        "Hedione"
+      ]
+    }
+  },
+  {
+    "brand": "Frédéric Malle",
+    "name": "Carnal Flower",
+    "concentration": "EDP",
+    "url": "https://www.fredericmalle.com/product/19566/50210/parfums/carnal-flower/by-dominique-ropion",
+    "notes": {
+      "top": [
+        "Melon"
+      ],
+      "heart": [
+        "Tuberose"
+      ],
+      "base": [
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Creed",
+    "name": "Viking",
+    "concentration": "EDP",
+    "url": "https://creedboutique.com/products/viking?variant=32812867551329",
+    "notes": {
+      "top": [
+        "Bergamot",
+        "Lemon",
+        "Pink pepper"
+      ],
+      "heart": [
+        "Rose"
+      ],
+      "base": [
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Afnan",
+    "name": "9 PM Night Out",
+    "concentration": "EXTRAIT",
+    "url": "https://be.afnan.com/en/products/9pm-night-out",
+    "notes": {
+      "top": [
+        "Dragon fruit",
+        "Bergamot",
+        "Cognac",
+        "Lavender",
+        "Apple"
+      ],
+      "heart": [
+        "Cardamom",
+        "Mahonial",
+        "Suede",
+        "Toffee",
+        "Cedar"
+      ],
+      "base": [
+        "Tonka bean",
+        "Akigalawood",
+        "Ambrofix",
+        "Patchouli"
+      ]
+    },
+    "scentoId": "afnan-9pm"
+  },
+  {
+    "brand": "Kilian Paris",
+    "name": "Love, Don't Be Shy",
+    "concentration": "EDP",
+    "url": "https://www.bykilian.com/product/19797/50771/perfume/love-dont-be-shy/the-narcotics",
+    "notes": {
+      "top": [
+        "Neroli"
+      ],
+      "heart": [
+        "Rose",
+        "Honeysuckle"
+      ],
+      "base": [
+        "Marshmallow",
+        "Labdanum"
+      ]
+    },
+    "scentoId": "kilian-love-dont-be-shy"
+  },
+  {
+    "brand": "Kilian Paris",
+    "name": "Good Girl Gone Bad",
+    "concentration": "EDP",
+    "url": "https://www.bykilian.co.uk/product/19797/52759/perfume/good-girl-gone-bad-by-kilian/the-narcotics",
+    "notes": {
+      "top": [
+        "Orange blossom",
+        "Rose"
+      ],
+      "heart": [
+        "Osmanthus",
+        "Tuberose"
+      ],
+      "base": [
+        "Narcissus"
+      ]
+    },
+    "scentoId": "kilian-good-girl-gone-bad"
+  },
+  {
+    "brand": "Amouage",
+    "name": "Reflection Man",
+    "concentration": "EDP",
+    "url": "https://amouage.com/products/reflection-man-100ml",
+    "notes": {
+      "top": [
+        "Rosemary",
+        "Red pepper berries",
+        "Bitter orange leaves"
+      ],
+      "heart": [
+        "Neroli",
+        "Orris",
+        "Jasmine",
+        "Ylang-ylang"
+      ],
+      "base": [
+        "Vetiver",
+        "Patchouli",
+        "Sandalwood",
+        "Cedarwood"
+      ]
+    },
+    "scentoId": "amouage-reflection-man"
+  },
+  {
+    "brand": "Mancera",
+    "name": "Cedrat Boise",
+    "concentration": "EDP",
+    "url": "https://www.manceraparfums.com/en/woody/16-cedrat-boise.html",
+    "notes": {
+      "top": [
+        "Citrus",
+        "Blackcurrant",
+        "Cold spices"
+      ],
+      "heart": [
+        "Aquatic jasmine",
+        "Patchouli leaves"
+      ],
+      "base": [
+        "Woody notes",
+        "Leather",
+        "Oakmoss",
+        "Vanilla"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Bloomingdale's",
+      "url": "https://www.bloomingdales.com/shop/product/mancera-cedrat-boise-eau-de-parfum?ID=6035789",
+      "notes": {
+        "listed": [
+          "Citrus",
+          "Blackcurrant",
+          "Cold spices",
+          "Aquatic jasmine",
+          "Patchouli leaves",
+          "Woody notes",
+          "Leather",
+          "Oakmoss",
+          "Vanilla"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Tiziana Terenzi",
+    "name": "Kirké",
+    "concentration": "EXTRAIT",
+    "url": "https://terenziboutique.us/products/engf",
+    "notes": {
+      "top": [
+        "Passion fruit",
+        "Peach",
+        "Raspberry",
+        "Cassis",
+        "Pear",
+        "Warm sand"
+      ],
+      "heart": [
+        "Lily of the valley"
+      ],
+      "base": [
+        "Heliotrope",
+        "Sandalwood",
+        "Vanilla",
+        "Patchouli",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Versace",
+    "name": "Bright Crystal",
+    "concentration": "EDT",
+    "url": "https://www.versace.com/us/en/women/accessories/fragrances-body-care/bright-crystal/bright-crystal-edt-90-ml-pink/R510032-R090MLS_RNUL.html",
+    "notes": {
+      "listed": [
+        "Yuzu",
+        "Pomegranate",
+        "Peony",
+        "Magnolia",
+        "Lotus flower",
+        "Musk"
+      ]
+    }
+  },
+  {
+    "brand": "Prada",
+    "name": "Luna Rossa Carbon",
+    "concentration": "EDT",
+    "url": "https://www.prada-beauty.com/fragrance/luna-rossa/luna-rossa-carbon-eau-de-toilette/8435137759811.html",
+    "notes": {
+      "listed": [
+        "Bergamot",
+        "Lavender",
+        "Black pepper",
+        "Ambroxan",
+        "Patchouli"
+      ]
+    }
+  },
+  {
+    "brand": "Tom Ford",
+    "name": "Ombré Leather",
+    "concentration": "EDP",
+    "url": "https://www.tomfordbeauty.com/products/ombre-leather-eau-de-parfum",
+    "notes": {
+      "listed": [
+        "Black leather",
+        "Cardamom",
+        "Jasmine sambac",
+        "Patchouli",
+        "Moss",
+        "Amber"
+      ]
+    }
+  },
+  {
+    "brand": "Rabanne",
+    "name": "Lady Million",
+    "concentration": "EDP",
+    "url": "https://www.rabanne.com/uk/en_GB/fragrance/p/lady-million--000000000065251982",
+    "notes": {
+      "listed": [
+        "White honey",
+        "Patchouli",
+        "Orange blossom",
+        "Jasmine",
+        "Raspberry"
+      ]
+    }
+  },
+  {
+    "brand": "Chanel",
+    "name": "Chance Eau Tendre",
+    "concentration": "EDP",
+    "url": "https://www.chanel.com/us/fragrance/p/126270/chance-eau-tendre-eau-de-parfum-spray/",
+    "notes": {
+      "listed": [
+        "Grapefruit",
+        "Quince",
+        "Jasmine",
+        "Rose",
+        "White musk"
+      ]
+    }
+  },
+  {
+    "brand": "Chanel",
+    "name": "Chance Eau Tendre",
+    "concentration": "EDT",
+    "url": "https://www.chanel.com/us/fragrance/p/126290/chance-eau-tendre-eau-de-toilette-spray/",
+    "notes": {
+      "listed": [
+        "Grapefruit",
+        "Quince",
+        "Jasmine",
+        "White musk"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/chanel-chance-eau-tendre-eau-de-toilette-spray/3081847",
+      "notes": {
+        "listed": [
+          "Grapefruit",
+          "Quince",
+          "Jasmine",
+          "White musk"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Yves Saint Laurent",
+    "name": "La Nuit de L'Homme",
+    "concentration": "EDT",
+    "url": "https://www.yslbeautyus.com/fragrance/mens-fragrances/la-nuit-de-lhomme/la-nuit-de-lhomme-eau-de-toilette-spray/3365440375079.html",
+    "notes": {
+      "listed": [
+        "Cardamom",
+        "Cedarwood",
+        "Coumarin",
+        "Lavender",
+        "Vetiver"
+      ]
+    }
+  },
+  {
+    "brand": "Kayali",
+    "name": "Yum Boujee Marshmallow 81",
+    "concentration": "EDP",
+    "url": "https://us.kayali.com/products/yum-boujee-marshmallow-81",
+    "notes": {
+      "listed": [
+        "Strawberry",
+        "Pink marshmallow",
+        "Whipped vanilla"
+      ]
+    },
+    "aliases": [
+      "Yum Boujee Marshmallow",
+      "Yum Boujee Marshmallow 81 Eau de Parfum Intense"
+    ],
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/kayali-yum-boujee-marshmallow-81-eau-de-parfum-intense-P512856",
+      "notes": {
+        "listed": [
+          "Strawberry",
+          "Pink marshmallow",
+          "Whipped vanilla"
+        ]
+      }
+    }
+  },
+  {
+    "brand": "Phlur",
+    "name": "Vanilla Skin",
+    "concentration": "EDP",
+    "url": "https://phlur.com/products/vanilla-skin-perfume",
+    "notes": {
+      "listed": [
+        "Pink pepper",
+        "Sugar",
+        "Cashmere wood",
+        "Vanilla",
+        "Sandalwood"
+      ]
+    },
+    "corroboration": {
+      "publisher": "Sephora",
+      "url": "https://www.sephora.com/product/phlur-vanilla-skin-eau-de-parfum-P511943",
+      "notes": {
+        "listed": [
+          "Pink pepper",
+          "Sugar",
+          "Cashmere wood",
+          "Vanilla",
+          "Sandalwood"
+        ]
+      }
+    }
   }
 ]

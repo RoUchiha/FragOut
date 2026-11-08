@@ -20,11 +20,14 @@ STAGES = ("top", "heart", "base")
 SOURCE_STAGES = (*STAGES, "listed")
 CONCENTRATIONS = {
     "eau de toilette": "EDT", "edt": "EDT", "eau de parfum": "EDP",
-    "edp": "EDP", "parfum": "PARFUM", "elixir": "ELIXIR", "oil": "OIL",
+    "edp": "EDP", "eau de cologne": "EDC", "cologne": "EDC", "edc": "EDC",
+    "parfum": "PARFUM", "extrait": "EXTRAIT", "extrait de parfum": "EXTRAIT",
+    "elixir": "ELIXIR", "oil": "OIL", "mist": "MIST", "fragrance mist": "MIST",
 }
 THROW_STARS = {
     "intimate": 1, "soft intimate": 1.5, "soft": 2, "soft moderate": 2.5,
-    "moderate": 3, "moderate strong": 3.5, "strong": 4, "very strong": 5, "enormous": 5,
+    "light": 2, "moderate": 3, "moderate strong": 3.5, "moderate to strong": 3.5,
+    "strong": 4, "very strong": 5, "enormous": 5,
 }
 NOTE_ALIASES = {
     "calabrian bergamot": "bergamot", "sicilian lemon": "lemon",
@@ -39,11 +42,17 @@ NOTE_ALIASES = {
     "mandarin orange": "mandarin", "white musk": "musk", "guaiacwood": "guaiac wood",
     "lotus blossom": "lotus", "black orchid": "orchid", "liquid amber": "amber",
     "black violet": "violet",
+    "ambrette seeds": "ambrette", "sea salt": "salt", "king william pear": "pear",
+    "red apple": "apple", "acacia honey": "honey", "cassis": "blackcurrant",
+    "bay leaves": "bay", "honeycomb": "honey", "bluebells": "bluebell",
+    "amber wood": "amberwood", "sheer sandalwood": "sandalwood",
+    "ambrette musk mallow": "ambrette", "vanilla bean": "vanilla", "cloves": "clove",
+    "black leather": "leather", "white honey": "honey", "virginian cedar": "cedar",
 }
 
 
 def normalize(text):
-    unaccented = "".join(c for c in unicodedata.normalize("NFKD", text.lower())
+    unaccented = "".join(c for c in unicodedata.normalize("NFKD", re.sub("[™®℠]", "", text.lower()))
                          if not unicodedata.category(c).startswith("M"))
     return re.sub(r"[\W_]+", " ", re.sub("[’ʼ']", "", unaccented).replace("&", " and ")).strip()
 
@@ -74,6 +83,31 @@ def unique_rows(rows, brand_field):
     return {key: group[0] for key, group in matches.items() if len(group) == 1}
 
 
+def reviewed_scento_rows(rows, reviewed):
+    matches = unique_rows(rows, "house")
+    by_id = {row["id"]: row for row in rows}
+    if len(by_id) != len(rows):
+        raise ValueError("Duplicate Scento record IDs")
+    used = {row["id"]: key for key, row in matches.items()}
+    for key, review in reviewed.items():
+        reference = review.get("scentoId")
+        if not reference:
+            continue
+        row = by_id.get(reference)
+        names = [review["name"], *review.get("aliases", [])]
+        accepted = {identity_key(review["brand"], name, key[2]) for name in names}
+        if not row or identity_key(row["house"], row["name"], key[2]) not in accepted:
+            raise ValueError(f"Scento identity does not match {key}: {reference}")
+        concentration = normalize(row["concentration"])
+        if concentration and CONCENTRATIONS.get(concentration) != key[2]:
+            raise ValueError(f"Scento concentration does not match {key}: {reference}")
+        if used.get(reference, key) != key or (key in matches and matches[key]["id"] != reference):
+            raise ValueError(f"Scento reference would replace an existing edition: {reference}")
+        used[reference] = key
+        matches[key] = row
+    return matches
+
+
 def make_source(id_, publisher, url, kind, license_=None, credit=None):
     parsed = urlsplit(url)
     if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
@@ -97,8 +131,7 @@ def checked_notes(lists):
                     evidence[key][source].add(stage)
     checked = []
     for name, sources in evidence.items():
-        # The house page corroborates published note names from a licensed list.
-        if len(sources) < 2 or not {"scento", "mysecretcart"}.intersection(sources):
+        if len(sources) < 2:
             continue
         stages = [stage for declared in sources.values() for stage in declared if stage in STAGES]
         stage = stages[0] if len(stages) >= 2 and len(set(stages)) == 1 else "listed"
@@ -164,7 +197,9 @@ def quick_links(profile_id, brand, name, concentration, sources):
         query = urlencode({"q": f"{brand} {name} {concentration}"})
         links.append({"label": "Search Jomashop", "url": "https://www.jomashop.com/search?" + query})
     for source in sources:
-        if source["id"] == "community":
+        if any(link["url"] == source["url"] for link in links):
+            continue
+        if source["id"] in {"community", "retailer"}:
             links.append({"label": f"View on {source['publisher']}", "url": source["url"]})
         if source["kind"] == "house":
             links.append({"label": "View official page", "url": source["url"]})
@@ -211,6 +246,12 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
     if reviewed:
         sources.append(make_source("house", reviewed["brand"], reviewed["url"], "house"))
         lists["house"] = reviewed["notes"]
+    if corroboration := reviewed.get("corroboration"):
+        if (normalize(corroboration["publisher"]) == normalize(reviewed["brand"])
+                or urlsplit(corroboration["url"]).hostname == urlsplit(reviewed["url"]).hostname):
+            raise ValueError(f"Repeated publisher in corroboration for {key}")
+        sources.append(make_source("retailer", corroboration["publisher"], corroboration["url"], "reference"))
+        lists["retailer"] = corroboration["notes"]
     release = reviewed.get("release")
     if release:
         sources.append(make_source("release", release["publisher"], release["url"], "reference"))
@@ -224,18 +265,19 @@ def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
         sources.append(make_source("mysecretcart", "MySecretCart", "https://mysecretcart.com/fragrance-study",
                                    "reference", CC_BY, "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."))
         lists["mysecretcart"] = {stage: csv_row[f"{stage}_notes"].split(";") for stage in STAGES}
-    notes = checked_notes(lists)
-    performance = wear_reports(csv_row, index_row)
-    ratings = wear_ratings(csv_row, index_row)
-    if any(rating["sourceId"] == "gouttes" for rating in ratings):
+    if index_row:
         sources.append(make_source("gouttes", "Gouttes Rares",
                                    "https://gouttesrares.com/pages/fragrance-longevity-sillage-index",
                                    "wear", CC_BY, "Gouttes Rares Longevity & Sillage Index, 2026. In-house wear assessments reformatted."))
+        lists["gouttes"] = {"top": index_row["top_notes"].split(",")}
+    notes = checked_notes(lists)
+    performance = wear_reports(csv_row, index_row)
+    ratings = wear_ratings(csv_row, index_row)
     id_ = "-".join(key).replace(" ", "-").lower()
     photos = profile_photos(id_, sources)
     if reviewed.get("communityUrl"):
         sources.append(make_source("community", "Parfumo", reviewed["communityUrl"], "community"))
-    if not (notes or performance or photos):
+    if not (notes or ratings or photos):
         return None
     brand = reviewed.get("brand") or scento["house"]
     name = reviewed.get("name") or scento["name"]
@@ -266,10 +308,12 @@ def main():
     parser.add_argument("gouttes_json", type=Path)
     parser.add_argument("--checked-at", type=date.fromisoformat, required=True)
     args = parser.parse_args()
-    reviewed = {identity_key(r["brand"], r["name"], r["concentration"]): r
-                for r in json.loads((CATALOG / "reviewed.json").read_text(encoding="utf-8"))}
-    scento = unique_rows((json.loads(line) for line in args.scento_jsonl.read_text(encoding="utf-8").splitlines()
-                          if line), "house")
+    references = json.loads((CATALOG / "reviewed.json").read_text(encoding="utf-8"))
+    reviewed = {identity_key(r["brand"], r["name"], r["concentration"]): r for r in references}
+    if len(reviewed) != len(references):
+        raise ValueError("Duplicate reviewed edition")
+    scento = reviewed_scento_rows(
+        [json.loads(line) for line in args.scento_jsonl.read_text(encoding="utf-8").splitlines() if line], reviewed)
     with args.mysecretcart_csv.open(encoding="utf-8-sig", newline="") as rows:
         csv_rows = unique_rows(csv.DictReader(rows), "house")
     index = json.loads(args.gouttes_json.read_text(encoding="utf-8"))
@@ -290,6 +334,8 @@ def main():
         entry = build_entry(key, note_row, csv_row, review, index_row, args.checked_at.isoformat())
         if entry:
             profiles.append(entry)
+        elif review:
+            raise ValueError(f"Reviewed edition has no publishable evidence: {key}")
     unused = (PHOTOS.keys() | LINKS.keys()) - {entry["id"] for entry in profiles}
     if unused:
         raise ValueError(f"References for unknown editions: {sorted(unused)}")

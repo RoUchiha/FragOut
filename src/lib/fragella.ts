@@ -5,7 +5,9 @@ import type {CatalogProfile,CatalogSource} from './types.ts';
 
 const concentrations = new Map([
  ['eau de toilette','EDT'],['edt','EDT'],['eau de parfum','EDP'],['edp','EDP'],
- ['parfum','PARFUM'],['elixir','ELIXIR'],['perfume oil','OIL'],
+ ['eau de cologne','EDC'],['cologne','EDC'],['edc','EDC'],['parfum','PARFUM'],
+ ['extrait de parfum','EXTRAIT'],['extrait','EXTRAIT'],['elixir','ELIXIR'],
+ ['perfume mist','MIST'],['fragrance mist','MIST'],['perfume oil','OIL'],
 ]);
 const voted = new Set(['medium','high','very high']);
 const rowSchema=z.object({

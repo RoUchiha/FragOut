@@ -1,9 +1,10 @@
 import {z} from 'zod';
 import {moodOptions,vibeOptions} from './intent.ts';
+import {concentrationCodes} from './concentrations.ts';
 export const intentFields={mood:z.enum(moodOptions.map(([id])=>id)).default('ANY'),vibe:z.enum(vibeOptions.map(([id])=>id)).default('ANY')};
 const text=(max=120)=>z.string().trim().max(max);
 export const bottleSchema=z.object({
-  brand:text().min(1),name:text().min(1),concentration:z.enum(['EDT','EDP','PARFUM','ELIXIR','OIL','OTHER','UNKNOWN']),ownership:z.enum(['OWNED','WISHLIST','REMOVED']),
+  brand:text().min(1),name:text().min(1),concentration:z.enum(concentrationCodes),ownership:z.enum(['OWNED','WISHLIST','REMOVED']),
   family:text(60),notes:z.array(text(50).min(1)).max(30),strength:z.number().int().min(1).max(3),climate:z.enum(['FRESH','BALANCED','WARM','UNKNOWN']),
   profileKnown:z.boolean(),provenance:z.enum(['personal','unknown']),color:z.string().regex(/^#[0-9a-fA-F]{6}$/),shape:z.enum(['square','round','tall']),
   sizeMl:z.number().min(1).max(2000),fillPct:z.number().min(0).max(100),rating:z.number().int().min(0).max(5),favorite:z.boolean(),memo:text(2000)

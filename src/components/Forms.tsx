@@ -3,6 +3,7 @@ import {useState,type FormEvent} from 'react';
 import {Camera,Check,Info,MapPin,Plus,Trash2,ArrowUp,ArrowDown,Eye,EyeOff} from 'lucide-react';
 import {BottleArt,ShortcutIcon} from './Primitives';
 import {defaultShortcuts,occasions} from '@/lib/seed';
+import {concentrationOptions} from '@/lib/concentrations';
 import type {Bottle,Preferences,Shortcut,WearContext} from '@/lib/types';
 export type Save=(path:string,method:string,data?:unknown)=>Promise<boolean>;
 const words=(s:string)=>s.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
@@ -16,7 +17,7 @@ export function BottleForm({bottle,onSave,onDelete,busy}:{bottle?:Bottle;onSave:
   <div className="form-note"><Info size={17}/><span>Use the exact variant. Scent traits are your own observations.</span></div>
   <div className="capture-row"><div className="capture-preview">{photo?<img src={photo} alt="Your bottle reference"/>:<BottleArt bottle={data}/>}</div><div><label className="button secondary file-button"><Camera size={17}/>Photo reference<input aria-label="Choose bottle reference photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" onChange={e=>{const f=e.target.files?.[0];setPhotoError('');if(!f)return;if(f.size>5*1024*1024||!['image/jpeg','image/png','image/webp'].includes(f.type)){setPhotoError('Choose a JPG, PNG or WebP under 5 MB.');return;}const reader=new FileReader();reader.onload=()=>setPhoto(String(reader.result));reader.readAsDataURL(f);}}/></label><p className="muted tiny">Photo reference only. Automatic identification isn’t connected.</p>{photoError&&<p className="field-error" role="alert">{photoError}</p>}</div></div>
   <div className="form-grid"><label>Brand / house<input required maxLength={120} value={data.brand} placeholder="Brand name" onChange={e=>field('brand',e.target.value)}/></label><label>Exact fragrance name<input required maxLength={120} value={data.name} placeholder="Include flanker or edition" onChange={e=>field('name',e.target.value)}/></label>
-   <label>Concentration<select value={data.concentration} onChange={e=>field('concentration',e.target.value)}>{['UNKNOWN','EDT','EDP','PARFUM','ELIXIR','OIL','OTHER'].map(c=><option key={c} value={c}>{c==='UNKNOWN'?'Not sure':c}</option>)}</select></label>
+   <label>Concentration<select value={data.concentration} onChange={e=>field('concentration',e.target.value)}>{concentrationOptions.map(([code,label])=><option key={code} value={code}>{code==='UNKNOWN'?'Not sure':label}</option>)}</select></label>
    <label>Collection status<select value={data.ownership} onChange={e=>field('ownership',e.target.value)}><option value="OWNED">Owned</option><option value="WISHLIST">Wishlist</option><option value="REMOVED">Not owned</option></select></label>
    <label>Size (ml)<input required type="number" min={1} max={2000} value={data.sizeMl} onChange={e=>field('sizeMl',Number(e.target.value))}/></label><label>Fill remaining: {data.fillPct}%<input type="range" min={0} max={100} value={data.fillPct} onChange={e=>field('fillPct',Number(e.target.value))}/></label>
   </div>

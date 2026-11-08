@@ -1,9 +1,10 @@
 import {z} from 'zod';
 import {rankSolo,rankCombos} from './engine.ts';
+import {concentrationCodes} from './concentrations.ts';
 import type {Bottle,OutfitProfile,PairRecord,Preferences,WearContext} from './types.ts';
 const strings=(max:number,length:number)=>z.array(z.string().trim().max(length)).max(max);
 export const outfitSchema=z.object({summary:z.string().trim().max(300),garments:strings(10,80),colors:strings(8,30),styleTags:z.array(z.enum(['casual','tailored','minimal','sporty','evening','streetwear','romantic','outdoors'])).max(8),formality:z.enum(['casual','smart','formal']),palette:z.enum(['light','dark','bright','neutral','mixed']),hasOutfit:z.boolean(),uncertainty:strings(5,160)}).strict();
-export const bottleCaptureSchema=z.object({candidates:z.array(z.object({brand:z.string().trim().max(100),name:z.string().trim().max(120),concentration:z.enum(['EDT','EDP','PARFUM','ELIXIR','OIL','OTHER','UNKNOWN']),confidence:z.enum(['likely','uncertain']),clue:z.string().max(200)}).strict()).max(3),message:z.string().max(300)}).strict();
+export const bottleCaptureSchema=z.object({candidates:z.array(z.object({brand:z.string().trim().max(100),name:z.string().trim().max(120),concentration:z.enum(concentrationCodes),confidence:z.enum(['likely','uncertain']),clue:z.string().max(200)}).strict()).max(3),message:z.string().max(300)}).strict();
 export const imageSchema=z.object({mime:z.enum(['image/jpeg','image/png','image/webp']),data:z.string().min(12).max(4*1024*1024)}).strict();
 export type ImageInput=z.infer<typeof imageSchema>;
 export function validateImage(input:unknown){

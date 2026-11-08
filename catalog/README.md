@@ -1,14 +1,14 @@
 # Fragrance catalog
 
-Catalog snapshot from November 7, 2026. It contains 67 releases. Sixty-six have corroborated notes and 63 have a wear estimate. Fifteen have exact Fragrantica links and 62 have exact Jomashop listings. The November 8 photo update brings licensed bottle photography to 23 releases.
+The November 8, 2026 snapshot covers 211 exact releases from 63 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 63 have exact Jomashop listings, and 23 have licensed bottle photography.
 
-The app compares the saved house, release and concentration with this snapshot on the FragOut server. It serves licensed catalog photography from a dedicated static directory. Saved bottles and their profile lookups require the owner's session. The optional live rating lookup sends only the public catalog identity. Label scans and personal observations follow their private flows.
+The app compares the saved house, release, and concentration with this snapshot on the FragOut server. It keeps EDT, EDP, cologne, parfum, extrait, elixir, and mist separate. Where a label and concentration have documented reformulations, enter the edition year as part of the name to select that profile. Unlisted editions save as a basic entry. The server uses the local snapshot for the initial result, and the optional live rating lookup sends only the public catalog identity. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their private flows.
 
 ## Evidence
 
 - The compiler retains note names found in two or more source records for the same edition. It standardizes selected synonyms at the shared level of detail. A note gets a top, heart or base label when two references agree on the stage and every published placement agrees. Otherwise it appears in the general notes list.
 - For Green Irish Tweed EDP and Naxos EDP, the profile shows the two wear estimates side by side. MySecretCart compiles typical wear from published information and wearer reports. Gouttes Rares publishes in-house ranges and uses its sillage field for assessed throw. Different wear methods and scales keep their own labels. Oud for Greatness was held out of the performance comparison because the Gouttes listing and the house use different concentration descriptions.
-- Official pages corroborate short note names and exact identity. Parfumo links open the exact edition as a community reference. Publisher ratings, review text and product photography remain on those sites unless the specific item has reuse permission.
+- Official pages corroborate short note names and exact identity. An authorized retailer's exact product listing can also corroborate notes. Parfumo links open the exact edition as a community reference. Publisher ratings, review text, and product photography remain on those sites unless the specific item has reuse permission.
 
 ## Five-star ratings
 
@@ -27,8 +27,8 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 | --- | --- | --- |
 | Scento Perfume Database | CC BY 4.0. Selected note names and release facts are standardized and filtered by agreement. Each record links to the publisher's exact page. | [Dataset and terms](https://github.com/Scento-com/perfume-dataset) · [JSONL](https://raw.githubusercontent.com/Scento-com/perfume-dataset/main/perfumes.jsonl) |
 | MySecretCart Fragrance Study | CC BY 4.0. Selected note names and wear estimates are standardized and reformatted. | [Study and reuse terms](https://mysecretcart.com/fragrance-study) · [CSV](https://mysecretcart.com/data/fragrance-database.csv) |
-| Gouttes Rares Longevity & Sillage Index, 2026 | CC BY 4.0. Two individually matched release records support the side-by-side wear estimates. | [Index and reuse terms](https://gouttesrares.com/pages/fragrance-longevity-sillage-index) · [September 24 JSON](https://cdn.shopify.com/s/files/1/0937/0340/5861/files/gouttes-rares-longevity-sillage-index-2026-09-24.json) |
-| Manufacturer and community pages | Direct links checked for the named release. The reviewed file identifies these pages. | [Reviewed release references](reviewed.json) |
+| Gouttes Rares Longevity & Sillage Index, 2026 | CC BY 4.0. Individually matched release records supply wear estimates. Green Irish Tweed EDP and Naxos EDP show those estimates alongside MySecretCart. | [Index and reuse terms](https://gouttesrares.com/pages/fragrance-longevity-sillage-index) · [September 24 JSON](https://cdn.shopify.com/s/files/1/0937/0340/5861/files/gouttes-rares-longevity-sillage-index-2026-09-24.json) |
+| Manufacturer, retailer, and community pages | Direct links checked for the named release. The reviewed file identifies these pages. | [Reviewed release references](reviewed.json) |
 
 [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)
 

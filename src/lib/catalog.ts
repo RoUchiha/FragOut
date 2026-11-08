@@ -4,7 +4,7 @@ import type {Bottle,CatalogProfile} from './types.ts';
 
 type Label = Pick<Bottle,'brand'|'name'|'concentration'>;
 type CatalogEntry = CatalogProfile & {aliases?:string[]};
-const normalize = (value:string)=>value.normalize('NFKD').toLowerCase()
+const normalize = (value:string)=>value.replace(/[™®℠]/g,'').normalize('NFKD').toLowerCase()
  .replace(/\p{M}/gu,'').replace(/[’ʼ']/g,'').replace(/&/g,' and ')
  .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const houses = new Map(Object.entries(identity.houseAliases));

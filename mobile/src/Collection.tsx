@@ -5,6 +5,7 @@ import {api,sessionScope,type AiStatus,type AppState,type BottleCandidate} from 
 import {capturePhoto,discardPhoto,type Capture} from './capture';
 import {BottleArt,Btn,Choices,Empty,Field,IconButton,SearchBox,Sheet,Spinner,useUi} from './ui';
 import {matchesBottleSearch,scentSearchLimit} from '../../src/lib/scent-search';
+import {concentrationOptions} from '../../src/lib/concentrations';
 import type {Bottle} from '../../src/lib/types';
 import FragranceProfile from './FragranceProfile';
 
@@ -189,7 +190,7 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
   <Field label="Brand / house" value={brand} onChangeText={v=>{setBrand(v);if(candidate)setVerified(false);}} maxLength={120}/>
   <Field label="Exact fragrance name" value={name} onChangeText={v=>{setName(v);if(candidate)setVerified(false);}} maxLength={120}/>
   <Choices label="Concentration" value={concentration}
-   items={[['UNKNOWN','Unknown'],['EDT','EDT'],['EDP','EDP'],['PARFUM','Parfum'],['ELIXIR','Elixir'],['OIL','Oil'],['OTHER','Other']]}
+   items={concentrationOptions}
    onChange={v=>{setConc(v);if(candidate)setVerified(false);}}/>
   <Choices label="Status" value={ownership} items={[['OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned']]} onChange={setOwnership}/>
   {changed&&<View style={styles.warm}><Text style={styles.small}>Changing the edition clears its personal scent observations.</Text></View>}

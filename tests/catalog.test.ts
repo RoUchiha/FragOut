@@ -18,8 +18,9 @@ test('catalog matches exact concentration and flanker with common label formatti
 });
 
 test('catalog checks every displayed note and wear metric across publishers',()=>{
- assert.ok(catalogProfiles.length>=20);
+ assert.ok(catalogProfiles.length>=200);
  for(const profile of catalogProfiles) {
+  assert.equal(findCatalogProfile(profile)?.id,profile.id);
   const sources=new Map(profile.sources.map(source=>[source.id,source]));
   assert.equal(sources.size,profile.sources.length);
   for(const source of sources.values()) assert.equal(new URL(source.url).protocol,'https:');
@@ -31,6 +32,32 @@ test('catalog checks every displayed note and wear metric across publishers',()=
   for(const note of profile.notes) crossChecked(note.sourceIds);
   for(const metric of profile.performance) crossChecked(metric.reports.map(report=>report.sourceId));
  }
+});
+
+test('expanded catalog matches popular exact editions across concentrations',()=>{
+ const known=[
+  {brand:'Jo Malone',name:'Wood Sage & Sea Salt Cologne',concentration:'EDC',id:'jo-malone-london-wood-sage-and-sea-salt-edc'},
+  {brand:'Nishane',name:'Hacivat Extrait de Parfum',concentration:'EXTRAIT',id:'nishane-hacivat-extrait'},
+  {brand:'Sol de Janeiro',name:'Cheirosa 62™ Perfume Mist',concentration:'MIST',id:'sol-de-janeiro-cheirosa-62-mist'},
+  {brand:'Lattafa',name:'Khamrah',concentration:'EDP',id:'lattafa-khamrah-edp'},
+ ];
+ for(const {id,...label} of known) {
+  const profile=findCatalogProfile(label);
+  assert.equal(profile?.id,id);
+  assert.ok(profile.notes.length>=2);
+  assert.equal(findCatalogProfile({...label,concentration:'UNKNOWN'}),null);
+ }
+ assert.equal(findCatalogProfile({brand:'Nishane',name:'Hacivat',concentration:'EDP'}),null);
+ assert.equal(findCatalogProfile({brand:'Sol de Janeiro',name:'Cheirosa 62 Intense',concentration:'MIST'}),null);
+ const label={brand:'Yves Saint Laurent',name:"La Nuit de L'Homme",concentration:'EDP'};
+ assert.equal(findCatalogProfile(label),null);
+ const original=findCatalogProfile({...label,name:label.name+' (2019)'});
+ const reformulated=findCatalogProfile({...label,name:label.name+' (2026)'});
+ assert.ok(original&&reformulated);
+ assert.ok(original.notes.some(note=>note.name==='Grapefruit'));
+ assert.ok(reformulated.notes.some(note=>note.name==='Tobacco'));
+ assert.ok(original.links.some(link=>link.kind==='jomashop-listing'));
+ assert.ok(!reformulated.links.some(link=>link.kind==='jomashop-listing'));
 });
 
 test('catalog retains wear-source disagreement and uses only credited local photo files',()=>{
