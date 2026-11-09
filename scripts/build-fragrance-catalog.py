@@ -309,6 +309,7 @@ def main():
     parser.add_argument("mysecretcart_csv", type=Path)
     parser.add_argument("gouttes_json", type=Path)
     parser.add_argument("--checked-at", type=date.fromisoformat, required=True)
+    parser.add_argument("--output-dir", type=Path, default=CATALOG)
     args = parser.parse_args()
     references = json.loads((CATALOG / "reviewed.json").read_text(encoding="utf-8"))
     reviewed = {identity_key(r["brand"], r["name"], r["concentration"]): r for r in references}
@@ -342,7 +343,6 @@ def main():
     if unused:
         raise ValueError(f"References for unknown editions: {sorted(unused)}")
     output = "[\n" + ",\n".join("  " + json.dumps(row, ensure_ascii=False) for row in profiles) + "\n]\n"
-    (CATALOG / "fragrances.json").write_text(output, encoding="utf-8", newline="\n")
     public_editions = []
     for key, row in sorted(unique_rows(scento_rows, "house").items()):
         entry = {"id": "scento:" + row["id"], "brand": row["house"], "name": row["name"], "concentration": key[2]}
@@ -350,7 +350,9 @@ def main():
             entry["releaseYear"] = int(row["year"])
         public_editions.append(entry)
     edition_output = "[\n" + ",\n".join("  " + json.dumps(row, ensure_ascii=False) for row in public_editions) + "\n]\n"
-    (CATALOG / "thumbnail-editions.json").write_text(edition_output, encoding="utf-8", newline="\n")
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    (args.output_dir / "fragrances.json").write_text(output, encoding="utf-8", newline="\n")
+    (args.output_dir / "thumbnail-editions.json").write_text(edition_output, encoding="utf-8", newline="\n")
     print(json.dumps({
         "editions": len(profiles), "with_notes": sum(bool(p["notes"]) for p in profiles),
         "with_performance": sum(bool(p["performance"]) for p in profiles),

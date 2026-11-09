@@ -12,9 +12,11 @@ import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
 import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
 import type {lookupFragellaThumbnail} from '../src/lib/catalog-thumbnail.ts';
+import {hasWebThumbnail,type lookupWebThumbnail} from '../src/lib/catalog-web-thumbnails.ts';
 const require=createRequire(import.meta.url),next=require('next/server');
-function harness({key='',lookup=async()=>null,images=false,thumbnail=async()=>null}:{
+function harness({key='',lookup=async()=>null,images=false,thumbnail=async()=>null,webThumbnail=async()=>null}:{
  key?:string;lookup?:typeof lookupFragellaRatings;images?:boolean;thumbnail?:typeof lookupFragellaThumbnail;
+ webThumbnail?:typeof lookupWebThumbnail;
 }={}){
  const db=new Store(':memory:'),module={exports:{} as any};
  const source=readFileSync(new URL('../src/app/api/[...path]/route.ts',import.meta.url),'utf8');
@@ -23,6 +25,7 @@ function harness({key='',lookup=async()=>null,images=false,thumbnail=async()=>nu
   if(name==='@/lib/catalog')return catalog;
   if(name==='@/lib/fragella')return {lookupFragellaRatings:lookup};
   if(name==='@/lib/catalog-thumbnail')return {lookupFragellaThumbnail:thumbnail};
+  if(name==='@/lib/catalog-web-thumbnails')return {hasWebThumbnail,lookupWebThumbnail:webThumbnail};
   if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/scent-search')return search;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
  }});
  async function call(path:string,{method='GET',body,raw,token,cookie,origin='http://localhost:3237',url='http://localhost:3237',headers={}}:{method?:string;body?:unknown;raw?:string;token?:string;cookie?:string;origin?:string|null;url?:string;headers?:Record<string,string>}={}){
@@ -176,6 +179,33 @@ test('new entries get thumbnails only for a public exact edition and the current
   finish();
   assert.equal((await revoked.pending).status,401);
  } finally {h.db.close();}
+});
+
+test('new entries with a reviewed web source can load its image without a provider key',async()=>{
+ const seen:string[]=[];
+ const h=harness({webThumbnail:async edition=>{
+  seen.push(edition.id);
+  return {uri:'data:image/jpeg;base64,fixture',caption:edition.name,
+   source:{id:'fixture',kind:'photo',publisher:'Wikimedia Commons',url:'https://commons.wikimedia.org/'}};
+ }});
+ try {
+  const owner=h.db.createDemo(),other=h.db.createDemo();
+  const token=h.db.createSession(owner.id),otherToken=h.db.createSession(other.id);
+  const saved=h.db.addBottle(owner.id,{...h.db.state(owner.id).bottles[0],
+   brand:'Bvlgari',name:'Aqva Pour Homme',concentration:'EDT'});
+  const root='bottles/'+saved.id;
+  const profile=await h.call(root+'/profile',{token});
+  assert.equal(profile.body.thumbnailLookup,true);
+  assert.equal((await h.call(root+'/thumbnail',{token:otherToken})).status,404);
+  assert.deepEqual(seen,[]);
+  const response=await h.call(root+'/thumbnail',{token});
+  assert.equal(response.body.variantId,saved.variantId);
+  assert.equal(response.body.photo.source.publisher,'Wikimedia Commons');
+  assert.deepEqual(seen,['scento:bvlgari-aqva-pour-homme']);
+  h.db.updateBottle(owner.id,saved.id,{concentration:'EDP'});
+  assert.equal((await h.call(root+'/thumbnail',{token})).body.photo,null);
+  assert.equal(seen.length,1);
+ }finally{h.db.close();}
 });
 
 test('manual saves accept cologne, extrait and mist without conflating editions',async()=>{

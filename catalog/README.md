@@ -42,9 +42,11 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 ## Bottle thumbnails
 
-FragDex shows a single bottle thumbnail and enlarges that same image on tap. It uses reviewed front and three-quarter views of the exact release. Some photos are cropped to make the bottle clear at thumbnail size. If a photo fails to load, the entry tries the next reviewed thumbnail when available. Entries without a usable image use a text-only header.
+FragDex shows a single bottle thumbnail and enlarges that same image on tap. It uses reviewed front and three-quarter views of the exact release. Some photos are cropped to make the bottle clear at thumbnail size. The app tries bundled images first, followed by the reviewed Wikimedia source and then Fragella if configured. Entries without a usable image use a text-only header.
 
 FragOut serves 35 JPEGs with camera metadata removed. Edition checks compare the label, barcode, or documented bottle design with the exact product. The [photo registry](photos.json) records the view, photographer, source, license, and caption for each file. FragDex displays the credits under **Sources & credits**.
+
+The [web photo registry](web-thumbnails.json) pins a reviewed Wikimedia Commons file and its fingerprint to the exact fragrance and concentration. The server rechecks the license and file before displaying a resized JPEG with credit. Reviewed previews have their own fingerprints and reduce download size. This fallback is on by default and works without a developer key. Set `FRAGOUT_WEB_THUMBNAILS=false` to turn it off. Set `FRAGOUT_WIKIMEDIA_CONTACT` to a public project URL or operator contact when running a shared installation. [Wikimedia reuse guidance](https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia) · [MediaWiki API etiquette](https://www.mediawiki.org/wiki/API:Etiquette)
 
 ### Enable live thumbnail lookup
 
@@ -52,7 +54,16 @@ Set `FRAGOUT_FRAGELLA_IMAGES=true` alongside the server's private `FRAGOUT_FRAGE
 
 ## Refreshing the snapshot
 
-Download the three licensed data files from the table to a scratch directory. Review changes to source rights, scope, and exact editions before regenerating the catalog. For each photo, compare the actual image with the exact product and review its reuse license. Select a clear view of the bottle from the front or at a front angle. Save the image next to a JSON array of reviewed records. Each record has `id` for the exact catalog ID, `image` for the local filename, `view` set to `front` or `front-angle`, `publisher`, `url`, `credit`, `caption`, and `license` with `name` and `url`. Give backup thumbnails a `suffix`. Set `cover` to true to place a new thumbnail first. The importer resizes the selected photos, removes camera metadata, and updates the registry.
+The scraper downloads the three licensed data sources above, stages a fresh snapshot, and searches Wikimedia for images for the selected public releases. It creates a new run folder with the source fingerprints, a draft catalog, and a report listing candidates and credits. Notes and wear estimates go through the existing catalog compiler. Reviewed retailer links and dupe relationships stay in their separate registries. Review the draft and the candidate list before publishing changes.
+
+```powershell
+npm run catalog:scrape -- --out ../catalog-review
+npm run catalog:scrape -- --out ../catalog-review --photos-only --edition scento:bvlgari-aqva-pour-homme
+```
+
+Use `--limit` and `--offset` to scan the next group of missing thumbnails. The default group has ten editions. Repeat `--edition` to review specific public IDs, or use `--data-only` for the notes and ratings refresh. If Wikimedia pauses a scan, the report keeps completed results and the next offset. After the requested pause, use `--photos-only --offset` to resume. The batch tool uses Node and Python.
+
+For each photo, compare the actual image with the exact product and review its reuse license. Select a clear view of the bottle from the front or at a front angle. To serve a reviewed Wikimedia file on demand, add its file title, fingerprint, license URL, bottle identity, view, and caption to the web photo registry. To bundle a photo, save it next to a JSON array of reviewed records. Each record has `id` for the exact catalog ID, `image` for the local filename, `view` set to `front` or `front-angle`, `publisher`, `url`, `credit`, `caption`, and `license` with `name` and `url`. Give backup thumbnails a `suffix`. Set `cover` to true to place a new thumbnail first. The importer resizes the selected photos, removes camera metadata, and updates the registry.
 
 ```powershell
 node scripts/import-fragrance-photos.mjs PATH_TO_REVIEWED_PHOTOS.json

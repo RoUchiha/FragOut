@@ -9,6 +9,7 @@
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "catalog:scrape": "node --experimental-strip-types scripts/scrape-fragrance-catalog.mjs",
     "verify": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {

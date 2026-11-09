@@ -10,6 +10,7 @@ import {requestPolicy} from '@/lib/security';
 import {findCatalogDupes,findCatalogProfile,findThumbnailEdition} from '@/lib/catalog';
 import {lookupFragellaRatings} from '@/lib/fragella';
 import {lookupFragellaThumbnail} from '@/lib/catalog-thumbnail';
+import {hasWebThumbnail,lookupWebThumbnail} from '@/lib/catalog-web-thumbnails';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
@@ -75,12 +76,20 @@ async function handle(req:NextRequest){
         if(!bottle)return reply({error:'Bottle not found.'},404);
         const profile=findCatalogProfile(bottle);
         const key=process.env.FRAGOUT_FRAGELLA_API_KEY?.trim();
-        const edition=!user.demo&&key&&process.env.FRAGOUT_FRAGELLA_IMAGES==='true'?findThumbnailEdition(bottle,profile):null;
+        const webEnabled=process.env.FRAGOUT_WEB_THUMBNAILS!=='false';
+        const fragellaKey=!user.demo&&process.env.FRAGOUT_FRAGELLA_IMAGES==='true'?key:undefined;
+        const edition=webEnabled||fragellaKey?findThumbnailEdition(bottle,profile):null;
+        const fromWeb=!!edition&&webEnabled&&hasWebThumbnail(edition);
+        const thumbnailLookup=!!edition&&(fromWeb||!!fragellaKey);
         if(path[2]==='thumbnail'){
           const result:BottleThumbnailReply={variantId:bottle.variantId,photo:null};
-          if(!edition||!key)return reply(result);
-          result.photo=await lookupFragellaThumbnail(edition,key,()=>
-            db.limit('fragella-image-user:'+user.id,10,60000)&&db.limit('fragella-image-installation',30,60000));
+          if(!edition||!thumbnailLookup)return reply(result);
+          if(fromWeb)result.photo=await lookupWebThumbnail(edition,()=>
+            db.limit('web-image-user:'+user.id,4,60000)&&db.limit('web-image-installation',12,60000));
+          if(!result.photo&&fragellaKey&&db.sessionUser(token)?.id===user.id&&
+             db.getBottle(user.id,bottle.id)?.variantId===bottle.variantId)
+            result.photo=await lookupFragellaThumbnail(edition,fragellaKey,()=>
+              db.limit('fragella-image-user:'+user.id,10,60000)&&db.limit('fragella-image-installation',30,60000));
           if(db.sessionUser(token)?.id!==user.id)return reply({error:'Please sign in to continue.'},401);
           const current=db.getBottle(user.id,bottle.id);
           if(!current)return reply({error:'Bottle not found.'},404);
@@ -88,7 +97,7 @@ async function handle(req:NextRequest){
           return reply(result);
         }
         if(!profile?.releaseYear||!key||user.demo)
-          return reply(bottleProfile(bottle,profile,!!edition));
+          return reply(bottleProfile(bottle,profile,thumbnailLookup));
         const live=await lookupFragellaRatings(profile,key,()=>
           db.limit('fragella-user:'+user.id,4,60000)&&db.limit('fragella-installation',20,60000));
         if(db.sessionUser(token)?.id!==user.id)return reply({error:'Please sign in to continue.'},401);
@@ -99,7 +108,7 @@ async function handle(req:NextRequest){
         const liveRatings=live?.ratings.filter(rating=>rating.kind==='published'||!profile.ratings.some(existing=>existing.facet===rating.facet));
         return reply(bottleProfile(bottle,live&&liveRatings?.length?{
           ...profile,ratings:[...liveRatings,...profile.ratings],sources:[...profile.sources,live.source],
-        }:profile,!!edition));
+        }:profile,thumbnailLookup));
       }
       if(method==='PATCH'&&path.length===2&&path[1]){const b=db.updateBottle(user.id,path[1],bottleSchema.partial().parse(body));return b?reply(b):reply({error:'Bottle not found.'},404);}
       if(method==='DELETE'&&path.length===2&&path[1])return db.removeBottle(user.id,path[1])?reply({ok:true}):reply({error:'Bottle not found.'},404);

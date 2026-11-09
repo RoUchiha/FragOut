@@ -43,7 +43,7 @@ The mobile collection reads bottle labels through the selected vision provider a
 
 Save a fragrance or tap one in Collection to open FragDex. It matches the exact house, release and concentration against a local reference catalog. Tap the bottle thumbnail to enlarge it when a reviewed photo is available. Profiles show cross-checked notes and five-star ratings where evidence is available. Tap a score to open its source in a browser sheet. Fragrance and retailer links sit below the ratings.
 
-The starter catalog has 67 exact editions, with notes for 66, licensed photos for six and wear estimates for 63. Unsupported facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [catalog sources, scoring, and setup](catalog/README.md).
+The catalog includes 215 exact editions with corroborated notes, bundled photos for 31 editions, and reviewed Wikimedia Commons photos available as a web fallback. Unsupported facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [catalog sources, scraper, and setup](catalog/README.md).
 
 ## Free default, optional personal providers
 
