@@ -112,25 +112,26 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
    onChange={setFilter}/>
   {busy&&<Spinner label="Reading bottle label…"/>}
   {visible.length ? <View style={styles.grid}>
-   {visible.map(bottle=><View key={bottle.id} style={styles.tile}>
-    <View style={[styles.bottleStage,{backgroundColor:bottle.color+'28'}]}>
-     <Pressable accessibilityRole="button" accessibilityLabel={'Open profile for '+bottle.name}
-      onPress={()=>setViewing(bottle)} style={{width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
-      <BottleArt bottle={bottle} size={114} illustrate={bottle.provenance==='demo'}/>
+   {visible.map(bottle=>{
+    const demo=bottle.provenance==='demo';
+    return <View key={bottle.id} style={[!demo&&styles.card,styles.tile,!demo&&{padding:9}]}>
+     {demo&&<Pressable accessibilityRole="button" accessibilityLabel={'Open profile for '+bottle.name}
+      onPress={()=>setViewing(bottle)} style={[styles.bottleStage,{backgroundColor:bottle.color+'28'}]}>
+      <BottleArt bottle={bottle} size={114}/>
+     </Pressable>}
+     <Pressable accessibilityRole="button" accessibilityLabel={'Details for '+bottle.name}
+      onPress={()=>setViewing(bottle)} style={{paddingVertical:7,paddingRight:demo?0:32,gap:2}}>
+      <Text style={styles.h3} numberOfLines={2}>{bottle.name}</Text>
+      <Text style={styles.small} numberOfLines={1}>{bottle.brand} · {bottle.concentration}</Text>
+      {!!bottle.family&&<Text style={styles.small} numberOfLines={1}>{bottle.family}</Text>}
      </Pressable>
      <Pressable accessibilityRole="button" accessibilityLabel={(bottle.favorite?'Unfavorite ':'Favorite ')+bottle.name}
       accessibilityState={{selected:bottle.favorite}} onPress={()=>void favorite(bottle)}
-      style={{position:'absolute',right:4,top:4,padding:9}}>
+      style={{position:'absolute',right:0,top:0,width:44,height:44,alignItems:'center',justifyContent:'center'}}>
       <Heart size={17} color={colors.link} fill={bottle.favorite?colors.link:'transparent'}/>
      </Pressable>
-    </View>
-    <Pressable accessibilityRole="button" accessibilityLabel={'Details for '+bottle.name}
-     onPress={()=>setViewing(bottle)} style={{paddingVertical:7,gap:2}}>
-     <Text style={styles.h3} numberOfLines={2}>{bottle.name}</Text>
-     <Text style={styles.small} numberOfLines={1}>{bottle.brand} · {bottle.concentration}</Text>
-     {!!bottle.family&&<Text style={styles.small} numberOfLines={1}>{bottle.family}</Text>}
-    </Pressable>
-   </View>)}
+    </View>;
+   })}
   </View> : <Empty title={query.trim()?'No matches':'No bottles here'}
    detail={query.trim()?'Try a different name, brand, or note.':'Add a fragrance by name or scan the label.'}/>}
 

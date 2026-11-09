@@ -1,14 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import {Image,Pressable,Text,View} from 'react-native';
 import {openBrowserAsync,WebBrowserPresentationStyle} from 'expo-web-browser';
-import {ChevronDown,ChevronLeft,ChevronRight,ExternalLink,Images,Maximize2} from 'lucide-react-native';
-import {api,sessionScope} from './api';
-import {Btn,catalogPhotoUrl,IconButton,Section,Sheet,Spinner,useUi} from './ui';
+import {ChevronDown,ExternalLink,Maximize2} from 'lucide-react-native';
+import {api,serverUrl,sessionScope} from './api';
+import {Btn,Section,Sheet,Spinner,useUi} from './ui';
 import FragDexDupes from './FragDexDupes';
 import FragDexLink from './FragDexLink';
 import FragDexRatings from './FragDexRatings';
-import {catalogGalleryPhotos,catalogPhotoReferences,catalogPhotoSearchUrl} from '../../src/lib/catalog-photos';
-import type {Bottle,BottleProfileReply,CatalogProfile} from '../../src/lib/types';
+import {catalogThumbnailPhotos} from '../../src/lib/catalog-photos';
+import type {Bottle,BottleProfileReply} from '../../src/lib/types';
 
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
 type Lookup=BottleProfileReply|{error:string};
@@ -19,7 +19,7 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const {styles,colors}=useUi();
  const [lookup,setLookup]=useState<Lookup|null>(null);
  const [attempt,setAttempt]=useState(0);
- const [photoIndex,setPhotoIndex]=useState<number|null>(null);
+ const [enlarged,setEnlarged]=useState(false);
  const [failedPhotos,setFailedPhotos]=useState<string[]>([]);
  const [showSources,setShowSources]=useState(false);
  const [linkError,setLinkError]=useState('');
@@ -37,9 +37,9 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const changed=!!reply&&reply.variantId!==bottle.variantId;
  const profile=changed?null:reply?.profile;
  const dupes=changed?null:reply?.dupes;
- const photos=catalogGalleryPhotos(profile,failedPhotos);
- const featured=photos[0];
- const featuredUrl=catalogPhotoUrl(featured?.path);
+ const [thumbnail]=catalogThumbnailPhotos(profile,failedPhotos);
+ const photoUrl=thumbnail?serverUrl()+thumbnail.path:undefined;
+ const name=profile?.name??bottle.name;
  const noteGroups=stages.map(([stage,label])=>({
   label,names:profile?.notes.filter(note=>note.stage===stage).map(note=>note.name)??[],
  })).filter(group=>group.names.length>0);
@@ -54,37 +54,23 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
 
  function markPhotoFailed(path:string) {
   setFailedPhotos(current=>current.includes(path)?current:[...current,path]);
+  setEnlarged(false);
  }
 
- if(photoIndex!==null) {
-  const index=Math.min(photoIndex,photos.length-1);
-  const photo=photos[index];
-  const uri=catalogPhotoUrl(photo?.path);
-  return <Sheet title="Bottle photos" onClose={()=>setPhotoIndex(null)}>
-   {photo&&uri&&<Image key={photo.path} accessible accessibilityLabel={bottle.name+' · '+photo.caption}
-    source={{uri}} resizeMode="contain" onError={()=>markPhotoFailed(photo.path)}
-    style={[styles.image,{height:340}]}/>}
-   {photos.length>1&&<View style={[styles.spread,{alignSelf:'center',gap:16}]}>
-    <IconButton label="Previous photo" icon={<ChevronLeft size={20} color={colors.ink}/>}
-     disabled={index===0} onPress={()=>setPhotoIndex(index-1)}/>
-    <Text accessibilityLiveRegion="polite" style={styles.small}>{index+1} / {photos.length}</Text>
-    <IconButton label="Next photo" icon={<ChevronRight size={20} color={colors.ink}/>}
-     disabled={index===photos.length-1} onPress={()=>setPhotoIndex(index+1)}/>
-   </View>}
-   {photo&&<Text style={[styles.small,{textAlign:'center'}]}>{photo.caption}</Text>}
-   <PhotoReferences bottle={bottle} profile={profile} visit={visit}/>
-   {linkError&&<Text accessibilityRole="alert" style={styles.muted}>{linkError}</Text>}
+ if(enlarged&&thumbnail&&photoUrl) {
+  return <Sheet title={name} onClose={()=>setEnlarged(false)}>
+   <Image accessible accessibilityLabel={thumbnail.caption} source={{uri:photoUrl}} resizeMode="contain"
+    onError={()=>markPhotoFailed(thumbnail.path)} style={[styles.image,{height:400}]}/>
   </Sheet>;
  }
 
  return <Sheet title="FragDex" onClose={onClose}>
   <View style={[styles.row,{alignItems:'center',gap:14}]}>
-   {featured&&featuredUrl&&<Pressable accessibilityRole="button" accessibilityLabel="Open bottle photos"
-     onPress={()=>setPhotoIndex(0)}>
-     <Image key={featured.path} accessible accessibilityLabel={bottle.name+' · '+featured.caption}
-      source={{uri:featuredUrl}} resizeMode="contain"
-      onError={()=>markPhotoFailed(featured.path)}
-      style={{width:88,height:114,borderRadius:5,backgroundColor:colors.wash}}/>
+   {thumbnail&&photoUrl&&<Pressable accessibilityRole="button" accessibilityLabel="Enlarge bottle thumbnail"
+     onPress={()=>setEnlarged(true)}>
+     <Image key={thumbnail.path} source={{uri:photoUrl}} resizeMode="contain"
+      onError={()=>markPhotoFailed(thumbnail.path)}
+      style={{width:96,height:114,borderRadius:5,backgroundColor:colors.wash}}/>
      <View pointerEvents="none" style={{position:'absolute',right:4,bottom:4,padding:4,
       borderRadius:4,backgroundColor:colors.surface}}>
       <Maximize2 size={12} color={colors.ink}/>
@@ -92,14 +78,12 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
     </Pressable>}
    <View style={{flex:1,minWidth:0,gap:4}}>
     <Text style={styles.small}>{profile?.brand??bottle.brand}</Text>
-    <Text style={styles.h2}>{profile?.name??bottle.name}</Text>
+    <Text style={styles.h2}>{name}</Text>
     <Text style={styles.small}>{bottle.concentration==='UNKNOWN'?'Concentration unknown':bottle.concentration}</Text>
     <Btn label="Edit bottle" kind="secondary" disabled={!lookup||changed}
      onPress={onEdit} style={{alignSelf:'flex-start',marginTop:3}}/>
    </View>
   </View>
-  {reply&&!changed&&!featuredUrl&&(profile||bottle.provenance!=='demo')&&
-   <PhotoReferences bottle={bottle} profile={profile} visit={visit}/>}
   {!lookup&&<Spinner label="Checking catalog…"/>}
   {lookup&&'error' in lookup&&<View style={styles.notice}>
    <Text style={styles.muted}>{lookup.error}</Text>
@@ -156,24 +140,4 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
   </>}
   {linkError&&<Text accessibilityRole="alert" style={styles.muted}>{linkError}</Text>}
  </Sheet>;
-}
-
-function PhotoReferences({bottle,profile,visit}:{
- bottle:Bottle;profile:CatalogProfile|null|undefined;visit:(url:string)=>void;
-}){
- const {styles,colors}=useUi();
- const references=profile?catalogPhotoReferences(profile):
-  [{label:'Search bottle photos',url:catalogPhotoSearchUrl(bottle)}];
- return <View style={{gap:5}}>
-  <Section title="Bottle photos"/>
-  <View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
-   {references.map(({label,url})=><FragDexLink key={url} url={url} visit={visit}
-    style={[styles.row,{minHeight:44,gap:5,paddingHorizontal:9,borderWidth:1,borderColor:colors.line,borderRadius:6}]}>
-    <Images size={14} color={colors.link}/>
-    <Text style={styles.link}>{label}</Text>
-    <ExternalLink size={11} color={colors.link}/>
-   </FragDexLink>)}
-  </View>
-  {!profile&&<Text style={styles.small}>Search shares the bottle label with Google.</Text>}
- </View>;
 }

@@ -101,13 +101,13 @@ test('fragrance profiles require bottle ownership and resolve the current editio
   assert.equal(edp.status,200);
   assert.equal(edp.body.variantId,owned.variantId);
   assert.equal(edp.body.profile.concentration,'EDP');
-  assert.equal(edp.body.profile.additionalPhotos[0].path,'/catalog/bottles/dior-sauvage-edp-bailo.jpg');
+  assert.equal(edp.body.profile.photo.path,'/catalog/bottles/dior-sauvage-edp.jpg');
   const product=(profile:{links:{kind?:string;url:string}[]})=>
    profile.links.find(link=>link.kind==='jomashop-listing')?.url;
   assert.match(product(edp.body.profile)??'',/^https:\/\/www\.jomashop\.com\/[a-z0-9-]+\.html$/);
   assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhoto,edp.body.profile.photo.path);
   assert.deepEqual((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhotos,
-   [edp.body.profile.photo.path,...edp.body.profile.additionalPhotos.map((photo:{path:string})=>photo.path)]);
+   [edp.body.profile.photo.path]);
   assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{catalogPhotos:['/data/private.jpg']}})).status,400);
   assert.ok(!JSON.stringify(edp.body).includes('private-catalog-canary'));
   assert.equal((await h.call('bottles/'+owned.id,{method:'PATCH',token,body:{concentration:'EDT'}})).status,200);

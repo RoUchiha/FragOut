@@ -8,13 +8,16 @@ import {catalogReferenceUrl} from '../src/lib/catalog-ratings.ts';
 const slug=z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(130);
 const creditLine=z.string().trim().min(1).max(200);
 const sourceUrl=z.string().max(500).refine(url=>!!catalogReferenceUrl(url),'Use a public HTTPS source page');
-const licenseUrl=sourceUrl.refine(url=>/^(?:https:\/\/creativecommons\.org\/(?:licenses\/(?:by|by-sa)\/(?:2\.0|2\.5|3\.0|4\.0)\/|publicdomain\/zero\/1\.0\/)|https:\/\/unsplash\.com\/license)$/.test(url),
- 'Use a reviewed license that allows resizing and redistribution');
+const stockPhotoLicenses=new Set(['https://unsplash.com/license','https://www.pexels.com/license/']);
+const licenseUrl=sourceUrl.refine(url=>stockPhotoLicenses.has(url)||
+ /^https:\/\/creativecommons\.org\/(?:licenses\/(?:by|by-sa)\/(?:2\.0|2\.5|3\.0|4\.0)\/|publicdomain\/zero\/1\.0\/)$/.test(url),
+ 'Use a reviewed license that allows resizing and reuse in FragDex');
 const manifestSchema=z.array(z.object({
  id:slug,
  image:z.string().max(180).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpe?g|png|webp)$/i),
  suffix:slug.optional(),
  cover:z.boolean().optional(),
+ view:z.enum(['front','front-angle']),
  publisher:creditLine,
  url:sourceUrl,
  credit:creditLine,
@@ -39,7 +42,7 @@ try {
  const registry=JSON.parse(await readFile(registryPath,'utf8'));
  const targets=new Set();
  const additions=[];
- for(const {id,image,suffix,cover,publisher,url,credit,license,caption} of manifest) {
+ for(const {id,image,suffix,cover,view,publisher,url,credit,license,caption} of manifest) {
   if(!ids.has(id)) throw new Error('Unknown fragrance edition '+id);
   const file=suffix?id+'-'+suffix:id;
   if(targets.has(file)) throw new Error('Duplicate photo '+file);
@@ -60,7 +63,7 @@ try {
   const photos=registry[id]??=[];
   const existing=photos.find(item=>item.file===file);
   if(existing&&existing.url!==url) throw new Error('Photo already credited to a different source '+file);
-  const record={file,publisher,url,credit:credit+' · JPEG optimized',license,caption};
+  const record={file,view,publisher,url,credit:credit+' · JPEG optimized',license,caption};
   registry[id]=photos.filter(item=>item.file!==file);
   if(cover) registry[id].unshift(record);
   else registry[id].splice(existing?photos.indexOf(existing):registry[id].length,0,record);

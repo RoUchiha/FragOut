@@ -1,48 +1,11 @@
 {
-  "armaf-club-de-nuit-intense-man-edt": [
-    {
-      "file": "armaf-club-de-nuit-intense-man-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=6085010044712&id=2",
-      "credit": "smoothie-app · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "105 mL Eau de Toilette box"
-    }
-  ],
-  "calvin-klein-euphoria-edp": [
-    {
-      "file": "calvin-klein-euphoria-edp",
-      "url": "https://commons.wikimedia.org/wiki/File:CK_Euphoria_Bottle.jpg",
-      "credit": "ggjsmith · edited by Bruce The Deus, resized",
-      "license": {
-        "name": "CC BY 2.0",
-        "url": "https://creativecommons.org/licenses/by/2.0/"
-      },
-      "caption": "30 mL reference bottle"
-    }
-  ],
-  "carolina-herrera-good-girl-edp": [
-    {
-      "file": "carolina-herrera-good-girl-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8411061819838&id=front_fr",
-      "credit": "openfoodfacts-contributors · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "50 mL Eau de Parfum box"
-    }
-  ],
   "chanel-bleu-de-chanel-edp": [
     {
       "file": "chanel-bleu-de-chanel-edp",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/bleu-de-chanel-perfume-bottle-2b0JeJTEclQ",
-      "credit": "Jeroen den Otter · resized",
+      "credit": "Jeroen den Otter · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -50,59 +13,24 @@
       "caption": "Bleu de Chanel Eau de Parfum"
     }
   ],
-  "chanel-bleu-de-chanel-parfum": [
-    {
-      "file": "chanel-bleu-de-chanel-parfum",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=0008309124568&id=front_xx",
-      "credit": "product-scan-com · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Parfum bottle front"
-    }
-  ],
-  "chanel-chance-eau-tendre-edt": [
-    {
-      "file": "chanel-chance-eau-tendre-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3145891263305&id=front_fr",
-      "credit": "rdg · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "150 mL Eau de Toilette box"
-    }
-  ],
   "chanel-coco-mademoiselle-edp": [
     {
       "file": "chanel-coco-mademoiselle-edp",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Coco_mademoiselle.jpg",
-      "credit": "Brownchl · crop by Cjp24 · JPEG optimized",
+      "credit": "Brownchl · crop by Cjp24 · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "CC BY 3.0",
         "url": "https://creativecommons.org/licenses/by/3.0/"
       },
       "caption": "Coco Mademoiselle Eau de Parfum bottle"
-    },
-    {
-      "file": "chanel-coco-mademoiselle-edp-box",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3145891165708&id=front_fr",
-      "credit": "alixngu · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "200 mL Eau de Parfum box"
     }
   ],
   "chanel-no-5-edp": [
     {
       "file": "chanel-no-5-edp",
+      "view": "front",
       "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg",
       "credit": "Arz · public-domain photograph, resized",
       "license": {
@@ -115,6 +43,7 @@
   "creed-aventus-edp": [
     {
       "file": "creed-aventus-edp",
+      "view": "front-angle",
       "publisher": "Flickr",
       "url": "https://www.flickr.com/photos/94977883@N08/49703467302/",
       "credit": "TheBetterDay · JPEG optimized",
@@ -123,73 +52,29 @@
         "url": "https://creativecommons.org/licenses/by-nd/2.0/"
       },
       "caption": "Aventus bottle"
-    },
-    {
-      "file": "creed-aventus-edp-atomizer",
-      "publisher": "Flickr",
-      "url": "https://www.flickr.com/photos/94977883@N08/49702619558/",
-      "credit": "TheBetterDay · JPEG optimized",
-      "license": {
-        "name": "CC BY-ND 2.0",
-        "url": "https://creativecommons.org/licenses/by-nd/2.0/"
-      },
-      "caption": "Cap and atomizer"
-    },
-    {
-      "file": "creed-aventus-edp-box",
-      "publisher": "Flickr",
-      "url": "https://www.flickr.com/photos/94977883@N08/49703152961/",
-      "credit": "TheBetterDay · JPEG optimized",
-      "license": {
-        "name": "CC BY-ND 2.0",
-        "url": "https://creativecommons.org/licenses/by-nd/2.0/"
-      },
-      "caption": "Bottle and presentation box"
-    }
-  ],
-  "dior-jadore-edp": [
-    {
-      "file": "dior-jadore-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3348900417878&id=front_fr",
-      "credit": "alixngu · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "J’adore Eau de Parfum box"
     }
   ],
   "dior-sauvage-edp": [
     {
       "file": "dior-sauvage-edp",
+      "view": "front",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-bottle-of-dior-sauvage-eau-de-parfum-bgrM9NxKLRQ",
-      "credit": "Farhan Chohan · resized",
+      "credit": "Farhan Chohan · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
       },
       "caption": "Reference bottle"
-    },
-    {
-      "file": "dior-sauvage-edp-bailo",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/dior-sauvage-eau-de-parfum-bottle-Fnn9_r9ewOY",
-      "credit": "Russel Bailo · resized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Sauvage Eau de Parfum"
     }
   ],
   "dior-sauvage-edt": [
     {
       "file": "dior-sauvage-edt",
+      "view": "front",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/dior-sauvage-perfume-bottle-with-water-droplets-nErXDQGI_CU",
-      "credit": "Lufefe Ngilana · JPEG optimized",
+      "credit": "Lufefe Ngilana · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -198,48 +83,24 @@
     },
     {
       "file": "dior-sauvage-edt-side",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-man-holding-a-bottle-of-dior-sauvage-JTqE39KQJmc",
-      "credit": "Tuan Anh Nguyen · JPEG optimized",
+      "credit": "Tuan Anh Nguyen · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
       },
-      "caption": "Sauvage EDT in hand"
-    }
-  ],
-  "dior-sauvage-elixir": [
-    {
-      "file": "dior-sauvage-elixir",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3348901567572&id=1",
-      "credit": "openfoodfacts-contributors · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Sauvage Elixir 60 mL box"
-    }
-  ],
-  "dolce-and-gabbana-light-blue-edt": [
-    {
-      "file": "dolce-and-gabbana-light-blue-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8057971188192&id=1",
-      "credit": "daxpot · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "2025 Light Blue EDT 100 mL box"
+      "caption": "Sauvage Eau de Toilette at an angle"
     }
   ],
   "dolce-and-gabbana-the-one-for-men-edp": [
     {
       "file": "dolce-and-gabbana-the-one-for-men-edp",
+      "view": "front",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/fr/photos/flacon-de-parfum-dolce-gabbana-the-one-sur-table-en-bois-blanc-wSX-poSLSKE",
-      "credit": "Quilia · JPEG optimized",
+      "credit": "Quilia · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -249,21 +110,11 @@
   ],
   "giorgio-armani-acqua-di-gio-edt": [
     {
-      "file": "giorgio-armani-acqua-di-gio-edt",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/acqua-di-gio-perfume-bottle-on-textured-surface-e65oBXnPZ2I",
-      "credit": "Sierra Alpha Juliet · resized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Acqua di Giò Eau de Toilette"
-    },
-    {
       "file": "giorgio-armani-acqua-di-gio-edt-classic",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-close-up-of-a-bottle-of-perfume-Sdg64dvfRk0",
-      "credit": "Isaac Wolff · resized",
+      "credit": "Isaac Wolff · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -274,6 +125,7 @@
   "giorgio-armani-armani-code-edt": [
     {
       "file": "giorgio-armani-armani-code-edt",
+      "view": "front",
       "publisher": "Open Beauty Facts",
       "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3360372100522&id=front_en",
       "credit": "openfoodfacts-contributors · JPEG optimized",
@@ -284,122 +136,38 @@
       "caption": "Earlier bottle design"
     }
   ],
-  "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp": [
-    {
-      "file": "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614274347388&id=front_tr",
-      "credit": "erenberk · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Stronger With You Intensely box"
-    }
-  ],
-  "givenchy-linterdit-edp": [
-    {
-      "file": "givenchy-linterdit-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3274872372146&id=front_fr",
-      "credit": "openfoodfacts-contributors · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "L’Interdit Eau de Parfum box"
-    }
-  ],
   "gucci-bloom-edp": [
     {
       "file": "gucci-bloom-edp",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-womans-hand-holding-a-perfume-bottle-in-front-of-a-pink-background-oQoABmEKlQc",
-      "credit": "Karolina Bobek · resized",
+      "credit": "Karolina Bobek · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
       },
       "caption": "Gucci Bloom Eau de Parfum"
-    },
-    {
-      "file": "gucci-bloom-edp-box",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-womans-hand-holding-a-small-box-with-a-perfume-TOBGYAOah7o",
-      "credit": "Karolina Bobek · resized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Bottle and box"
-    }
-  ],
-  "hermes-twilly-dhermes-edp": [
-    {
-      "file": "hermes-twilly-dhermes-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3346133200021&id=front_fr",
-      "credit": "rdg · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Twilly d’Hermès Eau de Parfum box"
-    }
-  ],
-  "hermes-un-jardin-sur-le-nil-edt": [
-    {
-      "file": "hermes-un-jardin-sur-le-nil-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3346138900087&id=front_nl",
-      "credit": "mitxina · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Un Jardin sur le Nil 100 mL box"
-    }
-  ],
-  "hugo-boss-boss-bottled-edp": [
-    {
-      "file": "hugo-boss-boss-bottled-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614229828535&id=2",
-      "credit": "daryl · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "100 mL Eau de Parfum bottle"
-    },
-    {
-      "file": "hugo-boss-boss-bottled-edp-box",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614229828535&id=front_en",
-      "credit": "daryl · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "100 mL Eau de Parfum box"
     }
   ],
   "jean-paul-gaultier-le-male-edt": [
     {
       "file": "jean-paul-gaultier-le-male-edt",
+      "view": "front",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Gaultier_Le_M%C3%A2le.jpg",
-      "credit": "Bruce The Deus · resized",
+      "credit": "Bruce The Deus · resized · Cropped for FragDex",
       "license": {
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0/"
       },
-      "caption": "Bottle and tin"
+      "caption": "Le Male Eau de Toilette bottle"
     }
   ],
   "jean-paul-gaultier-ultra-male-edt": [
     {
       "file": "jean-paul-gaultier-ultra-male-edt",
+      "view": "front-angle",
       "url": "https://commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_Ultra_Male.jpg",
       "credit": "Amin · resized",
       "license": {
@@ -407,35 +175,12 @@
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Reference bottle"
-    },
-    {
-      "file": "jean-paul-gaultier-ultra-male-edt-tin",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8435415011990&id=front_fr",
-      "credit": "kiliweb · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Ultra Male Intense presentation tin"
-    }
-  ],
-  "lattafa-fakhar-black-edp": [
-    {
-      "file": "lattafa-fakhar-black-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=6291107456058&id=1",
-      "credit": "smoothie-app · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "100 mL Fakhar Black box"
     }
   ],
   "le-labo-santal-33-edp": [
     {
       "file": "le-labo-santal-33-edp",
+      "view": "front",
       "url": "https://commons.wikimedia.org/wiki/File:Le_Labo_Santal_33_in_a_50_milliliter_bottle_(cropped).jpg",
       "credit": "The Honest Channel · Commons crop, resized",
       "license": {
@@ -448,6 +193,7 @@
   "maison-francis-kurkdjian-baccarat-rouge-540-edp": [
     {
       "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp",
+      "view": "front",
       "publisher": "Open Beauty Facts",
       "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3700559603116&id=3",
       "credit": "daryl · JPEG optimized",
@@ -456,25 +202,15 @@
         "url": "https://creativecommons.org/licenses/by-sa/3.0/"
       },
       "caption": "70 mL Eau de Parfum bottle"
-    },
-    {
-      "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp-box",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3700559603116&id=front_en",
-      "credit": "daryl · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "70 mL Eau de Parfum box"
     }
   ],
   "marc-jacobs-daisy-edt": [
     {
       "file": "marc-jacobs-daisy-edt",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Daisy_by_Marc_Jacobs.jpg",
-      "credit": "Mycatkins · resized",
+      "credit": "Mycatkins · resized · Cropped for FragDex",
       "license": {
         "name": "CC BY 2.0",
         "url": "https://creativecommons.org/licenses/by/2.0/"
@@ -485,6 +221,7 @@
   "narciso-rodriguez-for-her-edp": [
     {
       "file": "narciso-rodriguez-for-her-edp",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Narciso_Rodriguez_for_Her_Eau_de_Parfum.jpg",
       "credit": "1 nariz por Dênis Pagani · Commons crop and color by Innisfree987 · JPEG optimized",
@@ -495,25 +232,13 @@
       "caption": "For Her Eau de Parfum"
     }
   ],
-  "narciso-rodriguez-for-her-edt": [
-    {
-      "file": "narciso-rodriguez-for-her-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3423470890020&id=front_nl",
-      "credit": "mitxina · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "100 mL Eau de Toilette box"
-    }
-  ],
   "nautica-voyage-edt": [
     {
       "file": "nautica-voyage-edt",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-bottle-of-nautica-on-a-blanket-RDndFJZbZ1M",
-      "credit": "Amrut Roul · resized",
+      "credit": "Amrut Roul · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -524,6 +249,7 @@
   "prada-paradoxe-edp": [
     {
       "file": "prada-paradoxe-edp",
+      "view": "front",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_perfumowana_Prada_Paradoxe_(1).jpg",
       "credit": "Jacek Halicki · JPEG optimized",
@@ -535,6 +261,7 @@
     },
     {
       "file": "prada-paradoxe-edp-angle",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_perfumowana_Prada_Paradoxe_(2).jpg",
       "credit": "Jacek Halicki · JPEG optimized",
@@ -548,6 +275,7 @@
   "rabanne-1-million-edt": [
     {
       "file": "rabanne-1-million-edt",
+      "view": "front-angle",
       "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_toaletowa_Paco_Rabanne_1_Million.jpg",
       "credit": "Jacek Halicki · resized",
       "license": {
@@ -560,9 +288,10 @@
   "rabanne-1-million-lucky-edt": [
     {
       "file": "rabanne-1-million-lucky-edt",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Paco_Rabanne_1_Million_Lucky,_Eau_de_Toilette.jpg",
-      "credit": "DYVER · JPEG optimized",
+      "credit": "DYVER · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "CC BY-SA 4.0",
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
@@ -570,12 +299,27 @@
       "caption": "1 Million Lucky Eau de Toilette"
     }
   ],
+  "tom-ford-ombre-leather-edp": [
+    {
+      "file": "tom-ford-ombre-leather-edp",
+      "view": "front",
+      "publisher": "Pexels",
+      "url": "https://www.pexels.com/photo/perfume-bottle-with-white-inscription-against-dark-background-7487833/",
+      "credit": "Erik Mclean · Cropped for FragDex · JPEG optimized",
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/"
+      },
+      "caption": "Ombré Leather Eau de Parfum bottle"
+    }
+  ],
   "versace-eros-edt": [
     {
       "file": "versace-eros-edt",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/a-bottle-of-perfume-sitting-on-top-of-a-white-pedestal-7_yGs3wx6B4",
-      "credit": "Ojus Jaiswal · resized",
+      "credit": "Ojus Jaiswal · resized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -583,22 +327,10 @@
       "caption": "Eros Eau de Toilette"
     }
   ],
-  "viktor-and-rolf-flowerbomb-edp": [
-    {
-      "file": "viktor-and-rolf-flowerbomb-edp",
-      "publisher": "Flickr",
-      "url": "https://www.flickr.com/photos/8442703@N08/3963454314/",
-      "credit": "M. Al-Baker · JPEG optimized",
-      "license": {
-        "name": "CC BY-ND 2.0",
-        "url": "https://creativecommons.org/licenses/by-nd/2.0/"
-      },
-      "caption": "Bottle and gift presentations"
-    }
-  ],
   "yves-saint-laurent-black-opium-edp": [
     {
       "file": "yves-saint-laurent-black-opium-edp",
+      "view": "front",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Black_opium.jpg",
       "credit": "Dsuarez04 · JPEG optimized",
@@ -607,38 +339,15 @@
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Earlier Black Opium bottle design"
-    },
-    {
-      "file": "yves-saint-laurent-black-opium-edp-box",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3365440787971&id=front_ar",
-      "credit": "openfoodfacts-contributors · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "90 mL Eau de Parfum box"
-    }
-  ],
-  "yves-saint-laurent-la-nuit-de-lhomme-edt": [
-    {
-      "file": "yves-saint-laurent-la-nuit-de-lhomme-edt",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3365440375055&id=front_fr",
-      "credit": "zuly · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "60 mL Eau de Toilette box"
     }
   ],
   "yves-saint-laurent-libre-edp": [
     {
       "file": "yves-saint-laurent-libre-edp",
+      "view": "front-angle",
       "publisher": "Unsplash",
       "url": "https://unsplash.com/photos/clear-glass-perfume-bottle-on-brown-wooden-table-KPkR3e6BZG0",
-      "credit": "Olena Bohovyk · JPEG optimized",
+      "credit": "Olena Bohovyk · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "Unsplash License",
         "url": "https://unsplash.com/license"
@@ -646,41 +355,18 @@
       "caption": "Original Libre Eau de Parfum bottle"
     }
   ],
-  "yves-saint-laurent-mon-paris-edp": [
-    {
-      "file": "yves-saint-laurent-mon-paris-edp",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614270561634&id=front_fr",
-      "credit": "rdg · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "90 mL Eau de Parfum box"
-    }
-  ],
   "yves-saint-laurent-y-edp": [
     {
       "file": "yves-saint-laurent-y-edp",
+      "view": "front-angle",
       "publisher": "Wikimedia Commons",
       "url": "https://commons.wikimedia.org/wiki/File:Yves_Saint_Laurent_Y_-_1.jpg",
-      "credit": "DYVER · JPEG optimized",
+      "credit": "DYVER · JPEG optimized · Cropped for FragDex",
       "license": {
         "name": "CC BY-SA 4.0",
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Y Eau de Parfum"
-    },
-    {
-      "file": "yves-saint-laurent-y-edp-obf-box",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614272050358&id=front_fr",
-      "credit": "fabe56 · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Y Eau de Parfum box"
     }
   ]
 }

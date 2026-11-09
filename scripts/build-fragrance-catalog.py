@@ -211,6 +211,8 @@ def profile_photos(profile_id, sources):
     files = set()
     for number, photo in enumerate(PHOTOS.get(profile_id, []), start=1):
         filename = photo["file"]
+        if photo.get("view") not in {"front", "front-angle"}:
+            raise ValueError(f"Photo needs a reviewed front view: {filename}")
         belongs_to_edition = filename == profile_id or filename.startswith(f"{profile_id}-")
         if not belongs_to_edition or not re.fullmatch(r"[a-z0-9-]+", filename) or filename in files:
             raise ValueError(f"Invalid or duplicate photo name for {profile_id}: {filename}")
