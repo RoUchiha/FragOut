@@ -28,6 +28,9 @@ export interface CatalogProfile {
  additionalPhotos?:CatalogPhoto[];
  sources:CatalogSource[];
 }
+export type CatalogEdition=Pick<CatalogProfile,'id'|'brand'|'name'|'concentration'|'releaseYear'>;
+export interface RemoteCatalogThumbnail {uri:string;caption:string;source:CatalogSource}
+export interface BottleThumbnailReply {variantId:string;photo:RemoteCatalogThumbnail|null}
 export interface CatalogDupe {
  brand:string; name:string; concentration:string;
  evidence:'brand'|'community';
@@ -41,6 +44,7 @@ export interface BottleProfileReply {
  variantId:string;
  profile:CatalogProfile|null;
  dupes?:CatalogDupeLinks;
+ thumbnailLookup?:true;
 }
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];

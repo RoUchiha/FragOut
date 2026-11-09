@@ -1,4 +1,18 @@
 {
+  "calvin-klein-euphoria-edp": [
+    {
+      "file": "calvin-klein-euphoria-edp",
+      "view": "front-angle",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:CK_Euphoria_Bottle.jpg",
+      "credit": "ggjsmith, edited by Bruce the Deus (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "CC BY 2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0/"
+      },
+      "caption": "Euphoria Eau de Parfum bottle"
+    }
+  ],
   "chanel-bleu-de-chanel-edp": [
     {
       "file": "chanel-bleu-de-chanel-edp",
@@ -52,6 +66,32 @@
         "url": "https://creativecommons.org/licenses/by-nd/2.0/"
       },
       "caption": "Aventus bottle"
+    }
+  ],
+  "dior-miss-dior-blooming-bouquet-edt": [
+    {
+      "file": "dior-miss-dior-blooming-bouquet-edt",
+      "view": "front-angle",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/a-bottle-of-perfume-sitting-on-top-of-a-bed-aPLY2Mz9KQw",
+      "credit": "Annie Le (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Miss Dior Blooming Bouquet Eau de Toilette, earlier silver-bow bottle"
+    },
+    {
+      "file": "dior-miss-dior-blooming-bouquet-edt-vershinina",
+      "view": "front",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/a-piece-of-cake-on-a-table-EAU1Kzv1Q9Q",
+      "credit": "Alsu Vershinina (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Miss Dior Blooming Bouquet Eau de Toilette, earlier silver-bow bottle"
     }
   ],
   "dior-sauvage-edp": [
@@ -175,6 +215,60 @@
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Reference bottle"
+    }
+  ],
+  "jo-malone-london-blackberry-and-bay-edc": [
+    {
+      "file": "jo-malone-london-blackberry-and-bay-edc",
+      "view": "front",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/jo-malone-fragrance-bottle-on-white-surface-t8ueo1LnzEU",
+      "credit": "Hyunwon Jang (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Blackberry & Bay Cologne"
+    }
+  ],
+  "jo-malone-london-nectarine-blossom-and-honey-edc": [
+    {
+      "file": "jo-malone-london-nectarine-blossom-and-honey-edc",
+      "view": "front",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/jo-malone-fragrance-bottle-3IMl0kCxpHQ",
+      "credit": "charlesdeluvio (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Nectarine Blossom & Honey Cologne"
+    }
+  ],
+  "jo-malone-london-wood-sage-and-sea-salt-edc": [
+    {
+      "file": "jo-malone-london-wood-sage-and-sea-salt-edc",
+      "view": "front",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/a-bottle-of-cologne-sitting-on-top-of-a-table-Ryz2BB4JqQY",
+      "credit": "Maria Lupan (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Wood Sage & Sea Salt Cologne"
+    },
+    {
+      "file": "jo-malone-london-wood-sage-and-sea-salt-edc-harhai",
+      "view": "front",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/a-perfume-bottle-stands-out-on-a-seashell-8R-vmSD5WhY",
+      "credit": "Tamara Harhai (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Wood Sage & Sea Salt Cologne"
     }
   ],
   "le-labo-santal-33-edp": [
@@ -325,6 +419,20 @@
         "url": "https://unsplash.com/license"
       },
       "caption": "Eros Eau de Toilette"
+    }
+  ],
+  "xerjoff-naxos-edp": [
+    {
+      "file": "xerjoff-naxos-edp",
+      "view": "front",
+      "publisher": "Pexels",
+      "url": "https://www.pexels.com/photo/elegant-xerjoff-naxos-perfume-bottle-display-29255492/",
+      "credit": "Manish Jain (cropped for FragDex) · JPEG optimized",
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/"
+      },
+      "caption": "Xerjoff 1861 Naxos bottle"
     }
   ],
   "yves-saint-laurent-black-opium-edp": [

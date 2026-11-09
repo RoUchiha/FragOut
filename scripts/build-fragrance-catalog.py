@@ -314,8 +314,8 @@ def main():
     reviewed = {identity_key(r["brand"], r["name"], r["concentration"]): r for r in references}
     if len(reviewed) != len(references):
         raise ValueError("Duplicate reviewed edition")
-    scento = reviewed_scento_rows(
-        [json.loads(line) for line in args.scento_jsonl.read_text(encoding="utf-8").splitlines() if line], reviewed)
+    scento_rows = [json.loads(line) for line in args.scento_jsonl.read_text(encoding="utf-8").splitlines() if line]
+    scento = reviewed_scento_rows(scento_rows, reviewed)
     with args.mysecretcart_csv.open(encoding="utf-8-sig", newline="") as rows:
         csv_rows = unique_rows(csv.DictReader(rows), "house")
     index = json.loads(args.gouttes_json.read_text(encoding="utf-8"))
@@ -343,6 +343,14 @@ def main():
         raise ValueError(f"References for unknown editions: {sorted(unused)}")
     output = "[\n" + ",\n".join("  " + json.dumps(row, ensure_ascii=False) for row in profiles) + "\n]\n"
     (CATALOG / "fragrances.json").write_text(output, encoding="utf-8", newline="\n")
+    public_editions = []
+    for key, row in sorted(unique_rows(scento_rows, "house").items()):
+        entry = {"id": "scento:" + row["id"], "brand": row["house"], "name": row["name"], "concentration": key[2]}
+        if re.fullmatch(r"\d{4}", str(row["year"])):
+            entry["releaseYear"] = int(row["year"])
+        public_editions.append(entry)
+    edition_output = "[\n" + ",\n".join("  " + json.dumps(row, ensure_ascii=False) for row in public_editions) + "\n]\n"
+    (CATALOG / "thumbnail-editions.json").write_text(edition_output, encoding="utf-8", newline="\n")
     print(json.dumps({
         "editions": len(profiles), "with_notes": sum(bool(p["notes"]) for p in profiles),
         "with_performance": sum(bool(p["performance"]) for p in profiles),

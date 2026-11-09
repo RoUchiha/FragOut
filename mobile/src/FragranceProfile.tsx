@@ -7,8 +7,8 @@ import {Btn,Section,Sheet,Spinner,useUi} from './ui';
 import FragDexDupes from './FragDexDupes';
 import FragDexLink from './FragDexLink';
 import FragDexRatings from './FragDexRatings';
-import {catalogThumbnailPhotos} from '../../src/lib/catalog-photos';
-import type {Bottle,BottleProfileReply} from '../../src/lib/types';
+import {catalogThumbnailPhotos,isCatalogThumbnailDataUri} from '../../src/lib/catalog-photos';
+import type {Bottle,BottleProfileReply,BottleThumbnailReply,RemoteCatalogThumbnail} from '../../src/lib/types';
 
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
 type Lookup=BottleProfileReply|{error:string};
@@ -19,8 +19,10 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const {styles,colors}=useUi();
  const [lookup,setLookup]=useState<Lookup|null>(null);
  const [attempt,setAttempt]=useState(0);
- const [enlarged,setEnlarged]=useState(false);
+ const [enlarged,setEnlarged]=useState<string|null>(null);
  const [failedPhotos,setFailedPhotos]=useState<string[]>([]);
+ const [loadedPhoto,setLoadedPhoto]=useState('');
+ const [providerPhoto,setProviderPhoto]=useState<RemoteCatalogThumbnail|null>(null);
  const [showSources,setShowSources]=useState(false);
  const [linkError,setLinkError]=useState('');
 
@@ -37,8 +39,23 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const changed=!!reply&&reply.variantId!==bottle.variantId;
  const profile=changed?null:reply?.profile;
  const dupes=changed?null:reply?.dupes;
- const [thumbnail]=catalogThumbnailPhotos(profile,failedPhotos);
- const photoUrl=thumbnail?serverUrl()+thumbnail.path:undefined;
+ const [localPhoto]=catalogThumbnailPhotos(profile,failedPhotos);
+ const lookUpThumbnail=!!reply?.thumbnailLookup&&!changed&&!localPhoto;
+ useEffect(()=>{
+  if(!lookUpThumbnail) return;
+  let active=true;
+  const stillCurrent=sessionScope();
+  void api<BottleThumbnailReply>('bottles/'+bottle.id+'/thumbnail').then(result=>{
+   if(active&&stillCurrent()&&result.variantId===bottle.variantId&&isCatalogThumbnailDataUri(result.photo?.uri))
+    setProviderPhoto(result.photo);
+  }).catch(()=>{/* The entry remains available during a thumbnail service outage. */});
+  return ()=>{active=false;};
+ },[bottle.id,bottle.variantId,lookUpThumbnail]);
+
+ const livePhoto=lookUpThumbnail&&!failedPhotos.includes('provider')?providerPhoto:null;
+ const thumbnail=localPhoto?{key:localPhoto.path,uri:serverUrl()+localPhoto.path,caption:localPhoto.caption}:
+  livePhoto?{key:'provider',uri:livePhoto.uri,caption:livePhoto.caption}:null;
+ const sources=[...(profile?.sources??[]),...(livePhoto?[livePhoto.source]:[])];
  const name=profile?.name??bottle.name;
  const noteGroups=stages.map(([stage,label])=>({
   label,names:profile?.notes.filter(note=>note.stage===stage).map(note=>note.name)??[],
@@ -54,27 +71,27 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
 
  function markPhotoFailed(path:string) {
   setFailedPhotos(current=>current.includes(path)?current:[...current,path]);
-  setEnlarged(false);
+  setEnlarged(current=>current===path?null:current);
  }
 
- if(enlarged&&thumbnail&&photoUrl) {
-  return <Sheet title={name} onClose={()=>setEnlarged(false)}>
-   <Image accessible accessibilityLabel={thumbnail.caption} source={{uri:photoUrl}} resizeMode="contain"
-    onError={()=>markPhotoFailed(thumbnail.path)} style={[styles.image,{height:400}]}/>
+ if(thumbnail&&enlarged===thumbnail.key) {
+  return <Sheet title={name} onClose={()=>setEnlarged(null)}>
+   <Image accessible accessibilityLabel={thumbnail.caption} source={{uri:thumbnail.uri}} resizeMode="contain"
+    onError={()=>markPhotoFailed(thumbnail.key)} style={[styles.image,{height:400}]}/>
   </Sheet>;
  }
 
  return <Sheet title="FragDex" onClose={onClose}>
   <View style={[styles.row,{alignItems:'center',gap:14}]}>
-   {thumbnail&&photoUrl&&<Pressable accessibilityRole="button" accessibilityLabel="Enlarge bottle thumbnail"
-     onPress={()=>setEnlarged(true)}>
-     <Image key={thumbnail.path} source={{uri:photoUrl}} resizeMode="contain"
-      onError={()=>markPhotoFailed(thumbnail.path)}
+   {thumbnail&&<Pressable accessibilityRole="button" accessibilityLabel="Enlarge bottle thumbnail"
+     disabled={loadedPhoto!==thumbnail.key} onPress={()=>setEnlarged(thumbnail.key)}>
+     <Image key={thumbnail.key} source={{uri:thumbnail.uri}} resizeMode="contain"
+      onLoad={()=>setLoadedPhoto(thumbnail.key)} onError={()=>markPhotoFailed(thumbnail.key)}
       style={{width:96,height:114,borderRadius:5,backgroundColor:colors.wash}}/>
-     <View pointerEvents="none" style={{position:'absolute',right:4,bottom:4,padding:4,
+     {loadedPhoto===thumbnail.key&&<View pointerEvents="none" style={{position:'absolute',right:4,bottom:4,padding:4,
       borderRadius:4,backgroundColor:colors.surface}}>
       <Maximize2 size={12} color={colors.ink}/>
-     </View>
+     </View>}
     </Pressable>}
    <View style={{flex:1,minWidth:0,gap:4}}>
     <Text style={styles.small}>{profile?.brand??bottle.brand}</Text>
@@ -110,23 +127,23 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
   </>}
   {dupes&&<FragDexDupes dupes={dupes} visit={visit}/>}
   {reply&&!changed&&<FragDexRatings profile={profile} visit={visit}/>}
-  {profile&&<>
-   {!!profile.links?.length&&<View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
+  {!!profile?.links.length&&<View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
     {profile.links.map(link=><FragDexLink key={link.url} url={link.url} visit={visit}
      style={[styles.row,{minHeight:38,gap:4,paddingHorizontal:9,borderWidth:1,borderColor:colors.line,borderRadius:6}]}>
      <Text style={styles.link}>{link.bottleEdition?link.label+' · '+link.bottleEdition:link.label}</Text>
      <ExternalLink size={11} color={colors.link}/>
     </FragDexLink>)}
    </View>}
+  {!!sources.length&&<>
    <View style={styles.separator}/>
    <Pressable accessibilityRole="button" accessibilityLabel="Sources and credits" accessibilityState={{expanded:showSources}}
     onPress={()=>setShowSources(current=>!current)} style={[styles.spread,{minHeight:44}]}>
-    <Text style={styles.link}>Sources &amp; credits · {profile.sources.length}</Text>
+    <Text style={styles.link}>Sources &amp; credits · {sources.length}</Text>
     <ChevronDown size={16} color={colors.link} style={{transform:[{rotate:showSources?'180deg':'0deg'}]}}/>
    </Pressable>
    {showSources&&<View style={{gap:8}}>
-    <Text style={styles.small}>Checked {profile.checkedAt}</Text>
-    {profile.sources.map(source=><View key={source.id} style={{gap:2}}>
+    {profile&&<Text style={styles.small}>Checked {profile.checkedAt}</Text>}
+    {sources.map(source=><View key={source.id} style={{gap:2}}>
      <FragDexLink url={source.url} visit={visit} style={[styles.row,{minHeight:32}]}>
       <Text style={styles.link}>{source.publisher}{source.kind==='house'?' · Official':source.kind==='photo'?' · Photo':''}</Text>
       <ExternalLink size={12} color={colors.link}/>

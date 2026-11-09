@@ -4,18 +4,19 @@ import {getStore} from '@/lib/store';
 import {bottleSchema,settingsSchema,intentFields} from '@/lib/validation';
 import {rankCombos,rankSolo,ENGINE_VERSION} from '@/lib/engine';
 import {matchesBottleSearch,scentSearchLimit} from '@/lib/scent-search';
-import type {Bottle,BottleProfileReply} from '@/lib/types';
+import type {Bottle,BottleProfileReply,BottleThumbnailReply} from '@/lib/types';
 import {handleAiApi} from '@/lib/ai-api';
 import {requestPolicy} from '@/lib/security';
-import {findCatalogDupes,findCatalogProfile} from '@/lib/catalog';
+import {findCatalogDupes,findCatalogProfile,findThumbnailEdition} from '@/lib/catalog';
 import {lookupFragellaRatings} from '@/lib/fragella';
+import {lookupFragellaThumbnail} from '@/lib/catalog-thumbnail';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
 const SECURE_COOKIE='__Host-fragout_session';
 const reply=(data:unknown,status=200)=>NextResponse.json(data,{status,headers:{'Cache-Control':'no-store','Vary':'Cookie, Authorization','Referrer-Policy':'no-referrer'}});
-const bottleProfile=(bottle:Bottle,profile=findCatalogProfile(bottle)):BottleProfileReply=>({
-  variantId:bottle.variantId,profile,dupes:findCatalogDupes(bottle,profile),
+const bottleProfile=(bottle:Bottle,profile=findCatalogProfile(bottle),thumbnailLookup=false):BottleProfileReply=>({
+  variantId:bottle.variantId,profile,dupes:findCatalogDupes(bottle,profile),...(thumbnailLookup?{thumbnailLookup:true}:{}),
 });
 async function handle(req:NextRequest){
   try{
@@ -69,13 +70,25 @@ async function handle(req:NextRequest){
     if(path.length===1&&path[0]==='state'&&method==='GET')return reply(db.state(user.id));
     if(path[0]==='bottles'){
       if(method==='POST'&&path.length===1)return reply(db.addBottle(user.id,{...bottleSchema.parse(body),id:'',variantId:''} as Bottle),201);
-      if(method==='GET'&&path.length===3&&path[1]&&path[2]==='profile'){
+      if(method==='GET'&&path.length===3&&path[1]&&(path[2]==='profile'||path[2]==='thumbnail')){
         const bottle=db.getBottle(user.id,path[1]);
         if(!bottle)return reply({error:'Bottle not found.'},404);
         const profile=findCatalogProfile(bottle);
         const key=process.env.FRAGOUT_FRAGELLA_API_KEY?.trim();
+        const edition=!user.demo&&key&&process.env.FRAGOUT_FRAGELLA_IMAGES==='true'?findThumbnailEdition(bottle,profile):null;
+        if(path[2]==='thumbnail'){
+          const result:BottleThumbnailReply={variantId:bottle.variantId,photo:null};
+          if(!edition||!key)return reply(result);
+          result.photo=await lookupFragellaThumbnail(edition,key,()=>
+            db.limit('fragella-image-user:'+user.id,10,60000)&&db.limit('fragella-image-installation',30,60000));
+          if(db.sessionUser(token)?.id!==user.id)return reply({error:'Please sign in to continue.'},401);
+          const current=db.getBottle(user.id,bottle.id);
+          if(!current)return reply({error:'Bottle not found.'},404);
+          if(current.variantId!==result.variantId)return reply({variantId:current.variantId,photo:null});
+          return reply(result);
+        }
         if(!profile?.releaseYear||!key||user.demo)
-          return reply(bottleProfile(bottle,profile));
+          return reply(bottleProfile(bottle,profile,!!edition));
         const live=await lookupFragellaRatings(profile,key,()=>
           db.limit('fragella-user:'+user.id,4,60000)&&db.limit('fragella-installation',20,60000));
         if(db.sessionUser(token)?.id!==user.id)return reply({error:'Please sign in to continue.'},401);
@@ -86,7 +99,7 @@ async function handle(req:NextRequest){
         const liveRatings=live?.ratings.filter(rating=>rating.kind==='published'||!profile.ratings.some(existing=>existing.facet===rating.facet));
         return reply(bottleProfile(bottle,live&&liveRatings?.length?{
           ...profile,ratings:[...liveRatings,...profile.ratings],sources:[...profile.sources,live.source],
-        }:profile));
+        }:profile,!!edition));
       }
       if(method==='PATCH'&&path.length===2&&path[1]){const b=db.updateBottle(user.id,path[1],bottleSchema.partial().parse(body));return b?reply(b):reply({error:'Bottle not found.'},404);}
       if(method==='DELETE'&&path.length===2&&path[1])return db.removeBottle(user.id,path[1])?reply({ok:true}):reply({error:'Bottle not found.'},404);

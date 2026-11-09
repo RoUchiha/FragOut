@@ -1,7 +1,7 @@
 import {z} from 'zod';
-import {findCatalogProfile} from './catalog.ts';
+import {catalogIdentityKey,findCatalogProfile} from './catalog.ts';
 import type {CatalogRating,FragranceFacet} from './catalog-ratings.ts';
-import type {CatalogProfile,CatalogSource} from './types.ts';
+import type {CatalogEdition,CatalogProfile,CatalogSource} from './types.ts';
 
 const concentrations = new Map([
  ['eau de toilette','EDT'],['edt','EDT'],['eau de parfum','EDP'],['edp','EDP'],
@@ -10,9 +10,11 @@ const concentrations = new Map([
  ['perfume mist','MIST'],['fragrance mist','MIST'],['perfume oil','OIL'],
 ]);
 const voted = new Set(['medium','high','very high']);
-const rowSchema=z.object({
+const editionSchema=z.object({
  _id:z.string().regex(/^[a-z\d][a-z\d_-]{0,119}$/i),Name:z.string().min(1).max(160),Brand:z.string().min(1).max(160),
- OilType:z.string().max(60),Year:z.string().max(8).optional(),
+ OilType:z.string().max(60),Year:z.string().regex(/^\d{4}$/).or(z.literal('')).optional(),
+});
+const rowSchema=editionSchema.extend({
  rating:z.string().max(8).optional(),Confidence:z.string().max(25),Popularity:z.string().max(25),
  Longevity:z.string().max(40).optional(),Sillage:z.string().max(40).optional(),
  'Price Value':z.string().max(30).optional(),
@@ -23,19 +25,31 @@ const longevityBands=['poor','weak','moderate','long lasting','very long lasting
 const projectionBands=['intimate','soft','moderate','strong','enormous'];
 const valueBands=['overpriced','okay','good_value'];
 
-export function pickFragellaRatings(profile:CatalogProfile,payload:unknown):LiveRatings|null {
- if(!profile.releaseYear||!Array.isArray(payload)||payload.length>10) return null;
- const editions=payload.filter(row=>{
-  if(typeof row?.Name!=='string'||typeof row?.Brand!=='string'||typeof row?.OilType!=='string') return false;
+export function pickFragellaEdition(edition:CatalogEdition,payload:unknown) {
+ if(!Array.isArray(payload)||payload.length>10) return null;
+ const yearSuffix=' ('+edition.releaseYear+')';
+ const bareName=edition.name.endsWith(yearSuffix)?edition.name.slice(0,-yearSuffix.length):edition.name;
+ const expected=catalogIdentityKey({...edition,name:bareName});
+ const candidates=payload.filter(raw=>{
+  const parsed=editionSchema.safeParse(raw);
+  if(!parsed.success) return false;
+  const row=parsed.data;
   const concentration=concentrations.get(row.OilType.trim().toLowerCase());
-  return concentration===profile.concentration&&Number(row.Year)===profile.releaseYear&&
-   findCatalogProfile({name:row.Name,brand:row.Brand,concentration})?.id===profile.id;
+  if(!concentration||concentration!==edition.concentration||
+   edition.releaseYear&&Number(row.Year)!==edition.releaseYear) return false;
+  const label={name:row.Name,brand:row.Brand,concentration};
+  const known=findCatalogProfile(label);
+  return known?known.id===edition.id:catalogIdentityKey(label)===expected;
  });
- if(editions.length!==1) return null;
- const parsed=rowSchema.safeParse(editions[0]);
+ if(candidates.length!==1||payload.filter(row=>row?._id===candidates[0]._id).length!==1) return null;
+ return candidates[0] as z.infer<typeof editionSchema> & Record<string,unknown>;
+}
+
+export function pickFragellaRatings(profile:CatalogProfile,payload:unknown):LiveRatings|null {
+ if(!profile.releaseYear) return null;
+ const parsed=rowSchema.safeParse(pickFragellaEdition(profile,payload));
  if(!parsed.success) return null;
  const row=parsed.data;
- if(payload.filter(item=>item?._id===row._id).length!==1) return null;
  if(!['high','medium'].includes(row.Confidence.trim().toLowerCase())||!voted.has(row.Popularity.trim().toLowerCase())) return null;
  const sourceId='fragella';
  const ratings:CatalogRating[]=[];
@@ -60,45 +74,53 @@ export function pickFragellaRatings(profile:CatalogProfile,payload:unknown):Live
  };
 }
 
-async function readRatings(response:Response):Promise<unknown> {
+export async function readLimitedBody(response:Response,limit:number):Promise<Buffer|null> {
  const reader=response.body?.getReader();
  if(!reader) return null;
- const decoder=new TextDecoder();
- let text='',bytes=0;
+ const chunks:Uint8Array[]=[];
+ let bytes=0;
  try {
+  if(Number(response.headers.get('content-length'))>limit) {
+   await reader.cancel();
+   return null;
+  }
   while(true) {
    const {done,value}=await reader.read();
-   if(done) return JSON.parse(text+decoder.decode());
+   if(done) return Buffer.concat(chunks,bytes);
    bytes+=value.byteLength;
-   if(bytes>maxRatingResponseBytes) {
+   if(bytes>limit) {
     await reader.cancel();
     return null;
    }
-   text+=decoder.decode(value,{stream:true});
+   chunks.push(value);
   }
  } finally {
   reader.releaseLock();
  }
 }
 
+export async function fetchFragellaPayload(edition:CatalogEdition,key:string,request:typeof fetch):Promise<unknown> {
+ const url=new URL('https://api.fragella.com/api/v1/fragrances');
+ url.searchParams.set('search',[edition.brand,edition.name,edition.concentration].join(' '));
+ url.searchParams.set('limit','10');
+ const response=await request(url,{
+  headers:{'x-api-key':key,accept:'application/json'},redirect:'error',cache:'no-store',
+  signal:AbortSignal.timeout(2400),
+ });
+ if(!response.ok) {
+  await response.body?.cancel();
+  throw new Error('Fragella data is unavailable.');
+ }
+ const bytes=await readLimitedBody(response,maxRatingResponseBytes);
+ return bytes?JSON.parse(bytes.toString('utf8')):null;
+}
+
 export function createFragellaLookup(request:typeof fetch=fetch) {
  const pending=new Map<string,Promise<LiveRatings|null>>();
  let retryAt=0;
  async function load(profile:CatalogProfile,key:string) {
-  const url=new URL('https://api.fragella.com/api/v1/fragrances');
-  url.searchParams.set('search',[profile.brand,profile.name,profile.concentration].join(' '));
-  url.searchParams.set('limit','10');
   try {
-   const response=await request(url,{
-    headers:{'x-api-key':key,accept:'application/json'},redirect:'error',cache:'no-store',
-    signal:AbortSignal.timeout(2400),
-   });
-   if(!response.ok) {
-    // Avoid repeatedly calling an unavailable or quota-limited provider.
-    retryAt=Date.now()+60_000;
-    return null;
-   }
-   return pickFragellaRatings(profile,await readRatings(response));
+   return pickFragellaRatings(profile,await fetchFragellaPayload(profile,key,request));
   } catch {
    retryAt=Date.now()+60_000;
    return null;

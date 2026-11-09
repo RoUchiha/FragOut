@@ -1,6 +1,6 @@
 # Fragrance catalog
 
-The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 77 have exact Jomashop listings, and 25 have reviewed bottle thumbnails.
+The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 77 have exact Jomashop listings, and 31 have reviewed bottle thumbnails bundled with the app.
 
 The app compares the saved house, release, and concentration with this snapshot on the FragOut server. It keeps EDT, EDP, cologne, parfum, extrait, elixir, and mist separate. Where a label and concentration have documented reformulations, enter the edition year as part of the name to select that profile. Unlisted editions save as a basic entry. The server uses the local snapshot for the initial result, and the optional live rating lookup sends only the public catalog identity. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their private flows.
 
@@ -44,7 +44,11 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 FragDex shows a single bottle thumbnail and enlarges that same image on tap. It uses reviewed front and three-quarter views of the exact release. Some photos are cropped to make the bottle clear at thumbnail size. If a photo fails to load, the entry tries the next reviewed thumbnail when available. Entries without a usable image use a text-only header.
 
-FragOut serves 27 JPEGs with camera metadata removed. Edition checks compare the label, barcode, or documented bottle design with the exact product. The [photo registry](photos.json) records the view, photographer, source, license, and caption for each file. FragDex displays the credits under **Sources & credits**.
+FragOut serves 35 JPEGs with camera metadata removed. Edition checks compare the label, barcode, or documented bottle design with the exact product. The [photo registry](photos.json) records the view, photographer, source, license, and caption for each file. FragDex displays the credits under **Sources & credits**.
+
+### Enable live thumbnail lookup
+
+Set `FRAGOUT_FRAGELLA_IMAGES=true` alongside the server's private `FRAGOUT_FRAGELLA_API_KEY`, then restart FragOut. This lets signed-in accounts use Fragella images when a bundled thumbnail is absent or fails to load. FragDex only sends matched public release labels from the catalog, the reviewed dupe registry, and [the Scento edition index](thumbnail-editions.json). The server verifies the house, name, concentration, and any known release year, checks that the image decodes, and serves a cleaned JPEG. The same image opens on tap. Lookup coverage depends on the provider's records and the account's quota. [Fragella developer portal](https://api.fragella.com/) · [Fragella API terms](https://api.fragella.com/terms-of-use.html)
 
 ## Refreshing the snapshot
 

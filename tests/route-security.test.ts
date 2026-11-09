@@ -11,14 +11,18 @@ import * as security from '../src/lib/security.ts';
 import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
 import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
+import type {lookupFragellaThumbnail} from '../src/lib/catalog-thumbnail.ts';
 const require=createRequire(import.meta.url),next=require('next/server');
-function harness({key='',lookup=async()=>null}:{key?:string;lookup?:typeof lookupFragellaRatings}={}){
+function harness({key='',lookup=async()=>null,images=false,thumbnail=async()=>null}:{
+ key?:string;lookup?:typeof lookupFragellaRatings;images?:boolean;thumbnail?:typeof lookupFragellaThumbnail;
+}={}){
  const db=new Store(':memory:'),module={exports:{} as any};
  const source=readFileSync(new URL('../src/app/api/[...path]/route.ts',import.meta.url),'utf8');
- vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{FRAGOUT_FRAGELLA_API_KEY:key}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
+ vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{FRAGOUT_FRAGELLA_API_KEY:key,FRAGOUT_FRAGELLA_IMAGES:String(images)}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
   if(name==='next/server')return next;if(name==='zod')return require('zod');
   if(name==='@/lib/catalog')return catalog;
   if(name==='@/lib/fragella')return {lookupFragellaRatings:lookup};
+  if(name==='@/lib/catalog-thumbnail')return {lookupFragellaThumbnail:thumbnail};
   if(name==='@/lib/store')return {getStore:()=>db};if(name==='@/lib/validation')return validation;if(name==='@/lib/engine')return engine;if(name==='@/lib/security')return security;if(name==='@/lib/scent-search')return search;if(name==='@/lib/ai-api')return {handleAiApi:async()=>null};throw new Error('Unexpected dependency '+name);
  }});
  async function call(path:string,{method='GET',body,raw,token,cookie,origin='http://localhost:3237',url='http://localhost:3237',headers={}}:{method?:string;body?:unknown;raw?:string;token?:string;cookie?:string;origin?:string|null;url?:string;headers?:Record<string,string>}={}){
@@ -122,6 +126,56 @@ test('fragrance profiles require bottle ownership and resolve the current editio
   assert.equal((await h.call(path,{token})).body.profile,null);
   assert.equal((await h.call('state',{token})).body.bottles.find((bottle:{id:string})=>bottle.id===owned.id).catalogPhotos,undefined);
  } finally { h.db.close(); }
+});
+
+test('new entries get thumbnails only for a public exact edition and the current owner and variant',async()=>{
+ const image={uri:'data:image/jpeg;base64,fixture',caption:'Fahrenheit bottle',
+  source:{id:'fixture',publisher:'Test fixture',url:'https://example.com/fixture',kind:'photo' as const}};
+ const received:unknown[]=[];
+ let start=()=>{};
+ let finish:()=>void=()=>{};
+ const h=harness({key:'fixture-key',images:true,thumbnail:async edition=>{
+  received.push(edition);
+  await new Promise<void>(resolve=>{finish=resolve;start();});
+  return image;
+ }});
+ try {
+  const user=h.db.register('Thumbnail test','thumbnail@example.test','synthetic-password');
+  const demo=h.db.createDemo();
+  const token=h.db.createSession(user.id),otherToken=h.db.createSession(demo.id);
+  const {brand:_,name:__,concentration:___,...defaults}=h.db.state(demo.id).bottles[0];
+  const owned=h.db.addBottle(user.id,{...defaults,id:'',variantId:'',brand:'Christian Dior',
+   name:'Fahrenheit EDT',concentration:'EDT',provenance:'unknown',memo:'private-thumb-canary'});
+  const root='bottles/'+owned.id;
+  assert.equal((await h.call(root+'/thumbnail')).status,401);
+  assert.equal((await h.call(root+'/thumbnail',{token:otherToken})).status,404);
+  assert.equal((await h.call(root+'/profile',{token})).body.thumbnailLookup,true);
+  assert.equal(received.length,0);
+  async function begin() {
+   const started=new Promise<void>(resolve=>{start=resolve;});
+   const pending=h.call(root+'/thumbnail',{token});
+   await started;
+   return {pending};
+  }
+  const first=await begin();finish();
+  const found=await first.pending;
+  assert.equal(found.body.variantId,owned.variantId);
+  assert.deepEqual(found.body.photo,image);
+  assert.equal((received[0] as {name:string}).name,'Fahrenheit');
+  assert.ok(!JSON.stringify(received).includes('private-thumb-canary'));
+  const stale=await begin();
+  h.db.updateBottle(user.id,owned.id,{name:'My private custom blend'});
+  finish();
+  assert.equal((await stale.pending).body.photo,null);
+  assert.equal((await h.call(root+'/profile',{token})).body.thumbnailLookup,undefined);
+  assert.equal((await h.call(root+'/thumbnail',{token})).body.photo,null);
+  assert.equal(received.length,2);
+  h.db.updateBottle(user.id,owned.id,{name:'Fahrenheit'});
+  const revoked=await begin();
+  h.db.revokeSession(token);
+  finish();
+  assert.equal((await revoked.pending).status,401);
+ } finally {h.db.close();}
 });
 
 test('manual saves accept cologne, extrait and mist without conflating editions',async()=>{

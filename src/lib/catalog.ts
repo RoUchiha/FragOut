@@ -1,7 +1,8 @@
 import entries from '../../catalog/fragrances.json' with {type:'json'};
 import dupeEntries from '../../catalog/dupes.json' with {type:'json'};
 import identity from '../../catalog/identity.json' with {type:'json'};
-import type {Bottle,CatalogDupe,CatalogDupeLinks,CatalogProfile} from './types.ts';
+import thumbnailEditions from '../../catalog/thumbnail-editions.json' with {type:'json'};
+import type {Bottle,CatalogDupe,CatalogDupeLinks,CatalogEdition,CatalogProfile} from './types.ts';
 
 type Label = Pick<Bottle,'brand'|'name'|'concentration'>;
 type CatalogEntry = CatalogProfile & {aliases?:string[]};
@@ -11,7 +12,7 @@ const normalize = (value:string)=>value.replace(/[™®℠]/g,'').normalize('NFK
 const houses = new Map(Object.entries(identity.houseAliases));
 const suffixes = new Map(Object.entries(identity.suffixes));
 
-function key({brand,name,concentration}:Label) {
+export function catalogIdentityKey({brand,name,concentration}:Label) {
  const labelSuffixes=suffixes.get(concentration);
  if(!labelSuffixes) return null;
  const inputHouse=normalize(brand);
@@ -29,7 +30,7 @@ export const catalogProfiles = entries as CatalogEntry[];
 const index = new Map<string,CatalogEntry|null>();
 for(const profile of catalogProfiles) {
  for(const name of [profile.name,...(profile.aliases??[])]) {
-  const id=key({...profile,name});
+  const id=catalogIdentityKey({...profile,name});
   if(!id) continue;
   const previous=index.get(id);
   index.set(id,previous===undefined||previous===profile?profile:null);
@@ -37,7 +38,7 @@ for(const profile of catalogProfiles) {
 }
 
 export function findCatalogProfile(label:Label):CatalogProfile|null {
- const id=key(label);
+ const id=catalogIdentityKey(label);
  return id?index.get(id)??null:null;
 }
 
@@ -48,6 +49,19 @@ type DupeEntry = Pick<CatalogDupe,'evidence'|'sources'> & {
 const profilesById=new Map(catalogProfiles.map(profile=>[profile.id,profile]));
 const alternativesByOriginal=new Map<string,CatalogDupe[]>();
 const originalsByAlternative=new Map<string,CatalogDupe[]>();
+const thumbnailIndex=new Map<string,CatalogEdition|null>();
+const unqualifiedEditions=new Set<string>();
+
+for(const profile of catalogProfiles) {
+ const unqualified=profile.name.replace(/ \((?:19|20)\d{2}\)$/, '');
+ const id=catalogIdentityKey({...profile,name:unqualified});
+ if(id&&unqualified!==profile.name) unqualifiedEditions.add(id);
+}
+
+for(const edition of thumbnailEditions as CatalogEdition[]) {
+ const id=catalogIdentityKey(edition);
+ if(id) thumbnailIndex.set(id,thumbnailIndex.has(id)?null:edition);
+}
 
 function addDupeLink(target:Map<string,CatalogDupe[]>,id:string,match:CatalogDupe) {
  const matches=target.get(id);
@@ -61,13 +75,25 @@ for(const {originalId,alternative:{brand,name,concentration,aliases},evidence,so
  const label={brand,name,concentration};
  addDupeLink(alternativesByOriginal,originalId,{...label,evidence,sources});
  const citedOriginal={brand:original.brand,name:original.name,concentration:original.concentration,evidence,sources};
- for(const id of new Set([name,...(aliases??[])].map(alias=>key({...label,name:alias})))) {
-  if(id) addDupeLink(originalsByAlternative,id,citedOriginal);
+ const canonical=catalogIdentityKey(label);
+ for(const id of new Set([name,...(aliases??[])].map(alias=>catalogIdentityKey({...label,name:alias})))) {
+  if(!id) continue;
+  addDupeLink(originalsByAlternative,id,citedOriginal);
+  const previous=thumbnailIndex.get(id);
+  if(previous===undefined) thumbnailIndex.set(id,{...label,id:'dupe:'+canonical});
+  else if(previous&&catalogIdentityKey(previous)!==canonical) thumbnailIndex.set(id,null);
  }
 }
 
+export function findThumbnailEdition(label:Label,profile=findCatalogProfile(label)):CatalogEdition|null {
+ if(profile) return profile;
+ const id=catalogIdentityKey(label);
+ if(!id||index.has(id)||unqualifiedEditions.has(id)) return null;
+ return thumbnailIndex.get(id)??null;
+}
+
 export function findCatalogDupes(label:Label,profile=findCatalogProfile(label)):CatalogDupeLinks {
- const id=key(label);
+ const id=catalogIdentityKey(label);
  return {
   alternatives:profile?alternativesByOriginal.get(profile.id)?.slice(0,3)??[]:[],
   originals:id?originalsByAlternative.get(id)??[]:[],
