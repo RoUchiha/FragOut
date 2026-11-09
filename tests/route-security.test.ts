@@ -139,6 +139,25 @@ test('manual saves accept cologne, extrait and mist without conflating editions'
  } finally {h.db.close();}
 });
 
+test('owner FragDex shows the original for a saved dupe without a full catalog profile',async()=>{
+ const h=harness();
+ try {
+  const owner=h.db.createDemo(),other=h.db.createDemo();
+  const token=h.db.createSession(owner.id),otherToken=h.db.createSession(other.id);
+  const saved=h.db.addBottle(owner.id,{...h.db.state(owner.id).bottles[0],
+   brand:'Oil Perfumery',name:'Baccarat Rouge 540 Extrait de Parfum',concentration:'OIL',memo:'dupe-note-canary'});
+  const path='bottles/'+saved.id+'/profile';
+  assert.equal((await h.call(path,{token:otherToken})).status,404);
+  const result=await h.call(path,{token});
+  assert.equal(result.status,200);
+  assert.equal(result.body.profile,null);
+  assert.equal(result.body.dupes.originals[0].name,'Baccarat Rouge 540');
+  assert.equal(result.body.dupes.originals[0].concentration,'EXTRAIT');
+  assert.equal(result.body.dupes.originals[0].evidence,'brand');
+  assert.ok(!JSON.stringify(result.body).includes('dupe-note-canary'));
+ } finally {h.db.close();}
+});
+
 test('live FragDex ratings are owner-scoped and discarded after edition or session changes',async()=>{
  let lookups=0,change=()=>{};
  const h=harness({key:'server-only-test-key',lookup:async(profile,key)=>{

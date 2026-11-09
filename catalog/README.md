@@ -1,6 +1,6 @@
 # Fragrance catalog
 
-The November 8, 2026 snapshot covers 211 exact releases from 63 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 63 have exact Jomashop listings, and 23 have licensed bottle photography.
+The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 63 have exact Jomashop listings, and 23 have licensed bottle photography.
 
 The app compares the saved house, release, and concentration with this snapshot on the FragOut server. It keeps EDT, EDP, cologne, parfum, extrait, elixir, and mist separate. Where a label and concentration have documented reformulations, enter the edition year as part of the name to select that profile. Unlisted editions save as a basic entry. The server uses the local snapshot for the initial result, and the optional live rating lookup sends only the public catalog identity. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their private flows.
 
@@ -16,6 +16,14 @@ The app compares the saved house, release, and concentration with this snapshot 
 - MySecretCart's published summary of wear reports supplies duration and sillage estimates. The duration midpoint maps to one star per two hours, rounded to a half-star and bounded from one to five. Reported trail strength maps from one for intimate to five for very strong. The separate Gouttes Rares assessment maps its throw band to projection and keeps its longevity result separate.
 - The optional Fragella API supplies its weighted overall score on the publisher's five-point scale. FragDex can also map its documented duration and projection bands to one through five stars and its three value categories to two through four stars when local wear estimates are absent. These mappings carry an **Est.** label and preserve the source category. [Fragella data methodology](https://api.fragella.com/docs.html#data-methodology)
 - **View on Fragrantica** and **View on Jomashop** point to reviewed editions in the [link list](links.json).
+
+## Affordable dupes
+
+The November 9, 2026 review records 241 relationships for 147 originals in [the dupe registry](dupes.json). A premium entry shows up to three alternatives. Saving a recognized alternative shows the original under **Dupe of**, including when the alternative has no notes profile. Both directions use the saved house, name, and format.
+
+- **Brand-stated inspiration** links to the maker that names the original. **Community comparison** links to independent sources comparing the exact releases. The product's own concentration or format appears next to its name.
+- The shortlist favors direct comparisons and named inspirations from different makers. When evidence supports fewer choices, the list is shorter. Unresolved editions and comparisons supported only by shared notes stay out.
+- The server resolves both directions from the reviewed registry in the authenticated bottle profile response. Opening a citation is a separate, user-initiated action.
 
 ## Enable live scores
 

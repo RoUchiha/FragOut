@@ -1,5 +1,60 @@
 [
   {
+    "brand": "Bvlgari", "name": "Le Gemme Tygar", "concentration": "EDP", "aliases": ["Tygar"],
+    "url": "https://www.bulgari.com/en-us/fragrances/bvlgari-le-gemme/le-gemme-tygar-eau-de-parfum-42170",
+    "notes": {"listed": ["Grapefruit", "Ambergris"]},
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/le-gemme-tygar-eau-de-parfum/7994987",
+      "notes": {"listed": ["Grapefruit", "Ambergris"]}
+    }
+  },
+  {
+    "brand": "Ex Nihilo", "name": "Blue Talisman", "concentration": "EDP",
+    "url": "https://us.ex-nihilo-paris.com/products/blue-talisman-eau-de-parfum",
+    "notes": {
+      "top": ["Pear", "Bergamot", "Ginger", "Mandarin"],
+      "heart": ["Orange blossom", "Georgywood"],
+      "base": ["Ambrofix", "Akigalawood", "Musk"]
+    }
+  },
+  {
+    "brand": "Creed", "name": "Millésime Impérial", "concentration": "EDP",
+    "url": "https://creedboutique.com/collections/mens-fragrances/products/millesime-imperial",
+    "notes": {
+      "top": ["Bergamot", "Blackcurrant", "Violet leaves"],
+      "heart": ["Orris", "Salty marine accord"],
+      "base": ["Cedarwood", "Musk", "Sandalwood"]
+    },
+    "corroboration": {
+      "publisher": "Neiman Marcus",
+      "url": "https://nmo-ui-to-product-v1-prod.neimanmarcuscloud.com/p/creed-millesime-imperial-eau-de-parfum-16-9-oz-prod288880693",
+      "notes": {
+        "top": ["Bergamot", "Blackcurrant", "Violet leaves"],
+        "heart": ["Orris", "Salty marine accord"],
+        "base": ["Cedarwood", "Musk", "Sandalwood"]
+      }
+    }
+  },
+  {
+    "brand": "Xerjoff", "name": "Erba Pura", "concentration": "EDP",
+    "url": "https://www.xerjoff.com/en-us/products/erba-pura-eau-de-parfum",
+    "notes": {
+      "top": ["Lemon", "Calabrian bergamot", "Sicilian orange"],
+      "heart": ["Mediterranean fruit"],
+      "base": ["Amber", "Madagascar vanilla", "White musk"]
+    },
+    "corroboration": {
+      "publisher": "Nordstrom",
+      "url": "https://www.nordstrom.com/s/xerjoff-erba-pura-eau-de-parfum/8101979",
+      "notes": {
+        "top": ["Lemon", "Calabrian bergamot", "Sicilian orange"],
+        "heart": ["Mediterranean fruit"],
+        "base": ["Amber", "Madagascar vanilla", "White musk"]
+      }
+    }
+  },
+  {
     "brand": "Dior", "name": "Sauvage", "concentration": "EDT",
     "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-toilette-Y0685240.html",
     "notes": {"listed": ["Calabrian bergamot", "Sichuan pepper", "Ambery marine wood"]},

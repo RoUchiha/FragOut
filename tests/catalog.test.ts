@@ -1,8 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
-import {catalogProfiles,findCatalogProfile} from '../src/lib/catalog.ts';
+import dupeRows from '../catalog/dupes.json' with {type:'json'};
+import {catalogProfiles,findCatalogDupes,findCatalogProfile} from '../src/lib/catalog.ts';
 import {catalogReferenceUrl,fragranceFacets} from '../src/lib/catalog-ratings.ts';
+import {concentrationCodes} from '../src/lib/concentrations.ts';
 
 test('catalog matches exact concentration and flanker with common label formatting',()=>{
  const edt=findCatalogProfile({brand:'Christian Dior',name:'Dior Sauvage Eau de Toilette',concentration:'EDT'});
@@ -150,4 +152,39 @@ test('web-sourced photos distinguish lookalike releases and retain their credits
  const narciso=findCatalogProfile({brand:'Narciso Rodriguez',name:'For Her',concentration:'EDP'})!;
  assert.equal(narciso.releaseYear,2006);
  assert.ok(narciso.sources.some(source=>source.kind==='photo'&&source.license?.name==='CC BY 3.0'));
+});
+
+test('dupe links resolve both directions and keep concentration and flankers distinct',()=>{
+ const original={brand:'Jean Paul Gaultier',name:'Ultra Male',concentration:'EDT'};
+ const copy={brand:'Afnan',name:'9 PM',concentration:'EDP'};
+ const {alternatives}=findCatalogDupes(original);
+ assert.ok(alternatives.some(match=>match.brand==='Afnan'&&match.name==='9PM'&&match.evidence==='community'));
+ assert.ok(alternatives.length<=3);
+ const reverse=findCatalogDupes({...copy,brand:'Afnan Perfumes'}).originals;
+ assert.deepEqual(reverse.map(({brand,name,concentration})=>({brand,name,concentration})),[original]);
+ assert.deepEqual(findCatalogDupes({...copy,concentration:'UNKNOWN'}).originals,[]);
+ assert.deepEqual(findCatalogDupes({...copy,name:'9 PM Night Out',concentration:'EXTRAIT'}).originals,[]);
+ assert.deepEqual(findCatalogDupes({...original,concentration:'EDP'}).alternatives,[]);
+});
+
+test('every published dupe has an exact original, a reciprocal lookup and public evidence',()=>{
+ const profiles=new Map(catalogProfiles.map(profile=>[profile.id,profile]));
+ const edges=new Set<string>();
+ for(const {originalId,alternative,evidence,sources} of dupeRows) {
+  const original=profiles.get(originalId);
+  assert.ok(original,originalId);
+  assert.ok(concentrationCodes.some(code=>code!=='UNKNOWN'&&code===alternative.concentration));
+  assert.notEqual(findCatalogProfile(alternative)?.id,originalId);
+  assert.ok(['brand','community'].includes(evidence));
+  assert.ok(sources.every(source=>source.publisher&&catalogReferenceUrl(source.url)));
+  const publishers=new Set(sources.map(source=>source.publisher));
+  assert.ok(publishers.size>=(evidence==='community'?2:1));
+  const edge=JSON.stringify([originalId,alternative.brand,alternative.name,alternative.concentration]);
+  assert.ok(!edges.has(edge));
+  edges.add(edge);
+  assert.ok(findCatalogDupes(alternative).originals.some(match=>
+   match.brand===original.brand&&match.name===original.name&&match.concentration===original.concentration),edge);
+  const {alternatives}=findCatalogDupes(original);
+  assert.ok(alternatives.length>0&&alternatives.length<=3);
+ }
 });

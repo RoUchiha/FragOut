@@ -27,6 +27,20 @@ export interface CatalogProfile {
  additionalPhotos?:CatalogPhoto[];
  sources:CatalogSource[];
 }
+export interface CatalogDupe {
+ brand:string; name:string; concentration:string;
+ evidence:'brand'|'community';
+ sources:{publisher:string;url:string}[];
+}
+export interface CatalogDupeLinks {
+ alternatives:CatalogDupe[];
+ originals:CatalogDupe[];
+}
+export interface BottleProfileReply {
+ variantId:string;
+ profile:CatalogProfile|null;
+ dupes?:CatalogDupeLinks;
+}
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];
   maxStrength:number; sensitivity:boolean; units:'C'|'F'; archiveOutfits:boolean;

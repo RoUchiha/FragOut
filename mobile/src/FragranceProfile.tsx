@@ -4,13 +4,13 @@ import {openBrowserAsync,WebBrowserPresentationStyle} from 'expo-web-browser';
 import {ChevronDown,ChevronLeft,ChevronRight,ExternalLink,Images,Maximize2} from 'lucide-react-native';
 import {api,sessionScope} from './api';
 import {BottleArt,Btn,catalogPhotoUrl,IconButton,Section,Sheet,Spinner,useUi} from './ui';
+import FragDexDupes from './FragDexDupes';
 import FragDexLink from './FragDexLink';
 import FragDexRatings from './FragDexRatings';
-import type {Bottle,CatalogProfile} from '../../src/lib/types';
+import type {Bottle,BottleProfileReply} from '../../src/lib/types';
 
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
-type ProfileReply={variantId:string;profile:CatalogProfile|null};
-type Lookup=ProfileReply|{error:string};
+type Lookup=BottleProfileReply|{error:string};
 
 export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  bottle:Bottle;onClose:()=>void;onEdit:()=>void;onRefresh:()=>void;
@@ -26,7 +26,7 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  useEffect(()=>{
   let active=true;
   const stillCurrent=sessionScope();
-  void api<ProfileReply>('bottles/'+bottle.id+'/profile')
+  void api<BottleProfileReply>('bottles/'+bottle.id+'/profile')
    .then(result=>{if(active&&stillCurrent())setLookup(result);})
    .catch((error:Error)=>{if(active&&stillCurrent())setLookup({error:error.message});});
   return ()=>{active=false;};
@@ -35,6 +35,7 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const reply=lookup&&'profile' in lookup?lookup:null;
  const changed=!!reply&&reply.variantId!==bottle.variantId;
  const profile=changed?null:reply?.profile;
+ const dupes=changed?null:reply?.dupes;
  const photos=profile?.photo?[profile.photo,...(profile.additionalPhotos??[])]:[];
  const featured=photos.find(photo=>!failedPhotos.includes(photo.path)&&catalogPhotoUrl(photo.path));
  const featuredUrl=catalogPhotoUrl(featured?.path);
@@ -119,7 +120,8 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
    <Btn label="Refresh collection" kind="quiet" onPress={onRefresh}/>
   </View>}
   {reply&&!changed&&!profile&&<Text style={styles.muted}>
-   {bottle.concentration==='UNKNOWN'?'Set the concentration to match a catalog profile.':'No cross-checked profile for this edition yet.'}
+   {bottle.concentration==='UNKNOWN'?'Set the concentration to match a catalog profile.':
+    dupes?.originals.length?'Cross-checked notes pending.':'No cross-checked profile for this edition yet.'}
   </Text>}
   {profile&&<>
    <View style={styles.separator}/>
@@ -132,6 +134,7 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
     </View>)}
    </View>
   </>}
+  {dupes&&<FragDexDupes dupes={dupes} visit={visit}/>}
   {reply&&!changed&&<FragDexRatings profile={profile} visit={visit}/>}
   {profile&&<>
    {!!profile.links?.length&&<View style={[styles.row,{flexWrap:'wrap',gap:7}]}>

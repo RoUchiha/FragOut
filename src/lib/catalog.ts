@@ -1,6 +1,7 @@
 import entries from '../../catalog/fragrances.json' with {type:'json'};
+import dupeEntries from '../../catalog/dupes.json' with {type:'json'};
 import identity from '../../catalog/identity.json' with {type:'json'};
-import type {Bottle,CatalogProfile} from './types.ts';
+import type {Bottle,CatalogDupe,CatalogDupeLinks,CatalogProfile} from './types.ts';
 
 type Label = Pick<Bottle,'brand'|'name'|'concentration'>;
 type CatalogEntry = CatalogProfile & {aliases?:string[]};
@@ -38,4 +39,37 @@ for(const profile of catalogProfiles) {
 export function findCatalogProfile(label:Label):CatalogProfile|null {
  const id=key(label);
  return id?index.get(id)??null:null;
+}
+
+type DupeEntry = Pick<CatalogDupe,'evidence'|'sources'> & {
+ originalId:string;
+ alternative:Label & {aliases?:string[]};
+};
+const profilesById=new Map(catalogProfiles.map(profile=>[profile.id,profile]));
+const alternativesByOriginal=new Map<string,CatalogDupe[]>();
+const originalsByAlternative=new Map<string,CatalogDupe[]>();
+
+function addDupeLink(target:Map<string,CatalogDupe[]>,id:string,match:CatalogDupe) {
+ const matches=target.get(id);
+ if(matches) matches.push(match);
+ else target.set(id,[match]);
+}
+
+for(const {originalId,alternative:{brand,name,concentration,aliases},evidence,sources} of dupeEntries as DupeEntry[]) {
+ const original=profilesById.get(originalId);
+ if(!original) continue;
+ const label={brand,name,concentration};
+ addDupeLink(alternativesByOriginal,originalId,{...label,evidence,sources});
+ const citedOriginal={brand:original.brand,name:original.name,concentration:original.concentration,evidence,sources};
+ for(const id of new Set([name,...(aliases??[])].map(alias=>key({...label,name:alias})))) {
+  if(id) addDupeLink(originalsByAlternative,id,citedOriginal);
+ }
+}
+
+export function findCatalogDupes(label:Label,profile=findCatalogProfile(label)):CatalogDupeLinks {
+ const id=key(label);
+ return {
+  alternatives:profile?alternativesByOriginal.get(profile.id)?.slice(0,3)??[]:[],
+  originals:id?originalsByAlternative.get(id)??[]:[],
+ };
 }

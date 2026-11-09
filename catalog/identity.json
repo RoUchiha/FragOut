@@ -10,7 +10,12 @@
     "initio parfums prives": "initio",
     "jo malone": "jo malone london",
     "kilian": "kilian paris",
-    "by kilian": "kilian paris"
+    "by kilian": "kilian paris",
+    "afnan perfumes": "afnan",
+    "montagne": "montagne parfums",
+    "the dua brand": "dua fragrances",
+    "dua": "dua fragrances",
+    "alt": "alt fragrances"
   },
   "suffixes": {
     "EDT": ["eau de toilette", "edt"],
