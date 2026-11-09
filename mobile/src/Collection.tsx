@@ -116,7 +116,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
     <View style={[styles.bottleStage,{backgroundColor:bottle.color+'28'}]}>
      <Pressable accessibilityRole="button" accessibilityLabel={'Open profile for '+bottle.name}
       onPress={()=>setViewing(bottle)} style={{width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
-      <BottleArt bottle={bottle} size={114}/>
+      <BottleArt bottle={bottle} size={114} illustrate={bottle.provenance==='demo'}/>
      </Pressable>
      <Pressable accessibilityRole="button" accessibilityLabel={(bottle.favorite?'Unfavorite ':'Favorite ')+bottle.name}
       accessibilityState={{selected:bottle.favorite}} onPress={()=>void favorite(bottle)}

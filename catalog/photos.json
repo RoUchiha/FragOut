@@ -1,4 +1,17 @@
 {
+  "armaf-club-de-nuit-intense-man-edt": [
+    {
+      "file": "armaf-club-de-nuit-intense-man-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=6085010044712&id=2",
+      "credit": "smoothie-app · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "105 mL Eau de Toilette box"
+    }
+  ],
   "calvin-klein-euphoria-edp": [
     {
       "file": "calvin-klein-euphoria-edp",
@@ -9,6 +22,19 @@
         "url": "https://creativecommons.org/licenses/by/2.0/"
       },
       "caption": "30 mL reference bottle"
+    }
+  ],
+  "carolina-herrera-good-girl-edp": [
+    {
+      "file": "carolina-herrera-good-girl-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8411061819838&id=front_fr",
+      "credit": "openfoodfacts-contributors · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "50 mL Eau de Parfum box"
     }
   ],
   "chanel-bleu-de-chanel-edp": [
@@ -22,6 +48,56 @@
         "url": "https://unsplash.com/license"
       },
       "caption": "Bleu de Chanel Eau de Parfum"
+    }
+  ],
+  "chanel-bleu-de-chanel-parfum": [
+    {
+      "file": "chanel-bleu-de-chanel-parfum",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=0008309124568&id=front_xx",
+      "credit": "product-scan-com · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Parfum bottle front"
+    }
+  ],
+  "chanel-chance-eau-tendre-edt": [
+    {
+      "file": "chanel-chance-eau-tendre-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3145891263305&id=front_fr",
+      "credit": "rdg · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "150 mL Eau de Toilette box"
+    }
+  ],
+  "chanel-coco-mademoiselle-edp": [
+    {
+      "file": "chanel-coco-mademoiselle-edp",
+      "publisher": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Coco_mademoiselle.jpg",
+      "credit": "Brownchl · crop by Cjp24 · JPEG optimized",
+      "license": {
+        "name": "CC BY 3.0",
+        "url": "https://creativecommons.org/licenses/by/3.0/"
+      },
+      "caption": "Coco Mademoiselle Eau de Parfum bottle"
+    },
+    {
+      "file": "chanel-coco-mademoiselle-edp-box",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3145891165708&id=front_fr",
+      "credit": "alixngu · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "200 mL Eau de Parfum box"
     }
   ],
   "chanel-no-5-edp": [
@@ -71,6 +147,19 @@
       "caption": "Bottle and presentation box"
     }
   ],
+  "dior-jadore-edp": [
+    {
+      "file": "dior-jadore-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3348900417878&id=front_fr",
+      "credit": "alixngu · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "J’adore Eau de Parfum box"
+    }
+  ],
   "dior-sauvage-edp": [
     {
       "file": "dior-sauvage-edp",
@@ -117,6 +206,32 @@
         "url": "https://unsplash.com/license"
       },
       "caption": "Sauvage EDT in hand"
+    }
+  ],
+  "dior-sauvage-elixir": [
+    {
+      "file": "dior-sauvage-elixir",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3348901567572&id=1",
+      "credit": "openfoodfacts-contributors · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Sauvage Elixir 60 mL box"
+    }
+  ],
+  "dolce-and-gabbana-light-blue-edt": [
+    {
+      "file": "dolce-and-gabbana-light-blue-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8057971188192&id=1",
+      "credit": "daxpot · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "2025 Light Blue EDT 100 mL box"
     }
   ],
   "dolce-and-gabbana-the-one-for-men-edp": [
@@ -169,6 +284,32 @@
       "caption": "Earlier bottle design"
     }
   ],
+  "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp": [
+    {
+      "file": "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614274347388&id=front_tr",
+      "credit": "erenberk · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Stronger With You Intensely box"
+    }
+  ],
+  "givenchy-linterdit-edp": [
+    {
+      "file": "givenchy-linterdit-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3274872372146&id=front_fr",
+      "credit": "openfoodfacts-contributors · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "L’Interdit Eau de Parfum box"
+    }
+  ],
   "gucci-bloom-edp": [
     {
       "file": "gucci-bloom-edp",
@@ -191,6 +332,56 @@
         "url": "https://unsplash.com/license"
       },
       "caption": "Bottle and box"
+    }
+  ],
+  "hermes-twilly-dhermes-edp": [
+    {
+      "file": "hermes-twilly-dhermes-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3346133200021&id=front_fr",
+      "credit": "rdg · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Twilly d’Hermès Eau de Parfum box"
+    }
+  ],
+  "hermes-un-jardin-sur-le-nil-edt": [
+    {
+      "file": "hermes-un-jardin-sur-le-nil-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3346138900087&id=front_nl",
+      "credit": "mitxina · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Un Jardin sur le Nil 100 mL box"
+    }
+  ],
+  "hugo-boss-boss-bottled-edp": [
+    {
+      "file": "hugo-boss-boss-bottled-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614229828535&id=2",
+      "credit": "daryl · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "100 mL Eau de Parfum bottle"
+    },
+    {
+      "file": "hugo-boss-boss-bottled-edp-box",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614229828535&id=front_en",
+      "credit": "daryl · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "100 mL Eau de Parfum box"
     }
   ],
   "jean-paul-gaultier-le-male-edt": [
@@ -216,6 +407,30 @@
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Reference bottle"
+    },
+    {
+      "file": "jean-paul-gaultier-ultra-male-edt-tin",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=8435415011990&id=front_fr",
+      "credit": "kiliweb · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Ultra Male Intense presentation tin"
+    }
+  ],
+  "lattafa-fakhar-black-edp": [
+    {
+      "file": "lattafa-fakhar-black-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=6291107456058&id=1",
+      "credit": "smoothie-app · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "100 mL Fakhar Black box"
     }
   ],
   "le-labo-santal-33-edp": [
@@ -228,6 +443,30 @@
         "url": "https://creativecommons.org/licenses/by/3.0/"
       },
       "caption": "50 mL reference bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-baccarat-rouge-540-edp": [
+    {
+      "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3700559603116&id=3",
+      "credit": "daryl · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "70 mL Eau de Parfum bottle"
+    },
+    {
+      "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp-box",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3700559603116&id=front_en",
+      "credit": "daryl · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "70 mL Eau de Parfum box"
     }
   ],
   "marc-jacobs-daisy-edt": [
@@ -254,6 +493,19 @@
         "url": "https://creativecommons.org/licenses/by/3.0/"
       },
       "caption": "For Her Eau de Parfum"
+    }
+  ],
+  "narciso-rodriguez-for-her-edt": [
+    {
+      "file": "narciso-rodriguez-for-her-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3423470890020&id=front_nl",
+      "credit": "mitxina · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "100 mL Eau de Toilette box"
     }
   ],
   "nautica-voyage-edt": [
@@ -368,6 +620,45 @@
       "caption": "90 mL Eau de Parfum box"
     }
   ],
+  "yves-saint-laurent-la-nuit-de-lhomme-edt": [
+    {
+      "file": "yves-saint-laurent-la-nuit-de-lhomme-edt",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3365440375055&id=front_fr",
+      "credit": "zuly · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "60 mL Eau de Toilette box"
+    }
+  ],
+  "yves-saint-laurent-libre-edp": [
+    {
+      "file": "yves-saint-laurent-libre-edp",
+      "publisher": "Unsplash",
+      "url": "https://unsplash.com/photos/clear-glass-perfume-bottle-on-brown-wooden-table-KPkR3e6BZG0",
+      "credit": "Olena Bohovyk · JPEG optimized",
+      "license": {
+        "name": "Unsplash License",
+        "url": "https://unsplash.com/license"
+      },
+      "caption": "Original Libre Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-mon-paris-edp": [
+    {
+      "file": "yves-saint-laurent-mon-paris-edp",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614270561634&id=front_fr",
+      "credit": "rdg · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "90 mL Eau de Parfum box"
+    }
+  ],
   "yves-saint-laurent-y-edp": [
     {
       "file": "yves-saint-laurent-y-edp",
@@ -379,6 +670,17 @@
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
       },
       "caption": "Y Eau de Parfum"
+    },
+    {
+      "file": "yves-saint-laurent-y-edp-obf-box",
+      "publisher": "Open Beauty Facts",
+      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3614272050358&id=front_fr",
+      "credit": "fabe56 · JPEG optimized",
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "caption": "Y Eau de Parfum box"
     }
   ]
 }

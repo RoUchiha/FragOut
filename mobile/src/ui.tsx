@@ -4,9 +4,10 @@ import {
  Pressable, ScrollView, StyleSheet, Text, TextInput, View, type TextInputProps, type ViewStyle,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ArrowRight,Search,X} from 'lucide-react-native';
+import {ArrowRight,Images,Search,X} from 'lucide-react-native';
 import Svg,{Rect,Ellipse,Text as SvgText} from 'react-native-svg';
 import {paletteFor,themePeriod,type Palette} from '../../src/lib/palette';
+import {isCatalogPhotoPath} from '../../src/lib/catalog-photos';
 import type {Bottle} from '../../src/lib/types';
 import {serverUrl} from './api';
 
@@ -183,16 +184,22 @@ export function Sheet({title,children,onClose}:{title:string;children:React.Reac
 }
 
 export function catalogPhotoUrl(path?:string) {
- return path&&/^\/catalog\/bottles\/[a-z0-9-]+\.jpg$/.test(path)?serverUrl()+path:undefined;
+ return isCatalogPhotoPath(path)?serverUrl()+path:undefined;
 }
 
-export function BottleArt({bottle,size=125}:{bottle:Pick<Bottle,'name'|'color'|'shape'|'catalogPhoto'>;size?:number}) {
- const {colors} = useUi();
- const [failedPhoto,setFailedPhoto]=useState<string>();
- const uri=catalogPhotoUrl(bottle.catalogPhoto);
- if(uri&&uri!==failedPhoto) return <Image accessible accessibilityLabel={'Reference bottle photo of '+bottle.name}
+export function BottleArt({bottle,size=125,illustrate=true}:{
+ bottle:Pick<Bottle,'name'|'color'|'shape'|'catalogPhoto'|'catalogPhotos'>;size?:number;illustrate?:boolean;
+}) {
+ const {colors,styles} = useUi();
+ const [failedPhotos,setFailedPhotos]=useState<string[]>([]);
+ const uri=(bottle.catalogPhotos??[bottle.catalogPhoto]).map(catalogPhotoUrl)
+  .find(url=>url&&!failedPhotos.includes(url));
+ if(uri) return <Image key={uri} accessible accessibilityLabel={'Catalog photo of '+bottle.name}
   source={{uri}} resizeMode="contain" style={{width:size*.88,height:size,borderRadius:4}}
-  onError={()=>setFailedPhoto(uri)}/>;
+  onError={()=>setFailedPhotos(current=>[...current,uri])}/>;
+ if(!illustrate) return <View style={[styles.row,{gap:5}]}>
+  <Images size={15} color={colors.muted}/><Text style={styles.small}>Bottle photos</Text>
+ </View>;
  const round = bottle.shape==='round';
  const tall = bottle.shape==='tall';
  const cap = colors.isDark ? colors.muted : colors.ink;

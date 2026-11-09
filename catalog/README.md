@@ -1,6 +1,6 @@
 # Fragrance catalog
 
-The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 63 have exact Jomashop listings, and 23 have licensed bottle photography.
+The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 77 have exact Jomashop listings, and 42 have reusable bottle or packaging photography.
 
 The app compares the saved house, release, and concentration with this snapshot on the FragOut server. It keeps EDT, EDP, cologne, parfum, extrait, elixir, and mist separate. Where a label and concentration have documented reformulations, enter the edition year as part of the name to select that profile. Unlisted editions save as a basic entry. The server uses the local snapshot for the initial result, and the optional live rating lookup sends only the public catalog identity. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their private flows.
 
@@ -42,17 +42,18 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 ## Bottle galleries
 
-Tap a bottle photo to enlarge it and browse available views. FragOut serves 31 JPEGs with camera metadata removed. Edition checks compare each label, barcode or documented bottle design with the exact house product page. The [photo registry](photos.json) records the photographer, source, license and caption for each file. FragDex shows these credits in **Sources & credits**.
+Tap a photo to enlarge it and browse the available views. FragOut serves 55 JPEGs with camera metadata removed. Edition checks compare the label, barcode, or documented bottle design with the exact product. The [photo registry](photos.json) records the photographer, source, license, and caption for each file. FragDex shows these credits in **Sources & credits**. Front-of-box photos have packaging captions.
 
-Without an in-app photo, **Jomashop photos** opens the full retailer page for a reviewed standalone bottle. The same listing appears under **View on Jomashop** below the ratings. The checks compare the house, release, concentration and, when packaging or naming is ambiguous, the product barcode. The 2025 Light Blue EDT points to the matching 100 mL bottle. Profiles without a confirmed retailer match offer **Search Jomashop**, using the public catalog label when tapped.
+If a JPEG fails to load, the collection and FragDex try the next available image. **Bottle photos** links open exact official and retail product pages where available, including the full **Jomashop photos** gallery. The 2025 Light Blue EDT points to the matching 100 mL bottle. **Search bottle photos** opens a web image search on tap. The search uses the brand, fragrance name, and known concentration. The app displays a disclosure before users choose to search for an unlisted bottle.
 
-Jomashop requires written authorization to reuse its photos. Its images are served by the original listing in the browser. [Jomashop terms](https://help.jomashop.com/hc/en-us/articles/11923120092571-Terms-Conditions)
+The November 9 photo batch used the public Open Beauty Facts snapshot to identify candidates by barcode and then checked the actual images. The individual photographs retain their CC BY-SA license and creator credit. Wikimedia Commons and Unsplash photos retain their respective licenses. Jomashop gallery links display images on the retailer's page under its terms. [Open Beauty Facts data](https://world.openbeautyfacts.org/data) · [Jomashop terms](https://help.jomashop.com/hc/en-us/articles/11923120092571-Terms-Conditions)
 
 ## Refreshing the snapshot
 
-Download the three licensed data files from the table to a scratch directory. Review changes to source rights, scope and exact editions before regenerating the catalog. For each new photo, check the photographer's license and the house product page. Add the resized JPEG to `public/catalog/bottles` and credit it in `photos.json` under the exact catalog ID, with the preferred cover first. Keep distinct releases separate.
+Download the three licensed data files from the table to a scratch directory. Review changes to source rights, scope, and exact editions before regenerating the catalog. For each photo, compare the actual image with the exact product and review its reuse license. Save the image next to a JSON array of reviewed records. Each record has `id` for the exact catalog ID, `image` for the local filename, `publisher`, `url`, `credit`, `caption`, and `license` with `name` and `url`. Give extra views a `suffix`. Set `cover` to true to place a new view first. The importer resizes the selected photos, removes camera metadata, and updates the registry.
 
 ```powershell
+node scripts/import-fragrance-photos.mjs PATH_TO_REVIEWED_PHOTOS.json
 python scripts/build-fragrance-catalog.py PATH_TO_SCENTO_JSONL PATH_TO_MSC_CSV PATH_TO_GOUTTES_JSON --checked-at YYYY-MM-DD
 node --experimental-strip-types --test tests/catalog.test.ts tests/route-security.test.ts
 ```

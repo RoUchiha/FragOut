@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import dupeRows from '../catalog/dupes.json' with {type:'json'};
 import {catalogProfiles,findCatalogDupes,findCatalogProfile} from '../src/lib/catalog.ts';
+import {catalogGalleryPhotos,catalogPhotoReferences,catalogPhotoSearchUrl} from '../src/lib/catalog-photos.ts';
 import {catalogReferenceUrl,fragranceFacets} from '../src/lib/catalog-ratings.ts';
 import {concentrationCodes} from '../src/lib/concentrations.ts';
 
@@ -152,6 +153,50 @@ test('web-sourced photos distinguish lookalike releases and retain their credits
  const narciso=findCatalogProfile({brand:'Narciso Rodriguez',name:'For Her',concentration:'EDP'})!;
  assert.equal(narciso.releaseYear,2006);
  assert.ok(narciso.sources.some(source=>source.kind==='photo'&&source.license?.name==='CC BY 3.0'));
+});
+
+test('the photo gallery skips failed, duplicate and non-catalog images',()=>{
+ const profile=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'})!;
+ const first=profile.photo!;
+ const [second]=profile.additionalPhotos!;
+ assert.deepEqual(catalogGalleryPhotos({...profile,additionalPhotos:[
+  first,{...first,path:'https://example.com/other.jpg'},second,
+ ]},[first.path]),[second]);
+ assert.deepEqual(catalogGalleryPhotos(profile,[first.path,second.path]),[]);
+});
+
+test('barcode-reviewed photos stay with the matching fragrance edition',()=>{
+ const eauTendre={brand:'Chanel',name:'Chance Eau Tendre'};
+ const edt=findCatalogProfile({...eauTendre,concentration:'EDT'})!;
+ const edp=findCatalogProfile({...eauTendre,concentration:'EDP'})!;
+ assert.match(edt.photo?.caption??'',/Eau de Toilette/);
+ assert.notEqual(edt.photo?.path,edp.photo?.path);
+ const rouge={brand:'MFK',name:'Baccarat Rouge 540'};
+ const bottle=findCatalogProfile({...rouge,concentration:'EDP'})!;
+ assert.ok(bottle.photo&&bottle.additionalPhotos?.length);
+ assert.notEqual(bottle.photo.path,findCatalogProfile({...rouge,concentration:'EXTRAIT'})?.photo?.path);
+ assert.ok(bottle.sources.some(source=>source.publisher==='Open Beauty Facts'&&source.kind==='photo'));
+});
+
+test('FragDex has a photo destination for every known edition',()=>{
+ for(const profile of catalogProfiles) {
+  const references=catalogPhotoReferences(profile);
+  assert.ok(references.length>0,profile.id);
+  assert.ok(references.every(({url})=>catalogReferenceUrl(url)),profile.id);
+  assert.equal(new Set(references.map(({url})=>url)).size,references.length);
+ }
+ const profile=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDT'})!;
+ assert.match(catalogPhotoReferences(profile)[0].url,/^https:\/\/www\.jomashop\.com\/.+\.html$/);
+ assert.ok(!catalogPhotoReferences({...profile,links:[],sources:[]})[0].url.includes('jomashop'));
+});
+
+test('the user-initiated web photo search encodes only the bottle identity',()=>{
+ const label={brand:'Example & Co',name:'One #2? edt',concentration:'EDT',memo:'private-note'};
+ const url=new URL(catalogPhotoSearchUrl(label));
+ assert.equal(url.origin,'https://www.google.com');
+ assert.equal(url.searchParams.get('udm'),'2');
+ assert.equal(url.searchParams.get('q'),'Example & Co One #2? edt EDT bottle');
+ assert.ok(!url.href.includes(label.memo));
 });
 
 test('dupe links resolve both directions and keep concentration and flankers distinct',()=>{

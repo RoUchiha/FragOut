@@ -6,6 +6,7 @@ import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './
 import {privateDataPath} from './private-path.ts';
 import {protectPrivateDirectory} from './private-directory.ts';
 import {findCatalogProfile} from './catalog.ts';
+import {catalogGalleryPhotos} from './catalog-photos.ts';
 import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
 const OUTFIT_ANALYSIS_MS=15*60*1000;
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
@@ -76,8 +77,8 @@ export class Store {
     const setting=this.db.prepare('SELECT body FROM settings WHERE user_id=?').get(userId) as {body:string};
     const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(row=>{
       const bottle=JSON.parse(row.body) as Bottle;
-      const catalogPhoto=findCatalogProfile(bottle)?.photo?.path;
-      return catalogPhoto?{...bottle,catalogPhoto}:bottle;
+      const catalogPhotos=catalogGalleryPhotos(findCatalogProfile(bottle)).map(photo=>photo.path);
+      return catalogPhotos.length?{...bottle,catalogPhoto:catalogPhotos[0],catalogPhotos}:bottle;
     });
     const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
     const likes=new Map<string,WearEvent>();
