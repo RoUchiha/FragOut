@@ -6,7 +6,7 @@ import ts from 'typescript';
 
 const aToken='a'.repeat(64),bToken='b'.repeat(64);
 function harness({development=false,web=false,failWrite=false,initial=new Map<string,string>(),hooks={} as {write?:(key:string,value:string)=>Promise<void>;remove?:(key:string)=>Promise<void>}}={}){
- const requests:{url:string;options:any;resolve:(value:any)=>void}[]=[],storage=new Map(initial);
+ const requests:{url:string;options:any;resolve:(value:any)=>void;reject:(error:Error)=>void}[]=[],storage=new Map(initial);
  const module={exports:{} as any},flags={cleanupFailure:false};
  const context={module,exports:module.exports,Error,URL,AbortController,__DEV__:development,window:web?{location:{origin:'https://server-a.example'}}:undefined,
   process:{env:{EXPO_PUBLIC_API_URL:'https://server-a.example'}},
@@ -17,7 +17,7 @@ function harness({development=false,web=false,failWrite=false,initial=new Map<st
    if(name==='./capture')return {clearTemporaryPhotos:async()=>{if(flags.cleanupFailure)throw new Error('synthetic cleanup failure');}};
    throw new Error('Unexpected native dependency: '+name);
   },
-  fetch:(url:string,options:any)=>new Promise(resolve=>requests.push({url,options,resolve}))
+  fetch:(url:string,options:any)=>new Promise((resolve,reject)=>requests.push({url,options,resolve,reject}))
  };
  const source=readFileSync(new URL('../mobile/src/api.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,context);
@@ -54,6 +54,29 @@ test('failed secure persistence leaves no usable in-memory session',async()=>{
  const r=h.client.api('state');await h.flush();assert.equal(h.requests[1].options.headers.Authorization,undefined);h.respond(1);await r;
 });
 
+test('a rejected sign-in leaves the existing session available for retry',async()=>{
+ const initial=new Map([['fragout.session.v2',JSON.stringify({origin:'https://server-a.example',token:aToken})]]);
+ const h=harness({initial});
+ await h.client.restoreSession();
+ const login=h.client.signIn('login',{email:'synthetic@example.test',password:'wrong-password'});
+ const rejected=assert.rejects(login,{status:401,message:'Email or password is incorrect.'});
+ await h.flush();
+ h.respond(0,undefined,{ok:false,status:401,json:async()=>({error:'Email or password is incorrect.'})});
+ await rejected;
+ const state=h.client.api('state');await h.flush();
+ assert.equal(h.requests[1].options.headers.Authorization,'Bearer '+aToken);
+ assert.equal(JSON.parse(h.storage.get('fragout.session.v2')??'null')?.token,aToken);
+ h.respond(1);await state;
+});
+
+test('native transport failures return the connection guidance',async()=>{
+ const h=harness();
+ const request=h.client.api('state');
+ const failed=assert.rejects(request,{message:'Could not reach the server. Check the server address and try again.'});
+ h.requests[0].reject(new TypeError('fetch failed: native network detail'));
+ await failed;
+});
+
 test('restore rejects mismatched origin envelopes and removes ambiguous legacy tokens',async()=>{
  const initial=new Map([['fragout.server','https://server-b.example'],['fragout.session',aToken],['fragout.session.v2',JSON.stringify({origin:'https://server-a.example',token:aToken})]]);
  const h=harness({initial});await h.client.restoreSession();const r=h.client.api('state');await h.flush();
@@ -64,6 +87,12 @@ test('release clients reject remote and LAN plaintext server origins',async()=>{
  const h=harness();await assert.rejects(()=>h.client.setServer('http://192.168.1.8:3000'),/HTTPS|secure/i);
  await assert.rejects(()=>h.client.setServer('https://user:secret@example.test'),/origin|address|credentials/i);
  await h.client.setServer('https://server-b.example');
+});
+
+test('Android release connection guidance matches its loopback network policy',()=>{
+ const url='http://127.0.0.1:3000';
+ assert.throws(()=>harness().client.validateServerUrl(url),/Android release builds require HTTPS/i);
+ assert.equal(harness({development:true}).client.validateServerUrl(url),url);
 });
 
 test('authenticated requests reject redirects rather than following credentials to a new origin',async()=>{

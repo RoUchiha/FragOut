@@ -93,6 +93,8 @@ Hosted FragOut uses a private Postgres schema with the same sign-in and data con
 
 ## Verification and limits
 
+See the [12 November 2026 acceptance report](docs/ACCEPTANCE_REPORT.md) for the browser, Android, API, photo, and cloud checks.
+
 ```powershell
 npm.cmd run typecheck
 npm.cmd test

@@ -7,7 +7,7 @@ import {Collection,Dashboard,Journal,Layering,Learn,SoloResults,occasionName,typ
 import {defaultIntent,intentSummary} from '@/lib/intent';
 import type {AppState,Bottle,ComboResult,ScentIntent,SoloResult,WearContext} from '@/lib/types';
 
-type Dialog={kind:'add'}|{kind:'edit';bottle:Bottle}|{kind:'context'}|{kind:'preferences'}|{kind:'shortcuts'}|{kind:'solo'}|{kind:'why';result:SoloResult}|{kind:'auth'}|{kind:'delete'}|null;
+type Dialog={kind:'add'}|{kind:'edit';bottle:Bottle}|{kind:'context'}|{kind:'preferences'}|{kind:'shortcuts'}|{kind:'solo';opener:HTMLElement|null}|{kind:'why';result:SoloResult}|{kind:'auth'}|{kind:'delete'}|null;
 async function request<T>(path:string,method='GET',body?:unknown):Promise<T>{
  const response=await fetch('/api/'+path,{method,headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined});
  const data=await response.json();if(!response.ok)throw new Error(data.error??'Unable to complete this request.');return data as T;
@@ -28,7 +28,18 @@ export default function App({accountDeletion}:{accountDeletion:boolean}){
  const clearPersonalState=()=>{intentRevision.current++;setIntent(defaultIntent);setSolo([]);setSoloOccasion('GENERAL');setSoloContext(null);setSoloRequestId(undefined);setComboRequestId(undefined);setCombos(null);setDialog(null);};
  async function mutate(path:string,method:string,data?:unknown,message='Saved.'){setBusy(true);try{await request(path,method,data);setState(await request<AppState>('state'));if(message)setToast(message);setCombos(null);return true;}catch(e){notifyError(e);return false;}finally{setBusy(false);}}
  function requestPicks(occasion:string,shortcutId?:string){return request<{solo:SoloResult[];context:WearContext;requestId:string}>('recommend','POST',{occasion,mode:'solo',shortcutId,...intent});}
- async function recommend(occasion=state?.context.occasion??'GENERAL',shortcutId?:string){setBusy(true);const revision=intentRevision.current;try{const data=await requestPicks(occasion,shortcutId);if(revision!==intentRevision.current)return;setSolo(data.solo);setSoloOccasion(data.context.occasion);setSoloContext(data.context);setSoloRequestId(data.requestId);setDialog({kind:'solo'});}catch(e){if(revision===intentRevision.current)notifyError(e);}finally{setBusy(false);}}
+ async function recommend(occasion=state?.context.occasion??'GENERAL',shortcutId?:string){
+  const opener=document.activeElement instanceof HTMLElement?document.activeElement:null;
+  const revision=intentRevision.current;
+  setBusy(true);
+  try{
+   const data=await requestPicks(occasion,shortcutId);
+   if(revision!==intentRevision.current)return;
+   setSolo(data.solo);setSoloOccasion(data.context.occasion);setSoloContext(data.context);
+   setSoloRequestId(data.requestId);setDialog({kind:'solo',opener});
+  }catch(error){if(revision===intentRevision.current)notifyError(error);}
+  finally{setBusy(false);}
+ }
  async function generate(occasion:string,evidenceMode:string,isCurrent:()=>boolean){setBusy(true);setCombos(null);setComboRequestId(undefined);const revision=intentRevision.current;try{const data=await request<{combos:ComboResult[];requestId:string}>('recommend','POST',{occasion,mode:'combo',evidenceMode,...intent});if(revision!==intentRevision.current||!isCurrent())return;setCombos(data.combos);setComboRequestId(data.requestId);}catch(e){if(revision===intentRevision.current&&isCurrent())notifyError(e);}finally{setBusy(false);}}
  async function feedback(ids:string[],reaction:'wore'|'loved'|'disliked'|'saved',occasion='GENERAL',requestId?:string){const ok=await mutate('feedback','POST',{bottleIds:ids,reaction,occasion,requestId},reaction==='saved'?'Pair saved.':reaction==='disliked'?(ids.length===2?'Pair excluded from future suggestions.':'Preference saved.'):'Logged.');if(ok&&reaction==='wore')setDialog(null);}
  async function wearPick(bottleId:string){setBusy(true);const revision=intentRevision.current;try{const picks=await requestPicks(state?.context.occasion??'GENERAL');if(revision!==intentRevision.current)return;if(!picks.solo.some(r=>r.bottle.id===bottleId))throw new Error('Your picks changed. Open Recommend to choose again.');await feedback([bottleId],'wore',picks.context.occasion,picks.requestId);}catch(e){if(revision===intentRevision.current)notifyError(e);}finally{setBusy(false);}}
@@ -62,7 +73,7 @@ export default function App({accountDeletion}:{accountDeletion:boolean}){
  </main></div>
  <nav className="bottom-nav" aria-label="Mobile navigation">{navigation.slice(0,4).map(([v,label,Icon])=><button key={v} className={view===v?'active':''} aria-label={label} onClick={()=>navigate(v)}><Icon size={21}/><span>{v==='home'?'Home':v==='collection'?'Collection':v==='layering'?'Layering':'Journal'}</span></button>)}<button className={view==='profile'?'active':''} onClick={()=>navigate('profile')} aria-label="Profile"><UserRound size={21}/><span>You</span></button></nav>
  {toast&&<div className="toast" role="status"><Info size={18}/><span>{toast}</span><button aria-label="Dismiss message" onClick={()=>setToast('')}><X size={17}/></button></div>}
- {dialog&&<Modal title={dialog.kind==='add'?'Add fragrance':dialog.kind==='edit'?dialog.bottle.name:dialog.kind==='context'?'Conditions':dialog.kind==='preferences'?'Preferences':dialog.kind==='shortcuts'?'Shortcuts':dialog.kind==='solo'?`Picks · ${(soloContext&&intentSummary(soloContext))||occasionName(soloOccasion)}`:dialog.kind==='why'?'Why this?':dialog.kind==='auth'?'Account':'Delete your account'} wide={['solo','shortcuts','add','edit'].includes(dialog.kind)} onClose={close}>
+ {dialog&&<Modal title={dialog.kind==='add'?'Add fragrance':dialog.kind==='edit'?dialog.bottle.name:dialog.kind==='context'?'Conditions':dialog.kind==='preferences'?'Preferences':dialog.kind==='shortcuts'?'Shortcuts':dialog.kind==='solo'?`Picks · ${(soloContext&&intentSummary(soloContext))||occasionName(soloOccasion)}`:dialog.kind==='why'?'Why this?':dialog.kind==='auth'?'Account':'Delete your account'} wide={['solo','shortcuts','add','edit'].includes(dialog.kind)} onClose={close} opener={dialog.kind==='solo'?dialog.opener:undefined}>
   {(dialog.kind==='add'||dialog.kind==='edit')&&<BottleForm key={dialog.kind==='edit'?dialog.bottle.id:'new'} bottle={dialog.kind==='edit'?dialog.bottle:undefined} busy={busy} onSave={async data=>{if(await mutate(dialog.kind==='edit'?'bottles/'+dialog.bottle.id:'bottles',dialog.kind==='edit'?'PATCH':'POST',data,'Saved.')){close();}}} onDelete={dialog.kind==='edit'?()=>{void mutate('bottles/'+dialog.bottle.id,'DELETE',undefined,'Bottle removed from collection.').then(ok=>{if(ok)close();});}:undefined}/>}
   {dialog.kind==='context'&&<ContextForm context={state.context} busy={busy} onSave={async context=>{if(await mutate('settings','PUT',{context},'Wearing conditions updated.'))close();}}/>}
   {dialog.kind==='preferences'&&<PreferencesForm preferences={state.preferences} busy={busy} onSave={async preferences=>{if(await mutate('settings','PUT',{preferences},'Scent preferences saved.'))close();}}/>}

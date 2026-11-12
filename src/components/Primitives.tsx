@@ -23,9 +23,10 @@ export function BottleArt({bottle,hero=false}:{bottle:Pick<Bottle,'name'|'color'
   <text x="100" y={tall?179:190} textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="4.8" letterSpacing="1.2">{bottle.concentration==='EDP'?'EAU DE PARFUM':bottle.concentration==='EDT'?'EAU DE TOILETTE':bottle.concentration&&bottle.concentration!=='UNKNOWN'?bottle.concentration:'PERSONAL COLLECTION'}</text>
  </svg>;
 }
-export function Modal({title,children,onClose,wide=false}:{title:string;children:ReactNode;onClose:()=>void;wide?:boolean}){
+export function Modal({title,children,onClose,wide=false,opener}:{title:string;children:ReactNode;onClose:()=>void;wide?:boolean;opener?:HTMLElement|null}){
  const ref=useRef<HTMLDivElement>(null),titleId=useId();
- useEffect(()=>{const previous=document.activeElement as HTMLElement|null;const scroll=document.body.style.overflow;document.body.style.overflow='hidden';
+ const firstOpener=useRef(opener);
+ useEffect(()=>{const previous=firstOpener.current??document.activeElement as HTMLElement|null;const scroll=document.body.style.overflow;document.body.style.overflow='hidden';
    const el=ref.current;const focusables=()=>el?.querySelectorAll<HTMLElement>('button, input, select, textarea, a[href], [tabindex="0"]');
    focusables()?.[0]?.focus();
    const key=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose();if(e.key==='Tab'){const items=Array.from(focusables()??[]).filter(e=>!e.hasAttribute('disabled'));const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}};

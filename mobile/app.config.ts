@@ -24,7 +24,7 @@ const config:ExpoConfig={
   ['expo-image-picker',{photosPermission:'Choose an outfit or fragrance photo.',
    cameraPermission:'Take outfit selfies and fragrance bottle photos.',microphonePermission:dictationPermission}],
   ['expo-speech-recognition',{microphonePermission:dictationPermission,speechRecognitionPermission:'Turn your outfit description into text.'}],
-  'expo-secure-store','expo-sharing','expo-web-browser',
+  'expo-secure-store','expo-sharing','expo-status-bar','expo-web-browser',
   ...adPlugins,
  ],
  extra:{admob:{

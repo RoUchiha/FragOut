@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {openURL} from 'expo-linking';
 import {useAdPrivacy} from './ads';
 import {Platform,Pressable,Switch,Text,View} from 'react-native';
-import {api,serverUrl,setServer,signIn,signOut,sessionScope,validateServerUrl,type AppState} from './api';
+import {api,isSignInRejection,serverUrl,setServer,signIn,signOut,sessionScope,validateServerUrl,type AppState} from './api';
 import {shareAccountExport} from './export-data';
 import Connections from './Connections';
 import FragDexAdmin from './FragDexAdmin';
@@ -13,6 +13,7 @@ export default function Settings({state,refresh,onSession,notify}:{state:AppStat
  const [hemisphere,setHemisphere] = useState(state.context.latitude<0?'south':'north');
  const [dialog,setDialog]=useState<'auth'|'preferences'|'context'|'server'|'delete'|'archiveOff'|'catalogPhotos'|null>(null),[busy,setBusy]=useState(false),[deleteText,setDeleteText]=useState(''),[server,setServerValue]=useState(serverUrl());
  const [authMode,setAuthMode]=useState<'register'|'login'>('register'),[name,setName]=useState(''),[email,setEmail]=useState(''),[password,setPassword]=useState('');
+ const [authError,setAuthError]=useState('');
  const [liked,setLiked]=useState(state.preferences.likedNotes.join(', ')),[disliked,setDisliked]=useState(state.preferences.dislikedNotes.join(', ')),[maxStrength,setMaxStrength]=useState(String(state.preferences.maxStrength)),[sensitive,setSensitive]=useState(state.preferences.sensitivity),[units,setUnits]=useState(state.preferences.units);
  const [city,setCity]=useState(state.context.city),[temp,setTemp]=useState(String(state.context.tempC)),[indoor,setIndoor]=useState(String(state.context.indoorTempC)),[setting,setSetting]=useState(state.context.setting),[policy,setPolicy]=useState(state.context.policy);
  async function run(work:()=>Promise<void>){setBusy(true);try{await work();}catch(e){notify((e as Error).message);}finally{setBusy(false);}}
@@ -37,19 +38,28 @@ export default function Settings({state,refresh,onSession,notify}:{state:AppStat
  {editAdPrivacy&&<Btn label="Ad privacy" kind="quiet" disabled={busy} onPress={()=>void run(editAdPrivacy)}/>}
  <Section title="Server" action={Platform.OS==='web'?undefined:'Change'} onAction={()=>setDialog('server')}/><Text selectable style={styles.small}>{serverUrl()}</Text>
  {state.user.catalogAdmin===true&&dialog==='catalogPhotos'&&<FragDexAdmin onClose={()=>setDialog(null)} onUpdated={refresh}/>}
- {dialog==='auth'&&<Sheet title="Account" onClose={()=>setDialog(null)}>
-  <Choices value={authMode} items={[["register","Create account"],["login","Sign in"]]} onChange={setAuthMode}/>
+ {dialog==='auth'&&<Sheet title="Account" onClose={()=>{if(!busy){setAuthError('');setDialog(null);}}}>
+  <Choices value={authMode} items={[["register","Create account"],["login","Sign in"]]} onChange={mode=>{if(!busy){setAuthError('');setAuthMode(mode);}}}/>
   {authMode==='register'&&<Field label="Name" value={name} onChangeText={setName} autoComplete="name"/>}
   <Field label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" autoComplete="email"/>
   <Field label="Password" value={password} onChangeText={setPassword} secureTextEntry autoCapitalize="none"/>
   {authMode==='register'&&<Text style={styles.small}>12 characters minimum. Local account; no password recovery.</Text>}
+  {!!authError&&<Text accessibilityRole="alert" style={styles.muted}>{authError}</Text>}
   <Btn label={authMode==='register'?'Create account':'Sign in'}
    disabled={busy||!email||!password||authMode==='register'&&(!name||password.length<12)} onPress={()=>void run(async()=>{
+    setAuthError('');
     const fields=authMode==='register'?{name,email,password}:{email,password};
     const signing=signIn(authMode,fields);
-    onSession(null);
-    const next=await signing;
-    setPassword('');setDialog(null);onSession(next);
+    const stillCurrent=sessionScope();
+    try{
+     const next=await signing;
+     if(stillCurrent()){setPassword('');setDialog(null);onSession(next);}
+    }catch(error){
+     if(!stillCurrent())return;
+     if(isSignInRejection(error)){setAuthError((error as Error).message);return;}
+     onSession(null);
+     throw error;
+    }
    })}/>
  </Sheet>}
  {dialog==='preferences'&&<Sheet title="Preferences" onClose={()=>setDialog(null)}><Choices label="Temperature" value={units} items={[["F","Fahrenheit"],["C","Celsius"]]} onChange={setUnits}/><Field label="Liked notes" value={liked} onChangeText={setLiked}/><Field label="Avoided notes" value={disliked} onChangeText={setDisliked}/><Choices label="Maximum projection" value={maxStrength} items={[["1","Light"],["2","Moderate"],["3","Any"]]} onChange={setMaxStrength}/><View style={styles.spread}><Text style={styles.text}>Sensitivity: light only</Text><Switch accessibilityLabel="Sensitivity: light only" value={sensitive} onValueChange={setSensitive}/></View><Text style={styles.small}>Avoided notes exclude matching known profiles.</Text><Btn label="Save preferences" disabled={busy} onPress={()=>void run(async()=>{const words=(s:string)=>s.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);await api('settings','PUT',{preferences:{...state.preferences,likedNotes:words(liked),dislikedNotes:words(disliked),maxStrength:Number(maxStrength),sensitivity:sensitive,units}});await refresh();setDialog(null);})}/></Sheet>}

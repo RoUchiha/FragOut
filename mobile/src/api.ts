@@ -15,12 +15,19 @@ const controllers=new Set<AbortController>();
 const SESSION='fragout.session.v2';
 type Context={origin:string;generation:number;credential:string|null};
 class SessionChangedError extends Error {constructor(){super('Session or server changed. Please try again.');this.name='SessionChangedError';}}
+export class ApiResponseError extends Error {
+ constructor(readonly status:number,message:string){super(message);this.name='ApiResponseError';}
+}
+export function isSignInRejection(error:unknown){
+ return error instanceof ApiResponseError&&[400,401,429].includes(error.status);
+}
 
 export function validateServerUrl(value:string){
  let parsed:URL;try{parsed=new URL(value.trim());}catch{throw new Error('Enter a valid HTTPS server address.');}
  if(!['http:','https:'].includes(parsed.protocol)||parsed.username||parsed.password||parsed.search||parsed.hash||parsed.pathname!=='/')throw new Error('Use a server origin without credentials or a path.');
  const loopback=['localhost','127.0.0.1','[::1]'].includes(parsed.hostname);
  const privateNetwork=/^(10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)$/.test(parsed.hostname);
+ if(parsed.protocol==='http:'&&loopback&&Platform.OS==='android'&&!development)throw new Error('Android release builds require HTTPS. Use a development build for a local HTTP server.');
  if(parsed.protocol!=='https:'&&!loopback&&!(development&&privateNetwork))throw new Error('Use HTTPS. Plaintext LAN connections are only available in development builds.');
  return parsed.origin;
 }
@@ -36,6 +43,17 @@ function persist(context:Context,work:()=>Promise<void>){
  storageQueue=pending.catch(()=>{});return pending;
 }
 async function removeCredential(){if(!web){await SecureStore.deleteItemAsync(SESSION);await SecureStore.deleteItemAsync('fragout.session');}}
+async function saveCredential(context:Context,credential:string){
+ try{
+  await persist(context,async()=>{
+   if(!web)await SecureStore.setItemAsync(SESSION,JSON.stringify({origin:context.origin,token:credential}),{keychainAccessible:SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY});
+  });
+  assertCurrent(context);token=credential;
+ }catch(error){
+  if(context.generation===generation){token=null;try{await persist(context,removeCredential);}catch{/* No credential is active in this process. */}}
+  throw error;
+ }
+}
 export function serverUrl(){return base;}
 export function supportsKeys(){try{const u=new URL(base);return u.protocol==='https:'||['localhost','127.0.0.1','[::1]'].includes(u.hostname);}catch{return false;}}
 export function sessionScope(){const context=current();return ()=>context.generation===generation&&context.origin===base;}
@@ -62,23 +80,31 @@ async function request<T>(context:Context,path:string,method='GET',body?:unknown
  if(!/^[A-Za-z0-9_/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))throw new Error('Invalid API path.');
  const controller=new AbortController();controllers.add(controller);const timer=setTimeout(()=>controller.abort(),175000);
  try{
-  const response=await fetch(origin+'/api/'+path,{method,headers:{...(body?{'Content-Type':'application/json'}:{}),...(context.credential?{Authorization:'Bearer '+context.credential}:{})},body:body?JSON.stringify(body):undefined,credentials:'omit',redirect:'error',cache:'no-store',signal:controller.signal});
+  const response=await fetch(origin+'/api/'+path,{method,headers:{...(body?{'Content-Type':'application/json'}:{}),...(context.credential?{Authorization:'Bearer '+context.credential}:{})},body:body?JSON.stringify(body):undefined,credentials:'omit',redirect:'error',cache:'no-store',signal:controller.signal}).catch(()=>{
+   assertCurrent(context);
+   throw new Error('Could not reach the server. Check the server address and try again.');
+  });
   assertCurrent(context);
   if(response.redirected||(response.url&&new URL(response.url).origin!==origin))throw new Error('Unexpected server redirect. No session was accepted.');
-  const data=await response.json();assertCurrent(context);if(!response.ok)throw new Error(typeof data.error==='string'?data.error:'Request failed.');return data as T;
- }catch(error){assertCurrent(context);if(error instanceof Error&&error.name!=='AbortError'&&error.message!=='Network request failed')throw error;throw new Error('Could not reach the server. Check the address in Settings.');}
+  const data=await response.json().catch(()=>null);
+  assertCurrent(context);
+  if(!response.ok)throw new ApiResponseError(response.status,typeof data?.error==='string'?data.error:'Request failed. Try again.');
+  if(data===null)throw new Error('The server did not return a FragOut response.');
+  return data as T;
+ }
  finally{clearTimeout(timer);controllers.delete(controller);}
 }
 export async function api<T=unknown>(path:string,method='GET',body?:unknown):Promise<T>{return request<T>(current(),path,method,body);}
 export async function signIn(action:'demo'|'login'|'register',fields?:{name?:string;email:string;password:string}){
  const old=current(),context=invalidate();context.credential=old.credential;
  await persist(context,removeCredential);await clearTemporaryPhotos();assertCurrent(context);
- const response=await request<AppState&{sessionToken:string}>(context,'auth','POST',{action,client:'mobile',...fields});
+ const response=await request<AppState&{sessionToken:string}>(context,'auth','POST',{action,client:'mobile',...fields}).catch(async error=>{
+  // A rejected login leaves the server's existing session active.
+  if(old.credential&&isSignInRejection(error))await saveCredential(context,old.credential);
+  throw error;
+ });
  if(!/^[a-f0-9]{64}$/.test(response.sessionToken??''))throw new Error('The server did not return a valid native session.');
- try{
-  await persist(context,async()=>{if(!web)await SecureStore.setItemAsync(SESSION,JSON.stringify({origin:context.origin,token:response.sessionToken}),{keychainAccessible:SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY});});
-  assertCurrent(context);token=response.sessionToken;
- }catch(error){if(context.generation===generation){token=null;try{await persist(context,removeCredential);}catch{/* Persistence error is reported; no credential is active in this process. */}}throw error;}
+ await saveCredential(context,response.sessionToken);
  const {sessionToken:_,...state}=response;return state;
 }
 export async function signOut(){

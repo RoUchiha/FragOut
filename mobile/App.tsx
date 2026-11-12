@@ -4,7 +4,7 @@ import {SafeAreaProvider,SafeAreaView} from 'react-native-safe-area-context';
 import {router,useLocalSearchParams} from 'expo-router';
 import {StatusBar} from 'expo-status-bar';
 import {ArrowLeft,BookOpen,Home,Lightbulb,Settings2,X} from 'lucide-react-native';
-import {api,restoreSession,serverUrl,sessionScope,setServer,signIn,type AppState} from './src/api';
+import {api,ApiResponseError,restoreSession,serverUrl,sessionScope,setServer,signIn,type AppState} from './src/api';
 import {Btn,Field,IconButton,Spinner,UiProvider,useSeasonalUi} from './src/ui';
 import Outfit from './src/Outfit';
 import Collection from './src/Collection';
@@ -54,10 +54,15 @@ function Workspace() {
   setLoading(true);
   setError('');
   try {
-   setAddress(await restoreSession());
+   const origin=await restoreSession();
+   setAddress(origin);
+   if(!origin)return;
    let next:AppState;
    try { next=await api<AppState>('state'); }
-   catch { next=await signIn('demo'); }
+   catch (error) {
+    if(!(error instanceof ApiResponseError)||error.status!==401)throw error;
+    next=await signIn('demo');
+   }
    onSession(next,false);
   } catch (problem) {
    setError((problem as Error).message);
@@ -113,7 +118,7 @@ function Workspace() {
   <SafeAreaView style={styles.screen} edges={['top','bottom']}>
    <StatusBar style={colors.isDark?'light':'dark'}/>
    {loading ? <Spinner label="Opening FragOut…"/> : !state ?
-    <ScrollView contentContainerStyle={[styles.content,{paddingTop:42}]}>
+    <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={[styles.content,{paddingTop:42}]}>
      <Text style={styles.h1}>Connect FragOut</Text>
      <Text style={styles.muted}>{toast||error||'Enter your server address.'}</Text>
      <Field label="Server URL" value={address} onChangeText={setAddress} autoCapitalize="none" autoCorrect={false}/>
@@ -160,7 +165,7 @@ function Workspace() {
      <View style={styles.tabbar} accessibilityRole="tablist">
       {tabs.map(([id,label,Icon])=>{
        const selected = activeTab===id;
-       return <Pressable key={id} accessibilityRole="tab" accessibilityLabel={label}
+       return <Pressable key={id} accessibilityRole="tab" accessibilityLabel={label} aria-selected={selected}
         accessibilityState={{selected}} onPress={()=>navigate(id)} style={[styles.tab,selected&&styles.activeTab]}>
         <Icon size={22} color={selected?colors.accentInk:colors.muted} strokeWidth={1.75}/>
        </Pressable>;

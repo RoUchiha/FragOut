@@ -27,6 +27,7 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
  const {styles,colors} = useUi();
 
  const [text,setText]=useState(''),[photo,setPhoto]=useState<Capture|null>(null),[status,setStatus]=useState<AiStatus|null>(null),[busy,setBusy]=useState(false),[receipt,setReceipt]=useState<OutfitReceipt|null>(null),[profile,setProfile]=useState<OutfitProfile|null>(null),[matches,setMatches]=useState<OutfitMatches|null>(null),[confirmed,setConfirmed]=useState(false),[details,setDetails]=useState(false);
+ const [garmentInput,setGarmentInput]=useState(''),[colorInput,setColorInput]=useState('');
 
  const [occasion,setOccasion]=useState('GENERAL'),[mode,setMode]=useState<'solo'|'combo'|'both'>('both'),[experimental,setExperimental]=useState(false),[listening,setListening]=useState(false);
 
@@ -76,7 +77,9 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
    if(!active.current||!stillCurrent())return;
    const value=await api<OutfitReceipt>('outfit/analyze','POST',{provider,archivePhoto:archiveEnabled,...(description?{text:description}:{}),...(image?{image}:{})});
    if(!active.current||!stillCurrent())return;
-   setReceipt(value);setProfile(value.profile);setConfirmed(false);setDetails(false);invalidate();
+   setReceipt(value);setProfile(value.profile);
+   setGarmentInput(value.profile.garments.join(', '));setColorInput(value.profile.colors.join(', '));
+   setConfirmed(false);setDetails(false);invalidate();
   }catch(error){if(active.current&&stillCurrent())onError((error as Error).message);}finally{if(image)image.data='';analysisInFlight.current=false;if(active.current&&stillCurrent())setBusy(false);}
  }
  async function archive(ids:string[],requestId?:string){
@@ -86,6 +89,20 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
  }
 
  async function recommend(){if(!profile||!receipt)return;const generation=revision.current;setBusy(true);try{const next=await api<OutfitMatches>('outfit/recommend','POST',{analysisId:receipt.id,profile,occasion,mode,evidenceMode:experimental?'experimental':'evidence',...intent});if(active.current&&generation===revision.current)setMatches(next);}catch(e){if(active.current&&generation===revision.current)onError((e as Error).message);}finally{if(active.current)setBusy(false);}}
+
+ function editProfile(change:Partial<OutfitProfile>){
+  setProfile(current=>current?{...current,...change}:current);
+  setConfirmed(false);
+  invalidate();
+ }
+
+ function editList(field:'garments'|'colors',value:string){
+  const isGarment=field==='garments';
+  const setInput=isGarment?setGarmentInput:setColorInput;
+  setInput(value);
+  const items=value.split(',').map(item=>item.trim()).filter(Boolean).slice(0,isGarment?10:8);
+  editProfile({[field]:items});
+ }
 
  const provider=status?.selected;
  const cloudName=provider&&provider!=='qwen'?cloudAiNames[provider]:undefined;
@@ -116,7 +133,56 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
 
  {busy&&<Spinner label={profile?'Finding matches…':'Reading clothing details…'}/>}
 
- {profile&&receipt&&<><Section title="Review outfit" action="Start over" onAction={()=>{setProfile(null);setReceipt(null);invalidate();}}/>{receipt.method==='offline_rules'&&<Text style={styles.small}>Offline description rules - Qwen unavailable</Text>}<Text style={styles.small}>{receipt.photoRetained?'Photo held privately for up to 15 minutes. Archive a selected look to keep it.':'Photo not retained.'}</Text><Field label="Description" multiline value={profile.summary} maxLength={300} onChangeText={summary=>{setProfile({...profile,summary,hasOutfit:summary.trim().length>3});setConfirmed(false);invalidate();}}/><View style={styles.spread}><Text style={styles.small}>{profile.styleTags.slice(0,3).join(' · ')} · {profile.formality}</Text><Btn label={details?'Less detail':'Edit details'} kind="quiet" onPress={()=>setDetails(!details)}/></View>{details&&<><Field label="Garments" value={profile.garments.join(', ')} onChangeText={v=>{setProfile({...profile,garments:v.split(',').map(x=>x.trim()).filter(Boolean).slice(0,10)});setConfirmed(false);invalidate();}}/><Field label="Colors" value={profile.colors.join(', ')} onChangeText={v=>{setProfile({...profile,colors:v.split(',').map(x=>x.trim()).filter(Boolean).slice(0,8)});setConfirmed(false);invalidate();}}/><Text style={styles.label}>Style</Text><View style={[styles.row,{flexWrap:'wrap',gap:7}]}>{tags.map(tag=><Pressable key={tag} accessibilityRole="button" accessibilityLabel={tag} accessibilityState={{selected:profile.styleTags.includes(tag)}} onPress={()=>{setProfile({...profile,styleTags:profile.styleTags.includes(tag)?profile.styleTags.filter(t=>t!==tag):[...profile.styleTags,tag]});setConfirmed(false);invalidate();}} style={[styles.choice,profile.styleTags.includes(tag)&&styles.choiceActive]}><Text style={[styles.choiceText,profile.styleTags.includes(tag)&&{color:colors.accentInk,fontWeight:'600'}]}>{tag}</Text></Pressable>)}</View><Choices label="Formality" value={profile.formality} items={[["casual","Casual"],["smart","Smart"],["formal","Formal"]]} onChange={formality=>{setProfile({...profile,formality});setConfirmed(false);invalidate();}}/><Choices label="Palette" value={profile.palette} items={[["light","Light"],["dark","Dark"],["bright","Bright"],["neutral","Neutral"],["mixed","Mixed"]]} onChange={palette=>{setProfile({...profile,palette});setConfirmed(false);invalidate();}}/>{profile.uncertainty.length>0&&<Text style={styles.small}>{profile.uncertainty.join(' ')}</Text>}</>}<View style={styles.spread}><Text style={[styles.text,{flex:1}]}>This describes my outfit</Text><Switch accessibilityLabel="Confirm outfit description" value={confirmed} onValueChange={v=>{setConfirmed(v);if(!v)invalidate();}} trackColor={{true:colors.accentLine,false:colors.line}}/></View><Choices label="Occasion" value={occasion} items={occasions} onChange={v=>{setOccasion(v);invalidate();}}/><IntentPicker value={intent} onChange={value=>{invalidate();onIntentChange(value);}}/><Choices label="Recommend" value={mode} items={[["solo","Fragrance"],["combo","Pair"],["both","Both"]]} onChange={v=>{setMode(v);invalidate();}}/>{mode!=='solo'&&<View style={styles.spread}><View style={{flex:1}}><Text style={styles.text}>Include experimental pairs</Text><Text style={styles.small}>Untested. Uses two owned bottles.</Text></View><Switch accessibilityLabel="Include experimental pairs" value={experimental} onValueChange={v=>{setExperimental(v);invalidate();}} trackColor={{true:colors.accentLine,false:colors.line}}/></View>}<Btn label="Find matches" disabled={!confirmed||!profile.hasOutfit||busy} onPress={()=>void recommend()}/>{!profile.hasOutfit&&<Text style={styles.muted}>No outfit was identified. Add a clothing description.</Text>}</>}
+ {profile&&receipt&&<>
+  <Section title="Review outfit" action="Start over" onAction={()=>{setProfile(null);setReceipt(null);invalidate();}}/>
+  {receipt.method==='offline_rules'&&<Text style={styles.small}>Offline description rules - Qwen unavailable</Text>}
+  <Text style={styles.small}>{receipt.photoRetained?'Photo held privately for up to 15 minutes. Archive a selected look to keep it.':'Photo not retained.'}</Text>
+  <Field label="Description" multiline value={profile.summary} maxLength={300}
+   onChangeText={summary=>editProfile({summary,hasOutfit:summary.trim().length>3})}/>
+  <View style={styles.spread}>
+   <Text style={styles.small}>{profile.styleTags.slice(0,3).join(' · ')} · {profile.formality}</Text>
+   <Btn label={details?'Less detail':'Edit details'} kind="quiet" onPress={()=>setDetails(!details)}/>
+  </View>
+  {details&&<>
+   <Field label="Garments" value={garmentInput} onChangeText={value=>editList('garments',value)}/>
+   <Field label="Colors" value={colorInput} onChangeText={value=>editList('colors',value)}/>
+   <Text style={styles.label}>Style</Text>
+   <View style={[styles.row,{flexWrap:'wrap',gap:7}]}>
+    {tags.map(tag=>{
+     const selected=profile.styleTags.includes(tag);
+     return <Pressable key={tag} accessibilityRole="button" accessibilityLabel={tag} accessibilityState={{selected}}
+      onPress={()=>editProfile({styleTags:selected?profile.styleTags.filter(item=>item!==tag):[...profile.styleTags,tag]})}
+      style={[styles.choice,selected&&styles.choiceActive]}>
+      <Text style={[styles.choiceText,selected&&{color:colors.accentInk,fontWeight:'600'}]}>{tag}</Text>
+     </Pressable>;
+    })}
+   </View>
+   <Choices label="Formality" value={profile.formality} items={[["casual","Casual"],["smart","Smart"],["formal","Formal"]]}
+    onChange={formality=>editProfile({formality})}/>
+   <Choices label="Palette" value={profile.palette} items={[["light","Light"],["dark","Dark"],["bright","Bright"],["neutral","Neutral"],["mixed","Mixed"]]}
+    onChange={palette=>editProfile({palette})}/>
+   {profile.uncertainty.length>0&&<Text style={styles.small}>{profile.uncertainty.join(' ')}</Text>}
+  </>}
+  <View style={styles.spread}>
+   <Text style={[styles.text,{flex:1}]}>This describes my outfit</Text>
+   <Switch accessibilityLabel="Confirm outfit description" value={confirmed}
+    onValueChange={value=>{setConfirmed(value);if(!value)invalidate();}} trackColor={{true:colors.accentLine,false:colors.line}}/>
+  </View>
+  <Choices label="Occasion" value={occasion} items={occasions} onChange={value=>{setOccasion(value);invalidate();}}/>
+  <IntentPicker value={intent} onChange={value=>{invalidate();onIntentChange(value);}}/>
+  <Choices label="Recommend" value={mode} items={[["solo","Fragrance"],["combo","Pair"],["both","Both"]]}
+   onChange={value=>{setMode(value);invalidate();}}/>
+  {mode!=='solo'&&<View style={styles.spread}>
+   <View style={{flex:1}}>
+    <Text style={styles.text}>Include experimental pairs</Text>
+    <Text style={styles.small}>Untested. Uses two owned bottles.</Text>
+   </View>
+   <Switch accessibilityLabel="Include experimental pairs" value={experimental}
+    onValueChange={value=>{setExperimental(value);invalidate();}} trackColor={{true:colors.accentLine,false:colors.line}}/>
+  </View>}
+  <Btn label="Find matches" disabled={!confirmed||!profile.hasOutfit||busy} onPress={()=>void recommend()}/>
+  {!profile.hasOutfit&&<Text style={styles.muted}>No outfit was identified. Add a clothing description.</Text>}
+ </>}
 
  {matches&&matches.context.mood===intent.mood&&matches.context.vibe===intent.vibe&&<><Section title="Your matches"/>{!matches.solo.length&&!matches.combos.length&&<Empty title={matches.context.policy==='NO_FRAGRANCE'?'No fragrance advised':'No matches'} detail="Your collection, profiles, venue rules or evidence mode limit these results."/>}<Results solo={matches.solo} combos={matches.combos} occasion={occasion} requestId={matches.requestId} onFeedback={onFeedback} comboLikes={comboLikes} busy={feedbackBusy||busy} onArchive={archiveEnabled?(ids,id)=>void archive(ids,id):undefined} showPairs={mode!=='solo'}/><Text style={styles.small}>{archiveEnabled?'Saved looks are private.':'Archiving is off. Enable it in Settings to save looks.'}</Text><Text style={styles.small}>Outfit fit is a style heuristic. Venue policy and your exclusions take priority.</Text></>}
 
