@@ -1,5 +1,26 @@
 [
   {
+    "brand": "Bvlgari", "name": "Aqva Pour Homme", "concentration": "EDT",
+    "publisher": "Sephora",
+    "url": "https://sephora.in/product/bvlgari-aqva-pour-homme-edt-100ml-v-100ml",
+    "notes": {"listed": ["Mandarin", "Santolina", "Clary sage"]}
+  },
+  {
+    "brand": "Dior", "name": "Eau Sauvage", "concentration": "EDT",
+    "url": "https://www.dior.com/en_gb/beauty/products/eau-sauvage-eau-de-toilette-Y0097001.html",
+    "notes": {"top": ["Bergamot"], "heart": ["Hedione"], "base": ["Chypre accord"]},
+    "corroboration": {
+      "publisher": "Macy's",
+      "url": "https://www.macys.com/shop/product/dior-mens-eau-sauvage-eau-de-toilette-spray-3.4-oz.?ID=3828624",
+      "notes": {"top": ["Bergamot"], "heart": ["Hedione"], "base": ["Chypre accord"]}
+    }
+  },
+  {
+    "brand": "Guerlain", "name": "Vétiver", "concentration": "EDT",
+    "url": "https://www.guerlain.com/us/en-us/p/vetiver-de-guerlain-paris-eau-de-toilette-G030486.html",
+    "notes": {"heart": ["Nutmeg", "Pepper"], "base": ["Vetiver", "Tobacco", "Tonka bean"]}
+  },
+  {
     "brand": "Bvlgari", "name": "Le Gemme Tygar", "concentration": "EDP", "aliases": ["Tygar"],
     "url": "https://www.bulgari.com/en-us/fragrances/bvlgari-le-gemme/le-gemme-tygar-eau-de-parfum-42170",
     "notes": {"listed": ["Grapefruit", "Ambergris"]},

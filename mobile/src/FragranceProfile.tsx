@@ -7,8 +7,8 @@ import {Btn,Section,Sheet,Spinner,useUi} from './ui';
 import FragDexDupes from './FragDexDupes';
 import FragDexLink from './FragDexLink';
 import FragDexRatings from './FragDexRatings';
-import {catalogThumbnailPhotos,isCatalogThumbnailDataUri} from '../../src/lib/catalog-photos';
-import type {Bottle,BottleProfileReply,BottleThumbnailReply,RemoteCatalogThumbnail} from '../../src/lib/types';
+import {catalogThumbnailPhotos} from '../../src/lib/catalog-photos';
+import type {Bottle,BottleProfileReply} from '../../src/lib/types';
 
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
 type Lookup=BottleProfileReply|{error:string};
@@ -22,7 +22,6 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const [enlarged,setEnlarged]=useState<string|null>(null);
  const [failedPhotos,setFailedPhotos]=useState<string[]>([]);
  const [loadedPhoto,setLoadedPhoto]=useState('');
- const [providerPhoto,setProviderPhoto]=useState<RemoteCatalogThumbnail|null>(null);
  const [showSources,setShowSources]=useState(false);
  const [linkError,setLinkError]=useState('');
 
@@ -40,22 +39,8 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
  const profile=changed?null:reply?.profile;
  const dupes=changed?null:reply?.dupes;
  const [localPhoto]=catalogThumbnailPhotos(profile,failedPhotos);
- const lookUpThumbnail=!!reply?.thumbnailLookup&&!changed&&!localPhoto;
- useEffect(()=>{
-  if(!lookUpThumbnail) return;
-  let active=true;
-  const stillCurrent=sessionScope();
-  void api<BottleThumbnailReply>('bottles/'+bottle.id+'/thumbnail').then(result=>{
-   if(active&&stillCurrent()&&result.variantId===bottle.variantId&&isCatalogThumbnailDataUri(result.photo?.uri))
-    setProviderPhoto(result.photo);
-  }).catch(()=>{/* The entry remains available during a thumbnail service outage. */});
-  return ()=>{active=false;};
- },[bottle.id,bottle.variantId,lookUpThumbnail]);
-
- const livePhoto=lookUpThumbnail&&!failedPhotos.includes('provider')?providerPhoto:null;
- const thumbnail=localPhoto?{key:localPhoto.path,uri:serverUrl()+localPhoto.path,caption:localPhoto.caption}:
-  livePhoto?{key:'provider',uri:livePhoto.uri,caption:livePhoto.caption}:null;
- const sources=[...(profile?.sources??[]),...(livePhoto?[livePhoto.source]:[])];
+ const thumbnail=localPhoto?{key:localPhoto.path,uri:serverUrl()+localPhoto.path,caption:localPhoto.caption}:null;
+ const sources=profile?.sources??[];
  const name=profile?.name??bottle.name;
  const noteGroups=stages.map(([stage,label])=>({
   label,names:profile?.notes.filter(note=>note.stage===stage).map(note=>note.name)??[],

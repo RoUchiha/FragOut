@@ -22,8 +22,3 @@ export async function readLimitedBody(response:Response,limit:number):Promise<Bu
   reader.releaseLock();
  }
 }
-
-export function retryAfterDelay(value:string|null,now=Date.now()):number {
- const delay=value&&/^\d+$/.test(value)?Number(value)*1000:value?Date.parse(value)-now:0;
- return Math.max(60_000,Number.isFinite(delay)?delay:0);
-}

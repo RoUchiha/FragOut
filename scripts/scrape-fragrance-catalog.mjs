@@ -4,11 +4,10 @@ import {mkdir,mkdtemp,readFile,realpath,writeFile} from 'node:fs/promises';
 import {isAbsolute,join,relative,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
-import {setTimeout as delay} from 'node:timers/promises';
 import {catalogProfiles} from '../src/lib/catalog.ts';
-import {discoverCommonsPhotos} from '../src/lib/catalog-commons.ts';
-import {hasWebThumbnail} from '../src/lib/catalog-web-thumbnails.ts';
-import {readLimitedBody,retryAfterDelay} from '../src/lib/catalog-http.ts';
+import {readLimitedBody} from '../src/lib/catalog-http.ts';
+import {findAutomaticCatalogPhoto} from '../src/lib/catalog-photo-selector.ts';
+import {bottleImageSearchUrl,discoverProductPhotos} from './catalog-photo-discovery.ts';
 import publicEditions from '../catalog/thumbnail-editions.json' with {type:'json'};
 
 const sources=[
@@ -49,6 +48,7 @@ checkOutput(parent);
 const run=await mkdtemp(join(parent,'fragdex-'));
 const checkedAt=new Date().toISOString().slice(0,10);
 const report={checkedAt,sources:[],draft:null,photos:[],photoScan:null,errors:[]};
+let draftProfiles=null;
 
 async function fetchSource([name,url]) {
  const response=await fetch(url,{redirect:'error',credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(15000)});
@@ -78,6 +78,7 @@ if(!values['photos-only']) {
    report.errors.push('Draft compilation failed. See compiler-error.txt in the run folder.');
   } else {
    const draft=JSON.parse(await readFile(join(snapshot,'fragrances.json'),'utf8'));
+   draftProfiles=draft;
    const draftIds=new Set(draft.map(edition=>edition.id));
    report.draft={...JSON.parse(build.stdout),added:draft.filter(edition=>!byId.has(edition.id)).map(edition=>edition.id),
     removed:catalogProfiles.filter(edition=>!draftIds.has(edition.id)).map(edition=>edition.id)};
@@ -86,39 +87,43 @@ if(!values['photos-only']) {
 }
 
 if(!values['data-only']) {
- const queue=selected??catalogProfiles.filter(edition=>!edition.photo&&!hasWebThumbnail(edition)).slice(offset,offset+limit);
- let retryAfterSeconds=null;
- const searchRequest=async (url,options)=>{
-  const response=await fetch(url,options);
-  if(response.status===429||response.status===503||response.headers.has('retry-after'))
-   retryAfterSeconds=Math.ceil(retryAfterDelay(response.headers.get('retry-after'))/1000);
-  return response;
- };
+ const profiles=draftProfiles??catalogProfiles;
+ const importable=new Set(profiles.map(edition=>edition.id));
+ const queue=selected??profiles.filter(edition=>!edition.photo).slice(offset,offset+limit);
+ const imports=[];
  for(const edition of queue) {
-  try {
-   const candidates=await discoverCommonsPhotos(edition,searchRequest);
-   report.photos.push({id:edition.id,brand:edition.brand,name:edition.name,concentration:edition.concentration,
-    status:candidates.length?'needs-review':'no-candidates',candidates});
-  } catch(error) {
-   report.errors.push(edition.id+' · '+(error instanceof Error?error.message:'Image discovery failed.'));
-   break;
+  const searchUrl=bottleImageSearchUrl(edition);
+  const page=edition.sources?.find(source=>source.kind==='house'||source.id==='product')?.url;
+  const identity={id:edition.id,brand:edition.brand,name:edition.name,concentration:edition.concentration,
+   ...(edition.releaseYear?{releaseYear:edition.releaseYear}:{})};
+  const automatic=edition.photo?null:await findAutomaticCatalogPhoto(identity).catch(()=>null);
+  if(automatic) {
+   const suffix=createHash('sha256').update(automatic.bytes).digest('hex').slice(0,12);
+   const image=edition.id.replace(':','-')+'-'+suffix+'.jpg';
+   await writeFile(join(run,image),automatic.bytes,{flag:'wx'});
+   const selectedPhoto={image,suffix,publisher:automatic.publisher,url:automatic.sourceUrl,imageUrl:automatic.imageUrl};
+   report.photos.push({...identity,searchUrl,status:'automatic',selectedPhoto});
+   if(importable.has(edition.id)) imports.push({id:edition.id,...selectedPhoto,
+    view:'front-angle',cover:true,caption:edition.name+' bottle',credit:'Product photo via '+automatic.publisher});
+   continue;
   }
-  if(queue.length>1&&edition!==queue.at(-1)) await delay(1050);
+  let candidates=[];
+  try {
+   if(page) candidates=await discoverProductPhotos(page);
+  } catch {
+   // The Google Images query remains usable when a product page cannot be fetched.
+  }
+  report.photos.push({...identity,searchUrl,status:edition.photo?'bundled':'missing',candidates});
  }
+ if(imports.length) await writeFile(join(run,'selected-photos.json'),JSON.stringify(imports,null,2)+'\n',{flag:'wx'});
  report.photoScan={requested:queue.length,completed:report.photos.length,
-  nextOffset:selected?null:offset+report.photos.length,
-  remainingEditions:queue.slice(report.photos.length).map(edition=>edition.id),retryAfterSeconds};
+  nextOffset:selected?null:offset+report.photos.length};
 }
 
 await writeFile(join(run,'report.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});
 console.log('Staged results in '+run);
 if(report.draft) console.log('Draft contains '+report.draft.editions+' editions.');
-console.log('Searched '+report.photos.length+' editions and found review candidates for '+
- report.photos.filter(edition=>edition.candidates.length).length+'.');
-if(report.photoScan?.remainingEditions.length) {
- const {nextOffset,retryAfterSeconds}=report.photoScan;
- if(retryAfterSeconds) console.log('Wikimedia asked for a pause of at least '+retryAfterSeconds+' seconds.');
- if(nextOffset!==null) console.log('Resume with --photos-only --offset '+nextOffset+'.');
-}
+console.log('Checked '+report.photos.length+' photo entries and selected '+
+ report.photos.filter(edition=>edition.status==='automatic').length+' new images.');
 for(const error of report.errors) console.error(error);
 if(report.errors.length) process.exitCode=1;

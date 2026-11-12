@@ -3,11 +3,16 @@ import {Pressable,Switch,Text,View} from 'react-native';
 import {Camera,ChevronRight,Heart,Plus} from 'lucide-react-native';
 import {api,sessionScope,type AiStatus,type AppState,type BottleCandidate} from './api';
 import {capturePhoto,discardPhoto,type Capture} from './capture';
+import {cloudAiNames} from './cloud-ai';
 import {BottleArt,Btn,Choices,Empty,Field,IconButton,SearchBox,Sheet,Spinner,useUi} from './ui';
 import {matchesBottleSearch,scentSearchLimit} from '../../src/lib/scent-search';
 import {concentrationOptions} from '../../src/lib/concentrations';
-import type {Bottle} from '../../src/lib/types';
+import type {AiProvider,Bottle} from '../../src/lib/types';
 import FragranceProfile from './FragranceProfile';
+
+type ScanImage = Pick<Capture,'data'|'mime'>;
+type ScanConsent = {provider:keyof typeof cloudAiNames};
+type PendingScan = {consent:ScanConsent; image:ScanImage};
 
 export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
  state:AppState; refresh:()=>Promise<void>; notify:(message:string)=>void; onOpenLikedCombos:()=>void;
@@ -21,14 +26,21 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
  const [candidates,setCandidates] = useState<BottleCandidate[]|null>(null);
  const [busy,setBusy] = useState(false);
  const [status,setStatus] = useState<AiStatus|null>(null);
+ const [scanConsent,setScanConsent] = useState<ScanConsent|null>(null);
+ const pendingScanRef = useRef<PendingScan|null>(null);
+ const [stillCurrent] = useState(()=>sessionScope());
  const active = useRef(true);
 
  useEffect(()=>{
   active.current=true;
-  void api<AiStatus>('ai/status').then(value=>{if(active.current)setStatus(value);})
-   .catch(error=>{if(active.current)notify(error.message);});
-  return ()=>{active.current=false;};
- },[notify]);
+  void api<AiStatus>('ai/status').then(value=>{if(active.current&&stillCurrent())setStatus(value);})
+   .catch(error=>{if(active.current&&stillCurrent())notify(error.message);});
+  return ()=>{
+   active.current=false;
+   if(pendingScanRef.current)pendingScanRef.current.image.data='';
+   pendingScanRef.current=null;
+  };
+ },[notify,stillCurrent]);
 
  const ownedCount = state.bottles.filter(bottle=>bottle.ownership==='OWNED').length;
  const visible = state.bottles.filter(bottle=>(filter==='ALL'||bottle.ownership===filter)&&matchesBottleSearch(bottle,query));
@@ -36,29 +48,52 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
 
  async function scan() {
   const provider = status?.selected;
-  if (!provider||busy) return;
-  const stillCurrent = sessionScope();
+  if (!provider||busy||pendingScanRef.current||!stillCurrent()) return;
   setBusy(true);
-  let photo:Capture|null = null;
+  let image:ScanImage|undefined;
   try {
-   photo=await capturePhoto('bottle');
-   if (!photo||!active.current||!stillCurrent()) return;
-   const reply=await api<{candidates:BottleCandidate[];message:string}>('vision/bottle','POST',{
-    provider,image:{data:photo.data,mime:photo.mime},
-   });
+   const photo=await capturePhoto('bottle');
+   if (!photo) return;
+   image={data:photo.data,mime:photo.mime};
    await discardPhoto(photo);
-   photo=null;
    if (!active.current||!stillCurrent()) return;
-   setCandidates(reply.candidates);
-   if (!reply.candidates.length) notify(reply.message||'No readable label. Try again or enter details manually.');
+   if (provider==='qwen') {
+    await sendScan(provider,image);
+   } else {
+    const consent={provider};
+    pendingScanRef.current={consent,image};
+    setScanConsent(consent);
+    image=undefined;
+   }
   } catch (error) {
    if (active.current&&stillCurrent()) notify((error as Error).message);
   } finally {
-   try {
-    await discardPhoto(photo);
-   } catch (error) {
-    if (active.current&&stillCurrent()) notify((error as Error).message);
+   if (image) image.data='';
+   if (active.current&&stillCurrent()) setBusy(false);
+  }
+ }
+
+ async function sendScan(provider:AiProvider,image:ScanImage) {
+  const reply=await api<{candidates:BottleCandidate[];message:string}>('vision/bottle','POST',{provider,image});
+  if (!active.current||!stillCurrent()) return;
+  setCandidates(reply.candidates);
+  if (!reply.candidates.length) notify(reply.message||'No readable label. Try again or enter details manually.');
+ }
+
+ async function resolveScanConsent(consent:ScanConsent,approved:boolean) {
+  const pending=pendingScanRef.current;
+  if (pending?.consent!==consent) return;
+  pendingScanRef.current=null;
+  setScanConsent(null);
+  try {
+   if (approved&&active.current&&stillCurrent()) {
+    setBusy(true);
+    await sendScan(consent.provider,pending.image);
    }
+  } catch (error) {
+   if (active.current&&stillCurrent()) notify((error as Error).message);
+  } finally {
+   pending.image.data='';
    if (active.current&&stillCurrent()) setBusy(false);
   }
  }
@@ -90,13 +125,10 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
    </View>
    <View style={[styles.row,{gap:4}]}>
     <IconButton label="Scan bottle" icon={<Camera size={18} color={colors.link}/>}
-     disabled={busy||!status} onPress={()=>void scan()}/>
+     disabled={busy||!status||!!scanConsent} onPress={()=>void scan()}/>
     <Btn label="Add" icon={<Plus size={15} color={colors.accentInk}/>} onPress={()=>openForm(null)}/>
    </View>
   </View>
-  {status&&status.selected!=='qwen'&&<Text style={styles.small}>
-   {status.selected==='openai'?'OpenAI':'Claude'} processes scans using your API key.
-  </Text>}
   <SearchBox label="Search collection" placeholder="Name, brand, or note" value={query}
    onChange={setQuery} onClear={()=>setQuery('')} maxLength={scentSearchLimit}/>
   <Pressable accessibilityRole="button" accessibilityLabel="Liked combos" onPress={onOpenLikedCombos}
@@ -110,7 +142,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
   </Pressable>
   <Choices value={filter} items={[[ 'OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned'],['ALL','All']]}
    onChange={setFilter}/>
-  {busy&&<Spinner label="Reading bottle label…"/>}
+  {busy&&<Spinner label="Scanning bottle…"/>}
   {visible.length ? <View style={styles.grid}>
    {visible.map(bottle=>{
     const demo=bottle.provenance==='demo';
@@ -135,6 +167,11 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
   </View> : <Empty title={query.trim()?'No matches':'No bottles here'}
    detail={query.trim()?'Try a different name, brand, or note.':'Add a fragrance by name or scan the label.'}/>}
 
+  {scanConsent&&<Sheet title="Share bottle photo?" onClose={()=>void resolveScanConsent(scanConsent,false)}>
+   <Text style={styles.text}>FragOut will send this bottle photo to {cloudAiNames[scanConsent.provider]} to read the label. The provider’s retention policy applies and your API account may be billed.</Text>
+   <Btn label={`Send to ${cloudAiNames[scanConsent.provider]}`} onPress={()=>void resolveScanConsent(scanConsent,true)}/>
+   <Btn label="Cancel" kind="secondary" onPress={()=>void resolveScanConsent(scanConsent,false)}/>
+  </Sheet>}
   {candidates!==null&&<Sheet title="Confirm the label" onClose={()=>setCandidates(null)}>
    <Text style={styles.muted}>Check the exact bottle before adding. The scan photo has already been deleted.</Text>
    {candidates.map((item,index)=><View key={index} style={styles.card}>

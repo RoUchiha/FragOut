@@ -1,6 +1,6 @@
 # Fragrance catalog
 
-The catalog covers 215 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links, 77 have exact Jomashop listings, and 31 have reviewed bottle thumbnails bundled with the app.
+The catalog covers 218 exact releases from 65 houses, including designer bestsellers, niche lines, classics, and affordable fragrances. Every entry has corroborated notes and a bundled bottle thumbnail. Ninety-six have at least one sourced wear estimate. Fifteen have exact Fragrantica links and 77 have exact Jomashop listings.
 
 The app compares the saved house, release, and concentration with this snapshot on the FragOut server. It keeps EDT, EDP, cologne, parfum, extrait, elixir, and mist separate. Where a label and concentration have documented reformulations, enter the edition year as part of the name to select that profile. Unlisted editions save as a basic entry. The server uses the local snapshot for the initial result, and the optional live rating lookup sends only the public catalog identity. Saved bottles and their profile lookups require the owner's session. Label scans and personal observations follow their private flows.
 
@@ -8,7 +8,7 @@ The app compares the saved house, release, and concentration with this snapshot 
 
 - The compiler retains note names found in two or more source records for the same edition. It standardizes selected synonyms at the shared level of detail. A note gets a top, heart or base label when two references agree on the stage and every published placement agrees. Otherwise it appears in the general notes list.
 - For Green Irish Tweed EDP and Naxos EDP, the profile shows the two wear estimates side by side. MySecretCart compiles typical wear from published information and wearer reports. Gouttes Rares publishes in-house ranges and uses its sillage field for assessed throw. Different wear methods and scales keep their own labels. Oud for Greatness was held out of the performance comparison because the Gouttes listing and the house use different concentration descriptions.
-- Official pages corroborate short note names and exact identity. An authorized retailer's exact product listing can also corroborate notes. Parfumo links open the exact edition as a community reference. Publisher ratings, review text, and product photography remain on those sites unless the specific item has reuse permission.
+- Official pages and exact retailer listings corroborate short note names and identity. Parfumo links open the exact edition as a community reference.
 
 ## Five-star ratings
 
@@ -42,28 +42,34 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 ## Bottle thumbnails
 
-FragDex shows a single bottle thumbnail and enlarges that same image on tap. It uses reviewed front and three-quarter views of the exact release. Some photos are cropped to make the bottle clear at thumbnail size. The app tries bundled images first, followed by the reviewed Wikimedia source and then Fragella if configured. Entries without a usable image use a text-only header.
+FragDex shows one front or three-quarter bottle photo and enlarges the same image on tap. Photos are selected from web image results and manufacturer or retailer product pages, then bundled as optimized JPEGs. The [photo registry](photos.json) records each product page, original image URL, view, and caption. Credits appear under **Sources & credits**.
 
-FragOut serves 35 JPEGs with camera metadata removed. Edition checks compare the label, barcode, or documented bottle design with the exact product. The [photo registry](photos.json) records the view, photographer, source, license, and caption for each file. FragDex displays the credits under **Sources & credits**.
+Saving or editing a recognized public edition queues photo lookup when it needs a thumbnail. FragDex checks the seller's search result and product record for the exact house, release, concentration, and any distinguishing year. It checks that the image belongs to a full-size product and screens for packaging, alternative views, and poorly isolated bottles. It stores accepted photos as cleaned JPEGs with the product source. Edits and simultaneous saves share the cached result. An ambiguous or unavailable result leaves the entry eligible for retry.
 
-The [web photo registry](web-thumbnails.json) pins a reviewed Wikimedia Commons file and its fingerprint to the exact fragrance and concentration. The server rechecks the license and file before displaying a resized JPEG with credit. Reviewed previews have their own fingerprints and reduce download size. This fallback is on by default and works without a developer key. Set `FRAGOUT_WEB_THUMBNAILS=false` to turn it off. Set `FRAGOUT_WIKIMEDIA_CONTACT` to a public project URL or operator contact when running a shared installation. [Wikimedia reuse guidance](https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia) · [MediaWiki API etiquette](https://www.mediawiki.org/wiki/API:Etiquette)
+The catalog and the public edition index supply the query labels. Custom labels and personal images stay within their own account flows. Both bundled and discovered thumbnails load from FragOut.
 
-### Enable live thumbnail lookup
+### Photo administration
 
-Set `FRAGOUT_FRAGELLA_IMAGES=true` alongside the server's private `FRAGOUT_FRAGELLA_API_KEY`, then restart FragOut. This lets signed-in accounts use Fragella images when a bundled thumbnail is absent or fails to load. FragDex only sends matched public release labels from the catalog, the reviewed dupe registry, and [the Scento edition index](thumbnail-editions.json). The server verifies the house, name, concentration, and any known release year, checks that the image decodes, and serves a cleaned JPEG. The same image opens on tap. Lookup coverage depends on the provider's records and the account's quota. [Fragella developer portal](https://api.fragella.com/) · [Fragella API terms](https://api.fragella.com/terms-of-use.html)
+Create and sign in to your FragOut account. From the FragOut project directory, grant the account access to the shared catalog on the same server.
+
+```powershell
+npm run catalog:admin -- grant "your-account@example.com"
+```
+
+Open **Settings → FragDex photos**. Search by house, release, concentration, or edition year. Select an entry to upload a replacement, hide its photo, restore its default, or rerun an automatic lookup. A replacement is shared across the catalog and takes precedence over automatic results. Use `revoke` in the same command to remove access. The grant command uses the server's `FRAGOUT_DB` if it is configured.
 
 ## Refreshing the snapshot
 
-The scraper downloads the three licensed data sources above, stages a fresh snapshot, and searches Wikimedia for images for the selected public releases. It creates a new run folder with the source fingerprints, a draft catalog, and a report listing candidates and credits. Notes and wear estimates go through the existing catalog compiler. Reviewed retailer links and dupe relationships stay in their separate registries. Review the draft and the candidate list before publishing changes.
+The scraper stages the three datasets above and builds a draft snapshot. It runs the same automatic photo selection on entries that need a thumbnail. The report includes the selected photo, its product page, and an exact Google Images link for investigation. The run folder contains the selected JPEGs and an import manifest for eligible catalog entries.
 
 ```powershell
 npm run catalog:scrape -- --out ../catalog-review
-npm run catalog:scrape -- --out ../catalog-review --photos-only --edition scento:bvlgari-aqva-pour-homme
+npm run catalog:scrape -- --out ../catalog-review --photos-only --edition scento:dior-fahrenheit-toilette
 ```
 
-Use `--limit` and `--offset` to scan the next group of missing thumbnails. The default group has ten editions. Repeat `--edition` to review specific public IDs, or use `--data-only` for the notes and ratings refresh. If Wikimedia pauses a scan, the report keeps completed results and the next offset. After the requested pause, use `--photos-only --offset` to resume. The batch tool uses Node and Python.
+Use `--limit` and `--offset` to select a group of entries missing thumbnails. The default group has ten editions. Repeat `--edition` to review specific public IDs or use `--data-only` for the notes and ratings refresh. The batch tool uses Node and Python.
 
-For each photo, compare the actual image with the exact product and review its reuse license. Select a clear view of the bottle from the front or at a front angle. To serve a reviewed Wikimedia file on demand, add its file title, fingerprint, license URL, bottle identity, view, and caption to the web photo registry. To bundle a photo, save it next to a JSON array of reviewed records. Each record has `id` for the exact catalog ID, `image` for the local filename, `view` set to `front` or `front-angle`, `publisher`, `url`, `credit`, `caption`, and `license` with `name` and `url`. Give backup thumbnails a `suffix`. Set `cover` to true to place a new thumbnail first. The importer resizes the selected photos, removes camera metadata, and updates the registry.
+Use `selected-photos.json` from a successful run to bundle those photos with the snapshot. Each record includes the exact catalog ID, local image filename, view, publisher, product page, original image URL, credit, and caption. The importer resizes photos, removes camera metadata, and updates the registry. Use `--replace-all` with one photo per edition to replace the registry. Rebuild the catalog before removing retired image files.
 
 ```powershell
 node scripts/import-fragrance-photos.mjs PATH_TO_REVIEWED_PHOTOS.json

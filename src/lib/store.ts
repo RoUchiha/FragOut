@@ -1,181 +1,358 @@
-import {DatabaseSync} from 'node:sqlite';
 import {randomUUID,randomBytes,scryptSync,timingSafeEqual,createHash} from 'node:crypto';
-import {mkdirSync} from 'node:fs';
-import {dirname,join} from 'node:path';
 import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './seed.ts';
-import {privateDataPath} from './private-path.ts';
-import {protectPrivateDirectory} from './private-directory.ts';
-import {findCatalogProfile} from './catalog.ts';
+import {openConfiguredDatabase,openSqlite,type DataConnection} from './database.ts';
+import {CatalogPhotoStore} from './catalog-photo-store.ts';
 import {catalogThumbnailPhotos} from './catalog-photos.ts';
 import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
+
+const DAY_MS=86400000;
+const ACCOUNT_LIFETIME_MS=7*DAY_MS;
 const OUTFIT_ANALYSIS_MS=15*60*1000;
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
-type UserRow={id:string;name:string;email:string|null;demo:number;password:string|null};
+type UserRow={id:string;name:string;email:string|null;demo:number;password?:string|null};
+type BodyRow={body:string};
+type Settings=Pick<AppState,'preferences'|'context'|'shortcuts'>;
+type SettingsPatch={preferences?:Omit<Preferences,'archiveOutfits'>&{archiveOutfits?:boolean};context?:WearContext;shortcuts?:Shortcut[]};
 const publicUser=(u:UserRow):User=>({id:u.id,name:u.name,email:u.email,demo:!!u.demo});
 const identity=(b:Pick<Bottle,'brand'|'name'|'concentration'>)=>hash([b.brand,b.name,b.concentration].map(s=>s.trim().toLowerCase().replace(/\s+/g,' ')).join('|'));
+const newBottle=(input:Bottle):Bottle=>({...input,id:randomUUID(),variantId:input.provenance==='demo'&&input.variantId?input.variantId:identity(input)});
 const comboKey=(ids:string[])=>JSON.stringify([...ids].sort());
+
 export class Store {
-  db:DatabaseSync;
-  constructor(path:string){
-    if(path!==':memory:'){path=privateDataPath(path);protectPrivateDirectory(path);}
-    if(path!==':memory:')mkdirSync(dirname(path),{recursive:true});
-    this.db=new DatabaseSync(path);this.db.exec(`PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA secure_delete=ON;
-    CREATE TABLE IF NOT EXISTS schema_migrations(version INTEGER PRIMARY KEY,applied_at TEXT NOT NULL);
-    CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,name TEXT NOT NULL,email TEXT UNIQUE,password TEXT,demo INTEGER NOT NULL DEFAULT 0,created INTEGER NOT NULL);
-    CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,expires INTEGER NOT NULL);
-    CREATE TABLE IF NOT EXISTS bottles(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL);
-    CREATE INDEX IF NOT EXISTS bottles_owner ON bottles(user_id);
-    CREATE TABLE IF NOT EXISTS settings(user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL);
-    CREATE TABLE IF NOT EXISTS archive_consents(user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,epoch INTEGER NOT NULL DEFAULT 0);
-    CREATE TABLE IF NOT EXISTS wear_events(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
-    CREATE INDEX IF NOT EXISTS events_owner ON wear_events(user_id,created);
-    CREATE TABLE IF NOT EXISTS recommendation_runs(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
-    CREATE TABLE IF NOT EXISTS outfit_analyses(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL,created INTEGER NOT NULL);
-    CREATE TABLE IF NOT EXISTS saved_looks(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,analysis_id TEXT NOT NULL,body TEXT NOT NULL,created INTEGER NOT NULL,UNIQUE(user_id,analysis_id));
-    CREATE TABLE IF NOT EXISTS private_photos(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,analysis_id TEXT NOT NULL,look_id TEXT REFERENCES saved_looks(id) ON DELETE CASCADE,sealed BLOB NOT NULL,expires INTEGER,UNIQUE(user_id,analysis_id),CHECK((look_id IS NULL AND expires IS NOT NULL) OR (look_id IS NOT NULL AND expires IS NULL)));
-    CREATE TABLE IF NOT EXISTS rate_limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);
-    INSERT OR IGNORE INTO schema_migrations VALUES(1,datetime('now'));`);
-    this.db.prepare('DELETE FROM sessions WHERE expires<?').run(Date.now());
-    this.db.prepare('DELETE FROM users WHERE demo=1 AND created<?').run(Date.now()-7*86400000);
-    this.db.prepare('DELETE FROM recommendation_runs WHERE created<?').run(Date.now()-86400000);
-    this.pruneOutfits();
+  readonly db:DataConnection;
+  readonly catalogPhotos:CatalogPhotoStore;
+
+  constructor(pathOrConnection:string|DataConnection){
+    this.db=typeof pathOrConnection==='string'?openSqlite(pathOrConnection):pathOrConnection;
+    this.catalogPhotos=new CatalogPhotoStore(this.db);
   }
-  close(){this.db.close();}
-  register(name:string,email:string,password:string){
+
+  async close(){await this.db.close();}
+
+  private get rowLock(){return this.db.engine==='postgres'?' FOR UPDATE':'';}
+  private get insertionOrder(){return this.db.engine==='postgres'?'sort_order':'rowid';}
+
+  async withOwnerTransaction<T>(userId:string,work:(store:Store)=>Promise<T>):Promise<T>{
+    return this.db.transaction(async tx=>{
+      const user=await tx.get('SELECT id FROM users WHERE id=? AND (demo=0 OR created>?)'+this.rowLock,userId,Date.now()-ACCOUNT_LIFETIME_MS);
+      if(!user)throw new Error('Account not found.');
+      return work(new Store(tx));
+    });
+  }
+
+  async register(name:string,email:string,password:string):Promise<User>{
     if(password.length<12)throw new Error('Use a password with at least 12 characters.');
     const salt=randomBytes(16).toString('hex'),digest=scryptSync(password,salt,64).toString('hex');
-    const id=randomUUID();
-    try{this.db.prepare('INSERT INTO users VALUES(?,?,?,?,0,?)').run(id,name,email.trim().toLowerCase(),`${salt}:${digest}`,Date.now());}
-    catch{throw new Error('Unable to create this account. Try signing in or use another email.');}
-    this.initSettings(id);return this.user(id)!;
+    const user={id:randomUUID(),name,email:email.trim().toLowerCase(),demo:false};
+    await this.db.transaction(async tx=>{
+      const inserted=await tx.run(`INSERT INTO users (id,name,email,password,demo,created) VALUES (?,?,?,?,0,?)
+        ON CONFLICT(email) DO NOTHING`,user.id,user.name,user.email,`${salt}:${digest}`,Date.now());
+      if(!inserted)throw new Error('Unable to create this account. Try signing in or use another email.');
+      await this.initSettings(tx,user.id);
+    });
+    return user;
   }
-  private initSettings(id:string){this.db.prepare('INSERT INTO settings VALUES(?,?)').run(id,JSON.stringify({preferences:defaultPreferences,context:defaultContext,shortcuts:defaultShortcuts}));}
-  createDemo(){
-    const id=randomUUID();this.db.prepare('INSERT INTO users VALUES(?,?,NULL,NULL,1,?)').run(id,'Scent explorer',Date.now());
-    this.initSettings(id);for(const b of demoBottles)this.addBottle(id,b);return this.user(id)!;
+
+  private async initSettings(db:DataConnection,userId:string){
+    await db.run('INSERT INTO settings (user_id,body) VALUES (?,?)',userId,
+      JSON.stringify({preferences:defaultPreferences,context:defaultContext,shortcuts:defaultShortcuts}));
   }
-  user(id:string){const row=this.db.prepare('SELECT * FROM users WHERE id=?').get(id) as UserRow|undefined;return row?publicUser(row):null;}
-  login(email:string,password:string){
-    const row=this.db.prepare('SELECT * FROM users WHERE email=?').get(email.trim().toLowerCase()) as UserRow|undefined;
-    const parts=row?.password?.split(':');const salt=parts?.[0]??'00000000000000000000000000000000';
-    const expected=parts?.[1]?Buffer.from(parts[1],'hex'):Buffer.alloc(64);const actual=scryptSync(password,salt,64);
-    return row&&parts&&timingSafeEqual(actual,expected)?publicUser(row):null;
+
+  async createDemo():Promise<User>{
+    const user={id:randomUUID(),name:'Scent explorer',email:null,demo:true};
+    const bottles=demoBottles.map(newBottle);
+    await this.db.transaction(async tx=>{
+      await tx.run('INSERT INTO users (id,name,email,password,demo,created) VALUES (?,?,NULL,NULL,1,?)',user.id,user.name,Date.now());
+      await this.initSettings(tx,user.id);
+      await tx.run('INSERT INTO bottles (id,user_id,body) VALUES '+bottles.map(()=>'(?,?,?)').join(','),
+        ...bottles.flatMap(bottle=>[bottle.id,user.id,JSON.stringify(bottle)]));
+    });
+    return user;
   }
-  createSession(userId:string){const token=randomBytes(32).toString('hex');this.db.prepare('INSERT INTO sessions VALUES(?,?,?)').run(hash(token),userId,Date.now()+7*86400000);return token;}
-  sessionUser(token:string){if(!token||token.length!==64)return null;const row=this.db.prepare('SELECT user_id FROM sessions WHERE token_hash=? AND expires>?').get(hash(token),Date.now()) as {user_id:string}|undefined;return row?this.user(row.user_id):null;}
-  revokeSession(token:string){this.db.prepare('DELETE FROM sessions WHERE token_hash=?').run(hash(token));}
-  private savedComboEvents(userId:string) {
-    const rows=this.db.prepare(`
+
+  async user(id:string):Promise<User|null>{
+    const row=await this.db.get<UserRow>('SELECT id,name,email,demo FROM users WHERE id=? AND (demo=0 OR created>?)',id,Date.now()-ACCOUNT_LIFETIME_MS);
+    return row?publicUser(row):null;
+  }
+
+  async login(email:string,password:string):Promise<User|null>{
+    const row=await this.db.get<UserRow>('SELECT id,name,email,demo,password FROM users WHERE email=? AND demo=0',email.trim().toLowerCase());
+    const parts=row?.password?.split(':');
+    const salt=parts?.[0]??'00000000000000000000000000000000';
+    const expected=parts?.[1]?Buffer.from(parts[1],'hex'):Buffer.alloc(64);
+    const actual=scryptSync(password,salt,64);
+    return row&&parts&&expected.length===actual.length&&timingSafeEqual(actual,expected)?publicUser(row):null;
+  }
+
+  async createSession(userId:string){
+    const token=randomBytes(32).toString('hex');
+    await this.db.run('INSERT INTO sessions (token_hash,user_id,expires) VALUES (?,?,?)',hash(token),userId,Date.now()+ACCOUNT_LIFETIME_MS);
+    return token;
+  }
+
+  async sessionUser(token:string,lock=false):Promise<User|null>{
+    if(!token||token.length!==64)return null;
+    const now=Date.now();
+    const row=await this.db.get<UserRow>(`
+      SELECT u.id,u.name,u.email,u.demo FROM sessions s JOIN users u ON u.id=s.user_id
+      WHERE s.token_hash=? AND s.expires>? AND (u.demo=0 OR u.created>?)
+    `+(lock&&this.db.engine==='postgres'?' FOR SHARE OF s':''),hash(token),now,now-ACCOUNT_LIFETIME_MS);
+    return row?publicUser(row):null;
+  }
+
+  async revokeSession(token:string){await this.db.run('DELETE FROM sessions WHERE token_hash=?',hash(token));}
+
+  private async settings(userId:string):Promise<Settings>{
+    const row=await this.db.get<BodyRow>('SELECT body FROM settings WHERE user_id=?',userId);
+    if(!row)throw new Error('Account not found.');
+    const saved=JSON.parse(row.body) as Settings;
+    return {...saved,preferences:{...defaultPreferences,...saved.preferences}};
+  }
+
+  private async savedComboEvents(userId:string){
+    const pair=this.db.engine==='postgres'
+      ? "jsonb_array_length(body::jsonb -> 'bottleIds')=2"
+      : "json_array_length(body,'$.bottleIds')=2";
+    const json=this.db.engine==='postgres'?'body::jsonb':'body';
+    const rows=await this.db.all<BodyRow>(`
       SELECT body FROM wear_events WHERE user_id=?
-      AND json_extract(body,'$.reaction')='saved' AND json_array_length(body,'$.bottleIds')=2
-      ORDER BY created DESC, rowid DESC
-    `).all(userId) as {body:string}[];
+      AND ${json} ->> 'reaction'='saved' AND ${pair}
+      ORDER BY created DESC,${this.insertionOrder} DESC
+    `,userId);
     return rows.map(row=>JSON.parse(row.body) as WearEvent);
   }
-  state(userId:string,allHistory=false):AppState{
-    const user=this.user(userId);if(!user)throw new Error('Account not found.');
-    const setting=this.db.prepare('SELECT body FROM settings WHERE user_id=?').get(userId) as {body:string};
-    const bottles=(this.db.prepare('SELECT body FROM bottles WHERE user_id=? ORDER BY rowid').all(userId) as {body:string}[]).map(row=>{
-      const bottle=JSON.parse(row.body) as Bottle;
-      const catalogPhotos=catalogThumbnailPhotos(findCatalogProfile(bottle)).map(photo=>photo.path);
+
+  async state(userId:string,allHistory=false):Promise<AppState>{
+    const user=await this.user(userId);
+    if(!user)throw new Error('Account not found.');
+    const [settings,admin,bottleRows,historyRows,comboEvents]=await Promise.all([
+      this.settings(userId),
+      this.catalogPhotos.isAdmin(userId),
+      this.db.all<BodyRow>('SELECT body FROM bottles WHERE user_id=? ORDER BY '+this.insertionOrder,userId),
+      this.db.all<BodyRow>('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC,'+this.insertionOrder+' DESC'+(allHistory?'':' LIMIT 200'),userId),
+      this.savedComboEvents(userId),
+    ]);
+    if(admin)user.catalogAdmin=true;
+    const storedBottles=bottleRows.map(row=>JSON.parse(row.body) as Bottle);
+    const profiles=await this.catalogPhotos.profiles(storedBottles);
+    const bottles=storedBottles.map((bottle,index)=>{
+      const catalogPhotos=catalogThumbnailPhotos(profiles[index]).map(photo=>photo.path);
       return catalogPhotos.length?{...bottle,catalogPhoto:catalogPhotos[0],catalogPhotos}:bottle;
     });
-    const history=(this.db.prepare('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC'+(allHistory?'':' LIMIT 200')).all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as WearEvent);
     const likes=new Map<string,WearEvent>();
-    for(const event of this.savedComboEvents(userId)) {
+    for(const event of comboEvents){
       const key=comboKey(event.bottleIds);
-      if(!likes.has(key)) likes.set(key,event);
+      if(!likes.has(key))likes.set(key,event);
     }
-    const saved=JSON.parse(setting.body);
-    return {user,bottles,history,...saved,likedCombos:[...likes.values()],preferences:{...defaultPreferences,...saved.preferences}};
+    const history=historyRows.map(row=>JSON.parse(row.body) as WearEvent);
+    return {user,bottles,history,...settings,likedCombos:[...likes.values()]};
   }
-  pruneOutfits(){
-    this.db.prepare('DELETE FROM outfit_analyses WHERE created<=?').run(Date.now()-OUTFIT_ANALYSIS_MS);
-    this.db.prepare(`UPDATE recommendation_runs SET body=json_remove(body,'$.outfit') WHERE json_type(body,'$.outfit') IS NOT NULL AND NOT EXISTS (SELECT 1 FROM outfit_analyses a WHERE a.user_id=recommendation_runs.user_id AND a.id=json_extract(recommendation_runs.body,'$.outfit.analysisId'))`).run();
-    this.db.prepare('DELETE FROM private_photos WHERE expires IS NOT NULL AND expires<=?').run(Date.now());
+
+  async pruneOutfits(){
+    if(this.db.engine!=='sqlite')return;
+    const now=Date.now();
+    await this.db.run('DELETE FROM outfit_analyses WHERE created<=?',now-OUTFIT_ANALYSIS_MS);
+    await this.db.run(`
+      UPDATE recommendation_runs SET body=json_remove(body,'$.outfit')
+      WHERE json_type(body,'$.outfit') IS NOT NULL AND NOT EXISTS (
+        SELECT 1 FROM outfit_analyses a WHERE a.user_id=recommendation_runs.user_id
+        AND a.id=json_extract(recommendation_runs.body,'$.outfit.analysisId')
+      )
+    `);
+    await this.db.run('DELETE FROM private_photos WHERE expires IS NOT NULL AND expires<=?',now);
   }
-  archiveConsent(userId:string):number|null{
-    if(!this.user(userId)||!this.state(userId).preferences.archiveOutfits)return null;
-    return (this.db.prepare('SELECT epoch FROM archive_consents WHERE user_id=?').get(userId) as {epoch:number}|undefined)?.epoch??0;
+
+  async archiveConsent(userId:string):Promise<number|null>{
+    const row=await this.db.get<{body:string;epoch:number|null}>(`
+      SELECT s.body,c.epoch FROM users u JOIN settings s ON s.user_id=u.id
+      LEFT JOIN archive_consents c ON c.user_id=u.id
+      WHERE u.id=? AND (u.demo=0 OR u.created>?)
+    `,userId,Date.now()-ACCOUNT_LIFETIME_MS);
+    return row&&(JSON.parse(row.body) as Settings).preferences?.archiveOutfits===true?(row.epoch??0):null;
   }
-  exportState(userId:string){this.pruneOutfits();return {...this.state(userId,true),outfitAnalyses:(this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND created>?').all(userId,Date.now()-OUTFIT_ANALYSIS_MS) as {body:string}[]).map(r=>JSON.parse(r.body) as OutfitReceipt),savedLooks:(this.db.prepare('SELECT body FROM saved_looks WHERE user_id=?').all(userId) as {body:string}[]).map(r=>JSON.parse(r.body) as SavedLook)};}
-  saveOutfit(userId:string,receipt:OutfitReceipt){this.pruneOutfits();this.db.prepare('INSERT INTO outfit_analyses VALUES(?,?,?,?)').run(receipt.id,userId,JSON.stringify(receipt),Date.now());}
-  getOutfit(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM outfit_analyses WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-OUTFIT_ANALYSIS_MS) as {body:string}|undefined;return row?JSON.parse(row.body) as OutfitReceipt:null;}
-  addBottle(userId:string,input:Bottle):Bottle{
-    const b={...input,id:randomUUID(),variantId:input.provenance==='demo'&&input.variantId?input.variantId:identity(input)};
-    this.db.prepare('INSERT INTO bottles VALUES(?,?,?)').run(b.id,userId,JSON.stringify(b));return b;
+
+  async exportState(userId:string){
+    await this.pruneOutfits();
+    const [state,analyses,looks]=await Promise.all([
+      this.state(userId,true),
+      this.db.all<BodyRow>('SELECT body FROM outfit_analyses WHERE user_id=? AND created>?',userId,Date.now()-OUTFIT_ANALYSIS_MS),
+      this.db.all<BodyRow>('SELECT body FROM saved_looks WHERE user_id=?',userId),
+    ]);
+    return {...state,outfitAnalyses:analyses.map(r=>JSON.parse(r.body) as OutfitReceipt),
+      savedLooks:looks.map(r=>JSON.parse(r.body) as SavedLook)};
   }
-  getBottle(userId:string,id:string):Bottle|null{
-    const row=this.db.prepare('SELECT body FROM bottles WHERE id=? AND user_id=?').get(id,userId) as {body:string}|undefined;
+
+  async saveOutfit(userId:string,receipt:OutfitReceipt){
+    await this.pruneOutfits();
+    await this.db.run('INSERT INTO outfit_analyses (id,user_id,body,created) VALUES (?,?,?,?)',receipt.id,userId,JSON.stringify(receipt),Date.now());
+  }
+
+  async getOutfit(userId:string,id:string){
+    await this.pruneOutfits();
+    const row=await this.db.get<BodyRow>('SELECT body FROM outfit_analyses WHERE user_id=? AND id=? AND created>?',userId,id,Date.now()-OUTFIT_ANALYSIS_MS);
+    return row?JSON.parse(row.body) as OutfitReceipt:null;
+  }
+
+  async addBottle(userId:string,input:Bottle):Promise<Bottle>{
+    const bottle=newBottle(input);
+    await this.db.run('INSERT INTO bottles (id,user_id,body) VALUES (?,?,?)',bottle.id,userId,JSON.stringify(bottle));
+    return bottle;
+  }
+
+  async getBottle(userId:string,id:string):Promise<Bottle|null>{return this.readBottle(userId,id);}
+
+  private async readBottle(userId:string,id:string,lock=false):Promise<Bottle|null>{
+    const row=await this.db.get<BodyRow>('SELECT body FROM bottles WHERE id=? AND user_id=?'+(lock?this.rowLock:''),id,userId);
     return row?JSON.parse(row.body) as Bottle:null;
   }
-  updateBottle(userId:string,id:string,patch:Partial<Bottle>):Bottle|null{
-    const before=this.getBottle(userId,id);if(!before)return null;
-    const b={...before,...patch,id};
-    if(identity(b)!==identity(before)){
-      b.variantId=identity(b);b.profileKnown=false;b.notes=[];b.family='';b.climate='UNKNOWN';b.strength=1;b.provenance='unknown';
+
+  async updateBottle(userId:string,id:string,patch:Partial<Bottle>):Promise<Bottle|null>{
+    return this.withOwnerTransaction(userId,async store=>{
+      const before=await store.readBottle(userId,id,true);
+      return before?store.patchBottle(userId,before,patch):null;
+    });
+  }
+
+  private async patchBottle(userId:string,before:Bottle,patch:Partial<Bottle>):Promise<Bottle>{
+    const bottle={...before,...patch,id:before.id};
+    const variant=identity(bottle);
+    if(variant!==identity(before)){
+      bottle.variantId=variant;bottle.profileKnown=false;bottle.notes=[];bottle.family='';
+      bottle.climate='UNKNOWN';bottle.strength=1;bottle.provenance='unknown';
     }
-    this.db.prepare('UPDATE bottles SET body=? WHERE id=? AND user_id=?').run(JSON.stringify(b),id,userId);return b;
+    await this.db.run('UPDATE bottles SET body=? WHERE id=? AND user_id=?',JSON.stringify(bottle),bottle.id,userId);
+    return bottle;
   }
-  removeBottle(userId:string,id:string){return this.db.prepare('DELETE FROM bottles WHERE id=? AND user_id=?').run(id,userId).changes>0;}
-  saveSettings(userId:string,patch:{preferences?:(Omit<Preferences,'archiveOutfits'>&{archiveOutfits?:boolean});context?:WearContext;shortcuts?:Shortcut[]}){
-    const s=this.state(userId);this.db.exec('BEGIN IMMEDIATE');try{
-      this.db.prepare('UPDATE settings SET body=? WHERE user_id=?').run(JSON.stringify({preferences:{...s.preferences,...patch.preferences},context:patch.context??s.context,shortcuts:patch.shortcuts??s.shortcuts}),userId);
+
+  async removeBottle(userId:string,id:string){
+    return (await this.db.run('DELETE FROM bottles WHERE id=? AND user_id=?',id,userId))>0;
+  }
+
+  async saveSettings(userId:string,patch:SettingsPatch){
+    await this.withOwnerTransaction(userId,async store=>{
+      const saved=await store.settings(userId);
+      await store.db.run('UPDATE settings SET body=? WHERE user_id=?',JSON.stringify({
+        preferences:{...saved.preferences,...patch.preferences},
+        context:patch.context??saved.context,shortcuts:patch.shortcuts??saved.shortcuts,
+      }),userId);
       if(patch.preferences?.archiveOutfits===false){
-        this.db.prepare('INSERT INTO archive_consents VALUES(?,1) ON CONFLICT(user_id) DO UPDATE SET epoch=epoch+1').run(userId);
-        this.db.prepare('DELETE FROM saved_looks WHERE user_id=?').run(userId);this.db.prepare('DELETE FROM private_photos WHERE user_id=?').run(userId);
-        this.db.prepare("UPDATE recommendation_runs SET body=json_remove(body,'$.outfit') WHERE user_id=? AND json_type(body,'$.outfit') IS NOT NULL").run(userId);
+        await store.db.run(`INSERT INTO archive_consents (user_id,epoch) VALUES (?,1)
+          ON CONFLICT(user_id) DO UPDATE SET epoch=archive_consents.epoch+1`,userId);
+        await store.db.run('DELETE FROM saved_looks WHERE user_id=?',userId);
+        await store.db.run('DELETE FROM private_photos WHERE user_id=?',userId);
+        const redact=store.db.engine==='postgres'
+          ? "UPDATE recommendation_runs SET body=(body::jsonb - 'outfit')::text WHERE user_id=? AND body::jsonb -> 'outfit' IS NOT NULL"
+          : "UPDATE recommendation_runs SET body=json_remove(body,'$.outfit') WHERE user_id=? AND json_type(body,'$.outfit') IS NOT NULL";
+        await store.db.run(redact,userId);
       }
-      this.db.exec('COMMIT');
-    }catch(error){this.db.exec('ROLLBACK');throw error;}
+    });
   }
-  recordRecommendation(userId:string,context:WearContext,bottleIds:string[],outfit?:OutfitSnapshot){
-    const id=randomUUID();this.db.prepare('INSERT INTO recommendation_runs VALUES(?,?,?,?)').run(id,userId,JSON.stringify({context,bottleIds,...(outfit?{outfit}:{})}),Date.now());return id;
+
+  async recordRecommendation(userId:string,context:WearContext,bottleIds:string[],outfit?:OutfitSnapshot,
+    archiveEpoch?:number|null,authorize?:(store:Store)=>Promise<void>){
+    const id=randomUUID();
+    const insert=async(db:DataConnection,retained?:OutfitSnapshot)=>{
+      const body=JSON.stringify({context,bottleIds,...(retained?{outfit:retained}:{})});
+      await db.run('INSERT INTO recommendation_runs (id,user_id,body,created) VALUES (?,?,?,?)',id,userId,body,Date.now());
+    };
+    if(outfit&&archiveEpoch!==undefined){
+      await this.withOwnerTransaction(userId,async store=>{
+        const active=archiveEpoch!==null&&await store.archiveConsent(userId)===archiveEpoch&&await store.db.get(
+          'SELECT 1 FROM outfit_analyses WHERE user_id=? AND id=? AND created>?',userId,outfit.analysisId,Date.now()-OUTFIT_ANALYSIS_MS);
+        if(active)await authorize?.(store);
+        await insert(store.db,active?outfit:undefined);
+      });
+    }else await insert(this.db,outfit);
+    return id;
   }
-  getRecommendation(userId:string,id:string){this.pruneOutfits();const row=this.db.prepare('SELECT body FROM recommendation_runs WHERE user_id=? AND id=? AND created>?').get(userId,id,Date.now()-86400000) as {body:string}|undefined;return row?JSON.parse(row.body) as RecommendationSnapshot:null;}
-  feedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){
-    const state=this.state(userId);const bs=ids.map(id=>state.bottles.find(b=>b.id===id&&b.ownership==='OWNED'));
-    if(ids.length<1||ids.length>2||new Set(ids).size!==ids.length||bs.some(b=>!b))throw new Error('Choose one or two bottles you own.');
-    let context={...state.context,occasion};
+
+  async getRecommendation(userId:string,id:string){
+    await this.pruneOutfits();
+    return this.readRecommendation(userId,id);
+  }
+
+  private async readRecommendation(userId:string,id:string){
+    const now=Date.now();
+    const json=this.db.engine==='postgres'?'run.body::jsonb':'run.body';
+    const redacted=this.db.engine==='postgres'?`(${json} - 'outfit')::text`:"json_remove(run.body,'$.outfit')";
+    const row=await this.db.get<BodyRow>(`
+      SELECT CASE WHEN ${json} -> 'outfit' IS NOT NULL AND NOT EXISTS (
+        SELECT 1 FROM outfit_analyses a WHERE a.user_id=run.user_id
+        AND a.id=${json} -> 'outfit' ->> 'analysisId' AND a.created>?
+      ) THEN ${redacted} ELSE run.body END AS body
+      FROM recommendation_runs run WHERE run.user_id=? AND run.id=? AND run.created>?
+    `,now-OUTFIT_ANALYSIS_MS,userId,id,now-DAY_MS);
+    return row?JSON.parse(row.body) as RecommendationSnapshot:null;
+  }
+
+  async feedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){
+    return this.withOwnerTransaction(userId,store=>store.writeFeedback(userId,ids,reaction,occasion,requestId));
+  }
+
+  private async writeFeedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){
+    if(ids.length<1||ids.length>2||new Set(ids).size!==ids.length)throw new Error('Choose one or two bottles you own.');
+    const bottles=await Promise.all(ids.map(id=>this.readBottle(userId,id,true)));
+    if(!bottles.every(bottle=>bottle?.ownership==='OWNED'))throw new Error('Choose one or two bottles you own.');
+    const settings=await this.settings(userId);
+    let context={...settings.context,occasion};
     if(requestId){
-      const row=this.db.prepare('SELECT body FROM recommendation_runs WHERE id=? AND user_id=? AND created>?').get(requestId,userId,Date.now()-86400000) as {body:string}|undefined;
-      if(!row)throw new Error('This recommendation has expired. Please generate a new pick.');
-      const run=JSON.parse(row.body) as {context:WearContext;bottleIds:string[]};
+      const run=await this.readRecommendation(userId,requestId);
+      if(!run)throw new Error('This recommendation has expired. Please generate a new pick.');
       if(ids.some(id=>!run.bottleIds.includes(id)))throw new Error('Bottle does not belong to this recommendation.');
       context=run.context;
     }
-    const event:WearEvent={id:randomUUID(),bottleIds:ids,names:bs.map(b=>b!.name),occasion:context.occasion,reaction,at:new Date().toISOString(),context};
-    this.db.prepare('INSERT INTO wear_events VALUES(?,?,?,?)').run(event.id,userId,JSON.stringify(event),Date.now());
-    if(ids.length===1&&(reaction==='loved'||reaction==='disliked'))for(const b of bs)this.updateBottle(userId,b!.id,{rating:reaction==='loved'?5:1,favorite:reaction==='loved'});
+    const now=Date.now();
+    const event:WearEvent={id:randomUUID(),bottleIds:ids,names:bottles.map(bottle=>bottle!.name),occasion:context.occasion,reaction,at:new Date(now).toISOString(),context};
+    await this.db.run('INSERT INTO wear_events (id,user_id,body,created) VALUES (?,?,?,?)',event.id,userId,JSON.stringify(event),now);
+    if(ids.length===1&&(reaction==='loved'||reaction==='disliked')){
+      await this.patchBottle(userId,bottles[0]!,{rating:reaction==='loved'?5:1,favorite:reaction==='loved'});
+    }
     return event;
   }
-  setComboLike(userId:string,ids:string[],liked:boolean,occasion:string,requestId?:string) {
-    if(ids.length!==2||ids[0]===ids[1]) throw new Error('Choose two distinct bottles you own.');
+
+  async setComboLike(userId:string,ids:string[],liked:boolean,occasion:string,requestId?:string){
+    if(ids.length!==2||ids[0]===ids[1])throw new Error('Choose two distinct bottles you own.');
     const key=comboKey(ids);
-    this.db.exec('BEGIN IMMEDIATE');
-    try {
-      const matches=this.savedComboEvents(userId).filter(event=>comboKey(event.bottleIds)===key);
-      if(liked) {
-        if(!matches.length) this.feedback(userId,ids,'saved',occasion,requestId);
-      } else {
-        for(const event of matches) this.deleteEvent(userId,event.id);
+    await this.withOwnerTransaction(userId,async store=>{
+      const matches=(await store.savedComboEvents(userId)).filter(event=>comboKey(event.bottleIds)===key);
+      if(liked){
+        if(!matches.length)await store.writeFeedback(userId,ids,'saved',occasion,requestId);
+      }else{
+        for(const event of matches)await store.deleteEvent(userId,event.id);
       }
-      this.db.exec('COMMIT');
-    } catch(error) {
-      this.db.exec('ROLLBACK');
-      throw error;
-    }
+    });
   }
-  deleteEvent(userId:string,id:string){return this.db.prepare('DELETE FROM wear_events WHERE id=? AND user_id=?').run(id,userId).changes>0;}
-  deleteUser(userId:string){this.db.prepare('DELETE FROM users WHERE id=?').run(userId);}
-  limit(key:string,max:number,periodMs:number){
-    const now=Date.now();this.db.prepare('DELETE FROM rate_limits WHERE expires<?').run(now);
-    this.db.prepare('INSERT INTO rate_limits VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1').run(hash(key),now+periodMs);
-    const row=this.db.prepare('SELECT count FROM rate_limits WHERE key=?').get(hash(key)) as {count:number};return row.count<=max;
+
+  async deleteEvent(userId:string,id:string){
+    return (await this.db.run('DELETE FROM wear_events WHERE id=? AND user_id=?',id,userId))>0;
+  }
+
+  async deleteUser(userId:string){await this.db.run('DELETE FROM users WHERE id=?',userId);}
+
+  async limit(key:string,max:number,periodMs:number){
+    const now=Date.now();
+    if(this.db.engine==='sqlite')await this.db.run('DELETE FROM rate_limits WHERE expires<=?',now);
+    const row=await this.db.get<{count:number}>(`
+      INSERT INTO rate_limits (key,count,expires) VALUES (?,1,?)
+      ON CONFLICT(key) DO UPDATE SET
+        count=CASE WHEN rate_limits.expires<=? THEN 1 ELSE rate_limits.count+1 END,
+        expires=CASE WHEN rate_limits.expires<=? THEN excluded.expires ELSE rate_limits.expires END
+      RETURNING count
+    `,hash(key),now+periodMs,now,now);
+    return !!row&&row.count<=max;
   }
 }
+
 const singleton=globalThis as typeof globalThis&{fragoutStore?:Store};
-export function getStore(){
- if(!singleton.fragoutStore){const store=new Store(privateDataPath());singleton.fragoutStore=store;setInterval(()=>store.pruneOutfits(),60000).unref();}
- return singleton.fragoutStore;
+export function getStore():Store{
+  if(!singleton.fragoutStore){
+    const store=new Store(openConfiguredDatabase());
+    singleton.fragoutStore=store;
+    if(store.db.engine==='sqlite'){
+      const prune=()=>{void store.pruneOutfits().catch(()=>{/* Retry on the next read or sweep. */});};
+      prune();
+      setInterval(prune,60000).unref();
+    }
+  }
+  return singleton.fragoutStore;
 }

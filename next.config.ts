@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 const config: NextConfig = {
   poweredByHeader:false,
   outputFileTracingExcludes:{'/*':['./data/**/*','./.env*','./**/*.sqlite','./**/*.sqlite-*','./**/credential-key','./mobile/native-dist/**/*','./mobile/node_modules/**/*']},
-  serverExternalPackages: ['node:sqlite'],
+  serverExternalPackages: ['node:sqlite','postgres'],
   async rewrites(){return [{source:'/_expo/:path*',destination:'/mobile/_expo/:path*'}];},
   async headers() { return [{source:'/(.*)',headers:[
     {key:'X-Content-Type-Options',value:'nosniff'},

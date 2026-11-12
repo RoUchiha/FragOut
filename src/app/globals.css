@@ -206,7 +206,14 @@ p { line-height: 1.6; }
 .settings-card svg { color: #8d9e7a; }
 .privacy-panel { padding: 0 0 15px; }
 .privacy-panel > p { font-size: 11px; color: #829274; margin: 5px 0 0; }
-.privacy-actions { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+.privacy-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+.policy-page { max-width: 720px; margin: 0 auto; padding: 36px 24px 56px; font-size: 15px; }
+.policy-page h1 { margin: 22px 0 16px; font-size: clamp(26px, 5vw, 38px); }
+.policy-page section { margin-top: 26px; }
+.policy-page h2 { margin-bottom: 8px; font-size: 18px; }
+.policy-page p + p, .policy-page > .button { margin-top: 12px; }
+.policy-page > .button { min-height: 44px; font-size: 14px; }
+.policy-link { text-decoration: underline; text-underline-offset: .16em; overflow-wrap: anywhere; }
 .danger-text { color: #a46b56; }
 .danger { background: #ab634f; color: #fff; }
 .danger:hover { background: #92513f; }

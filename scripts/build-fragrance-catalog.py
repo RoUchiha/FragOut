@@ -221,8 +221,8 @@ def profile_photos(profile_id, sources):
         if not (ROOT / "public" / path.lstrip("/")).is_file():
             raise ValueError(f"Missing catalog photo: {path}")
         source_id = "photo" if number == 1 else f"photo-{number}"
-        sources.append(make_source(source_id, photo.get("publisher", "Wikimedia Commons"), photo["url"], "photo",
-                                   photo["license"], photo["credit"]))
+        sources.append(make_source(source_id, photo.get("publisher") or urlsplit(photo["url"]).hostname, photo["url"], "photo",
+                                   photo.get("license"), photo["credit"]))
         photos.append({"path": path, "caption": photo["caption"], "sourceId": source_id})
     return photos
 
@@ -246,10 +246,13 @@ def wear_reports(csv_row, index_row):
 def build_entry(key, scento, csv_row, reviewed, index_row, checked_at):
     lists, sources = {}, []
     if reviewed:
-        sources.append(make_source("house", reviewed["brand"], reviewed["url"], "house"))
-        lists["house"] = reviewed["notes"]
+        publisher = reviewed.get("publisher")
+        primary_id = "product" if publisher else "house"
+        sources.append(make_source(primary_id, publisher or reviewed["brand"], reviewed["url"],
+                                   "reference" if publisher else "house"))
+        lists[primary_id] = reviewed["notes"]
     if corroboration := reviewed.get("corroboration"):
-        if (normalize(corroboration["publisher"]) == normalize(reviewed["brand"])
+        if (normalize(corroboration["publisher"]) == normalize(reviewed.get("publisher", reviewed["brand"]))
                 or urlsplit(corroboration["url"]).hostname == urlsplit(reviewed["url"]).hostname):
             raise ValueError(f"Repeated publisher in corroboration for {key}")
         sources.append(make_source("retailer", corroboration["publisher"], corroboration["url"], "reference"))

@@ -1,6 +1,7 @@
 import {lstat,open,readFile,rename,unlink,writeFile} from 'node:fs/promises';
 import {dirname,join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {parseArgs} from 'node:util';
 import sharp from 'sharp';
 import {z} from 'zod';
 import {catalogReferenceUrl} from '../src/lib/catalog-ratings.ts';
@@ -20,29 +21,32 @@ const manifestSchema=z.array(z.object({
  view:z.enum(['front','front-angle']),
  publisher:creditLine,
  url:sourceUrl,
+ imageUrl:z.string().max(1800).refine(url=>!!catalogReferenceUrl(url),'Use a public HTTPS image URL').optional(),
  credit:creditLine,
  caption:creditLine,
- license:z.object({name:creditLine,url:licenseUrl}).strict(),
-}).strict()).min(1).max(300);
+ license:z.object({name:creditLine,url:licenseUrl}).strict().optional(),
+}).strict().refine(row=>row.imageUrl||row.license,'Record the original image URL or a reuse license')).min(1).max(300);
 
-const input=process.argv[2];
-if(!input) throw new Error('Usage: node scripts/import-fragrance-photos.mjs PATH_TO_REVIEWED_PHOTOS.json');
+const {positionals:[input,...rest],values}=parseArgs({allowPositionals:true,options:{'replace-all':{type:'boolean'}}});
+if(!input||rest.length) throw new Error('Usage: node scripts/import-fragrance-photos.mjs PATH_TO_REVIEWED_PHOTOS.json [--replace-all]');
 const manifestPath=resolve(input);
 const catalogDir=fileURLToPath(new URL('../catalog/',import.meta.url));
 const bottlesDir=fileURLToPath(new URL('../public/catalog/bottles/',import.meta.url));
 const manifest=manifestSchema.parse(JSON.parse(await readFile(manifestPath,'utf8')));
 const catalog=JSON.parse(await readFile(join(catalogDir,'fragrances.json'),'utf8'));
 const ids=new Set(catalog.map(entry=>entry.id));
+if(values['replace-all']&&(manifest.length!==ids.size||new Set(manifest.map(row=>row.id)).size!==ids.size))
+ throw new Error('A full replacement needs one reviewed photo per catalog edition.');
 const registryPath=join(catalogDir,'photos.json');
 const lockPath=join(catalogDir,'photos.import.lock');
 const tempPath=join(catalogDir,'photos.import.tmp');
 const lock=await open(lockPath,'wx');
 
 try {
- const registry=JSON.parse(await readFile(registryPath,'utf8'));
+ const registry=values['replace-all']?{}:JSON.parse(await readFile(registryPath,'utf8'));
  const targets=new Set();
  const additions=[];
- for(const {id,image,suffix,cover,view,publisher,url,credit,license,caption} of manifest) {
+ for(const {id,image,suffix,cover,view,publisher,url,imageUrl,credit,license,caption} of manifest) {
   if(!ids.has(id)) throw new Error('Unknown fragrance edition '+id);
   const file=suffix?id+'-'+suffix:id;
   if(targets.has(file)) throw new Error('Duplicate photo '+file);
@@ -63,7 +67,7 @@ try {
   const photos=registry[id]??=[];
   const existing=photos.find(item=>item.file===file);
   if(existing&&existing.url!==url) throw new Error('Photo already credited to a different source '+file);
-  const record={file,view,publisher,url,credit:credit+' · JPEG optimized',license,caption};
+  const record={file,view,publisher,url,imageUrl,credit:credit+' · JPEG optimized',license,caption};
   registry[id]=photos.filter(item=>item.file!==file);
   if(cover) registry[id].unshift(record);
   else registry[id].splice(existing?photos.indexOf(existing):registry[id].length,0,record);

@@ -36,16 +36,31 @@ test('configured lookups use only public catalog identity and keep the key on a 
  assert.equal(await lookup(target,''),null);
  assert.equal(requests.length,0);
  let admissions=0;
- const admit=()=>{admissions++;return true;};
+ const admit=async()=>{admissions++;return true;};
  const results=await Promise.all(Array.from({length:20},()=>lookup(target,'fixture-key',admit)));
  assert.ok(results.every(result=>result?.ratings[0].score===4.23));
  assert.equal(requests.length,1);
  assert.equal(admissions,1);
- assert.equal(await lookup(target,'fixture-key',()=>false),null);
+ assert.equal(await lookup(target,'fixture-key',async()=>false),null);
  assert.equal(requests.length,1);
  assert.equal(requests[0].url.origin,'https://api.fragella.com');
  assert.equal(requests[0].url.searchParams.get('search'),'Dior Sauvage EDP');
  assert.equal(new Headers(requests[0].options?.headers).get('x-api-key'),'fixture-key');
  assert.equal(requests[0].options?.redirect,'error');
  assert.ok(!JSON.stringify(results).includes('fixture-key'));
+});
+
+test('a denied async admission does not block another requester for the same edition',async()=>{
+ let requests=0;
+ const lookup=createFragellaLookup(async()=>{
+  requests++;
+  return Response.json([fixture]);
+ });
+ const [denied,admitted]=await Promise.all([
+  lookup(target,'fixture-key',async()=>false),
+  lookup(target,'fixture-key',async()=>true),
+ ]);
+ assert.equal(denied,null);
+ assert.equal(admitted?.ratings[0].score,4.23);
+ assert.equal(requests,1);
 });

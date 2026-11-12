@@ -1,19 +1,42 @@
 import React,{useState} from 'react';
-import {Platform,Switch,Text,View} from 'react-native';
+import {openURL} from 'expo-linking';
+import {useAdPrivacy} from './ads';
+import {Platform,Pressable,Switch,Text,View} from 'react-native';
 import {api,serverUrl,setServer,signIn,signOut,sessionScope,validateServerUrl,type AppState} from './api';
 import {shareAccountExport} from './export-data';
 import Connections from './Connections';
+import FragDexAdmin from './FragDexAdmin';
 import {Btn,Choices,Field,Section,Sheet,useUi} from './ui';
 export default function Settings({state,refresh,onSession,notify}:{state:AppState;refresh:()=>Promise<void>;onSession:(s:AppState|null)=>void;notify:(s:string)=>void}){
  const {styles} = useUi();
+ const editAdPrivacy = useAdPrivacy();
  const [hemisphere,setHemisphere] = useState(state.context.latitude<0?'south':'north');
- const [dialog,setDialog]=useState<'auth'|'preferences'|'context'|'server'|'delete'|'archiveOff'|null>(null),[busy,setBusy]=useState(false),[deleteText,setDeleteText]=useState(''),[server,setServerValue]=useState(serverUrl());
+ const [dialog,setDialog]=useState<'auth'|'preferences'|'context'|'server'|'delete'|'archiveOff'|'catalogPhotos'|null>(null),[busy,setBusy]=useState(false),[deleteText,setDeleteText]=useState(''),[server,setServerValue]=useState(serverUrl());
  const [authMode,setAuthMode]=useState<'register'|'login'>('register'),[name,setName]=useState(''),[email,setEmail]=useState(''),[password,setPassword]=useState('');
  const [liked,setLiked]=useState(state.preferences.likedNotes.join(', ')),[disliked,setDisliked]=useState(state.preferences.dislikedNotes.join(', ')),[maxStrength,setMaxStrength]=useState(String(state.preferences.maxStrength)),[sensitive,setSensitive]=useState(state.preferences.sensitivity),[units,setUnits]=useState(state.preferences.units);
  const [city,setCity]=useState(state.context.city),[temp,setTemp]=useState(String(state.context.tempC)),[indoor,setIndoor]=useState(String(state.context.indoorTempC)),[setting,setSetting]=useState(state.context.setting),[policy,setPolicy]=useState(state.context.policy);
  async function run(work:()=>Promise<void>){setBusy(true);try{await work();}catch(e){notify((e as Error).message);}finally{setBusy(false);}}
  async function exportAll(){await shareAccountExport();notify('Export ready.');}
- return <View style={{gap:18}}><Text accessibilityRole="header" style={styles.h1}>Settings</Text><View style={styles.card}><Text style={styles.h3}>{state.user.name}</Text><Text style={styles.small}>{state.user.email??'Demo · fictional fragrances'}</Text><Btn label={state.user.demo?'Create account / sign in':'Sign out'} kind="secondary" disabled={busy} onPress={()=>state.user.demo?setDialog('auth'):void run(async()=>{const leaving=signOut(),stillCurrent=sessionScope();onSession(null);await leaving;if(stillCurrent())onSession(await signIn('demo'));})}/></View><View style={styles.row}><Btn label="Preferences" kind="secondary" onPress={()=>setDialog('preferences')} style={{flex:1}}/><Btn label="Conditions" kind="secondary" onPress={()=>setDialog('context')} style={{flex:1}}/></View><View style={styles.separator}/><Connections notify={notify}/><View style={styles.separator}/><Section title="Photo privacy"/><View style={styles.spread}><Text style={[styles.text,{flex:1}]}>Archive outfit-fragrance looks</Text><Switch accessibilityLabel="Archive outfit-fragrance looks" disabled={busy} value={state.preferences.archiveOutfits} onValueChange={value=>value?void run(async()=>{await api('settings','PUT',{preferences:{...state.preferences,archiveOutfits:true}});await refresh();notify('Archiving enabled. Save a selected look to keep its photo.');}):setDialog('archiveOff')}/></View><Text style={styles.small}>Off by default. Only explicitly saved looks keep a private, encrypted photo. Turning this off deletes saved looks and photos. Your photo-library originals are never removed.</Text><Section title="Your data"/><Btn label="Export data" kind="secondary" disabled={busy} onPress={()=>void run(exportAll)}/><Btn label="Delete account" kind="quiet" onPress={()=>setDialog('delete')}/><Text style={styles.small}>Default photos are discarded before upload and are not stored on this server. Opted-in, unsaved photos expire after 15 minutes. Provider keys and photos stay out of JSON exports. Cloud providers have their own retention policies.</Text><Section title="Server" action={Platform.OS==='web'?undefined:'Change'} onAction={()=>setDialog('server')}/><Text selectable style={styles.small}>{serverUrl()}</Text>
+ async function openPrivacyPolicy(){
+  try{await openURL(new URL('/privacy',validateServerUrl(serverUrl())).href);}
+  catch{notify('Could not open the privacy policy.');}
+ }
+ return <View style={{gap:18}}><Text accessibilityRole="header" style={styles.h1}>Settings</Text><View style={styles.card}><Text style={styles.h3}>{state.user.name}</Text><Text style={styles.small}>{state.user.email??'Demo · fictional fragrances'}</Text><Btn label={state.user.demo?'Create account / sign in':'Sign out'} kind="secondary" disabled={busy} onPress={()=>state.user.demo?setDialog('auth'):void run(async()=>{const leaving=signOut(),stillCurrent=sessionScope();onSession(null);await leaving;if(stillCurrent())onSession(await signIn('demo'));})}/>
+  {state.user.catalogAdmin===true&&<Btn label="FragDex photos" kind="secondary" onPress={()=>setDialog('catalogPhotos')}/>}
+ </View>
+ <View style={styles.row}><Btn label="Preferences" kind="secondary" onPress={()=>setDialog('preferences')} style={{flex:1}}/><Btn label="Conditions" kind="secondary" onPress={()=>setDialog('context')} style={{flex:1}}/></View>
+ <View style={styles.separator}/><Connections notify={notify}/><View style={styles.separator}/>
+ <Section title="Photo privacy"/>
+ <View style={styles.spread}><Text style={[styles.text,{flex:1}]}>Archive outfit-fragrance looks</Text><Switch accessibilityLabel="Archive outfit-fragrance looks" disabled={busy} value={state.preferences.archiveOutfits} onValueChange={value=>value?void run(async()=>{await api('settings','PUT',{preferences:{...state.preferences,archiveOutfits:true}});await refresh();notify('Archiving enabled. Save a selected look to keep its photo.');}):setDialog('archiveOff')}/></View>
+ <Text style={styles.small}>FragOut sends photos to your server for analysis. The server processes bottle photos and outfit photos with archiving off in memory.</Text>
+ <Text style={styles.small}>Archiving is off by default. When enabled, the server holds eligible outfit photos encrypted for up to 15 minutes. Choose Archive look to keep a photo. Turning off archiving deletes saved looks and photos. Your photo-library originals stay on your device.</Text>
+ <Section title="Your data"/>
+ <Btn label="Export data" kind="secondary" disabled={busy} onPress={()=>void run(exportAll)}/>
+ <Btn label="Delete account" kind="quiet" onPress={()=>setDialog('delete')}/>
+ <Pressable accessibilityRole="link" style={[styles.button,styles.quiet]} onPress={()=>void openPrivacyPolicy()}><Text style={styles.link}>Privacy policy</Text></Pressable>
+ {editAdPrivacy&&<Btn label="Ad privacy" kind="quiet" disabled={busy} onPress={()=>void run(editAdPrivacy)}/>}
+ <Section title="Server" action={Platform.OS==='web'?undefined:'Change'} onAction={()=>setDialog('server')}/><Text selectable style={styles.small}>{serverUrl()}</Text>
+ {state.user.catalogAdmin===true&&dialog==='catalogPhotos'&&<FragDexAdmin onClose={()=>setDialog(null)} onUpdated={refresh}/>}
  {dialog==='auth'&&<Sheet title="Account" onClose={()=>setDialog(null)}>
   <Choices value={authMode} items={[["register","Create account"],["login","Sign in"]]} onChange={setAuthMode}/>
   {authMode==='register'&&<Field label="Name" value={name} onChangeText={setName} autoComplete="name"/>}

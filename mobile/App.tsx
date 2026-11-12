@@ -14,9 +14,11 @@ import Suggester from './src/Suggester';
 import {LikedCombos,type ComboLikes,type Feedback} from './src/Results';
 import {defaultIntent} from '../src/lib/intent';
 import type {ScentIntent} from '../src/lib/types';
+import {AdBanner,AdsProvider} from './src/ads';
 
 type ViewId = 'home'|'suggester'|'outfit'|'journal'|'settings'|'liked-combos';
 const tabs = [['home','Home',Home],['suggester','Find a scent',Lightbulb]] as const;
+const contentMaxWidth = 620;
 
 export default function App() {
  return <SafeAreaProvider><Workspace/></SafeAreaProvider>;
@@ -107,7 +109,7 @@ function Workspace() {
   },
  };
 
- return <UiProvider value={theme}>
+ return <AdsProvider enabled={state!==null}><UiProvider value={theme}>
   <SafeAreaView style={styles.screen} edges={['top','bottom']}>
    <StatusBar style={colors.isDark?'light':'dark'}/>
    {loading ? <Spinner label="Opening FragOut…"/> : !state ?
@@ -141,9 +143,12 @@ function Workspace() {
       <IconButton label="Dismiss" icon={<X size={16} color={colors.paper}/>} onPress={()=>setToast('')}/>
      </View>}
      <ScrollView key={state.user.id+':'+view} style={{flex:1,minHeight:0}}
-      contentContainerStyle={[styles.content,{width:'100%',maxWidth:620,alignSelf:'center'}]}
+      contentContainerStyle={[styles.content,{width:'100%',maxWidth:contentMaxWidth,alignSelf:'center'}]}
       keyboardShouldPersistTaps="handled">
-      {view==='home'&&<Collection state={state} refresh={refresh} notify={notify} onOpenLikedCombos={()=>navigate('liked-combos')}/>}
+      {view==='home'&&<>
+       <Collection state={state} refresh={refresh} notify={notify} onOpenLikedCombos={()=>navigate('liked-combos')}/>
+       <AdBanner maxWidth={contentMaxWidth} gutter={styles.content.padding}/>
+      </>}
       {view==='suggester'&&<Suggester state={state} intent={intent} onIntentChange={setIntent}
        onOutfit={()=>navigate('outfit')} onFeedback={feedback} comboLikes={comboLikes} feedbackBusy={feedbackBusy}/>}
       {view==='outfit'&&<Outfit onError={notify} onFeedback={feedback} feedbackBusy={feedbackBusy}
@@ -163,5 +168,5 @@ function Workspace() {
      </View>
     </>}
   </SafeAreaView>
- </UiProvider>;
+ </UiProvider></AdsProvider>;
 }

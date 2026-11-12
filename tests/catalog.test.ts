@@ -81,21 +81,24 @@ test('catalog retains wear-source disagreement and uses only credited local phot
    assert.ok(!paths.has(image.path));
    paths.add(image.path);
    const source=sources.find(source=>source.id===image.sourceId);
-   assert.ok(source?.kind==='photo'&&source.credit&&source.license);
+   assert.ok(source?.kind==='photo'&&source.credit&&source.url.startsWith('https://'));
    assert.ok(existsSync(new URL('../public'+image.path,import.meta.url)));
   }
  }
 });
 
-test('all published bottle thumbnails have a reviewed front or front angle and an exact catalog edition',()=>{
+test('every catalog edition ships one reviewed bottle image from a product page',()=>{
  const catalogFiles=new Set<string>();
  const reviewedPhotos=new Map(Object.entries(photoRegistry));
  for(const {id,photo,additionalPhotos} of catalogProfiles) {
   const images=photo?[photo,...(additionalPhotos??[])]:[];
   const reviewed=reviewedPhotos.get(id)??[];
+  assert.equal(images.length,1,id);
   assert.deepEqual(images.map(image=>image.path),reviewed.map(({file})=>'/catalog/bottles/'+file+'.jpg'),id);
   for(const record of reviewed) {
    assert.match(record.view,/^(front|front-angle)$/,record.file);
+   assert.match(record.imageUrl,/^https:\/\//,record.file);
+   assert.doesNotMatch(record.url,/wikimedia|wikipedia/i,record.file);
    catalogFiles.add(record.file+'.jpg');
   }
  }
@@ -160,20 +163,20 @@ test('Jomashop links point only to distinct, exact listing pages',()=>{
 test('web-sourced photos distinguish lookalike releases and retain their credits',()=>{
  const edt=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDT'})!;
  const edp=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'})!;
- assert.equal(edt.photo?.path,'/catalog/bottles/dior-sauvage-edt.jpg');
- assert.equal(edp.photo?.path,'/catalog/bottles/dior-sauvage-edp.jpg');
+ assert.match(edt.photo?.path??'',/^\/catalog\/bottles\/dior-sauvage-edt-[a-f0-9]+\.jpg$/);
+ assert.match(edp.photo?.path??'',/^\/catalog\/bottles\/dior-sauvage-edp-[a-f0-9]+\.jpg$/);
  const prada=findCatalogProfile({brand:'Prada',name:'Paradoxe',concentration:'EDP'})!;
  assert.ok(prada.photo);
- assert.equal(prada.additionalPhotos?.length,1);
+ assert.equal(prada.additionalPhotos,undefined);
  const narciso=findCatalogProfile({brand:'Narciso Rodriguez',name:'For Her',concentration:'EDP'})!;
  assert.equal(narciso.releaseYear,2006);
- assert.ok(narciso.sources.some(source=>source.kind==='photo'&&source.license?.name==='CC BY 3.0'));
+ assert.ok(narciso.sources.some(source=>source.kind==='photo'&&source.credit));
 });
 
 test('the thumbnail selection skips failed, duplicate and non-catalog images',()=>{
  const profile=findCatalogProfile({brand:'Prada',name:'Paradoxe',concentration:'EDP'})!;
  const first=profile.photo!;
- const [second]=profile.additionalPhotos!;
+ const second={...first,path:'/catalog/bottles/prada-paradoxe-edp-other.jpg'};
  assert.deepEqual(catalogThumbnailPhotos({...profile,additionalPhotos:[
   first,{...first,path:'https://example.com/other.jpg'},second,
  ]},[first.path]),[second]);
@@ -182,8 +185,7 @@ test('the thumbnail selection skips failed, duplicate and non-catalog images',()
 
 test('box-only photos are excluded and reviewed bottles stay with the matching edition',()=>{
  const lightBlue=findCatalogProfile({brand:'Dolce & Gabbana',name:'Light Blue',concentration:'EDT'})!;
- assert.equal(lightBlue.photo,undefined);
- assert.deepEqual(catalogThumbnailPhotos(lightBlue),[]);
+ assert.match(lightBlue.photo?.caption??'',/Eau de Toilette bottle/);
  assert.ok(lightBlue.links.some(link=>link.kind==='jomashop-listing'));
  const rouge={brand:'MFK',name:'Baccarat Rouge 540'};
  const bottle=findCatalogProfile({...rouge,concentration:'EDP'})!;
@@ -191,7 +193,7 @@ test('box-only photos are excluded and reviewed bottles stay with the matching e
  assert.equal(bottle.additionalPhotos,undefined);
  assert.ok(bottle.photo);
  assert.notEqual(bottle.photo.path,findCatalogProfile({...rouge,concentration:'EXTRAIT'})?.photo?.path);
- assert.ok(bottle.sources.some(source=>source.publisher==='Open Beauty Facts'&&source.kind==='photo'));
+ assert.ok(bottle.sources.some(source=>source.kind==='photo'&&source.credit));
 });
 
 test('dupe links resolve both directions and keep concentration and flankers distinct',()=>{

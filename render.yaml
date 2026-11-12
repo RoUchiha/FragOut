@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: fragout
+    runtime: node
+    region: ohio
+    plan: free
+    buildCommand: npm ci --include=dev && npm ci --prefix mobile --include=dev && npm run export:web --prefix mobile && npm run build
+    startCommand: npm run start:cloud
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "24.16.0"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: FRAGOUT_DATABASE_URL
+        sync: false
+      - key: FRAGOUT_VAULT_KEY
+        sync: false
+      - key: FRAGOUT_PRIVACY_CONTACT_EMAIL
+        sync: false

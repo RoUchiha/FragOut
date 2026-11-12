@@ -1,8 +1,7 @@
 import entries from '../../catalog/fragrances.json' with {type:'json'};
 import dupeEntries from '../../catalog/dupes.json' with {type:'json'};
 import identity from '../../catalog/identity.json' with {type:'json'};
-import thumbnailEditions from '../../catalog/thumbnail-editions.json' with {type:'json'};
-import type {Bottle,CatalogDupe,CatalogDupeLinks,CatalogEdition,CatalogProfile} from './types.ts';
+import type {Bottle,CatalogDupe,CatalogDupeLinks,CatalogProfile} from './types.ts';
 
 type Label = Pick<Bottle,'brand'|'name'|'concentration'>;
 type CatalogEntry = CatalogProfile & {aliases?:string[]};
@@ -49,20 +48,6 @@ type DupeEntry = Pick<CatalogDupe,'evidence'|'sources'> & {
 const profilesById=new Map(catalogProfiles.map(profile=>[profile.id,profile]));
 const alternativesByOriginal=new Map<string,CatalogDupe[]>();
 const originalsByAlternative=new Map<string,CatalogDupe[]>();
-const thumbnailIndex=new Map<string,CatalogEdition|null>();
-const unqualifiedEditions=new Set<string>();
-
-for(const profile of catalogProfiles) {
- const unqualified=profile.name.replace(/ \((?:19|20)\d{2}\)$/, '');
- const id=catalogIdentityKey({...profile,name:unqualified});
- if(id&&unqualified!==profile.name) unqualifiedEditions.add(id);
-}
-
-for(const edition of thumbnailEditions as CatalogEdition[]) {
- const id=catalogIdentityKey(edition);
- if(id) thumbnailIndex.set(id,thumbnailIndex.has(id)?null:edition);
-}
-
 function addDupeLink(target:Map<string,CatalogDupe[]>,id:string,match:CatalogDupe) {
  const matches=target.get(id);
  if(matches) matches.push(match);
@@ -75,21 +60,10 @@ for(const {originalId,alternative:{brand,name,concentration,aliases},evidence,so
  const label={brand,name,concentration};
  addDupeLink(alternativesByOriginal,originalId,{...label,evidence,sources});
  const citedOriginal={brand:original.brand,name:original.name,concentration:original.concentration,evidence,sources};
- const canonical=catalogIdentityKey(label);
  for(const id of new Set([name,...(aliases??[])].map(alias=>catalogIdentityKey({...label,name:alias})))) {
   if(!id) continue;
   addDupeLink(originalsByAlternative,id,citedOriginal);
-  const previous=thumbnailIndex.get(id);
-  if(previous===undefined) thumbnailIndex.set(id,{...label,id:'dupe:'+canonical});
-  else if(previous&&catalogIdentityKey(previous)!==canonical) thumbnailIndex.set(id,null);
  }
-}
-
-export function findThumbnailEdition(label:Label,profile=findCatalogProfile(label)):CatalogEdition|null {
- if(profile) return profile;
- const id=catalogIdentityKey(label);
- if(!id||index.has(id)||unqualifiedEditions.has(id)) return null;
- return thumbnailIndex.get(id)??null;
 }
 
 export function findCatalogDupes(label:Label,profile=findCatalogProfile(label)):CatalogDupeLinks {

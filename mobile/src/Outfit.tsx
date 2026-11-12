@@ -8,11 +8,13 @@ import {api,sessionScope,type SavedLook,type AiStatus,type OutfitMatches,type Ou
 
 import {capturePhoto,discardPhoto,startDictation,type Capture} from './capture';
 
+import {cloudAiNames} from './cloud-ai';
+
 import {Btn,Choices,Empty,Field,Section,Spinner,useUi} from './ui';
 
 import {Results,type ComboLikes,type Feedback} from './Results';
 import IntentPicker from './IntentPicker';
-import type {ScentIntent} from '../../src/lib/types';
+import type {AiProvider,ScentIntent} from '../../src/lib/types';
 
 const occasions=[['GENERAL','Everyday'],['GYM','Gym'],['DATE','Date'],['WORK','Work'],['PARTY','Party'],['ERRANDS','Errands']] as const;
 
@@ -28,36 +30,54 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
 
  const [occasion,setOccasion]=useState('GENERAL'),[mode,setMode]=useState<'solo'|'combo'|'both'>('both'),[experimental,setExperimental]=useState(false),[listening,setListening]=useState(false);
 
- const active=useRef(true),captureGeneration=useRef(0);
+ const active=useRef(true),captureGeneration=useRef(0),analysisInFlight=useRef(false);
+
+ const [stillCurrent]=useState(()=>sessionScope());
 
  const revision=useRef(0);const livePhoto=useRef<Capture|null>(null),stop=useRef<(()=>void)|null>(null);
 
  const invalidate=useCallback(()=>{revision.current++;setMatches(null);},[]);
 
- const take=useCallback(async(source:'selfie'|'gallery')=>{try{const generation=++captureGeneration.current;const image=await capturePhoto(source);if(image&&(!active.current||generation!==captureGeneration.current)){await discardPhoto(image);return;}if(image){await discardPhoto(livePhoto.current);if(!active.current||generation!==captureGeneration.current){await discardPhoto(image);return;}livePhoto.current=image;setPhoto(image);setReceipt(null);setProfile(null);invalidate();}}catch(e){onError((e as Error).message);}},[invalidate,onError]);
+ const take=useCallback(async(source:'selfie'|'gallery')=>{
+  if(!stillCurrent())return;
+  try{
+   const generation=++captureGeneration.current;
+   const image=await capturePhoto(source);
+   if(!image)return;
+   if(!active.current||!stillCurrent()||generation!==captureGeneration.current){await discardPhoto(image);return;}
+   const previous=livePhoto.current;
+   livePhoto.current=image;
+   setPhoto(image);setReceipt(null);setProfile(null);invalidate();
+   await discardPhoto(previous);
+  }catch(error){if(active.current&&stillCurrent())onError((error as Error).message);}
+ },[invalidate,onError,stillCurrent]);
  useEffect(()=>{
   active.current=true;
-  void api<AiStatus>('ai/status').then(status=>{if(active.current)setStatus(status);}).catch(error=>{if(active.current)onError(error.message);});
+  void api<AiStatus>('ai/status').then(status=>{if(active.current&&stillCurrent())setStatus(status);}).catch(error=>{if(active.current&&stillCurrent())onError(error.message);});
   return ()=>{
    active.current=false;
-   void discardPhoto(livePhoto.current).catch(error=>onError(error.message));
+   void discardPhoto(livePhoto.current).catch(error=>{if(stillCurrent())onError(error.message);});
+   livePhoto.current=null;
    stop.current?.();
   };
- },[onError]);
+ },[onError,stillCurrent]);
 
  async function dictate(){if(listening){stop.current?.();return;}try{setListening(true);const before=text;const dispose=await startDictation(t=>{if(active.current)setText((before?before+' ':'')+t);},()=>{if(active.current)setListening(false);},onError);if(active.current)stop.current=dispose;else dispose();}catch(e){setListening(false);onError((e as Error).message);}}
 
- async function analyze(){
-  setBusy(true);stop.current?.();const stillCurrent=sessionScope();
-  const captured=livePhoto.current,image=captured?{mime:captured.mime,data:captured.data}:undefined;
+ async function analyze(provider:AiProvider){
+  if(busy||listening||analysisInFlight.current||!active.current||!stillCurrent()||photo!==livePhoto.current||(!photo&&!description))return;
+  analysisInFlight.current=true;
+  captureGeneration.current++;
+  setBusy(true);
+  const image=photo?{mime:photo.mime,data:photo.data}:undefined;
   livePhoto.current=null;setPhoto(null);
   try{
-   await discardPhoto(captured);
+   await discardPhoto(photo);
    if(!active.current||!stillCurrent())return;
-   const value=await api<OutfitReceipt>('outfit/analyze','POST',{provider:status!.selected,archivePhoto:archiveEnabled,...(text.trim()?{text:text.trim()}:{}),...(image?{image}:{})});
-   if(!active.current)return;
+   const value=await api<OutfitReceipt>('outfit/analyze','POST',{provider,archivePhoto:archiveEnabled,...(description?{text:description}:{}),...(image?{image}:{})});
+   if(!active.current||!stillCurrent())return;
    setReceipt(value);setProfile(value.profile);setConfirmed(false);setDetails(false);invalidate();
-  }catch(error){if(active.current)onError((error as Error).message);}finally{if(image)image.data='';if(active.current)setBusy(false);}
+  }catch(error){if(active.current&&stillCurrent())onError((error as Error).message);}finally{if(image)image.data='';analysisInFlight.current=false;if(active.current&&stillCurrent())setBusy(false);}
  }
  async function archive(ids:string[],requestId?:string){
   if(!requestId||!confirmed||!archiveEnabled)return;
@@ -67,11 +87,32 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
 
  async function recommend(){if(!profile||!receipt)return;const generation=revision.current;setBusy(true);try{const next=await api<OutfitMatches>('outfit/recommend','POST',{analysisId:receipt.id,profile,occasion,mode,evidenceMode:experimental?'experimental':'evidence',...intent});if(active.current&&generation===revision.current)setMatches(next);}catch(e){if(active.current&&generation===revision.current)onError((e as Error).message);}finally{if(active.current)setBusy(false);}}
 
- const provider=status?.selected??'qwen';
+ const provider=status?.selected;
+ const cloudName=provider&&provider!=='qwen'?cloudAiNames[provider]:undefined;
+ const description=text.trim();
+ const sharedContent=photo?(description?'your outfit photo and description':'your outfit photo'):
+  description?'your outfit description':'your outfit photo or description';
+ const analyzeButton=<Btn label={busy?'Reading outfit…':cloudName?`Send to ${cloudName}`:'Review outfit'}
+  disabled={busy||listening||!provider||(!photo&&!description)} onPress={()=>{if(provider)void analyze(provider);}}/>;
 
- return <View style={{gap:17}}><View style={styles.spread}><Text accessibilityRole="header" style={styles.h1}>Outfit</Text><Text style={styles.small}>{provider==='qwen'?'Qwen · Local / free':provider==='openai'?'OpenAI · Your API':'Claude · Your API'}</Text></View>
+ return <View style={{gap:17}}><View style={styles.spread}><Text accessibilityRole="header" style={styles.h1}>Outfit</Text>{provider&&<Text style={styles.small}>{provider==='qwen'?'Qwen · Local / free':`${cloudName} · Your API`}</Text>}</View>
 
- {!profile&&<><View style={styles.row}><Btn label="Take selfie" disabled={busy||listening} icon={<Camera size={16} color={colors.accentInk}/>} onPress={()=>void take('selfie')} style={{flex:1}}/><Btn label="Choose photo" kind="secondary" disabled={busy||listening} icon={<ImagePlus size={16} color={colors.muted}/>} onPress={()=>void take('gallery')} style={{flex:1}}/></View>{photo&&<View><Image source={{uri:photo.uri}} style={styles.image} resizeMode="contain"/><Pressable accessibilityRole="button" accessibilityLabel="Remove photo" onPress={()=>{void discardPhoto(livePhoto.current);livePhoto.current=null;setPhoto(null);}} style={{position:'absolute',right:8,top:8,padding:8,backgroundColor:colors.paper,borderRadius:20}}><X size={18} color={colors.muted}/></Pressable></View>}<Field label="Or describe your outfit" multiline maxLength={1800} value={text} onChangeText={setText} placeholder="White shirt, navy trousers, brown loafers…"/><View style={styles.spread}><Btn label={listening?'Stop dictation':'Dictate'} kind="secondary" disabled={busy} icon={listening?<Square size={14} color={colors.accentInk}/>:<Mic size={15} color={colors.muted}/>} onPress={()=>void dictate()}/><Btn label={busy?'Reading outfit…':'Review outfit'} disabled={busy||listening||!status||!photo&&!text.trim()} onPress={()=>void analyze()}/></View><Text style={styles.small}>{!status?'Checking analysis destination…':provider==='qwen'?'Qwen on your server. Photos are deleted by default.':`Photo/description is sent to ${provider==='openai'?'OpenAI':'Claude'} using your API key. Provider retention rules apply; API usage may be billed.`}</Text></>}
+ {!profile&&<>
+  <View style={styles.row}>
+   <Btn label="Take selfie" disabled={busy||listening} icon={<Camera size={16} color={colors.accentInk}/>} onPress={()=>void take('selfie')} style={{flex:1}}/>
+   <Btn label="Choose photo" kind="secondary" disabled={busy||listening} icon={<ImagePlus size={16} color={colors.muted}/>} onPress={()=>void take('gallery')} style={{flex:1}}/>
+  </View>
+  {photo&&<View><Image source={{uri:photo.uri}} style={styles.image} resizeMode="contain"/><Pressable accessibilityRole="button" accessibilityLabel="Remove photo" onPress={()=>{void discardPhoto(livePhoto.current);livePhoto.current=null;setPhoto(null);}} style={{position:'absolute',right:8,top:8,padding:8,backgroundColor:colors.paper,borderRadius:20}}><X size={18} color={colors.muted}/></Pressable></View>}
+  <Field label="Or describe your outfit" multiline maxLength={1800} value={text} onChangeText={setText} placeholder="White shirt, navy trousers, brown loafers…"/>
+  <View style={styles.spread}>
+   <Btn label={listening?'Stop dictation':'Dictate'} kind="secondary" disabled={busy} icon={listening?<Square size={14} color={colors.accentInk}/>:<Mic size={15} color={colors.muted}/>} onPress={()=>void dictate()}/>
+   {!cloudName&&analyzeButton}
+  </View>
+  {!busy&&(cloudName?<Text style={styles.text}>
+   FragOut will send {sharedContent} to {cloudName} to identify clothing details. The provider’s retention policy applies and your API account may be billed.
+  </Text>:<Text style={styles.small}>{provider?'Qwen on your server. Photos are deleted by default.':'Checking analysis destination…'}</Text>)}
+  {cloudName&&analyzeButton}
+ </>}
 
  {busy&&<Spinner label={profile?'Finding matches…':'Reading clothing details…'}/>}
 

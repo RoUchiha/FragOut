@@ -28,9 +28,8 @@ const model=createServer(async(req,res)=>{
 });
 await new Promise(done=>model.listen(0,'127.0.0.1',done));
 const modelBase=`http://127.0.0.1:${model.address().port}`;
-const webThumbnails=process.argv.includes('--web-thumbnails');
 const env={...process.env,NODE_ENV:'production',NEXT_TELEMETRY_DISABLED:'1',FRAGOUT_DB:database,FRAGOUT_VAULT_KEY:randomBytes(32).toString('base64'),FRAGOUT_OLLAMA_URL:modelBase,FRAGOUT_SECURE_COOKIES:'false',
- FRAGOUT_FRAGELLA_API_KEY:'',FRAGOUT_FRAGELLA_IMAGES:'false',FRAGOUT_WEB_THUMBNAILS:String(webThumbnails)};
+ FRAGOUT_FRAGELLA_API_KEY:''};
 delete env.FRAGOUT_PUBLIC_ORIGIN;delete env.FRAGOUT_ALLOW_LAN_HTTP;
 const child=spawn(process.execPath,[join(project,'node_modules','next','dist','bin','next'),'start','--hostname','127.0.0.1','--port',String(port)],{cwd:project,env,windowsHide:true,stdio:['ignore','pipe','pipe']});
 child.stdout.on('data',chunk=>process.stdout.write(chunk));child.stderr.on('data',chunk=>process.stderr.write(chunk));
@@ -44,7 +43,7 @@ for(let i=0;i<80;i++){
 }
 const manifest={base,modelBase,database,directory,createdAt:new Date().toISOString()};
 const manifestFile=join(work,'security-lab-run.json');await writeFile(manifestFile,JSON.stringify(manifest,null,2));
-console.log('SECURITY_LAB_READY '+JSON.stringify({base,manifestFile,syntheticOnly:true,externalProviderCalls:webThumbnails}));
+console.log('SECURITY_LAB_READY '+JSON.stringify({base,manifestFile,syntheticOnly:true,externalProviderCalls:false}));
 if(process.argv.includes('--test')){
  const test=spawn(process.execPath,['tests/security-http.mjs'],{cwd:project,env:{...process.env,FRAGOUT_SECURITY_RUN:manifestFile},windowsHide:true,stdio:'inherit'});
  const code=await new Promise(done=>test.on('exit',done));await stop();process.exitCode=code??1;

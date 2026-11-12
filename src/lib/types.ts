@@ -29,8 +29,11 @@ export interface CatalogProfile {
  sources:CatalogSource[];
 }
 export type CatalogEdition=Pick<CatalogProfile,'id'|'brand'|'name'|'concentration'|'releaseYear'>;
-export interface RemoteCatalogThumbnail {uri:string;caption:string;source:CatalogSource}
-export interface BottleThumbnailReply {variantId:string;photo:RemoteCatalogThumbnail|null}
+export interface CatalogAdminEntry extends CatalogEdition {
+ photoPath?:string;
+ source?:{publisher:string;url:string};
+ status:'bundled'|'automatic'|'override'|'hidden'|'missing';
+}
 export interface CatalogDupe {
  brand:string; name:string; concentration:string;
  evidence:'brand'|'community';
@@ -44,7 +47,6 @@ export interface BottleProfileReply {
  variantId:string;
  profile:CatalogProfile|null;
  dupes?:CatalogDupeLinks;
- thumbnailLookup?:true;
 }
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];
@@ -71,7 +73,7 @@ export interface Evidence {kind:'brand'|'community'; reports:EvidenceReport[]; a
 export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:string; status:'approved'|'draft'}
 export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string}
 export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
-export interface User {id:string; name:string; email:string|null; demo:boolean}
+export interface User {id:string; name:string; email:string|null; demo:boolean; catalogAdmin?:true}
 export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[]}
 export type AiProvider='qwen'|'openai'|'claude';
 export interface OutfitProfile {

@@ -1,480 +1,2400 @@
 {
+  "afnan-9-pm-night-out-extrait": [
+    {
+      "file": "afnan-9-pm-night-out-extrait-5c855c365082",
+      "view": "front",
+      "publisher": "parfimo.gr",
+      "url": "https://www.parfimo.gr/afnan-9pm-night-out-perfume-extract-100-ml_z1223410/",
+      "imageUrl": "https://data.parfimo.gr/photo/product_detail/146140/photo.desktop.el",
+      "credit": "Product photo via parfimo.gr · JPEG optimized",
+      "caption": "9 PM Night Out Extrait de Parfum bottle"
+    }
+  ],
+  "afnan-9pm-edp": [
+    {
+      "file": "afnan-9pm-edp-eb6c2595cc1e",
+      "view": "front",
+      "publisher": "souqscent.com",
+      "url": "https://souqscent.com/products/9pm",
+      "imageUrl": "https://souqscent.com/cdn/shop/files/paris_corner_khair_collection_feAT_WORK_-_2025-05-20T185003.499_1.png?v=1747756342&width=1445",
+      "credit": "Product photo via souqscent.com · JPEG optimized",
+      "caption": "9PM Eau de Parfum bottle"
+    }
+  ],
+  "afnan-turathi-blue-edp": [
+    {
+      "file": "afnan-turathi-blue-edp-655696b5e13c",
+      "view": "front",
+      "publisher": "profumeriamancino.com",
+      "url": "https://www.profumeriamancino.com/fragranze/15945-turathi-blue-uomo-eau-de-parfum-90ml-spray-6290171070580.html",
+      "imageUrl": "https://www.profumeriamancino.com/35086-large_default/turathi-blue-uomo-eau-de-parfum-90ml-spray.jpg",
+      "credit": "Product photo via profumeriamancino.com · JPEG optimized",
+      "caption": "Turathi Blue Eau de Parfum bottle"
+    }
+  ],
+  "afnan-turathi-electric-edp": [
+    {
+      "file": "afnan-turathi-electric-edp-6eaedbc77690",
+      "view": "front",
+      "publisher": "houseofniche.nl",
+      "url": "https://houseofniche.nl/products/afnan-turathi-electric-eau-de-parfum-90-ml",
+      "imageUrl": "https://houseofniche.nl/cdn/shop/files/Afnan_Turathi_Electric.png?v=1750070452&width=1445",
+      "credit": "Product photo via houseofniche.nl · JPEG optimized",
+      "caption": "Turathi Electric Eau de Parfum bottle"
+    }
+  ],
+  "al-haramain-amber-oud-gold-edition-edp": [
+    {
+      "file": "al-haramain-amber-oud-gold-edition-edp-ef8fb50f16f6",
+      "view": "front",
+      "publisher": "perfumemarket.eu",
+      "url": "https://perfumemarket.eu/products/al-haramain-amber-oud-gold-edition-60ml-edp",
+      "imageUrl": "https://perfumemarket.eu/cdn/shop/files/Copy_of_Untitled_-_2026-01-23T112137.674.png?v=1769163715&width=2048",
+      "credit": "Product photo via perfumemarket.eu · JPEG optimized",
+      "caption": "Amber Oud Gold Edition Eau de Parfum bottle"
+    }
+  ],
+  "amouage-decision-edp": [
+    {
+      "file": "amouage-decision-edp-0c427738a08a",
+      "view": "front",
+      "publisher": "noah.com.au",
+      "url": "https://noah.com.au/products/amouage-decision",
+      "imageUrl": "https://noah.com.au/cdn/shop/files/DecisionAmouageBottle.jpg?v=1765322369&width=1600",
+      "credit": "Product photo via noah.com.au · JPEG optimized",
+      "caption": "Decision Eau de Parfum bottle"
+    }
+  ],
+  "amouage-guidance-46-extrait": [
+    {
+      "file": "amouage-guidance-46-extrait-56cae6b97111",
+      "view": "front",
+      "publisher": "theparfums.com",
+      "url": "https://theparfums.com/products/guidance-46",
+      "imageUrl": "https://theparfums.com/cdn/shop/files/product-bottles-AMOUAGE-GUIDANCE_46_1f80b560-549c-4c2d-b047-7f4b98023184.png?v=1762201728&width=1445",
+      "credit": "Product photo via theparfums.com · JPEG optimized",
+      "caption": "Guidance 46 Extrait de Parfum bottle"
+    }
+  ],
+  "amouage-guidance-edp": [
+    {
+      "file": "amouage-guidance-edp-07845548d8ff",
+      "view": "front",
+      "publisher": "sundora.com.bd",
+      "url": "https://sundora.com.bd/products/guidance",
+      "imageUrl": "https://sundora.com.bd/cdn/shop/files/MicrosoftTeams-image_a5a08098-b0ef-438e-86e6-2c3e21005651.png?v=1756703354&width=3840",
+      "credit": "Product photo via sundora.com.bd · JPEG optimized",
+      "caption": "Guidance Eau de Parfum bottle"
+    }
+  ],
+  "amouage-interlude-53-man-extrait": [
+    {
+      "file": "amouage-interlude-53-man-extrait-cc27bb102ce7",
+      "view": "front",
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-gb/p/amouage-interlude-53-man-exceptional-extrait-100ml-000000000007258805",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/1208e219bb44c82c2d38c2a09048c20d.jpg?bg=ffffff&brightness=1&height=1230&quality=75&width=922",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "Interlude 53 Man Extrait de Parfum bottle"
+    }
+  ],
+  "amouage-reflection-man-edp": [
+    {
+      "file": "amouage-reflection-man-edp-e5ab559b8dad",
+      "view": "front",
+      "publisher": "sundora.com.bd",
+      "url": "https://sundora.com.bd/products/reflection-man-amouage-sundora",
+      "imageUrl": "https://sundora.com.bd/cdn/shop/products/Amouage-Reflection-Man-1.png?v=1756705525",
+      "credit": "Product photo via sundora.com.bd · JPEG optimized",
+      "caption": "Reflection Man Eau de Parfum bottle"
+    }
+  ],
+  "ariana-grande-cloud-edp": [
+    {
+      "file": "ariana-grande-cloud-edp-0cfc7ec25333",
+      "view": "front",
+      "publisher": "piaus.mx",
+      "url": "https://piaus.mx/products/ariana-grande-cloud-edp-100-ml",
+      "imageUrl": "https://piaus.mx/cdn/shop/files/Frasco-Photoroom_8769646d-4db3-47b4-b609-ed3bc1fa1302.jpg?v=1765830451&width=3840",
+      "credit": "Product photo via piaus.mx · JPEG optimized",
+      "caption": "Cloud Eau de Parfum bottle"
+    }
+  ],
+  "armaf-club-de-nuit-intense-man-edp": [
+    {
+      "file": "armaf-club-de-nuit-intense-man-edp-7704be459a41",
+      "view": "front",
+      "publisher": "flyimports.com",
+      "url": "https://flyimports.com/products/armaf-club-de-nuit-intense-man-eau-de-parfum-105ml",
+      "imageUrl": "https://flyimports.com/cdn/shop/files/CLUB1.png?v=1770857003&width=1024",
+      "credit": "Product photo via flyimports.com · JPEG optimized",
+      "caption": "Club de Nuit Intense Man Eau de Parfum bottle"
+    }
+  ],
+  "armaf-club-de-nuit-intense-man-edt": [
+    {
+      "file": "armaf-club-de-nuit-intense-man-edt-9bd872f7ea44",
+      "view": "front",
+      "publisher": "douglas.es",
+      "url": "https://www.douglas.es/es/p/5010993644",
+      "imageUrl": "https://media.douglas.es/medias/1btTC81062979-6-global.jpg?context=bWFzdGVyfGltYWdlc3wxMjczNjN8aW1hZ2UvanBlZ3xhRFl3TDJnMk1DODJNemc1TlRFek5qZzVOVEF3Tmk4eFluUlVRemd4TURZeU9UYzVYelpmWjJ4dlltRnNMbXB3Wnd8Y2UzYTA1NDcyYjAzMTNhMDlmMTQ4Nzc1NTNkY2E3NmIwZWNmNzlkY2Y2MmRlNWM0YTkzNGY1ODJlNmVmYTYyZA&grid=true",
+      "credit": "Product photo via douglas.es · JPEG optimized",
+      "caption": "Club de Nuit Intense Man Eau de Toilette bottle"
+    }
+  ],
+  "armaf-club-de-nuit-milestone-edp": [
+    {
+      "file": "armaf-club-de-nuit-milestone-edp-af2fa5f47b13",
+      "view": "front",
+      "publisher": "celaurabeauty.com",
+      "url": "https://celaurabeauty.com/products/armaf-club-de-nuit-milestone-for-unisex-eau-de-parfum-spray-3-6-oz",
+      "imageUrl": "https://celaurabeauty.com/cdn/shop/files/armaf-club-milestone-bottle-front.jpg?v=1773250649",
+      "credit": "Product photo via celaurabeauty.com · JPEG optimized",
+      "caption": "Club de Nuit Milestone Eau de Parfum bottle"
+    }
+  ],
+  "armaf-club-de-nuit-woman-edp": [
+    {
+      "file": "armaf-club-de-nuit-woman-edp-bcab9563b83b",
+      "view": "front",
+      "publisher": "oia-parfums.fr",
+      "url": "https://www.oia-parfums.fr/442933-club-de-nuit-woman-eau-de-parfum-vaporisateur.html",
+      "imageUrl": "https://www.oia-parfums.fr/115798-large_default/club-de-nuit-woman-eau-de-parfum-vaporisateur.jpg",
+      "credit": "Product photo via oia-parfums.fr · JPEG optimized",
+      "caption": "Club de Nuit Woman Eau de Parfum bottle"
+    }
+  ],
+  "armaf-odyssey-mega-edp": [
+    {
+      "file": "armaf-odyssey-mega-edp-7cc2ebc5ddb3",
+      "view": "front",
+      "publisher": "yauras.cl",
+      "url": "https://yauras.cl/products/armaf-odyssey-mega-edp-200ml-hombre",
+      "imageUrl": "https://yauras.cl/cdn/shop/files/2_ff30887c-9c11-4709-a511-4b14b40544d2_700x700.png?v=1761044356",
+      "credit": "Product photo via yauras.cl · JPEG optimized",
+      "caption": "Odyssey Mega Eau de Parfum bottle"
+    }
+  ],
+  "azzaro-the-most-wanted-eau-de-parfum-intense-edp": [
+    {
+      "file": "azzaro-the-most-wanted-eau-de-parfum-intense-edp-94f0b55c09a9",
+      "view": "front",
+      "publisher": "Azzaro",
+      "url": "https://www.azzaro.com/en/fragrances/azzaro-the-most-wanted/eau-de-parfum-intense",
+      "imageUrl": "https://res.cloudinary.com/azzaro-parfums/image/upload/c_fill%2Cw_1000%2Ch_1117/products/60b89c1fe1db7_azp-tmw-100ml-semi-face-jpg.jpeg",
+      "credit": "Product photo via Azzaro · JPEG optimized",
+      "caption": "The Most Wanted Eau de Parfum Intense Eau de Parfum bottle"
+    }
+  ],
+  "azzaro-the-most-wanted-parfum": [
+    {
+      "file": "azzaro-the-most-wanted-parfum-75ff7dd2527b",
+      "view": "front",
+      "publisher": "kosmenia.ma",
+      "url": "https://kosmenia.ma/products/azzaro-the-most-wanted-parfum",
+      "imageUrl": "https://kosmenia.ma/cdn/shop/files/azzaro_the_most_wanted_parfum_f_580x.jpg?v=1692131241",
+      "credit": "Product photo via kosmenia.ma · JPEG optimized",
+      "caption": "The Most Wanted Parfum bottle"
+    }
+  ],
+  "bdk-parfums-gris-charnel-edp": [
+    {
+      "file": "bdk-parfums-gris-charnel-edp-4ef4534c40d3",
+      "view": "front",
+      "publisher": "osmeperfumery.com",
+      "url": "https://www.osmeperfumery.com/products/gris-charnel-edp",
+      "imageUrl": "https://www.osmeperfumery.com/cdn/shop/products/SD-Grischarnelcote-v3.jpg?v=1593397649",
+      "credit": "Product photo via osmeperfumery.com · JPEG optimized",
+      "caption": "Gris Charnel Eau de Parfum bottle"
+    }
+  ],
+  "burberry-goddess-edp": [
+    {
+      "file": "burberry-goddess-edp-4ce5e014597a",
+      "view": "front",
+      "publisher": "scentira.in",
+      "url": "https://scentira.in/products/burberry-goddess-edp",
+      "imageUrl": "https://scentira.in/cdn/shop/files/burberry_goddess_343d1e0a-d909-45a3-84c4-45b72a031cbe.png?crop=center&height=1200&v=1756889609&width=1200",
+      "credit": "Product photo via scentira.in · JPEG optimized",
+      "caption": "Goddess Eau de Parfum bottle"
+    }
+  ],
+  "burberry-her-edp": [
+    {
+      "file": "burberry-her-edp-993b742daf43",
+      "view": "front",
+      "publisher": "lookfantastic.com",
+      "url": "https://www.lookfantastic.com/p/burberry-her-eau-de-parfum-100ml/12044922/",
+      "imageUrl": "https://static.thcdn.com/productimg/original/12044924-4425317684579659.jpg",
+      "credit": "Product photo via lookfantastic.com · JPEG optimized",
+      "caption": "Her Eau de Parfum bottle"
+    }
+  ],
+  "burberry-hero-edp": [
+    {
+      "file": "burberry-hero-edp-a1684ba65035",
+      "view": "front",
+      "publisher": "woolworths.co.za",
+      "url": "https://www.woolworths.co.za/prod/_/A-506425136",
+      "imageUrl": "https://www.woolworths.co.za/images/elasticera/products/hero/2024-04-12/506425136_150ML_hero.jpg",
+      "credit": "Product photo via woolworths.co.za · JPEG optimized",
+      "caption": "Hero Eau de Parfum bottle"
+    }
+  ],
+  "bvlgari-aqva-pour-homme-edt": [
+    {
+      "file": "bvlgari-aqva-pour-homme-edt-476d463262a2",
+      "view": "front",
+      "publisher": "escentual.com",
+      "url": "https://escentual.com/products/bvlgari-aqva-pour-homme-eau-de-toilette-spray",
+      "imageUrl": "https://escentual.com/cdn/shop/files/bvlgari_aqva_pour_homme_eau_de_toilette_spray_50ml.png?v=1746697619&width=1445",
+      "credit": "Product photo via escentual.com · JPEG optimized",
+      "caption": "Aqva Pour Homme Eau de Toilette bottle"
+    }
+  ],
+  "bvlgari-le-gemme-tygar-edp": [
+    {
+      "file": "bvlgari-le-gemme-tygar-edp-a0a560696d19",
+      "view": "front",
+      "publisher": "levelperfume.com",
+      "url": "https://levelperfume.com/products/le-gemme-tygar",
+      "imageUrl": "https://levelperfume.com/cdn/shop/files/tygarrr_1200x1200.jpg?v=1729064721",
+      "credit": "Product photo via levelperfume.com · JPEG optimized",
+      "caption": "Le Gemme Tygar Eau de Parfum bottle"
+    }
+  ],
+  "byredo-bal-dafrique-edp": [
+    {
+      "file": "byredo-bal-dafrique-edp-0450039f1b8e",
+      "view": "front",
+      "publisher": "niixtparfums.com",
+      "url": "https://niixtparfums.com/byredo-bal-dafrique",
+      "imageUrl": "https://bizweb.dktcdn.net/thumb/1024x1024/100/558/531/products/byredo-bal-d-afrique-7cec0b2c-27dc-465b-b7e0-27188c6ffcc0.png?v=1753350884963",
+      "credit": "Product photo via niixtparfums.com · JPEG optimized",
+      "caption": "Bal d'Afrique Eau de Parfum bottle"
+    }
+  ],
+  "byredo-blanche-edp": [
+    {
+      "file": "byredo-blanche-edp-e5e0cff4064e",
+      "view": "front",
+      "publisher": "epicentrk.ua",
+      "url": "https://epicentrk.ua/shop/mplc-parfumovana-voda-byredo-blanche-100-ml-7340032806199-1f01c5e7-a8ac-6d2a-892e-bddec6d25dc8.html",
+      "imageUrl": "https://cdn.27.ua/sc--media--prod/default/a1/79/b9/a179b928-ee7e-4c04-965b-7d697c34848b.png",
+      "credit": "Product photo via epicentrk.ua · JPEG optimized",
+      "caption": "Blanche Eau de Parfum bottle"
+    }
+  ],
+  "byredo-gypsy-water-edp": [
+    {
+      "file": "byredo-gypsy-water-edp-6a5a7e7540cd",
+      "view": "front",
+      "publisher": "doverstreetparfumsmarket.com",
+      "url": "https://www.doverstreetparfumsmarket.com/products/copy-of-byredo-gypsy-water-eau-de-parfum-100ml",
+      "imageUrl": "https://www.doverstreetparfumsmarket.com/cdn/shop/files/962279_NA_1__33004.jpg?v=1698333644",
+      "credit": "Product photo via doverstreetparfumsmarket.com · JPEG optimized",
+      "caption": "Gypsy Water Eau de Parfum bottle"
+    }
+  ],
+  "byredo-mojave-ghost-edp": [
+    {
+      "file": "byredo-mojave-ghost-edp-7440c49a5d67",
+      "view": "front",
+      "publisher": "Byredo",
+      "url": "https://www.byredo.com/mojave-ghost-eau-de-parfum-100ml",
+      "imageUrl": "https://www.byredo.com/cdn-cgi/image/width%3Dauto%2Cheight%3D1200%2Cfit%3Dscale-down%2Cgravity%3Dauto%2Cformat%3Dwebp%2Cquality%3D70/https%3A/www.byredo.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/b/y/byr_ecom_25_fragrance_edp_100ml_mojave_ghost_front.jpg",
+      "credit": "Product photo via Byredo · JPEG optimized",
+      "caption": "Mojave Ghost Eau de Parfum bottle"
+    }
+  ],
   "calvin-klein-euphoria-edp": [
     {
-      "file": "calvin-klein-euphoria-edp",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:CK_Euphoria_Bottle.jpg",
-      "credit": "ggjsmith, edited by Bruce the Deus (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "CC BY 2.0",
-        "url": "https://creativecommons.org/licenses/by/2.0/"
-      },
+      "file": "calvin-klein-euphoria-edp-4496eb824a00",
+      "view": "front",
+      "publisher": "shopee.com.br",
+      "url": "https://shopee.com.br/Perfume-Calvin-Klein-Euphoria-Eau-de-Parfum-100ml-para-mulher-Original-com-NFE-i.350280483.22507483861",
+      "imageUrl": "https://cf.shopee.com.br/file/sg-11134201-22110-59o833xfpakve1",
+      "credit": "Product photo via shopee.com.br · JPEG optimized",
       "caption": "Euphoria Eau de Parfum bottle"
+    }
+  ],
+  "carolina-herrera-212-vip-edp": [
+    {
+      "file": "carolina-herrera-212-vip-edp-ca4cab3f2bdf",
+      "view": "front",
+      "publisher": "shop-apotheke.com",
+      "url": "https://www.shop-apotheke.com/beauty/upmCEMD7A/carolina-herrera-212-vip.htm",
+      "imageUrl": "https://cdn.shop-apotheke.com/images/mp/prod/d37022057ea744b59a47e567d0892eba",
+      "credit": "Product photo via shop-apotheke.com · JPEG optimized",
+      "caption": "212 VIP Eau de Parfum bottle"
+    }
+  ],
+  "carolina-herrera-good-girl-blush-edp": [
+    {
+      "file": "carolina-herrera-good-girl-blush-edp-8c15dfe27b2f",
+      "view": "front",
+      "publisher": "luxefragrances.com.au",
+      "url": "https://luxefragrances.com.au/products/good-girl-blush-50ml-edp-by-carolina-herrera-womens",
+      "imageUrl": "https://luxefragrances.com.au/cdn/shop/files/pixelcut-export__65307.1724809026.1280.1280.jpg?v=1749023421&width=1024",
+      "credit": "Product photo via luxefragrances.com.au · JPEG optimized",
+      "caption": "Good Girl Blush Eau de Parfum bottle"
+    }
+  ],
+  "carolina-herrera-good-girl-edp": [
+    {
+      "file": "carolina-herrera-good-girl-edp-cad3674440db",
+      "view": "front",
+      "publisher": "flannels.ie",
+      "url": "https://www.flannels.ie/carolina-herrera-good-girl-eau-de-parfum-751635",
+      "imageUrl": "https://www.flannels.com/images/products/75163591_l.jpg",
+      "credit": "Product photo via flannels.ie · JPEG optimized",
+      "caption": "Good Girl Eau de Parfum bottle"
     }
   ],
   "chanel-bleu-de-chanel-edp": [
     {
-      "file": "chanel-bleu-de-chanel-edp",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/bleu-de-chanel-perfume-bottle-2b0JeJTEclQ",
-      "credit": "Jeroen den Otter · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Bleu de Chanel Eau de Parfum"
+      "file": "chanel-bleu-de-chanel-edp-2e677fe2601b",
+      "view": "front",
+      "publisher": "my-origines.com",
+      "url": "https://www.my-origines.com/fr/bleu-de-chanel-18417X01.html",
+      "imageUrl": "https://www.my-origines.com/on/demandware.static/-/Sites-size-master/default/dwdfd54547/images/18417540_P.jpg",
+      "credit": "Product photo via my-origines.com · JPEG optimized",
+      "caption": "Bleu de Chanel Eau de Parfum bottle"
+    }
+  ],
+  "chanel-bleu-de-chanel-edt": [
+    {
+      "file": "chanel-bleu-de-chanel-edt-885b1292bca7",
+      "view": "front",
+      "publisher": "Chanel",
+      "url": "https://id-eshop.chanel.com/products/parfum-pria-bleu-de-chanel-eau-de-toilette-spray",
+      "imageUrl": "https://img.myshopline.com/image/store/2004129914/1674805255704/3145891074604.jpg?h=2000&w=2000",
+      "credit": "Product photo via Chanel · JPEG optimized",
+      "caption": "Bleu de Chanel Eau de Toilette bottle"
+    }
+  ],
+  "chanel-bleu-de-chanel-parfum": [
+    {
+      "file": "chanel-bleu-de-chanel-parfum-da9e16fc3f4e",
+      "view": "front",
+      "publisher": "breuninger.com",
+      "url": "https://www.breuninger.com/de/marken/chanel/bleu-de-chanel/1000818532/p/",
+      "imageUrl": "https://cms.brnstc.de/product_images/1122x1536_retina/cpne/media/images/product/26/6/1000818532_3145891071801_0_1780272000000.jpg",
+      "credit": "Product photo via breuninger.com · JPEG optimized",
+      "caption": "Bleu de Chanel Parfum bottle"
+    }
+  ],
+  "chanel-chance-eau-tendre-edp": [
+    {
+      "file": "chanel-chance-eau-tendre-edp-15a151e19f70",
+      "view": "front",
+      "publisher": "perfumerialepetit.com",
+      "url": "https://perfumerialepetit.com/products/chance-eau-tendre-edp",
+      "imageUrl": "https://perfumerialepetit.com/cdn/shop/files/descripcion_corta_para_pagina_web_del_set_bvlgari_omnia_amethyste_con_perfume_de_100_ml_y_de_15_ml_con_sus_notas_ocasiones_para_salir_y_clima_-_2024-10-14T132527.969.png?v=1728930467",
+      "credit": "Product photo via perfumerialepetit.com · JPEG optimized",
+      "caption": "Chance Eau Tendre Eau de Parfum bottle"
+    }
+  ],
+  "chanel-chance-eau-tendre-edt": [
+    {
+      "file": "chanel-chance-eau-tendre-edt-6f068b2f024b",
+      "view": "front",
+      "publisher": "woolworths.co.za",
+      "url": "https://www.woolworths.co.za/prod/_/A-503694470",
+      "imageUrl": "https://assets.woolworthsstatic.co.za/Eau-De-Toilette-Spray-50ml-503694470.jpg?V=Zver&o=eyJidWNrZXQiOiJ3dy1vbmxpbmUtaW1hZ2UtcmVzaXplIiwia2V5IjoiaW1hZ2VzL2VsYXN0aWNlcmEvcHJvZHVjdHMvaGVyby8yMDIxLTAxLTI4LzUwMzY5NDQ3MF81ME1MX2hlcm8uanBnIn0&q=75",
+      "credit": "Product photo via woolworths.co.za · JPEG optimized",
+      "caption": "Chance Eau Tendre Eau de Toilette bottle"
     }
   ],
   "chanel-coco-mademoiselle-edp": [
     {
-      "file": "chanel-coco-mademoiselle-edp",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Coco_mademoiselle.jpg",
-      "credit": "Brownchl · crop by Cjp24 · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "CC BY 3.0",
-        "url": "https://creativecommons.org/licenses/by/3.0/"
-      },
+      "file": "chanel-coco-mademoiselle-edp-389dbd97d244",
+      "view": "front",
+      "publisher": "snapperfumes.in",
+      "url": "https://www.snapperfumes.in/products/chanel-coco-mademoiselle-eau-de-parfum-decants-samples",
+      "imageUrl": "https://www.snapperfumes.in/cdn/shop/files/chanel-coco-mademoiselle-eau-de-parfum-decantssamples-774963.jpg?v=1762955282&width=1080",
+      "credit": "Product photo via snapperfumes.in · JPEG optimized",
       "caption": "Coco Mademoiselle Eau de Parfum bottle"
     }
   ],
   "chanel-no-5-edp": [
     {
-      "file": "chanel-no-5-edp",
+      "file": "chanel-no-5-edp-9cbefc23e3ec",
       "view": "front",
-      "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg",
-      "credit": "Arz · public-domain photograph, resized",
-      "license": {
-        "name": "Public domain",
-        "url": "https://commons.wikimedia.org/wiki/File:CHANEL_No5_parfum.jpg"
-      },
-      "caption": "Reference bottle"
+      "publisher": "kixdutyfree.jp",
+      "url": "https://www.kixdutyfree.jp/en/eau-de-parfum-spray-50ml-3301101149.html",
+      "imageUrl": "https://edge.dis.commercecloud.salesforce.com/dw/image/v2/BKBN_PRD/on/demandware.static/-/Sites-catalog_master_sfcc_krs/default/dw92c45ebc/images/large/3301101149_1.jpg?sh=768&sm=fit&sw=768",
+      "credit": "Product photo via kixdutyfree.jp · JPEG optimized",
+      "caption": "No. 5 Eau de Parfum bottle"
+    }
+  ],
+  "chloe-nomade-edp": [
+    {
+      "file": "chloe-nomade-edp-3b66430c62b0",
+      "view": "front",
+      "publisher": "lookfantastic.com",
+      "url": "https://www.lookfantastic.com/p/chloe-nomade-eau-de-parfum-75ml/12780687/",
+      "imageUrl": "https://static.thcdn.com/productimg/original/12780687-2215321753971533.jpg",
+      "credit": "Product photo via lookfantastic.com · JPEG optimized",
+      "caption": "Nomade Eau de Parfum bottle"
+    }
+  ],
+  "creed-absolu-aventus-edp": [
+    {
+      "file": "creed-absolu-aventus-edp-72d15ac2dcec",
+      "view": "front",
+      "publisher": "myperfumeshop.co.nz",
+      "url": "https://www.myperfumeshop.co.nz/products/creed-absolu-aventus-edp",
+      "imageUrl": "https://www.myperfumeshop.co.nz/cdn/shop/products/creed-absolu-aventus-edp-perfume-cologne-332244.png?v=1705003835&width=700",
+      "credit": "Product photo via myperfumeshop.co.nz · JPEG optimized",
+      "caption": "Absolu Aventus Eau de Parfum bottle"
     }
   ],
   "creed-aventus-edp": [
     {
-      "file": "creed-aventus-edp",
-      "view": "front-angle",
-      "publisher": "Flickr",
-      "url": "https://www.flickr.com/photos/94977883@N08/49703467302/",
-      "credit": "TheBetterDay · JPEG optimized",
-      "license": {
-        "name": "CC BY-ND 2.0",
-        "url": "https://creativecommons.org/licenses/by-nd/2.0/"
-      },
-      "caption": "Aventus bottle"
+      "file": "creed-aventus-edp-0bac0bd1ae3b",
+      "view": "front",
+      "publisher": "scentopia.com",
+      "url": "https://scentopia.com/products/cr-men-aventus-edp",
+      "imageUrl": "https://scentopia.com/cdn/shop/files/3508441001114-1.jpg?v=1774867244",
+      "credit": "Product photo via scentopia.com · JPEG optimized",
+      "caption": "Aventus Eau de Parfum bottle"
+    }
+  ],
+  "creed-bois-du-portugal-edp": [
+    {
+      "file": "creed-bois-du-portugal-edp-82136bbeec94",
+      "view": "front",
+      "publisher": "parfumerie-stefani.ch",
+      "url": "https://www.parfumerie-stefani.ch/produkt/bois-du-portugal-eau-de-parfum-50ml-100ml/",
+      "imageUrl": "https://www.parfumerie-stefani.ch/app/uploads/2023/11/Creed_bois_du_portugal_eau_de_parfum.png",
+      "credit": "Product photo via parfumerie-stefani.ch · JPEG optimized",
+      "caption": "Bois du Portugal Eau de Parfum bottle"
+    }
+  ],
+  "creed-carmina-edp": [
+    {
+      "file": "creed-carmina-edp-63868cb5d38e",
+      "view": "front",
+      "publisher": "bluemercury.com",
+      "url": "https://bluemercury.com/products/creed-carmina",
+      "imageUrl": "https://bluemercury.com/cdn/shop/files/variant_images-size-253oz-3508440251435-1_1169f9f0-f8ea-427b-83e2-e3593d60b3c7.jpg?v=1758149299&width=1500",
+      "credit": "Product photo via bluemercury.com · JPEG optimized",
+      "caption": "Carmina Eau de Parfum bottle"
+    }
+  ],
+  "creed-green-irish-tweed-edp": [
+    {
+      "file": "creed-green-irish-tweed-edp-b1448684d277",
+      "view": "front",
+      "publisher": "bluemercury.com",
+      "url": "https://bluemercury.com/products/creed-green-irish-tweed",
+      "imageUrl": "https://bluemercury.com/cdn/shop/files/variant_images-size-338floz-3508441001022-1_0032487b-71b2-4aaf-8a0b-bbff37081c17.jpg?v=1775753463&width=1500",
+      "credit": "Product photo via bluemercury.com · JPEG optimized",
+      "caption": "Green Irish Tweed Eau de Parfum bottle"
+    }
+  ],
+  "creed-millesime-imperial-edp": [
+    {
+      "file": "creed-millesime-imperial-edp-83f338c31746",
+      "view": "front",
+      "publisher": "myperfumeshop.com.au",
+      "url": "https://www.myperfumeshop.com.au/products/creed-millesime-imperial-edp",
+      "imageUrl": "https://www.myperfumeshop.com.au/cdn/shop/products/creed-millesime-imperial-edp-perfume-cologne-523921.png?v=1682593316&width=2048",
+      "credit": "Product photo via myperfumeshop.com.au · JPEG optimized",
+      "caption": "Millésime Impérial Eau de Parfum bottle"
+    }
+  ],
+  "creed-silver-mountain-water-edp": [
+    {
+      "file": "creed-silver-mountain-water-edp-8e5522a9ac63",
+      "view": "front",
+      "publisher": "scentira.in",
+      "url": "https://scentira.in/products/creed-silver-mountain-water-eau-de-parfum",
+      "imageUrl": "https://scentira.in/cdn/shop/files/creed_silver_mountain_edp_1_1f671616-df3d-4f0f-acf2-980933779cd8.png?v=1756889361&width=1000",
+      "credit": "Product photo via scentira.in · JPEG optimized",
+      "caption": "Silver Mountain Water Eau de Parfum bottle"
+    }
+  ],
+  "creed-viking-edp": [
+    {
+      "file": "creed-viking-edp-247109efb99e",
+      "view": "front",
+      "publisher": "50-ml.eu",
+      "url": "https://50-ml.eu/creed-viking-edp-100-ml",
+      "imageUrl": "https://cdn.50-ml.media/media/catalog/product/c/r/creed_viking_edp_100_ml_1_1.jpg?bg-color=255%2C255%2C255&fit=bounds&height=&optimize=medium&width=",
+      "credit": "Product photo via 50-ml.eu · JPEG optimized",
+      "caption": "Viking Eau de Parfum bottle"
+    }
+  ],
+  "dior-eau-sauvage-edt": [
+    {
+      "file": "dior-eau-sauvage-edt-31785724b3f8",
+      "view": "front",
+      "publisher": "Dior",
+      "url": "https://www.dior.com/en_gb/beauty/products/eau-sauvage-eau-de-toilette-Y0097001.html",
+      "imageUrl": "https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw56d1e8ef/Y0097001/Y0097001_F009724109_E01_RHC.jpg?sw=800",
+      "credit": "Product photo via Dior · JPEG optimized",
+      "caption": "Eau Sauvage Eau de Toilette bottle"
+    }
+  ],
+  "dior-homme-intense-edp": [
+    {
+      "file": "dior-homme-intense-edp-2675afff4f67",
+      "view": "front",
+      "publisher": "perfumecartel.com",
+      "url": "https://perfumecartel.com/products/dior-homme-intense",
+      "imageUrl": "https://perfumecartel.com/cdn/shop/files/dior-homme-intense-hombre.jpg?v=1739476173",
+      "credit": "Product photo via perfumecartel.com · JPEG optimized",
+      "caption": "Dior Homme Intense Eau de Parfum bottle"
+    }
+  ],
+  "dior-hypnotic-poison-edt": [
+    {
+      "file": "dior-hypnotic-poison-edt-e6507f79eddc",
+      "view": "front",
+      "publisher": "faces.sa",
+      "url": "https://www.faces.sa/en/p/dior-christian-dior-hypnotic-poison-eau-de-toilette-009112426439.html",
+      "imageUrl": "https://www.faces.sa/dw/image/v2/BJSM_PRD/on/demandware.static/-/Sites-faces-master-catalog/default/dwe1c4e0f7/product/3348901250351/3348901250351.jpg?sh=800&sw=800",
+      "credit": "Product photo via faces.sa · JPEG optimized",
+      "caption": "Hypnotic Poison Eau de Toilette bottle"
+    }
+  ],
+  "dior-jadore-edp": [
+    {
+      "file": "dior-jadore-edp-724a1e00322f",
+      "view": "front",
+      "publisher": "perfumesecompanhia.pt",
+      "url": "https://www.perfumesecompanhia.pt/pt/dior-jadore-eau-de-parfum/421068.html",
+      "imageUrl": "https://www.perfumesecompanhia.pt/dw/image/v2/BGXV_PRD/on/demandware.static/-/Sites-master-catalog-pc/default/dw6e02134e/images/hi-res/P01/421068_333403.jpg?sh=1080&sm=fit&sw=1080",
+      "credit": "Product photo via perfumesecompanhia.pt · JPEG optimized",
+      "caption": "J'adore Eau de Parfum bottle"
     }
   ],
   "dior-miss-dior-blooming-bouquet-edt": [
     {
-      "file": "dior-miss-dior-blooming-bouquet-edt",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-perfume-sitting-on-top-of-a-bed-aPLY2Mz9KQw",
-      "credit": "Annie Le (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Miss Dior Blooming Bouquet Eau de Toilette, earlier silver-bow bottle"
-    },
-    {
-      "file": "dior-miss-dior-blooming-bouquet-edt-vershinina",
+      "file": "dior-miss-dior-blooming-bouquet-edt-7f17a4d09b77",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-piece-of-cake-on-a-table-EAU1Kzv1Q9Q",
-      "credit": "Alsu Vershinina (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Miss Dior Blooming Bouquet Eau de Toilette, earlier silver-bow bottle"
+      "publisher": "falabella.com",
+      "url": "https://www.falabella.com/falabella-cl/product/50220181/Perfume%20Mujer%20Miss%20Dior%20Blooming%20Bouquet%20-%20Eau%20de%20toilette%20-%20Notas%20frescas%20y%20tiernas/50220182",
+      "imageUrl": "https://media.falabella.com/falabellaCL/50220182_1/w%3D1004%2Ch%3D1500%2Cfit%3Dpad",
+      "credit": "Product photo via falabella.com · JPEG optimized",
+      "caption": "Miss Dior Blooming Bouquet Eau de Toilette bottle"
+    }
+  ],
+  "dior-miss-dior-parfum": [
+    {
+      "file": "dior-miss-dior-parfum-430d9d34e1cb",
+      "view": "front",
+      "publisher": "shop-beauty.dior.com.kw",
+      "url": "https://shop-beauty.dior.com.kw/products/miss-dior-parfum",
+      "imageUrl": "https://shop-beauty.dior.com.kw/cdn/shop/files/C099700901_E01_GHC_1_1024x1024%402x.jpg?v=1738560826",
+      "credit": "Product photo via shop-beauty.dior.com.kw · JPEG optimized",
+      "caption": "Miss Dior Parfum bottle"
     }
   ],
   "dior-sauvage-edp": [
     {
-      "file": "dior-sauvage-edp",
+      "file": "dior-sauvage-edp-7c860abb0e81",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-dior-sauvage-eau-de-parfum-bgrM9NxKLRQ",
-      "credit": "Farhan Chohan · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Reference bottle"
+      "publisher": "sephora.co.id",
+      "url": "https://www.sephora.co.id/products/dior-sauvage-eau-de-parfum",
+      "imageUrl": "https://image-optimizer-id.production.sephora-asia.net/images/product_images/zoom_edp_20100ml_14393cfb82384f190f2e4501210d14d3b2a09f5f_1602589642.png",
+      "credit": "Product photo via sephora.co.id · JPEG optimized",
+      "caption": "Sauvage Eau de Parfum bottle"
     }
   ],
   "dior-sauvage-edt": [
     {
-      "file": "dior-sauvage-edt",
+      "file": "dior-sauvage-edt-73f6c1636540",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/dior-sauvage-perfume-bottle-with-water-droplets-nErXDQGI_CU",
-      "credit": "Lufefe Ngilana · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Sauvage Eau de Toilette"
-    },
+      "publisher": "harryperfume.vn",
+      "url": "https://harryperfume.vn/dior-sauvage-edt",
+      "imageUrl": "https://bizweb.dktcdn.net/100/495/179/products/533fbec0-e85e-49c9-a8c9-9a9d81a09999.jpg?v=1726209284883",
+      "credit": "Product photo via harryperfume.vn · JPEG optimized",
+      "caption": "Sauvage Eau de Toilette bottle"
+    }
+  ],
+  "dior-sauvage-elixir": [
     {
-      "file": "dior-sauvage-edt-side",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-man-holding-a-bottle-of-dior-sauvage-JTqE39KQJmc",
-      "credit": "Tuan Anh Nguyen · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Sauvage Eau de Toilette at an angle"
+      "file": "dior-sauvage-elixir-8a9158a1a271",
+      "view": "front",
+      "publisher": "bestvalue.eu",
+      "url": "https://bestvalue.eu/p/parfum-dior-sauvage-elixir-100-ml",
+      "imageUrl": "https://cdn.bestvalue.eu/media/cache/sylius_shop_product_large_thumbnail/dior-parfum-sauvage-elixir-100-ml-8d516435308e2177a5a7cca1.jpg",
+      "credit": "Product photo via bestvalue.eu · JPEG optimized",
+      "caption": "Sauvage Elixir bottle"
+    }
+  ],
+  "dior-sauvage-parfum": [
+    {
+      "file": "dior-sauvage-parfum-ce21d974d9b4",
+      "view": "front",
+      "publisher": "Dior",
+      "url": "https://www.dior.com/en_id/beauty/products/sauvage-parfum-Y0998004.html",
+      "imageUrl": "https://whitelabel.dior.com/dw/image/v2/BJSW_PRD/on/demandware.static/-/Sites-pcd-whitelabel-master/default/dw5747630d/Y0998004/Y0998004_C099600456_E01_GHC.jpg?sh=700&sw=700",
+      "credit": "Product photo via Dior · JPEG optimized",
+      "caption": "Sauvage Parfum bottle"
+    }
+  ],
+  "diptyque-tam-dao-edt": [
+    {
+      "file": "diptyque-tam-dao-edt-07c940fd7e7e",
+      "view": "front",
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-mk/p/diptyque-tam-dao-eau-de-toilette-50ml-000000000002804824",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/ff9055835aab535d425030aaababed4e.jpg",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "Tam Dao Eau de Toilette bottle"
+    }
+  ],
+  "dolce-and-gabbana-devotion-edp": [
+    {
+      "file": "dolce-and-gabbana-devotion-edp-bf8a6897b8c6",
+      "view": "front",
+      "publisher": "ifragranceofficial.com",
+      "url": "https://ifragranceofficial.com/dolcegabbana-devotion/",
+      "imageUrl": "https://ifragranceofficial.com/wp-content/uploads/2023/08/devotion-edp-dolce-gabbana.jpeg",
+      "credit": "Product photo via ifragranceofficial.com · JPEG optimized",
+      "caption": "Devotion Eau de Parfum bottle"
+    }
+  ],
+  "dolce-and-gabbana-light-blue-edt": [
+    {
+      "file": "dolce-and-gabbana-light-blue-edt-d3798cc1a65a",
+      "view": "front",
+      "publisher": "alina-cosmetics.com",
+      "url": "https://alina-cosmetics.com/produkte/dolce-gabbana-light-blue-eau-de-toilette-edt-30-ml-143289",
+      "imageUrl": "https://media-2025.alina-cosmetics.com/prod/media/ae/25/42/1746452092/8057971188178.png",
+      "credit": "Product photo via alina-cosmetics.com · JPEG optimized",
+      "caption": "Light Blue Eau de Toilette bottle"
     }
   ],
   "dolce-and-gabbana-the-one-for-men-edp": [
     {
-      "file": "dolce-and-gabbana-the-one-for-men-edp",
+      "file": "dolce-and-gabbana-the-one-for-men-edp-5a3b1bf46785",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/fr/photos/flacon-de-parfum-dolce-gabbana-the-one-sur-table-en-bois-blanc-wSX-poSLSKE",
-      "credit": "Quilia · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Original Eau de Parfum bottle"
+      "publisher": "ni.siman.com",
+      "url": "https://ni.siman.com/dg-the-one-for-men-edp-100ml-100204116/p",
+      "imageUrl": "https://siman.vtexassets.com/arquivos/ids/821237-800-auto?aspect=true&height=auto&v=637353532768430000&width=800",
+      "credit": "Product photo via ni.siman.com · JPEG optimized",
+      "caption": "The One for Men Eau de Parfum bottle"
+    }
+  ],
+  "ex-nihilo-blue-talisman-edp": [
+    {
+      "file": "ex-nihilo-blue-talisman-edp-dc78532f19c1",
+      "view": "front",
+      "publisher": "epicentrk.ua",
+      "url": "https://epicentrk.ua/ua/shop/mplc-parfumovana-voda-ex-nihilo-blue-talisman-eau-de-parfum-100-ml-3760264097440-1f03710e-4ad8-6c70-97f3-ad85e49fd8cb.html",
+      "imageUrl": "https://cdn.27.ua/sc--media--prod/default/52/be/a5/52bea5ea-3218-42e5-b89a-27d12fc4c1b6.png",
+      "credit": "Product photo via epicentrk.ua · JPEG optimized",
+      "caption": "Blue Talisman Eau de Parfum bottle"
+    }
+  ],
+  "frederic-malle-carnal-flower-edp": [
+    {
+      "file": "frederic-malle-carnal-flower-edp-23f866f04e17",
+      "view": "front",
+      "publisher": "latelierdesparfums.jp",
+      "url": "https://latelierdesparfums.jp/products/carnal-flower-edp",
+      "imageUrl": "https://latelierdesparfums.jp/cdn/shop/products/50mL_d8d43fbc-d1c6-42cd-be6b-7245d59718f8_1200x1200.jpg?v=1652252112",
+      "credit": "Product photo via latelierdesparfums.jp · JPEG optimized",
+      "caption": "Carnal Flower Eau de Parfum bottle"
+    }
+  ],
+  "frederic-malle-musc-ravageur-edp": [
+    {
+      "file": "frederic-malle-musc-ravageur-edp-14aa496e91eb",
+      "view": "front",
+      "publisher": "agoratopia.com",
+      "url": "https://www.agoratopia.com/frederic-malle/musc-ravageur-eau-de-parfum-50ml",
+      "imageUrl": "https://cdn.agoratopia.com/cdn-cgi/image/format%3Dauto%2Cquality%3D80%2Cwidth%3D555%2Cheight%3D555%2Cfit%3Dcover/jw/9b/t6/jw9bt6ax3rts7qlye3bqrwbu/musc_ravageur_50ml_1_vDnv0LBjsU.webp",
+      "credit": "Product photo via agoratopia.com · JPEG optimized",
+      "caption": "Musc Ravageur Eau de Parfum bottle"
+    }
+  ],
+  "frederic-malle-portrait-of-a-lady-edp": [
+    {
+      "file": "frederic-malle-portrait-of-a-lady-edp-8f7248139b67",
+      "view": "front",
+      "publisher": "sundora.com.bd",
+      "url": "https://sundora.com.bd/products/frederic-malle-portrait-of-a-lady-edp",
+      "imageUrl": "https://sundora.com.bd/cdn/shop/products/PortraitOfALady.png?v=1756704300",
+      "credit": "Product photo via sundora.com.bd · JPEG optimized",
+      "caption": "Portrait of a Lady Eau de Parfum bottle"
+    }
+  ],
+  "giorgio-armani-acqua-di-gio-edp": [
+    {
+      "file": "giorgio-armani-acqua-di-gio-edp-88d4ab866778",
+      "view": "front",
+      "publisher": "Giorgio Armani",
+      "url": "https://www.giorgioarmanibeauty-usa.com/fragrances/mens-cologne/acqua-di-gio-eau-de-parfum/ww-00631-arm.html",
+      "imageUrl": "https://www.giorgioarmanibeauty-usa.com/on/demandware.static/-/Sites-gab-master-catalog/default/dwbfd0f384/products/ww-00631-arm/armani-acqua_di_gio_absolu-3614273662420-125ml.jpg",
+      "credit": "Product photo via Giorgio Armani · JPEG optimized",
+      "caption": "Acqua di Giò Eau de Parfum bottle"
     }
   ],
   "giorgio-armani-acqua-di-gio-edt": [
     {
-      "file": "giorgio-armani-acqua-di-gio-edt-classic",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-close-up-of-a-bottle-of-perfume-Sdg64dvfRk0",
-      "credit": "Isaac Wolff · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Earlier bottle design"
+      "file": "giorgio-armani-acqua-di-gio-edt-adb5e00fa79b",
+      "view": "front",
+      "publisher": "bonherre.com",
+      "url": "https://bonherre.com/products/giorgio-armani-acqua-di-gio-edt-50-ml-refillable-erkek-parfumu",
+      "imageUrl": "https://bonherre.com/cdn/shop/files/giorgio-armani-acqua-di-gio-edt.png?v=1773306353&width=1024",
+      "credit": "Product photo via bonherre.com · JPEG optimized",
+      "caption": "Acqua di Giò Eau de Toilette bottle"
+    }
+  ],
+  "giorgio-armani-acqua-di-gio-parfum": [
+    {
+      "file": "giorgio-armani-acqua-di-gio-parfum-f806feb53c6c",
+      "view": "front",
+      "publisher": "sevil.com.tr",
+      "url": "https://www.sevil.com.tr/giorgio-armani-acqua-di-gio-parfum-200ml-erkek-parfum.html",
+      "imageUrl": "https://www.sevil.com.tr/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/4/1/4150_1.png",
+      "credit": "Product photo via sevil.com.tr · JPEG optimized",
+      "caption": "Acqua di Gio Parfum bottle"
+    }
+  ],
+  "giorgio-armani-armani-code-edp": [
+    {
+      "file": "giorgio-armani-armani-code-edp-37cdaea4901a",
+      "view": "front",
+      "publisher": "adorebeauty.com.au",
+      "url": "https://www.adorebeauty.com.au/p/giorgio-armani/giorgio-armani-armani-code-edp-50ml.html",
+      "imageUrl": "https://www.adorebeauty.com.au/pim_media/000/477/746/Giorgio_Armani_Armani_Code_EDP_50ml.png",
+      "credit": "Product photo via adorebeauty.com.au · JPEG optimized",
+      "caption": "Armani Code Eau de Parfum bottle"
     }
   ],
   "giorgio-armani-armani-code-edt": [
     {
-      "file": "giorgio-armani-armani-code-edt",
+      "file": "giorgio-armani-armani-code-edt-9e7c7506093a",
       "view": "front",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3360372100522&id=front_en",
-      "credit": "openfoodfacts-contributors · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "Earlier bottle design"
+      "publisher": "kingofdecants.com.br",
+      "url": "https://www.kingofdecants.com.br/amostra-oficial-armani-code-eau-de-toilette-giorgio-armani",
+      "imageUrl": "https://cdn.awsli.com.br/2500x2500/2758/2758187/produto/398532308/d-31-fcx0ruwm04.png",
+      "credit": "Product photo via kingofdecants.com.br · JPEG optimized",
+      "caption": "Armani Code Eau de Toilette bottle"
+    }
+  ],
+  "giorgio-armani-armani-code-parfum": [
+    {
+      "file": "giorgio-armani-armani-code-parfum-b64ffcff0d69",
+      "view": "front",
+      "publisher": "hausofdupes.com",
+      "url": "https://hausofdupes.com/fragrance/giorgio-armani-code-parfum/dupes",
+      "imageUrl": "https://cdn.fragella.com/images/armani-code-parfum-giorgio-armani-for-men.jpg",
+      "credit": "Product photo via hausofdupes.com · JPEG optimized",
+      "caption": "Armani Code Parfum bottle"
+    }
+  ],
+  "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp": [
+    {
+      "file": "giorgio-armani-emporio-armani-stronger-with-you-intensely-edp-b7d399393849",
+      "view": "front",
+      "publisher": "vanilla.sa",
+      "url": "https://vanilla.sa/en/giorgio--armani--emporio--armani--stronger--with--you---intensely--eau--de--parfum/p1017334744",
+      "imageUrl": "https://cdn.salla.sa/dqYz/ff5732c5-ff3c-4c2e-bf47-af513fc1ac98-1000x1000-G4wPDwexSHrc3KpXvhMU98jMI89WOiv6FgKWFcdK.jpg",
+      "credit": "Product photo via vanilla.sa · JPEG optimized",
+      "caption": "Emporio Armani Stronger With You Intensely Eau de Parfum bottle"
+    }
+  ],
+  "giorgio-armani-stronger-with-you-absolutely-parfum": [
+    {
+      "file": "giorgio-armani-stronger-with-you-absolutely-parfum-ce9a5d76bf4b",
+      "view": "front",
+      "publisher": "Giorgio Armani",
+      "url": "https://www.armanibeauty.co.uk/perfume/mens-perfumes/emporio-armani/emporio-armani-stronger-with-you-absolutely-parfum/ww-00424-arm.html",
+      "imageUrl": "https://www.armanibeauty.co.uk/on/demandware.static/-/Sites-gac-master-catalog/default/dwa9f471b2/products/ww-00424-arm/3614273335812_e-armani_you_swy_absolutely_50ml_main.jpg",
+      "credit": "Product photo via Giorgio Armani · JPEG optimized",
+      "caption": "Stronger With You Absolutely Parfum bottle"
+    }
+  ],
+  "giorgio-armani-stronger-with-you-edt": [
+    {
+      "file": "giorgio-armani-stronger-with-you-edt-574afb309f8d",
+      "view": "front",
+      "publisher": "perfumesclub.fr",
+      "url": "https://www.perfumesclub.fr/fr/armani/armani-stronger-with-you-eau-de-toilette-vaporisateur/p_40588/",
+      "imageUrl": "https://i1.perfumesclub.com/grande/94271.jpg",
+      "credit": "Product photo via perfumesclub.fr · JPEG optimized",
+      "caption": "Stronger With You Eau de Toilette bottle"
+    }
+  ],
+  "givenchy-gentleman-edp": [
+    {
+      "file": "givenchy-gentleman-edp-94c8189a6bd9",
+      "view": "front",
+      "publisher": "benufarma.it",
+      "url": "https://www.benufarma.it/prodotti/givenchy-gentleman-eau-de-parfum-100-ml",
+      "imageUrl": "https://www.benufarma.it/_next/image?q=75&url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0490%2F7594%2F5639%2Ffiles%2F5b49b1dc5b4d4e7793edca87e0a56d2c.jpg%3Fv%3D1772682260&w=1200",
+      "credit": "Product photo via benufarma.it · JPEG optimized",
+      "caption": "Gentleman Eau de Parfum bottle"
+    }
+  ],
+  "givenchy-linterdit-edp": [
+    {
+      "file": "givenchy-linterdit-edp-60c7daa8dd03",
+      "view": "front",
+      "publisher": "Givenchy",
+      "url": "https://www.givenchybeauty.com/es/p/desodorante-linterdit-F10100167.html",
+      "imageUrl": "https://www.givenchybeauty.com/dw/image/v2/BBZW_PRD/on/demandware.static/-/Library-Sites-GivenchySharedLibrary/default/dw5d442f64/pageDesigner/PDP/Fragrance/L%27INTERDIT/F10100099/3274872372153_P069002_LINTERDIT_EDP_80ML_0.png?sh=600&strip=false&sw=600",
+      "credit": "Product photo via Givenchy · JPEG optimized",
+      "caption": "L'Interdit Eau de Parfum bottle"
+    }
+  ],
+  "glossier-you-edp": [
+    {
+      "file": "glossier-you-edp-ef34245683a3",
+      "view": "front",
+      "publisher": "fmboutique.com.mx",
+      "url": "https://fmboutique.com.mx/products/you-eau-de-parfum",
+      "imageUrl": "https://fmboutique.com.mx/cdn/shop/files/FullSizeRender_49089661-2a50-4324-aecb-c797d7e101ab.jpg?v=1704434089&width=1445",
+      "credit": "Product photo via fmboutique.com.mx · JPEG optimized",
+      "caption": "You Eau de Parfum bottle"
+    }
+  ],
+  "gucci-bamboo-edp": [
+    {
+      "file": "gucci-bamboo-edp-8c2932e69041",
+      "view": "front",
+      "publisher": "perfumenetwork.in",
+      "url": "https://www.perfumenetwork.in/products/bamboo-eau-de-parfum",
+      "imageUrl": "https://www.perfumenetwork.in/cdn/shop/products/GUCCIBAMBOOEDPWOMEN75ML.png?v=1629007556",
+      "credit": "Product photo via perfumenetwork.in · JPEG optimized",
+      "caption": "Bamboo Eau de Parfum bottle"
     }
   ],
   "gucci-bloom-edp": [
     {
-      "file": "gucci-bloom-edp",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-womans-hand-holding-a-perfume-bottle-in-front-of-a-pink-background-oQoABmEKlQc",
-      "credit": "Karolina Bobek · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Gucci Bloom Eau de Parfum"
+      "file": "gucci-bloom-edp-2e3815245525",
+      "view": "front",
+      "publisher": "kassioperfumaria.com.br",
+      "url": "https://www.kassioperfumaria.com.br/gucci-bloom-fem-edp100ml-481005-5578/p",
+      "imageUrl": "https://kassioperfumaria.vtexassets.com/arquivos/ids/247830/2CB69CA44BA2141A82EE8798032A8C93_638528585112301226.png?v=638627850537470000",
+      "credit": "Product photo via kassioperfumaria.com.br · JPEG optimized",
+      "caption": "Bloom Eau de Parfum bottle"
+    }
+  ],
+  "gucci-flora-gorgeous-gardenia-edp": [
+    {
+      "file": "gucci-flora-gorgeous-gardenia-edp-10ff3e69c518",
+      "view": "front",
+      "publisher": "alina-cosmetics.com",
+      "url": "https://alina-cosmetics.com/produkte/gucci-flora-gorgeous-gardenia-eau-de-parfum-edp-100-ml-114321",
+      "imageUrl": "https://media-2025.alina-cosmetics.com/prod/media/23/e7/52/1636740216/46d5f6e2010146a0b0b560e3f36e0acd.png?ts=1640852830",
+      "credit": "Product photo via alina-cosmetics.com · JPEG optimized",
+      "caption": "Flora Gorgeous Gardenia Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-jicky-edp": [
+    {
+      "file": "guerlain-jicky-edp-7a2487b54066",
+      "view": "front",
+      "publisher": "Guerlain",
+      "url": "https://www.guerlain.com/uk/en-uk/p/les-legendaires-jicky---eau-de-parfum-P014315.html",
+      "imageUrl": "https://www.guerlain.com/dw/image/v2/BDCZ_PRD/on/demandware.static/-/Sites-GSA_master_catalog/default/dwb984854c/primary_packshot_3/2022/Fragrance/Les%20L%C3%A9gendaires/G014315_3346470143159_JICKY-20-EDP-75ML-SPR.png?sh=900&sw=900",
+      "credit": "Product photo via Guerlain · JPEG optimized",
+      "caption": "Jicky Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-lheure-bleue-1912-edp": [
+    {
+      "file": "guerlain-lheure-bleue-1912-edp-ac21ff875258",
+      "view": "front",
+      "publisher": "Guerlain",
+      "url": "https://www.guerlain.com/fr/fr-fr/p/les-legendaires-lheure-bleue-1912---eau-de-parfum-026054.html",
+      "imageUrl": "https://www.guerlain.com/dw/image/v2/BDCZ_PRD/on/demandware.static/-/Sites-GSA_master_catalog/default/dwf26c8e61/01-ProductsViewer/P025108/P025108_E01_hi-res.png?sh=900&sw=900",
+      "credit": "Product photo via Guerlain · JPEG optimized",
+      "caption": "L'Heure Bleue 1912 Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-lheure-bleue-edp": [
+    {
+      "file": "guerlain-lheure-bleue-edp-8b62b062e4c8",
+      "view": "front",
+      "publisher": "Guerlain",
+      "url": "https://www.guerlain.com/fr/fr-fr/p/lheure-bleue-eau-de-parfum-P062450.html",
+      "imageUrl": "https://www.guerlain.com/dw/image/v2/BDCZ_PRD/on/demandware.static/-/Sites-GSA_master_catalog/default/dw382b1c8a/01-ProductsViewer/P062450/P062450_G062450_E01_hi-res.png?sh=900&sw=900",
+      "credit": "Product photo via Guerlain · JPEG optimized",
+      "caption": "L'Heure Bleue Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-mitsouko-edp": [
+    {
+      "file": "guerlain-mitsouko-edp-4fd2f6ab411c",
+      "view": "front",
+      "publisher": "Guerlain",
+      "url": "https://www.guerlain.com/us/en-us/p/les-legendaires-mitsouko---eau-de-parfum-P024104.html",
+      "imageUrl": "https://www.guerlain.com/dw/image/v2/BDCZ_PRD/on/demandware.static/-/Sites-GSA_master_catalog/default/dw7bd0771d/primary_packshot_3/2022/Fragrance/Les%20L%C3%A9gendaires/G024104_3346470241046_MITS-97-EDP-75ML-SPR.png?sh=900&sw=900",
+      "credit": "Product photo via Guerlain · JPEG optimized",
+      "caption": "Mitsouko Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-shalimar-edp": [
+    {
+      "file": "guerlain-shalimar-edp-4d5a92f6327f",
+      "view": "front",
+      "publisher": "Guerlain",
+      "url": "https://www.guerlain.com/ae/en-ae/p/shalimar-eau-de-parfum-P011355.html",
+      "imageUrl": "https://www.guerlain.com/dw/image/v2/BDCZ_PRD/on/demandware.static/-/Sites-GSA_master_catalog/default/dwd527f12e/01-ProductsViewer/P011355/P011355_G011355_E01_hi-res.png?sh=900&sw=900",
+      "credit": "Product photo via Guerlain · JPEG optimized",
+      "caption": "Shalimar Eau de Parfum bottle"
+    }
+  ],
+  "guerlain-vetiver-edt": [
+    {
+      "file": "guerlain-vetiver-edt-387325566e43",
+      "view": "front",
+      "publisher": "maxaroma.com",
+      "url": "https://www.maxaroma.com/fragrance/men-fragrances/vetiver-guerlain/pid/31490/3",
+      "imageUrl": "https://www.maxaroma.com/productimages/large/UP3346470304871.jpg?ver=1698250736",
+      "credit": "Product photo via maxaroma.com · JPEG optimized",
+      "caption": "Vétiver Eau de Toilette bottle"
+    }
+  ],
+  "hermes-twilly-dhermes-edp": [
+    {
+      "file": "hermes-twilly-dhermes-edp-a7e5d56ab4b6",
+      "view": "front",
+      "publisher": "perfumestudiomnl.com",
+      "url": "https://www.perfumestudiomnl.com/products/hermes-twilly-d-hermes-edp-85ml",
+      "imageUrl": "https://www.perfumestudiomnl.com/cdn/shop/files/IMG-6928.png?v=1704255827&width=416",
+      "credit": "Product photo via perfumestudiomnl.com · JPEG optimized",
+      "caption": "Twilly d'Hermès Eau de Parfum bottle"
+    }
+  ],
+  "hermes-un-jardin-sur-le-nil-edt": [
+    {
+      "file": "hermes-un-jardin-sur-le-nil-edt-1a6807de6470",
+      "view": "front",
+      "publisher": "spacenk.com",
+      "url": "https://www.spacenk.com/uk/fragrance/personal-fragrance/fragrance/un-jardin-sur-le-nil-eau-de-toilette-MUK200052785.html",
+      "imageUrl": "https://www.spacenk.com/on/demandware.static/-/Sites-spacenkmastercatalog/default/dw754a6ab7/products/HERM%C3%88S/UK200052785_HERM%C3%88S.jpg",
+      "credit": "Product photo via spacenk.com · JPEG optimized",
+      "caption": "Un Jardin sur le Nil Eau de Toilette bottle"
+    }
+  ],
+  "hugo-boss-boss-bottled-edp": [
+    {
+      "file": "hugo-boss-boss-bottled-edp-0838da1df15b",
+      "view": "front",
+      "publisher": "lookfantastic.at",
+      "url": "https://www.lookfantastic.at/p/hugo-boss-boss-bottled-eau-de-parfum-200ml/12612985/",
+      "imageUrl": "https://static.thcdn.com/productimg/original/12612985-6185172427481001.jpg",
+      "credit": "Product photo via lookfantastic.at · JPEG optimized",
+      "caption": "Boss Bottled Eau de Parfum bottle"
+    }
+  ],
+  "initio-atomic-rose-edp": [
+    {
+      "file": "initio-atomic-rose-edp-1b604b3363d9",
+      "view": "front",
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-gb/p/initio-parfums-prives-atomic-rose-eau-de-parfum-50ml-000000000007616846",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/6879e0ee3cefbcbdc8fc2f3a102fd413.jpg?bg=ffffff&brightness=1&height=768&quality=75&width=576",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "Atomic Rose Eau de Parfum bottle"
+    }
+  ],
+  "initio-musk-therapy-extrait": [
+    {
+      "file": "initio-musk-therapy-extrait-f8283ba22ddc",
+      "view": "front",
+      "publisher": "elcorteingles.es",
+      "url": "https://www.elcorteingles.es/perfumeria/MP_0013365_686-eau-de-parfum-musk-therapy-extrait-de-parfum-spray-90ml-initio-isolee/",
+      "imageUrl": "https://dam.elcorteingles.es/producto/www-3701415901445-00.jpg?height=1200&impolicy=Resize&width=967",
+      "credit": "Product photo via elcorteingles.es · JPEG optimized",
+      "caption": "Musk Therapy Extrait de Parfum bottle"
+    }
+  ],
+  "initio-oud-for-greatness-edp": [
+    {
+      "file": "initio-oud-for-greatness-edp-2763220f93bc",
+      "view": "front",
+      "publisher": "myperfumeshop.com.au",
+      "url": "https://www.myperfumeshop.com.au/products/initio-parfums-prives-black-gold-oud-for-greatness-edp",
+      "imageUrl": "https://www.myperfumeshop.com.au/cdn/shop/products/initio-parfums-black-gold-oud-for-happiness-edp-perfume-cologne-371755.png?v=1707601166&width=1000",
+      "credit": "Product photo via myperfumeshop.com.au · JPEG optimized",
+      "caption": "Oud for Greatness Eau de Parfum bottle"
+    }
+  ],
+  "initio-rehab-extrait": [
+    {
+      "file": "initio-rehab-extrait-c56c722384e6",
+      "view": "front",
+      "publisher": "vuahanghieu.com",
+      "url": "https://vuahanghieu.com/nuoc-hoa-initio-parfums-prives-rehab-extrait-de-parfum-ph268710",
+      "imageUrl": "https://cdn.vuahanghieu.com/unsafe/0x900/left/top/smart/filters%3Aquality%2890%29/https%3A/admin.vuahanghieu.com/upload/product/2026/04/nuoc-hoa-unisex-initio-parfums-prives-rehab-extrait-de-parfum-90ml-69e7332c3941a-21042026151956.jpg",
+      "credit": "Product photo via vuahanghieu.com · JPEG optimized",
+      "caption": "Rehab Extrait de Parfum bottle"
+    }
+  ],
+  "initio-side-effect-edp": [
+    {
+      "file": "initio-side-effect-edp-6cdbb9f71c1d",
+      "view": "front",
+      "publisher": "nordstrom.com",
+      "url": "https://www.nordstrom.com/s/initio-parfums-prives-side-effect-eau-de-parfum/7622708",
+      "imageUrl": "https://n.nordstrommedia.com/it/df99bb3c-1599-48cf-85c1-d0d101301b49.jpeg?dpr=2&h=368&w=240",
+      "credit": "Product photo via nordstrom.com · JPEG optimized",
+      "caption": "Side Effect Eau de Parfum bottle"
+    }
+  ],
+  "jean-paul-gaultier-la-belle-edp": [
+    {
+      "file": "jean-paul-gaultier-la-belle-edp-9143f489b671",
+      "view": "front",
+      "publisher": "Jean Paul Gaultier",
+      "url": "https://www.jeanpaulgaultier.com/us/en_US/p/range-la-belle/la-belle-eau-de-parfum-000000000065132212",
+      "imageUrl": "https://medias.jeanpaulgaultier.com/medias/sys_master/images/hac/hb4/10010170097694/10010170032158/10010170032158.png",
+      "credit": "Product photo via Jean Paul Gaultier · JPEG optimized",
+      "caption": "La Belle Eau de Parfum bottle"
+    }
+  ],
+  "jean-paul-gaultier-le-beau-edt": [
+    {
+      "file": "jean-paul-gaultier-le-beau-edt-8f51eb7f595e",
+      "view": "front",
+      "publisher": "preciosapr.com",
+      "url": "https://www.preciosapr.com/products/jean-paul-gautier-le-male-le-beau",
+      "imageUrl": "https://www.preciosapr.com/cdn/shop/products/61.png?v=1648141463",
+      "credit": "Product photo via preciosapr.com · JPEG optimized",
+      "caption": "Le Beau Eau de Toilette bottle"
+    }
+  ],
+  "jean-paul-gaultier-le-beau-le-parfum-edp": [
+    {
+      "file": "jean-paul-gaultier-le-beau-le-parfum-edp-82ef9d67a40d",
+      "view": "front",
+      "publisher": "basler-beauty.de",
+      "url": "https://www.basler-beauty.de/marken/jean-paul-gaultier/jean-paul-gaultier-le-beau-le-parfum-eau-de-parfum-intense.html",
+      "imageUrl": "https://cdn.basler-beauty.de/out/pictures/generated/product/1/980_980_100/1416650-Jean-Paul-Gaultier-Le-Beau-Le-Parfum-Eau-de-Parfum-Intense-75-ml.ff33eae9.jpg",
+      "credit": "Product photo via basler-beauty.de · JPEG optimized",
+      "caption": "Le Beau Le Parfum Eau de Parfum bottle"
+    }
+  ],
+  "jean-paul-gaultier-le-beau-paradise-garden-edp": [
+    {
+      "file": "jean-paul-gaultier-le-beau-paradise-garden-edp-3ed9363006db",
+      "view": "front",
+      "publisher": "dolcevitaperfumes.com.br",
+      "url": "https://www.dolcevitaperfumes.com.br/produto/le-beau-paradise-garden-jean-paul-gaultier-perfume-masculino-eau-de-parfum-75ml-11579",
+      "imageUrl": "https://cdn.vnda.com.br/1200x/dolcevitaperfumes/2024/06/28/15_52_54_628_15_6_3_392_01.jpg?v=1719600780",
+      "credit": "Product photo via dolcevitaperfumes.com.br · JPEG optimized",
+      "caption": "Le Beau Paradise Garden Eau de Parfum bottle"
     }
   ],
   "jean-paul-gaultier-le-male-edt": [
     {
-      "file": "jean-paul-gaultier-le-male-edt",
+      "file": "jean-paul-gaultier-le-male-edt-28820628fe0b",
       "view": "front",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Gaultier_Le_M%C3%A2le.jpg",
-      "credit": "Bruce The Deus · resized · Cropped for FragDex",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
+      "publisher": "nvspharmacy.co.uk",
+      "url": "https://www.nvspharmacy.co.uk/products/jean-paul-gaultier-le-male-eau-de-toilette-40ml",
+      "imageUrl": "https://www.nvspharmacy.co.uk/cdn/shop/files/8435415012607_1.jpg?v=1767982587",
+      "credit": "Product photo via nvspharmacy.co.uk · JPEG optimized",
       "caption": "Le Male Eau de Toilette bottle"
+    }
+  ],
+  "jean-paul-gaultier-le-male-elixir": [
+    {
+      "file": "jean-paul-gaultier-le-male-elixir-a4080c011b84",
+      "view": "front",
+      "publisher": "april-beauty.be",
+      "url": "https://www.april-beauty.be/fr/jean-paul-gaultier-le-male-elixir-12457358",
+      "imageUrl": "https://bogart-april-be-storage.omn.proximis.com/Imagestorage/imagesSynchro/0/0/7073a64803035a9eed50d693ba39a7721e2c3c0a_3c6b0537-8ab8-4165-9616-front.jpeg",
+      "credit": "Product photo via april-beauty.be · JPEG optimized",
+      "caption": "Le Male Elixir bottle"
+    }
+  ],
+  "jean-paul-gaultier-le-male-le-parfum-edp": [
+    {
+      "file": "jean-paul-gaultier-le-male-le-parfum-edp-d5058894afea",
+      "view": "front",
+      "publisher": "douglas.nl",
+      "url": "https://www.douglas.nl/nl/p/5002490497",
+      "imageUrl": "https://media.douglas.nl/medias/eshJUh614222-0-global.jpg?context=bWFzdGVyfGltYWdlc3w5NTk3N3xpbWFnZS9qcGVnfGFETm1MMmc0T0M4ek1UYzNNek16TmpnMk1qYzFNQzlsYzJoS1ZXZzJNVFF5TWpKZk1GOW5iRzlpWVd3dWFuQm58ZGIwNWFlMzgwYzFlMzJmODhjOTcyZGI5ZmFmMTY5NGE1NWY2MzU5YjY3ZDhhNTEyYmZiMmIyMzQwZDIwMGU3Yg&grid=true",
+      "credit": "Product photo via douglas.nl · JPEG optimized",
+      "caption": "Le Male Le Parfum Eau de Parfum bottle"
+    }
+  ],
+  "jean-paul-gaultier-scandal-edp": [
+    {
+      "file": "jean-paul-gaultier-scandal-edp-163cc1d8245e",
+      "view": "front",
+      "publisher": "woolworths.co.za",
+      "url": "https://www.woolworths.co.za/prod/_/A-503939622",
+      "imageUrl": "https://assets.woolworthsstatic.co.za/Scandal-Eau-de-Parfum-80ml-503939622.jpg?V=qxG9&o=eyJidWNrZXQiOiJ3dy1vbmxpbmUtaW1hZ2UtcmVzaXplIiwia2V5IjoiaW1hZ2VzL2VsYXN0aWNlcmEvcHJvZHVjdHMvaGVyby8yMDIyLTA2LTAyLzUwMzkzOTYyMl84ME1MU1VCX2hlcm8uanBnIn0",
+      "credit": "Product photo via woolworths.co.za · JPEG optimized",
+      "caption": "Scandal Eau de Parfum bottle"
     }
   ],
   "jean-paul-gaultier-ultra-male-edt": [
     {
-      "file": "jean-paul-gaultier-ultra-male-edt",
-      "view": "front-angle",
-      "url": "https://commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_Ultra_Male.jpg",
-      "credit": "Amin · resized",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Reference bottle"
+      "file": "jean-paul-gaultier-ultra-male-edt-1ba31dc0e16c",
+      "view": "front",
+      "publisher": "dayclo.com.br",
+      "url": "https://www.dayclo.com.br/product-page/perfume-ultra-male-jean-paul-gaultier-masculino-eau-de-toilette",
+      "imageUrl": "https://static.wixstatic.com/media/0eae49_5b73fd3ee5d54e16a47f18643efae07b~mv2.webp/v1/fill/w_1854%2Ch_2106%2Cal_c%2Cq_90%2Cenc_avif%2Cquality_auto/0eae49_5b73fd3ee5d54e16a47f18643efae07b~mv2.webp",
+      "credit": "Product photo via dayclo.com.br · JPEG optimized",
+      "caption": "Ultra Male Eau de Toilette bottle"
+    }
+  ],
+  "jo-malone-london-basil-and-neroli-edc": [
+    {
+      "file": "jo-malone-london-basil-and-neroli-edc-0ea2a307dd55",
+      "view": "front",
+      "publisher": "jomalone.nl",
+      "url": "https://www.jomalone.nl/product/basil-neroli-cologne",
+      "imageUrl": "https://sdcdn.io/jm/jm_sku_L5NH01_3000x3000_0S.png?height=1400px&width=1400px",
+      "credit": "Product photo via jomalone.nl · JPEG optimized",
+      "caption": "Basil & Neroli Eau de Cologne bottle"
     }
   ],
   "jo-malone-london-blackberry-and-bay-edc": [
     {
-      "file": "jo-malone-london-blackberry-and-bay-edc",
+      "file": "jo-malone-london-blackberry-and-bay-edc-016bda706d56",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/jo-malone-fragrance-bottle-on-white-surface-t8ueo1LnzEU",
-      "credit": "Hyunwon Jang (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Blackberry & Bay Cologne"
+      "publisher": "jomalone.nl",
+      "url": "https://www.jomalone.nl/product/blackberry-bay-cologne",
+      "imageUrl": "https://sdcdn.io/jm/jm_sku_L32R01_3000x3000_0S.png?height=1400px&width=1400px",
+      "credit": "Product photo via jomalone.nl · JPEG optimized",
+      "caption": "Blackberry & Bay Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-earl-grey-and-cucumber-edc": [
+    {
+      "file": "jo-malone-london-earl-grey-and-cucumber-edc-1cf7d6fba74e",
+      "view": "front",
+      "publisher": "luxperfume.com",
+      "url": "https://www.luxperfume.com/products/jo-malone-earl-grey-cucumber-eau-de-cologne-for-women",
+      "imageUrl": "https://www.luxperfume.com/cdn/shop/files/JO_MALONE_EARL_GREY__CUCUMBER_-_Eau_de_Cologne_for_Women.png?v=1761790167",
+      "credit": "Product photo via luxperfume.com · JPEG optimized",
+      "caption": "Earl Grey & Cucumber Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-english-pear-and-freesia-edc": [
+    {
+      "file": "jo-malone-london-english-pear-and-freesia-edc-a9fd86f875c1",
+      "view": "front",
+      "publisher": "ballantynes.co.nz",
+      "url": "https://www.ballantynes.co.nz/shop-by-brand/j/jo-malone-london/fragrance/cologne/jo-malone-london-english-pear-and-freesia-cologne-100ml/4088698.html",
+      "imageUrl": "https://www.ballantynes.co.nz/on/demandware.static/-/Sites-ballantynes-master-catalog/default/dwc608becb/4088698_na_1f.jpg",
+      "credit": "Product photo via ballantynes.co.nz · JPEG optimized",
+      "caption": "English Pear & Freesia Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-lime-basil-and-mandarin-edc": [
+    {
+      "file": "jo-malone-london-lime-basil-and-mandarin-edc-3a11f3a58496",
+      "view": "front",
+      "publisher": "Jo Malone London",
+      "url": "https://www.jomalone.com/product/25946/10101/colognes/lime-basil-mandarin-cologne",
+      "imageUrl": "https://www.jomalone.com/media/export/cms/products/1000x1000/jo_sku_L00401_1000x1000_0.png",
+      "credit": "Product photo via Jo Malone London · JPEG optimized",
+      "caption": "Lime Basil & Mandarin Eau de Cologne bottle"
     }
   ],
   "jo-malone-london-nectarine-blossom-and-honey-edc": [
     {
-      "file": "jo-malone-london-nectarine-blossom-and-honey-edc",
+      "file": "jo-malone-london-nectarine-blossom-and-honey-edc-68b40ff005e3",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/jo-malone-fragrance-bottle-3IMl0kCxpHQ",
-      "credit": "charlesdeluvio (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Nectarine Blossom & Honey Cologne"
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-se/p/jo-malone-london-nectarine-blossom-and-honey-cologne-100ml-000000000006174753",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/72bfeeead3e46af6f1cad8248c4cea58.jpg?bg=ffffff&brightness=1&height=1230&quality=75&width=922",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "Nectarine Blossom & Honey Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-oud-and-bergamot-edc": [
+    {
+      "file": "jo-malone-london-oud-and-bergamot-edc-f4230b16e19b",
+      "view": "front",
+      "publisher": "scentsworld.com",
+      "url": "https://www.scentsworld.com/jmlgxa010000/",
+      "imageUrl": "https://cdn11.bigcommerce.com/s-5cd76qe6s3/images/stencil/1280x1280/products/49559/581165/JMLGXA010000__38314.1774721476.jpg?c=1",
+      "credit": "Product photo via scentsworld.com · JPEG optimized",
+      "caption": "Oud & Bergamot Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-peony-and-blush-suede-edc": [
+    {
+      "file": "jo-malone-london-peony-and-blush-suede-edc-88c659a4f41a",
+      "view": "front",
+      "publisher": "sundora.com.bd",
+      "url": "https://sundora.com.bd/products/jo-malone-peony-blush-suede-edc",
+      "imageUrl": "https://sundora.com.bd/cdn/shop/files/jo_sku_L3AF01_1000x1000_0.png?v=1756702702",
+      "credit": "Product photo via sundora.com.bd · JPEG optimized",
+      "caption": "Peony & Blush Suede Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-pomegranate-noir-edc": [
+    {
+      "file": "jo-malone-london-pomegranate-noir-edc-33a1437682c2",
+      "view": "front",
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-us/p/jo-malone-london-pomegranate-noir-cologne-100ml-000000000006174814",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/569e33b94a836f865da967919fb4f3a7.jpg?bg=ffffff&brightness=1&height=1230&quality=75&width=922",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "Pomegranate Noir Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-red-roses-edc": [
+    {
+      "file": "jo-malone-london-red-roses-edc-d1b54015a7c9",
+      "view": "front",
+      "publisher": "fandi-perfume.com",
+      "url": "https://fandi-perfume.com/products/jo-malone-red-roses-women-s-perfume-cologne-for-women-eau-de-cologne-1-0-oz-3-4-oz-edc",
+      "imageUrl": "https://fandi-perfume.com/cdn/shop/files/jo-malone-red-roses-women-s-perfume-cologne-for-women-eau-de-cologne-1-0-oz-3-4-oz-edc-1217981953.webp?v=1769304611&width=1946",
+      "credit": "Product photo via fandi-perfume.com · JPEG optimized",
+      "caption": "Red Roses Eau de Cologne bottle"
+    }
+  ],
+  "jo-malone-london-wild-bluebell-edc": [
+    {
+      "file": "jo-malone-london-wild-bluebell-edc-4f2b91441b63",
+      "view": "front",
+      "publisher": "jomalone.com.cn",
+      "url": "https://www.jomalone.com.cn/product/25946/18848/colognes/wild-bluebell-cologne",
+      "imageUrl": "https://www.jomalone.com.cn/media/export/cms/products/1000x1000/jo_sku_L2H601_1000x1000_0.png",
+      "credit": "Product photo via jomalone.com.cn · JPEG optimized",
+      "caption": "Wild Bluebell Eau de Cologne bottle"
     }
   ],
   "jo-malone-london-wood-sage-and-sea-salt-edc": [
     {
-      "file": "jo-malone-london-wood-sage-and-sea-salt-edc",
+      "file": "jo-malone-london-wood-sage-and-sea-salt-edc-cfecdefda5ca",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-cologne-sitting-on-top-of-a-table-Ryz2BB4JqQY",
-      "credit": "Maria Lupan (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Wood Sage & Sea Salt Cologne"
-    },
+      "publisher": "elcorteingles.pt",
+      "url": "https://www.elcorteingles.pt/perfumaria-e-cosmetica/A49966042-wood-sage-and-sea-salt-cologne/",
+      "imageUrl": "https://dam.elcorteingles.es/producto/por-001016960106728-00.jpg",
+      "credit": "Product photo via elcorteingles.pt · JPEG optimized",
+      "caption": "Wood Sage & Sea Salt Eau de Cologne bottle"
+    }
+  ],
+  "juliette-has-a-gun-not-a-perfume-edp": [
     {
-      "file": "jo-malone-london-wood-sage-and-sea-salt-edc-harhai",
+      "file": "juliette-has-a-gun-not-a-perfume-edp-001a66c3fdb9",
       "view": "front",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-perfume-bottle-stands-out-on-a-seashell-8R-vmSD5WhY",
-      "credit": "Tamara Harhai (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Wood Sage & Sea Salt Cologne"
+      "publisher": "parigallery.com",
+      "url": "https://parigallery.com/products/juliette-has-a-gun-not-a-perfume-eau-de-parfum-100ml",
+      "imageUrl": "https://parigallery.com/cdn/shop/products/juliet-has-a-gun-not-a-perfume-edp-100ml.png?v=1681386352&width=1920",
+      "credit": "Product photo via parigallery.com · JPEG optimized",
+      "caption": "Not a Perfume Eau de Parfum bottle"
+    }
+  ],
+  "kayali-vanilla-28-edp": [
+    {
+      "file": "kayali-vanilla-28-edp-410dee1add66",
+      "view": "front",
+      "publisher": "spacenk.com",
+      "url": "https://www.spacenk.com/nl/geur/persoonlijke-geur/geur/vanilla-28-MUK200062137.html",
+      "imageUrl": "https://www.spacenk.com/on/demandware.static/-/Sites-spacenkmastercatalog/default/dw344433d5/products/KAYALI/UK200062137_KAYALI.jpg",
+      "credit": "Product photo via spacenk.com · JPEG optimized",
+      "caption": "Vanilla 28 Eau de Parfum bottle"
+    }
+  ],
+  "kayali-yum-boujee-marshmallow-81-edp": [
+    {
+      "file": "kayali-yum-boujee-marshmallow-81-edp-2256d3c85871",
+      "view": "front",
+      "publisher": "newbeauty.com",
+      "url": "https://www.newbeauty.com/awards/2025/yum-boujee-marshmallow-81-eau-de-parfum",
+      "imageUrl": "https://cdn.sanity.io/images/0vv8moc6/newbeauty/d5344ddcb41dac4b174f844f96fc140b69d43af7-600x600.png?auto=format&fit=crop&w=800",
+      "credit": "Product photo via newbeauty.com · JPEG optimized",
+      "caption": "Yum Boujee Marshmallow 81 Eau de Parfum bottle"
+    }
+  ],
+  "kilian-paris-angels-share-edp": [
+    {
+      "file": "kilian-paris-angels-share-edp-aa57bab8eb52",
+      "view": "front",
+      "publisher": "gradmann1864.de",
+      "url": "https://www.gradmann1864.de/marken/kilian-paris/the-liquors/27621/kilian-paris-angels-share-eau-de-parfum-nachfuellbar-unisex-duft",
+      "imageUrl": "https://www.gradmann1864.de/media/image/3f/ff/fc/3700550216094.jpg",
+      "credit": "Product photo via gradmann1864.de · JPEG optimized",
+      "caption": "Angels' Share Eau de Parfum bottle"
+    }
+  ],
+  "kilian-paris-good-girl-gone-bad-edp": [
+    {
+      "file": "kilian-paris-good-girl-gone-bad-edp-e855dd903920",
+      "view": "front",
+      "publisher": "my-origines.com",
+      "url": "https://www.my-origines.com/gb/good-girl-gone-bad-11K13X09.html",
+      "imageUrl": "https://www.my-origines.com/dw/image/v2/BJRD_PRD/on/demandware.static/-/Sites-size-master/default/dw753d030d/images/11K13161_P.jpg?sh=1500&sm=fit&sw=1500",
+      "credit": "Product photo via my-origines.com · JPEG optimized",
+      "caption": "Good Girl Gone Bad Eau de Parfum bottle"
+    }
+  ],
+  "kilian-paris-love-dont-be-shy-edp": [
+    {
+      "file": "kilian-paris-love-dont-be-shy-edp-2d73f625696c",
+      "view": "front",
+      "publisher": "poudrine.com",
+      "url": "https://www.poudrine.com/products/kilian-love-dont-be-shy-eau-de-parfum",
+      "imageUrl": "https://www.poudrine.com/cdn/shop/files/KILIANPARISPoudrineLoveDon_tBeShyEaudeParfum.webp?v=1741283200",
+      "credit": "Product photo via poudrine.com · JPEG optimized",
+      "caption": "Love, Don't Be Shy Eau de Parfum bottle"
+    }
+  ],
+  "lancome-idole-edp": [
+    {
+      "file": "lancome-idole-edp-99cd529b2f27",
+      "view": "front",
+      "publisher": "woolworths.co.za",
+      "url": "https://www.woolworths.co.za/prod/_/A-504710100",
+      "imageUrl": "https://assets.woolworthsstatic.co.za/Idole-Eau-de-Parfum-50ml-504710100.jpg?V=i9AA&o=eyJidWNrZXQiOiJ3dy1vbmxpbmUtaW1hZ2UtcmVzaXplIiwia2V5IjoiaW1hZ2VzL2VsYXN0aWNlcmEvcHJvZHVjdHMvaGVyby8yMDE5LTEyLTA5LzUwNDcxMDEwMF81ME1MX2hlcm8uanBnIn0&q=75",
+      "credit": "Product photo via woolworths.co.za · JPEG optimized",
+      "caption": "Idôle Eau de Parfum bottle"
+    }
+  ],
+  "lancome-la-vie-est-belle-edp": [
+    {
+      "file": "lancome-la-vie-est-belle-edp-8f6a90d76c81",
+      "view": "front",
+      "publisher": "sanroque.com.uy",
+      "url": "https://www.sanroque.com.uy/catalogo/perfume-lancome-la-vie-est-belle-edp-100ml_106940_106940",
+      "imageUrl": "https://f.fcdn.app/imgs/d8a706/www.sanroque.com.uy/sanruy/87a8/original/catalogo/106940_106940_1/2000-2000/perfume-lancome-la-vie-est-belle-edp-100ml-perfume-lancome-la-vie-est-belle-edp-100ml.jpg",
+      "credit": "Product photo via sanroque.com.uy · JPEG optimized",
+      "caption": "La Vie Est Belle Eau de Parfum bottle"
+    }
+  ],
+  "lattafa-asad-edp": [
+    {
+      "file": "lattafa-asad-edp-6697a67671ff",
+      "view": "front",
+      "publisher": "douglas.nl",
+      "url": "https://www.douglas.nl/nl/p/5011503009",
+      "imageUrl": "https://media.douglas.nl/medias/Xgvjvh1191647-0-global.jpg?context=bWFzdGVyfGltYWdlc3wxNjQzMDl8aW1hZ2UvanBlZ3xhREl5TDJnNU5DODJNemN6TWpNeE5EUXdOamswTWk5WVozWnFkbWd4TVRreE5qUTNYekJmWjJ4dlltRnNMbXB3Wnd8ZWRmODJjMGQwMmM0N2MxZjFlOWVkYjhjZWNkMGQ4OWFmODQ4MGJlOTUzMjQxOTVlYTQ1YWUxYTliODVmN2RlOQ&grid=true",
+      "credit": "Product photo via douglas.nl · JPEG optimized",
+      "caption": "Asad Eau de Parfum bottle"
+    }
+  ],
+  "lattafa-fakhar-black-edp": [
+    {
+      "file": "lattafa-fakhar-black-edp-0fef3b98211c",
+      "view": "front",
+      "publisher": "myperfumeshop.com.au",
+      "url": "https://www.myperfumeshop.com.au/products/lattafa-fakhar-black-edp",
+      "imageUrl": "https://www.myperfumeshop.com.au/cdn/shop/products/lattafa-fakhar-black-edp-perfume-cologne-526608_grande.png?v=1702195556",
+      "credit": "Product photo via myperfumeshop.com.au · JPEG optimized",
+      "caption": "Fakhar Black Eau de Parfum bottle"
+    }
+  ],
+  "lattafa-khamrah-edp": [
+    {
+      "file": "lattafa-khamrah-edp-720bde8fd00b",
+      "view": "front",
+      "publisher": "lifestyleperfume.am",
+      "url": "https://lifestyleperfume.am/en/product/khamrah",
+      "imageUrl": "https://lifestyleperfume.am/images/product/6057/1766659311.jpg",
+      "credit": "Product photo via lifestyleperfume.am · JPEG optimized",
+      "caption": "Khamrah Eau de Parfum bottle"
+    }
+  ],
+  "lattafa-yara-edp": [
+    {
+      "file": "lattafa-yara-edp-08492f675409",
+      "view": "front",
+      "publisher": "sykz.fr",
+      "url": "https://sykz.fr/products/lattafa-yara-eau-de-parfum-de-dubai-mixte",
+      "imageUrl": "https://sykz.fr/cdn/shop/files/SHOPIFYIMAGE_994e67cb-25c6-4653-9ea3-fb632b5b9998.png?v=1771589873&width=1445",
+      "credit": "Product photo via sykz.fr · JPEG optimized",
+      "caption": "Yara Eau de Parfum bottle"
+    }
+  ],
+  "le-labo-another-13-edp": [
+    {
+      "file": "le-labo-another-13-edp-27ec5560cfee",
+      "view": "front",
+      "publisher": "fragranceoutlet.com",
+      "url": "https://www.fragranceoutlet.com/products/another-13-perfume",
+      "imageUrl": "https://www.fragranceoutlet.com/cdn/shop/files/Another_13_EDP17.png?v=1773251281&width=1946",
+      "credit": "Product photo via fragranceoutlet.com · JPEG optimized",
+      "caption": "Another 13 Eau de Parfum bottle"
     }
   ],
   "le-labo-santal-33-edp": [
     {
-      "file": "le-labo-santal-33-edp",
+      "file": "le-labo-santal-33-edp-5c87679e4d55",
       "view": "front",
-      "url": "https://commons.wikimedia.org/wiki/File:Le_Labo_Santal_33_in_a_50_milliliter_bottle_(cropped).jpg",
-      "credit": "The Honest Channel · Commons crop, resized",
-      "license": {
-        "name": "CC BY 3.0",
-        "url": "https://creativecommons.org/licenses/by/3.0/"
-      },
-      "caption": "50 mL reference bottle"
+      "publisher": "secretsales.com",
+      "url": "https://www.secretsales.com/f70a4ed9228e57-le-labo-le-labo-santal-33-eau-de-parfum-spray-50ml/",
+      "imageUrl": "https://www.secretsales.com/cdn-cgi/image/width%3D640%2Cheight%3D800%2Cfit%3Dcontain%2Cformat%3Dauto/https%3A/secretsales-product-images.s3.eu-west-1.amazonaws.com/2026-03-24/019d20a4-5a6f-75d9-bffe-87cb7cf13af4.jpg",
+      "credit": "Product photo via secretsales.com · JPEG optimized",
+      "caption": "Santal 33 Eau de Parfum bottle"
+    }
+  ],
+  "louis-vuitton-imagination-edp": [
+    {
+      "file": "louis-vuitton-imagination-edp-70e38789f9e1",
+      "view": "front",
+      "publisher": "scentira.in",
+      "url": "https://scentira.in/products/louis-vuitton-imagination-eau-de-parfum",
+      "imageUrl": "https://scentira.in/cdn/shop/files/1_1_c46066a1-3aa0-4980-9d95-625f1c1031fb_grande.png?v=1756889638",
+      "credit": "Product photo via scentira.in · JPEG optimized",
+      "caption": "Imagination Eau de Parfum bottle"
+    }
+  ],
+  "louis-vuitton-ombre-nomade-edp": [
+    {
+      "file": "louis-vuitton-ombre-nomade-edp-551e316089ff",
+      "view": "front",
+      "publisher": "parfumsamples.be",
+      "url": "https://parfumsamples.be/fr/products/louis-vuitton-ombre-nomade-edp",
+      "imageUrl": "https://parfumsamples.be/cdn/shop/files/louis-vuitton-ombre-nomade-eau-de-parfum-parfumsamples.png?v=1756926879&width=1080",
+      "credit": "Product photo via parfumsamples.be · JPEG optimized",
+      "caption": "Ombre Nomade Eau de Parfum bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-aqua-universalis-edt": [
+    {
+      "file": "maison-francis-kurkdjian-aqua-universalis-edt-0b2aae6e27e0",
+      "view": "front",
+      "publisher": "Maison Francis Kurkdjian",
+      "url": "https://www.franciskurkdjian.com/int-en/p/aqua-universalis-eau-de-toilette-RA130321.html",
+      "imageUrl": "https://www.franciskurkdjian.com/dw/image/v2/BJSB_PRD/on/demandware.static/-/Sites-mfk-master-catalog/default/dwe9750d52/AQUA_UNIVERSALIS/FRAGRANCE/3700559612187_AQUA_UNIVERSALIS_EDT_70ML_3.png?q=85&sfrm=png&sh=1000&strip=true&sw=1000",
+      "credit": "Product photo via Maison Francis Kurkdjian · JPEG optimized",
+      "caption": "Aqua Universalis Eau de Toilette bottle"
     }
   ],
   "maison-francis-kurkdjian-baccarat-rouge-540-edp": [
     {
-      "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp",
+      "file": "maison-francis-kurkdjian-baccarat-rouge-540-edp-b3dc4364282a",
       "view": "front",
-      "publisher": "Open Beauty Facts",
-      "url": "https://world.openbeautyfacts.org/cgi/product_image.pl?code=3700559603116&id=3",
-      "credit": "daryl · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 3.0",
-        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
-      },
-      "caption": "70 mL Eau de Parfum bottle"
+      "publisher": "scentira.in",
+      "url": "https://scentira.in/products/maison-francis-kurkdijan-baccarat-rouge-540-eau-de-parfum",
+      "imageUrl": "https://scentira.in/cdn/shop/files/3_1218ca38-85d2-401a-9f87-5f4eb8dbf04b.png?v=1763119326&width=1470",
+      "credit": "Product photo via scentira.in · JPEG optimized",
+      "caption": "Baccarat Rouge 540 Eau de Parfum bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-baccarat-rouge-540-extrait": [
+    {
+      "file": "maison-francis-kurkdjian-baccarat-rouge-540-extrait-dc4374e5c602",
+      "view": "front",
+      "publisher": "skins.nl",
+      "url": "https://www.skins.nl/maison-francis-kurkdjian/baccarat-rouge-540-extrait-de-parfum/154695/",
+      "imageUrl": "https://www.skins.nl/media/0b/cd/a1/1781798771/4a0aac681f81412e505170d7d1b8b91c.png?ts=1781798771",
+      "credit": "Product photo via skins.nl · JPEG optimized",
+      "caption": "Baccarat Rouge 540 Extrait de Parfum bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-grand-soir-edp": [
+    {
+      "file": "maison-francis-kurkdjian-grand-soir-edp-d5bc2d21c019",
+      "view": "front",
+      "publisher": "beautyhouse.com",
+      "url": "https://beautyhouse.com/products/maison-francis-kurkdjian-grand-soir-eau-de-parfum-for-everyone",
+      "imageUrl": "https://beautyhouse.com/cdn/shop/files/01_50152fcc-39ef-407a-ad83-62183630ee32.jpg?v=1723936324&width=2048",
+      "credit": "Product photo via beautyhouse.com · JPEG optimized",
+      "caption": "Grand Soir Eau de Parfum bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-oud-satin-mood-edp": [
+    {
+      "file": "maison-francis-kurkdjian-oud-satin-mood-edp-c591936ae524",
+      "view": "front",
+      "publisher": "Maison Francis Kurkdjian",
+      "url": "https://www.franciskurkdjian.com/uk-en/p/oud-satin-mood-eau-de-parfum-RA12222.html",
+      "imageUrl": "https://www.franciskurkdjian.com/dw/image/v2/BJSB_PRD/on/demandware.static/-/Sites-mfk-master-catalog/default/dw5ca03bb8/OSAM/FRAGRANCE/3700559602607_OUD_SATIN_MOOD_EDP_70ML_3.png?q=85&sfrm=png&sh=1000&strip=true&sw=1000",
+      "credit": "Product photo via Maison Francis Kurkdjian · JPEG optimized",
+      "caption": "Oud Satin Mood Eau de Parfum bottle"
+    }
+  ],
+  "maison-francis-kurkdjian-oud-satin-mood-extrait": [
+    {
+      "file": "maison-francis-kurkdjian-oud-satin-mood-extrait-eb41887df7cd",
+      "view": "front",
+      "publisher": "sniffz-eg.com",
+      "url": "https://sniffz-eg.com/products/maison-francis-kurkdjian-oud-satin-mood-extrait-de-parfum-full-sealed",
+      "imageUrl": "https://sniffz-eg.com/cdn/shop/files/PACKSHOT_OUD_SATIN_70ML_EXT_VUE1-FACE_FOND-TRANSPARENT_640x640_70620818-6454-4845-8047-7d307a52c77d.webp?v=1762901229&width=1946",
+      "credit": "Product photo via sniffz-eg.com · JPEG optimized",
+      "caption": "Oud Satin Mood Extrait de Parfum bottle"
+    }
+  ],
+  "maison-margiela-replica-bubble-bath-edt": [
+    {
+      "file": "maison-margiela-replica-bubble-bath-edt-be9db349e96c",
+      "view": "front",
+      "publisher": "walmart.com",
+      "url": "https://www.walmart.com/ip/582480834",
+      "imageUrl": "https://i5.walmartimages.com/asr/b2aee635-b444-4fb1-b978-89a46e68232d.93a591a50a4d6d033966ac0f1f4bdb93.jpeg",
+      "credit": "Product photo via walmart.com · JPEG optimized",
+      "caption": "Replica Bubble Bath Eau de Toilette bottle"
+    }
+  ],
+  "maison-margiela-replica-by-the-fireplace-edt": [
+    {
+      "file": "maison-margiela-replica-by-the-fireplace-edt-782d0185cb32",
+      "view": "front",
+      "publisher": "flaconi.de",
+      "url": "https://www.flaconi.de/parfum/maison-margiela/replica/maison-margiela-replica-by-the-fireplace-eau-de-toilette.html",
+      "imageUrl": "https://cdn.flaconi.net/media/catalog/product/3/6/3614273185875.jpg?c=de&q=80&r=1Uwb9a&w=1200",
+      "credit": "Product photo via flaconi.de · JPEG optimized",
+      "caption": "Replica By the Fireplace Eau de Toilette bottle"
+    }
+  ],
+  "maison-margiela-replica-jazz-club-edt": [
+    {
+      "file": "maison-margiela-replica-jazz-club-edt-5907f2aad076",
+      "view": "front",
+      "publisher": "sasa.com",
+      "url": "https://www.sasa.com/products/109783302001",
+      "imageUrl": "https://www.sasa.com/cdn/shop/files/109783302001-2.jpg?v=1688372729",
+      "credit": "Product photo via sasa.com · JPEG optimized",
+      "caption": "Replica Jazz Club Eau de Toilette bottle"
+    }
+  ],
+  "maison-margiela-replica-lazy-sunday-morning-edt": [
+    {
+      "file": "maison-margiela-replica-lazy-sunday-morning-edt-dda8779a83c0",
+      "view": "front",
+      "publisher": "sundora.com.bd",
+      "url": "https://sundora.com.bd/products/replica-lazy-sunday-morning-edt",
+      "imageUrl": "https://sundora.com.bd/cdn/shop/files/mm_replica_lsm_bottle_100ML_3605521932464_rvb.png?v=1756701302",
+      "credit": "Product photo via sundora.com.bd · JPEG optimized",
+      "caption": "Replica Lazy Sunday Morning Eau de Toilette bottle"
+    }
+  ],
+  "mancera-cedrat-boise-edp": [
+    {
+      "file": "mancera-cedrat-boise-edp-cbf6e18f1033",
+      "view": "front",
+      "publisher": "matas.dk",
+      "url": "https://www.matas.dk/mancera-cedrat-boise-eau-de-parfum-120-ml",
+      "imageUrl": "https://images.matas.dk/encode/839407_20240625124009.jpg",
+      "credit": "Product photo via matas.dk · JPEG optimized",
+      "caption": "Cedrat Boise Eau de Parfum bottle"
+    }
+  ],
+  "marc-antoine-barrois-ganymede-edp": [
+    {
+      "file": "marc-antoine-barrois-ganymede-edp-5faebe0dfdce",
+      "view": "front",
+      "publisher": "noar.rs",
+      "url": "https://noar.rs/products/marc-antoine-barrois-ganymede-edp",
+      "imageUrl": "https://noar.rs/cdn/shop/files/2203_Marc-Antoine-Barrois.Ganymede_100ml_O-scaled.jpg?v=1696424772",
+      "credit": "Product photo via noar.rs · JPEG optimized",
+      "caption": "Ganymede Eau de Parfum bottle"
     }
   ],
   "marc-jacobs-daisy-edt": [
     {
-      "file": "marc-jacobs-daisy-edt",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Daisy_by_Marc_Jacobs.jpg",
-      "credit": "Mycatkins · resized · Cropped for FragDex",
-      "license": {
-        "name": "CC BY 2.0",
-        "url": "https://creativecommons.org/licenses/by/2.0/"
-      },
-      "caption": "Daisy Eau de Toilette"
+      "file": "marc-jacobs-daisy-edt-fde47981b69d",
+      "view": "front",
+      "publisher": "dillards.com",
+      "url": "https://www.dillards.com/p/Marc-Jacobs-Daisy-Eau-de-Toilette-Spray/501301053",
+      "imageUrl": "https://dimg.dillards.com/is/image/DillardsZoom/main/marc-jacobs-daisy-eau-de-toilette-spray/02729060_zi.jpg",
+      "credit": "Product photo via dillards.com · JPEG optimized",
+      "caption": "Daisy Eau de Toilette bottle"
+    }
+  ],
+  "marc-jacobs-perfect-edp": [
+    {
+      "file": "marc-jacobs-perfect-edp-e073c53ac418",
+      "view": "front",
+      "publisher": "bulldog.vn",
+      "url": "https://bulldog.vn/nuoc-hoa/marc-jacobs-perfect-edp-100ml.htm",
+      "imageUrl": "https://bulldog.vn/uploads/sanpham/mji-3614227086227-000-f8f8f8-1-1-main-jpeg-20240916112355aNOFOr8FUx.jpeg",
+      "credit": "Product photo via bulldog.vn · JPEG optimized",
+      "caption": "Perfect Eau de Parfum bottle"
+    }
+  ],
+  "memo-paris-african-leather-edp": [
+    {
+      "file": "memo-paris-african-leather-edp-28542339c9d3",
+      "view": "front",
+      "publisher": "harrods.com",
+      "url": "https://www.harrods.com/en-gb/p/african-leather-eau-de-parfum-75ml-000000000007703076",
+      "imageUrl": "https://hrd-live.cdn.scayle.cloud/images/e1969d3340282fc7ca6ff3566f066c13.jpg?quality=75",
+      "credit": "Product photo via harrods.com · JPEG optimized",
+      "caption": "African Leather Eau de Parfum bottle"
+    }
+  ],
+  "memo-paris-irish-leather-edp": [
+    {
+      "file": "memo-paris-irish-leather-edp-bf81d38a485b",
+      "view": "front",
+      "publisher": "maxaroma.com",
+      "url": "https://www.maxaroma.com/fragrance/unisex/memo-paris-irish-leather-new-packing/pid/31871/4",
+      "imageUrl": "https://www.maxaroma.com/productimages/large/UP3700458602982.jpg?ver=1705876954",
+      "credit": "Product photo via maxaroma.com · JPEG optimized",
+      "caption": "Irish Leather Eau de Parfum bottle"
+    }
+  ],
+  "montale-arabians-tonka-edp": [
+    {
+      "file": "montale-arabians-tonka-edp-6cf64100d1e9",
+      "view": "front",
+      "publisher": "Montale",
+      "url": "https://montaleparfums.com/tha/en/oriental/282-arabians-tonka.html",
+      "imageUrl": "https://montaleparfums.com/tha/1081-large_default/arabians-tonka.jpg",
+      "credit": "Product photo via Montale · JPEG optimized",
+      "caption": "Arabians Tonka Eau de Parfum bottle"
+    }
+  ],
+  "montblanc-explorer-edp": [
+    {
+      "file": "montblanc-explorer-edp-25a507154f8e",
+      "view": "front",
+      "publisher": "dublinandcorkdutyfree.ie",
+      "url": "https://www.dublinandcorkdutyfree.ie/eau-de-parfum/explorer-eau-de-parfum-100ml/360425.html?lang=en_IE",
+      "imageUrl": "https://www.dublinandcorkdutyfree.ie/dw/image/v2/BCWC_PRD/on/demandware.static/-/Sites-theloop-master-catalog-ie/default/dw6150a3ff/images/000069_MB017A01_01.jpg?sh=1000&sm=fit&sw=1000",
+      "credit": "Product photo via dublinandcorkdutyfree.ie · JPEG optimized",
+      "caption": "Explorer Eau de Parfum bottle"
+    }
+  ],
+  "mugler-alien-edp": [
+    {
+      "file": "mugler-alien-edp-835f7e443e41",
+      "view": "front",
+      "publisher": "basler-beauty.it",
+      "url": "https://www.basler-beauty.it/marche/mugler/mugler-alien-eau-de-parfum-ricaricabile.html",
+      "imageUrl": "https://cdn.basler-beauty.de/out/pictures/generated/product/1/980_980_100/1663232-90-ml.7887cff5.jpg",
+      "credit": "Product photo via basler-beauty.it · JPEG optimized",
+      "caption": "Alien Eau de Parfum bottle"
+    }
+  ],
+  "mugler-angel-edp": [
+    {
+      "file": "mugler-angel-edp-7cf9a03eb4b2",
+      "view": "front",
+      "publisher": "mugler.com",
+      "url": "https://www.mugler.com/fragrance/angel-eau-de-parfum-perfume/M010101003.html",
+      "imageUrl": "https://www.mugler.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-mugler-master-catalog/default/dwce102d93/images/pdp/M010101003/3439600056655-angel-eau-de-parfum-50ml-refill-main.png",
+      "credit": "Product photo via mugler.com · JPEG optimized",
+      "caption": "Angel Eau de Parfum bottle"
     }
   ],
   "narciso-rodriguez-for-her-edp": [
     {
-      "file": "narciso-rodriguez-for-her-edp",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Narciso_Rodriguez_for_Her_Eau_de_Parfum.jpg",
-      "credit": "1 nariz por Dênis Pagani · Commons crop and color by Innisfree987 · JPEG optimized",
-      "license": {
-        "name": "CC BY 3.0",
-        "url": "https://creativecommons.org/licenses/by/3.0/"
-      },
-      "caption": "For Her Eau de Parfum"
+      "file": "narciso-rodriguez-for-her-edp-18f70b541686",
+      "view": "front",
+      "publisher": "passionbeaute.fr",
+      "url": "https://www.passionbeaute.fr/for-her-790-13-05-fh.html",
+      "imageUrl": "https://www.passionbeaute.fr/media/catalog/product/n/a/narciso-rodriguez_3423478923553_01.jpg",
+      "credit": "Product photo via passionbeaute.fr · JPEG optimized",
+      "caption": "For Her Eau de Parfum bottle"
+    }
+  ],
+  "narciso-rodriguez-for-her-edt": [
+    {
+      "file": "narciso-rodriguez-for-her-edt-776db633bd62",
+      "view": "front",
+      "publisher": "passionbeaute.fr",
+      "url": "https://www.passionbeaute.fr/for-her-790-14-05-fh.html",
+      "imageUrl": "https://www.passionbeaute.fr/media/catalog/product/n/a/narciso-rodriguez_3423470890013_1.jpg",
+      "credit": "Product photo via passionbeaute.fr · JPEG optimized",
+      "caption": "For Her Eau de Toilette bottle"
     }
   ],
   "nautica-voyage-edt": [
     {
-      "file": "nautica-voyage-edt",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-nautica-on-a-blanket-RDndFJZbZ1M",
-      "credit": "Amrut Roul · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Earlier bottle design"
+      "file": "nautica-voyage-edt-3d267ff06a9d",
+      "view": "front",
+      "publisher": "matas.dk",
+      "url": "https://www.matas.dk/nautica-voyage-eau-de-toilette-50-ml",
+      "imageUrl": "https://images.matas.dk/encode/31655531892_20250321180100.jpg",
+      "credit": "Product photo via matas.dk · JPEG optimized",
+      "caption": "Voyage Eau de Toilette bottle"
+    }
+  ],
+  "nishane-ani-extrait": [
+    {
+      "file": "nishane-ani-extrait-215dc6cf6b35",
+      "view": "front",
+      "publisher": "essenza.ng",
+      "url": "https://www.essenza.ng/products/nishane-ani",
+      "imageUrl": "https://www.essenza.ng/cdn/shop/files/Screenshot2025-03-14at16.05.03.png?v=1741964767",
+      "credit": "Product photo via essenza.ng · JPEG optimized",
+      "caption": "Ani Extrait de Parfum bottle"
+    }
+  ],
+  "nishane-hacivat-extrait": [
+    {
+      "file": "nishane-hacivat-extrait-0bba4f915373",
+      "view": "front",
+      "publisher": "ananinja.com",
+      "url": "https://ananinja.com/sa/ar/pharmacy/product/nishane-hacivat-extrait-de-parfum-100-ml-19373466",
+      "imageUrl": "https://img.ananinja.com/media/bra-public-files/services-admin/files/4ddba92c-a5f8-4f7a-ba27-0d9eef1259d7?q=90&w=3840",
+      "credit": "Product photo via ananinja.com · JPEG optimized",
+      "caption": "Hacivat Extrait de Parfum bottle"
+    }
+  ],
+  "nishane-hundred-silent-ways-extrait": [
+    {
+      "file": "nishane-hundred-silent-ways-extrait-4d9ad5ede889",
+      "view": "front",
+      "publisher": "parfuma.com",
+      "url": "https://www.parfuma.com/product/detail/nishane-hundred-silent-ways-extrait-de-parfum-50ml-spray-0001046158",
+      "imageUrl": "https://imagestoreretrieval.aspos.nl/Product/Front/190520/7b6cfafa-0c8c-4a4a-8c7a-4f61597a2d7a.jpg",
+      "credit": "Product photo via parfuma.com · JPEG optimized",
+      "caption": "Hundred Silent Ways Extrait de Parfum bottle"
+    }
+  ],
+  "nishane-wulong-cha-extrait": [
+    {
+      "file": "nishane-wulong-cha-extrait-d0d4caf9f16c",
+      "view": "front",
+      "publisher": "vtrimports.com",
+      "url": "https://www.vtrimports.com/perfume-nishane-wulong-cha-100ml",
+      "imageUrl": "https://cdn.awsli.com.br/800x800/1718/1718314/produto/401032539/49c1e1a7badb4eb1acc09a03fb8d1ef5-6ibil7s6gt.png",
+      "credit": "Product photo via vtrimports.com · JPEG optimized",
+      "caption": "Wūlóng Chá Extrait de Parfum bottle"
+    }
+  ],
+  "ormonde-jayne-ormonde-woman-edp": [
+    {
+      "file": "ormonde-jayne-ormonde-woman-edp-20e177fb24b6",
+      "view": "front",
+      "publisher": "artofscent.com",
+      "url": "https://artofscent.com/products/ormonde-jayne-ormonde-woman",
+      "imageUrl": "https://artofscent.com/cdn/shop/products/OrmondeWoman120ml_1200x.jpg?v=1611110230",
+      "credit": "Product photo via artofscent.com · JPEG optimized",
+      "caption": "Ormonde Woman Eau de Parfum bottle"
+    }
+  ],
+  "parfums-de-marly-delina-edp": [
+    {
+      "file": "parfums-de-marly-delina-edp-0878d2ba2cd4",
+      "view": "front",
+      "publisher": "Parfums de Marly",
+      "url": "https://parfums-de-marly.com/fr/products/delina-30ml",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0525/0239/7079/files/DELINA-PERFUME-30-PACK1-1X1_CENTERED_88539f5d-3761-421a-9cd1-6c63d6f2afbe_grande.png?v=1759501422",
+      "credit": "Product photo via Parfums de Marly · JPEG optimized",
+      "caption": "Delina Eau de Parfum bottle"
+    }
+  ],
+  "parfums-de-marly-herod-edp": [
+    {
+      "file": "parfums-de-marly-herod-edp-376ceb132278",
+      "view": "front",
+      "publisher": "noahgrooming.co.nz",
+      "url": "https://noahgrooming.co.nz/products/parfums-de-marly-herod-edp",
+      "imageUrl": "https://noahgrooming.co.nz/cdn/shop/files/marly_herod_bottle_b2142918-1512-4c4e-895a-d14154a0d111.jpg?v=1742523222&width=1600",
+      "credit": "Product photo via noahgrooming.co.nz · JPEG optimized",
+      "caption": "Herod Eau de Parfum bottle"
+    }
+  ],
+  "parfums-de-marly-layton-edp": [
+    {
+      "file": "parfums-de-marly-layton-edp-041c851e46c1",
+      "view": "front",
+      "publisher": "Parfums de Marly",
+      "url": "https://uk.parfums-de-marly.com/products/layton",
+      "imageUrl": "https://uk.parfums-de-marly.com/cdn/shop/files/LAYTON-PERFUME-75-PACK11X1.png?v=1743175956&width=1080",
+      "credit": "Product photo via Parfums de Marly · JPEG optimized",
+      "caption": "Layton Eau de Parfum bottle"
+    }
+  ],
+  "parfums-de-marly-pegasus-edp": [
+    {
+      "file": "parfums-de-marly-pegasus-edp-a925a414e4f8",
+      "view": "front",
+      "publisher": "parfums-de-marly.com",
+      "url": "https://parfums-de-marly.com/products/pegasus",
+      "imageUrl": "https://parfums-de-marly.com/cdn/shop/files/PEGASUS-PERFUME-125-PACK1-1X1_CENTERED_d3297627-c8b1-4b62-b09f-d14238ee595d.png?v=1759501462&width=1080",
+      "credit": "Product photo via parfums-de-marly.com · JPEG optimized",
+      "caption": "Pegasus Eau de Parfum bottle"
+    }
+  ],
+  "parfums-de-marly-valaya-edp": [
+    {
+      "file": "parfums-de-marly-valaya-edp-8edbed3fbd35",
+      "view": "front",
+      "publisher": "Parfums de Marly",
+      "url": "https://parfums-de-marly.com/products/valaya-30ml",
+      "imageUrl": "https://parfums-de-marly.com/cdn/shop/files/VALAYA_30ml_9d56b114-f0f5-4c09-97f6-592dcbef0ddb.png?v=1728976408&width=1445",
+      "credit": "Product photo via Parfums de Marly · JPEG optimized",
+      "caption": "Valaya Eau de Parfum bottle"
+    }
+  ],
+  "phlur-missing-person-edp": [
+    {
+      "file": "phlur-missing-person-edp-7a0bec09caea",
+      "view": "front",
+      "publisher": "pricerunner.com",
+      "url": "https://www.pricerunner.com/pl/55-3201550917/Fragrances/Phlur-Missing-Person-EdP-50ml-Compare-Prices",
+      "imageUrl": "https://owp.klarna.com/product/640x640/3004804066/Phlur-Missing-Person-EdP-50ml.jpg?ph=true",
+      "credit": "Product photo via pricerunner.com · JPEG optimized",
+      "caption": "Missing Person Eau de Parfum bottle"
+    }
+  ],
+  "phlur-vanilla-skin-edp": [
+    {
+      "file": "phlur-vanilla-skin-edp-84085f8c684f",
+      "view": "front",
+      "publisher": "celaurabeauty.com",
+      "url": "https://celaurabeauty.com/products/phlur-vanilla-skin-edp-50ml-with-pink-pepper-cashmere-wood-sandalwood",
+      "imageUrl": "https://celaurabeauty.com/cdn/shop/files/phlur-vanilla-skin-edp-bottle.jpg?v=1773175243",
+      "credit": "Product photo via celaurabeauty.com · JPEG optimized",
+      "caption": "Vanilla Skin Eau de Parfum bottle"
+    }
+  ],
+  "prada-lhomme-prada-edt": [
+    {
+      "file": "prada-lhomme-prada-edt-cf511d4ab64f",
+      "view": "front",
+      "publisher": "nk.se",
+      "url": "https://www.nk.se/prada/lhomme-edt-100-ml-v00063574",
+      "imageUrl": "https://www.nk.se/globalassets/61654158_60340211--_1.png",
+      "credit": "Product photo via nk.se · JPEG optimized",
+      "caption": "L'Homme Prada Eau de Toilette bottle"
+    }
+  ],
+  "prada-luna-rossa-carbon-edt": [
+    {
+      "file": "prada-luna-rossa-carbon-edt-3e1568710a3b",
+      "view": "front",
+      "publisher": "matas.dk",
+      "url": "https://www.matas.dk/prada-luna-rossa-carbon-eau-de-toilette-100-ml",
+      "imageUrl": "https://images.matas.dk/encode/8435137759781_20240712133335.jpg",
+      "credit": "Product photo via matas.dk · JPEG optimized",
+      "caption": "Luna Rossa Carbon Eau de Toilette bottle"
     }
   ],
   "prada-paradoxe-edp": [
     {
-      "file": "prada-paradoxe-edp",
+      "file": "prada-paradoxe-edp-6b1c03af70d8",
       "view": "front",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_perfumowana_Prada_Paradoxe_(1).jpg",
-      "credit": "Jacek Halicki · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Paradoxe Eau de Parfum"
-    },
-    {
-      "file": "prada-paradoxe-edp-angle",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_perfumowana_Prada_Paradoxe_(2).jpg",
-      "credit": "Jacek Halicki · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Three-quarter view"
+      "publisher": "ebay.com",
+      "url": "https://www.ebay.com/itm/315574641832",
+      "imageUrl": "https://i.ebayimg.com/images/g/dnMAAOSwfQdmnFc0/s-l1200.jpg",
+      "credit": "Product photo via ebay.com · JPEG optimized",
+      "caption": "Paradoxe Eau de Parfum bottle"
     }
   ],
   "rabanne-1-million-edt": [
     {
-      "file": "rabanne-1-million-edt",
+      "file": "rabanne-1-million-edt-faa373be2deb",
       "view": "front-angle",
-      "url": "https://commons.wikimedia.org/wiki/File:2023_Woda_toaletowa_Paco_Rabanne_1_Million.jpg",
-      "credit": "Jacek Halicki · resized",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Reference bottle"
+      "publisher": "aeliadutyfree.it",
+      "url": "https://www.aeliadutyfree.it/venice/en/1-million-ma-pa-100028848.html",
+      "imageUrl": "https://www.aeliadutyfree.it/media/catalog/product/1/0/100028848_1_eb16.jpg?bg-color=255%2C255%2C255&canvas=934%3A934&fit=bounds&height=934&quality=80&width=934",
+      "credit": "Product photo via aeliadutyfree.it · JPEG optimized",
+      "caption": "1 Million Eau de Toilette bottle"
     }
   ],
   "rabanne-1-million-lucky-edt": [
     {
-      "file": "rabanne-1-million-lucky-edt",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Paco_Rabanne_1_Million_Lucky,_Eau_de_Toilette.jpg",
-      "credit": "DYVER · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "1 Million Lucky Eau de Toilette"
+      "file": "rabanne-1-million-lucky-edt-886354496aee",
+      "view": "front",
+      "publisher": "myperfumeshop.com.au",
+      "url": "https://www.myperfumeshop.com.au/products/paco-rabanne-1-million-lucky-edt",
+      "imageUrl": "https://www.myperfumeshop.com.au/cdn/shop/products/paco-rabanne-1-million-lucky-edt-perfume-for-him-803771.png?v=1609925623&width=2048",
+      "credit": "Product photo via myperfumeshop.com.au · JPEG optimized",
+      "caption": "1 Million Lucky Eau de Toilette bottle"
+    }
+  ],
+  "rabanne-fame-edp": [
+    {
+      "file": "rabanne-fame-edp-f04734dbdb2f",
+      "view": "front",
+      "publisher": "shop-apotheke.com",
+      "url": "https://www.shop-apotheke.com/beauty/upmAL2WLA/paco-rabanne-fame-e-d-p-nat-spray.htm",
+      "imageUrl": "https://cdn.shop-apotheke.com/images/mp/prod/50f606dbe4cd40ce95f836cbcd6fbd3e",
+      "credit": "Product photo via shop-apotheke.com · JPEG optimized",
+      "caption": "Fame Eau de Parfum bottle"
+    }
+  ],
+  "rabanne-fame-parfum": [
+    {
+      "file": "rabanne-fame-parfum-9187209bb902",
+      "view": "front",
+      "publisher": "matas.dk",
+      "url": "https://www.matas.dk/paco-rabanne-fame-le-parfum-50-ml",
+      "imageUrl": "https://images.matas.dk/encode/3349668614653_20260521135500.jpg",
+      "credit": "Product photo via matas.dk · JPEG optimized",
+      "caption": "Fame Parfum bottle"
+    }
+  ],
+  "rabanne-invictus-edt": [
+    {
+      "file": "rabanne-invictus-edt-aeea8e0f2789",
+      "view": "front",
+      "publisher": "lottedutyfree.com.au",
+      "url": "https://www.lottedutyfree.com.au/products/paco-rabanne-invictus-eau-de-toilette-100ml",
+      "imageUrl": "https://www.lottedutyfree.com.au/cdn/shop/files/2013128665_1.jpg?v=1724035488",
+      "credit": "Product photo via lottedutyfree.com.au · JPEG optimized",
+      "caption": "Invictus Eau de Toilette bottle"
+    }
+  ],
+  "rabanne-lady-million-edp": [
+    {
+      "file": "rabanne-lady-million-edp-9962a561d76f",
+      "view": "front",
+      "publisher": "fragranceoutlet.com",
+      "url": "https://www.fragranceoutlet.com/products/paco-rabanne-lady-million-womens-eau-de-parfum-spray",
+      "imageUrl": "https://www.fragranceoutlet.com/cdn/shop/products/Paco-Rabanne-Lady-Million-Womens-Eau-de-Parfume-Spray-2.7-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpeg?v=1626951023",
+      "credit": "Product photo via fragranceoutlet.com · JPEG optimized",
+      "caption": "Lady Million Eau de Parfum bottle"
+    }
+  ],
+  "rabanne-million-gold-for-her-edp": [
+    {
+      "file": "rabanne-million-gold-for-her-edp-53a82bd868b2",
+      "view": "front",
+      "publisher": "matas.dk",
+      "url": "https://www.matas.dk/rabanne-million-gold-for-her-eau-de-parfum-50-ml",
+      "imageUrl": "https://images.matas.dk/encode/3349668630257_20240826095241.jpg",
+      "credit": "Product photo via matas.dk · JPEG optimized",
+      "caption": "Million Gold For Her Eau de Parfum bottle"
+    }
+  ],
+  "rabanne-million-gold-for-her-le-parfum": [
+    {
+      "file": "rabanne-million-gold-for-her-le-parfum-d605ecd2c46d",
+      "view": "front",
+      "publisher": "sephora.com.au",
+      "url": "https://www.sephora.com.au/products/rabanne-million-gold-for-her-parfum",
+      "imageUrl": "https://image-optimizer-reg.production.sephora-asia.net/images/product_images/1_Product_3349668645206-Paco-Rabanne-Million-Gold-For-Her-Pa_71bc42264eb7165a71334c00f969526063540830_1751971886.png",
+      "credit": "Product photo via sephora.com.au · JPEG optimized",
+      "caption": "Million Gold For Her Le Parfum bottle"
+    }
+  ],
+  "rabanne-olympea-edp": [
+    {
+      "file": "rabanne-olympea-edp-dd21588f56a8",
+      "view": "front",
+      "publisher": "nicebeauty.com",
+      "url": "https://nicebeauty.com/de/rabanne-olympea-edp-80-ml.html",
+      "imageUrl": "https://distcdn.nicehair.dk/products/65196/rabanne-olympea-edp-80-ml-1765801009.webp",
+      "credit": "Product photo via nicebeauty.com · JPEG optimized",
+      "caption": "Olympéa Eau de Parfum bottle"
+    }
+  ],
+  "rabanne-phantom-parfum": [
+    {
+      "file": "rabanne-phantom-parfum-e163cf9732bd",
+      "view": "front",
+      "publisher": "vivir.com",
+      "url": "https://vivir.com/article/paco-rabanne-phantom-parfum-review",
+      "imageUrl": "https://vivir.com/cdn-cgi/image/width%3D1200%2Cquality%3D85%2Cformat%3Dauto%2Cfit%3Dscale-down/images/articles/gc_paco-rabanne-phantom-parfum-review.jpg",
+      "credit": "Product photo via vivir.com · JPEG optimized",
+      "caption": "Phantom Parfum bottle"
+    }
+  ],
+  "rasasi-hawas-for-him-edp": [
+    {
+      "file": "rasasi-hawas-for-him-edp-d15658958e8e",
+      "view": "front",
+      "publisher": "fragarabic.com",
+      "url": "https://fragarabic.com/products/hawas-for-him-rasasi-eau-de-parfum-para-hombre",
+      "imageUrl": "https://fragarabic.com/cdn/shop/files/Hawas_For_Him_Rasasi_Eau_de_Parfum_Para_Hombre.webp?v=1770130973&width=2048",
+      "credit": "Product photo via fragarabic.com · JPEG optimized",
+      "caption": "Hawas for Him Eau de Parfum bottle"
+    }
+  ],
+  "sol-de-janeiro-cheirosa-40-mist": [
+    {
+      "file": "sol-de-janeiro-cheirosa-40-mist-53246939f4ea",
+      "view": "front",
+      "publisher": "Sol de Janeiro",
+      "url": "https://soldejaneiro.com/products/cheirosa-40-hair-body-fragrance-mist",
+      "imageUrl": "https://soldejaneiro.com/cdn/shop/files/sdj_cheirosa68_Mist_240mL.jpg?v=1717619191",
+      "credit": "Product photo via Sol de Janeiro · JPEG optimized",
+      "caption": "Cheirosa 40 Fragrance Mist bottle"
+    }
+  ],
+  "sol-de-janeiro-cheirosa-59-mist": [
+    {
+      "file": "sol-de-janeiro-cheirosa-59-mist-58e0da4041ba",
+      "view": "front",
+      "publisher": "deyanniramaquillajeoriginal.com",
+      "url": "https://deyanniramaquillajeoriginal.com/products/mini-cheirosa-59-perfume-mist",
+      "imageUrl": "https://deyanniramaquillajeoriginal.com/cdn/shop/files/morado.png?v=1707706343",
+      "credit": "Product photo via deyanniramaquillajeoriginal.com · JPEG optimized",
+      "caption": "Cheirosa 59 Fragrance Mist bottle"
+    }
+  ],
+  "sol-de-janeiro-cheirosa-62-mist": [
+    {
+      "file": "sol-de-janeiro-cheirosa-62-mist-555612e27df2",
+      "view": "front",
+      "publisher": "Sol de Janeiro",
+      "url": "https://soldejaneiro.com/products/cheirosa-62-hair-body-fragrance-mist",
+      "imageUrl": "https://soldejaneiro.com/cdn/shop/files/sdj_Cheriosa62_perfume_Mist_90mL_Sol_de_Janeiro-webp.webp?v=1720730188&width=3840",
+      "credit": "Product photo via Sol de Janeiro · JPEG optimized",
+      "caption": "Cheirosa 62 Fragrance Mist bottle"
+    }
+  ],
+  "sol-de-janeiro-cheirosa-68-mist": [
+    {
+      "file": "sol-de-janeiro-cheirosa-68-mist-58ece9622762",
+      "view": "front",
+      "publisher": "tirabeauty.com",
+      "url": "https://www.tirabeauty.com/product/sol-de-janeiro-cheirosa-68-perfume-mist-90-ml-8602432",
+      "imageUrl": "https://cdn.tirabeauty.com/v2/billowing-snowflake-434234/tira-p/wrkr/products/pictures/item/free/original/1165276/-Jwfzd_E2G-1165276_1.jpg",
+      "credit": "Product photo via tirabeauty.com · JPEG optimized",
+      "caption": "Cheirosa 68 Fragrance Mist bottle"
+    }
+  ],
+  "sospiro-il-padrino-edp": [
+    {
+      "file": "sospiro-il-padrino-edp-334dbd45d65c",
+      "view": "front",
+      "publisher": "parfuemerie-heudorf-shop.de",
+      "url": "https://www.parfuemerie-heudorf-shop.de/sospiro-il-padrino-eau-de-parfum-spray-100ml.html",
+      "imageUrl": "https://www.parfuemerie-heudorf-shop.de/media/0c/b7/82/1769442219/Sospiro-Il-Padrino.jpg",
+      "credit": "Product photo via parfuemerie-heudorf-shop.de · JPEG optimized",
+      "caption": "Il Padrino Eau de Parfum bottle"
+    }
+  ],
+  "tauer-perfumes-lonestar-memories-edt": [
+    {
+      "file": "tauer-perfumes-lonestar-memories-edt-5306de1c6d47",
+      "view": "front",
+      "publisher": "vanilla.sa",
+      "url": "https://vanilla.sa/en/tauer--perfumes--03--lonestar--memories-perfume/p2019145754",
+      "imageUrl": "https://cdn.salla.sa/dqYz/b49927b3-efd6-4cd0-9386-f131ad47e47d-1000x1000-LRzjhKVHJaUDpkapAROoIVCaCQTsPbHI20wyvU9x.jpg",
+      "credit": "Product photo via vanilla.sa · JPEG optimized",
+      "caption": "Lonestar Memories Eau de Toilette bottle"
+    }
+  ],
+  "tiziana-terenzi-kirke-extrait": [
+    {
+      "file": "tiziana-terenzi-kirke-extrait-499594984a5e",
+      "view": "front",
+      "publisher": "perfumeoutletbg.com",
+      "url": "https://perfumeoutletbg.com/products/tiziana-terenzi-gold-kirke-extract-de-perfume",
+      "imageUrl": "https://perfumeoutletbg.com/cdn/shop/products/tiziana-terenzi-100-tiziana-terenzi-gold-kirke-extract-de-perfume-30434374877289-_1.png?v=1678785111&width=1200",
+      "credit": "Product photo via perfumeoutletbg.com · JPEG optimized",
+      "caption": "Kirké Extrait de Parfum bottle"
+    }
+  ],
+  "tom-ford-black-orchid-edp": [
+    {
+      "file": "tom-ford-black-orchid-edp-6c33ab39f2d2",
+      "view": "front",
+      "publisher": "tomfordbeauty.co.uk",
+      "url": "https://www.tomfordbeauty.co.uk/product/black-orchid-eau-de-parfum?size=100_ml",
+      "imageUrl": "https://sdcdn.io/tf/tfb_sku_T00501_2000x2000_0.png",
+      "credit": "Product photo via tomfordbeauty.co.uk · JPEG optimized",
+      "caption": "Black Orchid Eau de Parfum bottle"
+    }
+  ],
+  "tom-ford-lost-cherry-edp": [
+    {
+      "file": "tom-ford-lost-cherry-edp-b4bc09bfdc07",
+      "view": "front",
+      "publisher": "fragman.com",
+      "url": "https://www.fragman.com/blogs/fragrance-guide/tom-ford-lost-cherry-edp-review-the-cherry-fragrance-that-started-a-whole-trend",
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0597/2377/6047/articles/Lost_Cherry_Eau_De_Parfum_by_Tom_Ford_50ml_-_1.7oz_a0f76833-a49a-4bad-85b4-7f769f856b52.jpg?v=1773676319",
+      "credit": "Product photo via fragman.com · JPEG optimized",
+      "caption": "Lost Cherry Eau de Parfum bottle"
+    }
+  ],
+  "tom-ford-noir-extreme-edp": [
+    {
+      "file": "tom-ford-noir-extreme-edp-3f2622a98eaa",
+      "view": "front",
+      "publisher": "felix.com.pa",
+      "url": "https://felix.com.pa/products/noir-extreme-eau-de-parfum",
+      "imageUrl": "https://felix.com.pa/cdn/shop/files/T2TM0_1200x.png?v=1732657701",
+      "credit": "Product photo via felix.com.pa · JPEG optimized",
+      "caption": "Noir Extreme Eau de Parfum bottle"
     }
   ],
   "tom-ford-ombre-leather-edp": [
     {
-      "file": "tom-ford-ombre-leather-edp",
+      "file": "tom-ford-ombre-leather-edp-8f5121d5a39e",
       "view": "front",
-      "publisher": "Pexels",
-      "url": "https://www.pexels.com/photo/perfume-bottle-with-white-inscription-against-dark-background-7487833/",
-      "credit": "Erik Mclean · Cropped for FragDex · JPEG optimized",
-      "license": {
-        "name": "Pexels License",
-        "url": "https://www.pexels.com/license/"
-      },
+      "publisher": "Tom Ford",
+      "url": "https://www.tomfordbeauty.com/products/ombre-leather-eau-de-parfum",
+      "imageUrl": "https://www.tomfordbeauty.com/cdn/shop/files/tf_sku_T5Y201_2000x2000_0.png?v=1773906758&width=1200",
+      "credit": "Product photo via Tom Ford · JPEG optimized",
       "caption": "Ombré Leather Eau de Parfum bottle"
+    }
+  ],
+  "tom-ford-oud-wood-edp": [
+    {
+      "file": "tom-ford-oud-wood-edp-30e9b39baad0",
+      "view": "front",
+      "publisher": "eauparfum.ca",
+      "url": "https://eauparfum.ca/products/tom-ford-oud-wood",
+      "imageUrl": "https://eauparfum.ca/cdn/shop/files/IMG-4802.jpg?v=1744145198",
+      "credit": "Product photo via eauparfum.ca · JPEG optimized",
+      "caption": "Oud Wood Eau de Parfum bottle"
+    }
+  ],
+  "tom-ford-tobacco-vanille-edp": [
+    {
+      "file": "tom-ford-tobacco-vanille-edp-3f709fa68c69",
+      "view": "front",
+      "publisher": "deliriumexclusive.com",
+      "url": "https://www.deliriumexclusive.com/bg/aromati-nishobi-aromati-eau-de-parfum/tobacco-vanille-641946",
+      "imageUrl": "https://www.deliriumexclusive.com/Images/Products/Normal/640000/641945.jpg",
+      "credit": "Product photo via deliriumexclusive.com · JPEG optimized",
+      "caption": "Tobacco Vanille Eau de Parfum bottle"
+    }
+  ],
+  "valentino-born-in-roma-uomo-edt": [
+    {
+      "file": "valentino-born-in-roma-uomo-edt-40be9186127c",
+      "view": "front",
+      "publisher": "parfumerie.com.ar",
+      "url": "https://www.parfumerie.com.ar/born-in-roma-uomo-men-edt-50ml-rv158602",
+      "imageUrl": "https://www.parfumerie.com.ar/pub/media/catalog/product/1/5/158602-a-born-in-roma-uomo-men-edt-50ml.jpg",
+      "credit": "Product photo via parfumerie.com.ar · JPEG optimized",
+      "caption": "Born In Roma Uomo Eau de Toilette bottle"
+    }
+  ],
+  "valentino-donna-born-in-roma-edp": [
+    {
+      "file": "valentino-donna-born-in-roma-edp-868f32ee1412",
+      "view": "front",
+      "publisher": "scentsavvyvault.co.za",
+      "url": "https://www.scentsavvyvault.co.za/products/valentino-donna-born-in-roma-edp-100ml",
+      "imageUrl": "https://www.scentsavvyvault.co.za/cdn/shop/files/ValentinoRoma.webp?v=1714482859",
+      "credit": "Product photo via scentsavvyvault.co.za · JPEG optimized",
+      "caption": "Donna Born in Roma Eau de Parfum bottle"
+    }
+  ],
+  "valentino-donna-born-in-roma-intense-edp": [
+    {
+      "file": "valentino-donna-born-in-roma-intense-edp-fef0ffb2fe71",
+      "view": "front",
+      "publisher": "disfragancias.com",
+      "url": "https://disfragancias.com/products/valentino-donna-born-in-roma-intense",
+      "imageUrl": "https://disfragancias.com/cdn/shop/files/Valentino_Donna_Born_in_roma_Intense.png?v=1742874223",
+      "credit": "Product photo via disfragancias.com · JPEG optimized",
+      "caption": "Donna Born in Roma Intense Eau de Parfum bottle"
+    }
+  ],
+  "valentino-uomo-born-in-roma-intense-edp": [
+    {
+      "file": "valentino-uomo-born-in-roma-intense-edp-31184c6e821d",
+      "view": "front",
+      "publisher": "venbafragrance.com",
+      "url": "https://www.venbafragrance.com/products/valentino-uomo-born-in-roma-intense-3-4-oz",
+      "imageUrl": "https://www.venbafragrance.com/cdn/shop/files/ValentinoUomoBornInRomaIntense.png?v=1741232969",
+      "credit": "Product photo via venbafragrance.com · JPEG optimized",
+      "caption": "Uomo Born in Roma Intense Eau de Parfum bottle"
+    }
+  ],
+  "versace-bright-crystal-edt": [
+    {
+      "file": "versace-bright-crystal-edt-3c10d96138e5",
+      "view": "front",
+      "publisher": "faces.eg",
+      "url": "https://www.faces.eg/en/p/versace-bright-crystal-eau-de-toilette-PM_VERSACE_Bright_Crystal.html",
+      "imageUrl": "https://www.faces.eg/dw/image/v2/BJSM_PRD/on/demandware.static/-/Sites-faces-master-catalog/default/dwa272f335/00/versace/Bright_Crystal_200ml_1.jpg?sh=800&sw=800",
+      "credit": "Product photo via faces.eg · JPEG optimized",
+      "caption": "Bright Crystal Eau de Toilette bottle"
+    }
+  ],
+  "versace-dylan-blue-edt": [
+    {
+      "file": "versace-dylan-blue-edt-0522953c694d",
+      "view": "front",
+      "publisher": "coolshop.nl",
+      "url": "https://www.coolshop.nl/product/versace-dylan-blue-edt-200-ml/AB5Z4T/",
+      "imageUrl": "https://scale.coolshop-cdn.com/product-media.coolshop-cdn.com/AB5Z4T/5cb5566c2eae423f92a06ee2c69cd4c6.jpg/f/versace-dylan-blue-edt-200-ml.jpg?borderless=1&height=484&transparent=1",
+      "credit": "Product photo via coolshop.nl · JPEG optimized",
+      "caption": "Dylan Blue Eau de Toilette bottle"
     }
   ],
   "versace-eros-edt": [
     {
-      "file": "versace-eros-edt",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/a-bottle-of-perfume-sitting-on-top-of-a-white-pedestal-7_yGs3wx6B4",
-      "credit": "Ojus Jaiswal · resized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Eros Eau de Toilette"
+      "file": "versace-eros-edt-4057f55066b9",
+      "view": "front",
+      "publisher": "perfumegallery.ae",
+      "url": "https://perfumegallery.ae/ar/products/versace-eros-eau-de-toilette-for-men",
+      "imageUrl": "https://perfumegallery.ae/cdn/shop/files/Untitled_18_ce17bd57-2815-4072-be9e-c05b3c446393.png?v=1753707636&width=1200",
+      "credit": "Product photo via perfumegallery.ae · JPEG optimized",
+      "caption": "Eros Eau de Toilette bottle"
+    }
+  ],
+  "viktor-and-rolf-flowerbomb-edp": [
+    {
+      "file": "viktor-and-rolf-flowerbomb-edp-fe435153ecd4",
+      "view": "front",
+      "publisher": "Viktor&Rolf",
+      "url": "https://us.viktor-rolf.com/fragrance/flowerbomb-eau-de-parfum-by-viktor-rolf-VKR_002.html",
+      "imageUrl": "https://us.viktor-rolf.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-vr-master-catalog/default/dw52a4b375/FB%20EDP%202024/01_vr_frag_fbb_edp_perfect_pdp_premium_packshot_100ml_1x1.jpg?q=70&sfrm=jpg&sh=1400&sm=cut&sw=1400",
+      "credit": "Product photo via Viktor&Rolf · JPEG optimized",
+      "caption": "Flowerbomb Eau de Parfum bottle"
+    }
+  ],
+  "viktor-and-rolf-spicebomb-extreme-edp": [
+    {
+      "file": "viktor-and-rolf-spicebomb-extreme-edp-09d91283d74c",
+      "view": "front",
+      "publisher": "ubuy.kr",
+      "url": "https://www.ubuy.kr/en/product/AY24XB14O-spicebomb-extreme-by-viktor-amp-rolf-3-oz-edp-spray-for-men",
+      "imageUrl": "https://m.media-amazon.com/images/I/61dmANZGC-L._SL1500_.jpg",
+      "credit": "Product photo via ubuy.kr · JPEG optimized",
+      "caption": "Spicebomb Extreme Eau de Parfum bottle"
+    }
+  ],
+  "xerjoff-erba-pura-edp": [
+    {
+      "file": "xerjoff-erba-pura-edp-885fbe792054",
+      "view": "front",
+      "publisher": "parfumdreams.fr",
+      "url": "https://www.parfumdreams.fr/XERJOFF/Collections/Vibe-Collection/Eau-de-Parfum-Spray/index_76329.aspx",
+      "imageUrl": "https://cdn2.parfumdreams.de/image/product/76329-116451-2-12.webp",
+      "credit": "Product photo via parfumdreams.fr · JPEG optimized",
+      "caption": "Erba Pura Eau de Parfum bottle"
     }
   ],
   "xerjoff-naxos-edp": [
     {
-      "file": "xerjoff-naxos-edp",
+      "file": "xerjoff-naxos-edp-a93248ece082",
       "view": "front",
-      "publisher": "Pexels",
-      "url": "https://www.pexels.com/photo/elegant-xerjoff-naxos-perfume-bottle-display-29255492/",
-      "credit": "Manish Jain (cropped for FragDex) · JPEG optimized",
-      "license": {
-        "name": "Pexels License",
-        "url": "https://www.pexels.com/license/"
-      },
-      "caption": "Xerjoff 1861 Naxos bottle"
+      "publisher": "Xerjoff",
+      "url": "https://www.xerjoff.com/products/naxos-eau-de-parfum",
+      "imageUrl": "https://www.xerjoff.com/cdn/shop/files/gallery-naxos-eau-de-parfum-100ml.png?v=1745399897&width=1206",
+      "credit": "Product photo via Xerjoff · JPEG optimized",
+      "caption": "Naxos Eau de Parfum bottle"
     }
   ],
   "yves-saint-laurent-black-opium-edp": [
     {
-      "file": "yves-saint-laurent-black-opium-edp",
+      "file": "yves-saint-laurent-black-opium-edp-2cd9aded51ad",
       "view": "front",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Black_opium.jpg",
-      "credit": "Dsuarez04 · JPEG optimized",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Earlier Black Opium bottle design"
+      "publisher": "lookfantastic.com",
+      "url": "https://www.lookfantastic.com/p/yves-saint-laurent-black-opium-eau-de-parfum-50ml/11791423/",
+      "imageUrl": "https://static.thcdn.com/productimg/original/11791423-7585330268279591.jpg",
+      "credit": "Product photo via lookfantastic.com · JPEG optimized",
+      "caption": "Black Opium Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-black-opium-le-parfum": [
+    {
+      "file": "yves-saint-laurent-black-opium-le-parfum-3102cb2cbd7a",
+      "view": "front",
+      "publisher": "lunga.pl",
+      "url": "https://lunga.pl/pl/p/Flakon-Yves-Saint-Laurent-Black-Opium-Le-Parfum-Woda-Perfumowana-90ml/180397",
+      "imageUrl": "https://lunga.pl/userdata/public/gfx/200016/Flakon-Yves-Saint-Laurent-Black-Opium-Le-Parfum-Woda-Perfumowana-90ml-654228.jpg",
+      "credit": "Product photo via lunga.pl · JPEG optimized",
+      "caption": "Black Opium Le Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-black-opium-pink-glaze-edp": [
+    {
+      "file": "yves-saint-laurent-black-opium-pink-glaze-edp-8aa11d04e63c",
+      "view": "front",
+      "publisher": "carrefour.com.br",
+      "url": "https://www.carrefour.com.br/ysl-yves-saint-lauren-black-opium-feminino-eau-de-parfum-50ml-mp932680189/p",
+      "imageUrl": "https://carrefourbr.vtexassets.com/arquivos/ids/107855853/e41e2f03197248a5b94df1e44b105a97.jpg?v=638156408281130000",
+      "credit": "Product photo via carrefour.com.br · JPEG optimized",
+      "caption": "Black Opium Pink Glaze Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-la-nuit-de-lhomme-2019-edp": [
+    {
+      "file": "yves-saint-laurent-la-nuit-de-lhomme-2019-edp-aa04d1bf5b7b",
+      "view": "front",
+      "publisher": "flaconi.se",
+      "url": "https://www.flaconi.se/parfym/yves-saint-laurent/l-homme/yves-saint-laurent-l-homme-la-nuit-de-l-homme-eau-de-parfum.html",
+      "imageUrl": "https://cdn.flaconi.net/media/catalog/product/3/6/3614272648333_c.jpeg?c=se&q=80&r=1UwcQX&w=1200",
+      "credit": "Product photo via flaconi.se · JPEG optimized",
+      "caption": "La Nuit de L'Homme (2019) Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-la-nuit-de-lhomme-2026-edp": [
+    {
+      "file": "yves-saint-laurent-la-nuit-de-lhomme-2026-edp-f71a74972ceb",
+      "view": "front",
+      "publisher": "yslbeauty.co.uk",
+      "url": "https://www.yslbeauty.co.uk/fragrances/fragrances-for-him/la-nuit-de-l-homme/la-nuit-de-l-homme-eau-de-parfum/WW-50356YSL.html",
+      "imageUrl": "https://www.yslbeauty.co.uk/dw/image/v2/AAQP_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw6c4771ad/square/Fragrance/ForHim/La_Nuit_De_Lhomme_Eau_De_Parfum/3614272648333_La_Nuit_De_L_homme_Eau_De_Parfum_100ml-v2.webp?q=85&sfrm=png&sh=880&sw=880",
+      "credit": "Product photo via yslbeauty.co.uk · JPEG optimized",
+      "caption": "La Nuit de L'Homme (2026) Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-la-nuit-de-lhomme-edt": [
+    {
+      "file": "yves-saint-laurent-la-nuit-de-lhomme-edt-0f9677d5ffdd",
+      "view": "front",
+      "publisher": "aurafragrancess.com",
+      "url": "https://aurafragrancess.com/products/la-nuit-de-lhomme-by-yves-saint-laurent-100ml-edt",
+      "imageUrl": "https://aurafragrancess.com/cdn/shop/files/3365440375079_100-la-nuit-de-l-homme-eau-de-toilette-vaporisateur_Alt1_v2.png?v=1747813957",
+      "credit": "Product photo via aurafragrancess.com · JPEG optimized",
+      "caption": "La Nuit de L'Homme Eau de Toilette bottle"
     }
   ],
   "yves-saint-laurent-libre-edp": [
     {
-      "file": "yves-saint-laurent-libre-edp",
-      "view": "front-angle",
-      "publisher": "Unsplash",
-      "url": "https://unsplash.com/photos/clear-glass-perfume-bottle-on-brown-wooden-table-KPkR3e6BZG0",
-      "credit": "Olena Bohovyk · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "Unsplash License",
-        "url": "https://unsplash.com/license"
-      },
-      "caption": "Original Libre Eau de Parfum bottle"
+      "file": "yves-saint-laurent-libre-edp-8c94186028e7",
+      "view": "front",
+      "publisher": "Yves Saint Laurent",
+      "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/libre/libre-eau-de-parfum/109YSL.html",
+      "imageUrl": "https://www.yslbeautyus.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw3cedbd53/Images2019/Libre%20Eau%20De%20Parfum/90mL/3614272648425.jpg",
+      "credit": "Product photo via Yves Saint Laurent · JPEG optimized",
+      "caption": "Libre Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-libre-intense-edp": [
+    {
+      "file": "yves-saint-laurent-libre-intense-edp-f993b61b6437",
+      "view": "front",
+      "publisher": "taxfree-heinemann.dk",
+      "url": "https://www.taxfree-heinemann.dk/en/global/yves-saint-laurent/yves-saint-laurent-libre-intense-eau-de-parfum-intense-90-ml/p/000000000001470875/",
+      "imageUrl": "https://www.taxfree-heinemann.dk/medias/527Wx527H-null?context=bWFzdGVyfGltYWdlc3wzMjk2MHxpbWFnZS9qcGVnfGFHVTFMMmc1WkM4eE16TTRPVGc0TURZNE9EWTNNQzgxTWpkWGVEVXlOMGhmYm5Wc2JBfGEzM2QyNmE3NTZiMzg1Y2RkMjhhYTE1NWM3ZWJkMDU5ODQ2OWQ5NTE1NjUyNzM2MmRmMzQ5MDNmY2E1ODk2MWQ&v=1772269624523",
+      "credit": "Product photo via taxfree-heinemann.dk · JPEG optimized",
+      "caption": "Libre Intense Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-libre-le-parfum": [
+    {
+      "file": "yves-saint-laurent-libre-le-parfum-1a0545139f9a",
+      "view": "front",
+      "publisher": "Yves Saint Laurent",
+      "url": "https://www.yslbeautyus.com/fragrance/womens-fragrances/libre/libre-le-parfum/3614273776110.html",
+      "imageUrl": "https://www.yslbeautyus.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw6ef0c3f4/images/Libre%20Le%20Parfum/50ML/3614273776110.webp?q=85&sfrm=jpg&sh=880&sw=880",
+      "credit": "Product photo via Yves Saint Laurent · JPEG optimized",
+      "caption": "Libre Le Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-mon-paris-edp": [
+    {
+      "file": "yves-saint-laurent-mon-paris-edp-f57544c98583",
+      "view": "front",
+      "publisher": "kunchals.in",
+      "url": "https://www.kunchals.in/products/yves-saint-laurent-mon-paris-eau-de-parfum-90ml",
+      "imageUrl": "https://www.kunchals.in/cdn/shop/files/1_9ad0d364-9a5b-4fe1-baa8-4574232addcb.jpg?v=1686219574",
+      "credit": "Product photo via kunchals.in · JPEG optimized",
+      "caption": "Mon Paris Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-myslf-edp": [
+    {
+      "file": "yves-saint-laurent-myslf-edp-21880b808bca",
+      "view": "front",
+      "publisher": "gcc.luluhypermarket.com",
+      "url": "https://gcc.luluhypermarket.com/en-kw/yves-saint-laurent-men-myslf-eau-de-parfum-100-ml/p/2469904/",
+      "imageUrl": "https://bf1af2.akinoncloudcdn.com/products/2025/07/29/607061/6f9c7584-3350-408d-b227-77dacc31ca23_size3840_cropCenter.jpg",
+      "credit": "Product photo via gcc.luluhypermarket.com · JPEG optimized",
+      "caption": "MYSLF Eau de Parfum bottle"
     }
   ],
   "yves-saint-laurent-y-edp": [
     {
-      "file": "yves-saint-laurent-y-edp",
-      "view": "front-angle",
-      "publisher": "Wikimedia Commons",
-      "url": "https://commons.wikimedia.org/wiki/File:Yves_Saint_Laurent_Y_-_1.jpg",
-      "credit": "DYVER · JPEG optimized · Cropped for FragDex",
-      "license": {
-        "name": "CC BY-SA 4.0",
-        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
-      },
-      "caption": "Y Eau de Parfum"
+      "file": "yves-saint-laurent-y-edp-9c3b09395527",
+      "view": "front",
+      "publisher": "beautyhouse.com",
+      "url": "https://beautyhouse.com/products/yves-saint-laurent-y-eau-de-parfum-for-men",
+      "imageUrl": "https://beautyhouse.com/cdn/shop/files/01bdmtewnr.jpg?v=1760981447&width=1492",
+      "credit": "Product photo via beautyhouse.com · JPEG optimized",
+      "caption": "Y Eau de Parfum bottle"
+    }
+  ],
+  "yves-saint-laurent-y-edt": [
+    {
+      "file": "yves-saint-laurent-y-edt-208e3615dfe4",
+      "view": "front",
+      "publisher": "londondrugs.com",
+      "url": "https://www.londondrugs.com/products/yves-saint-laurent-y-eau-de-toilette-100ml/p/L2585393",
+      "imageUrl": "https://cdn.cs.1worldsync.com/3e/ec/3eec054d-df4d-4742-b3ac-4199fa2ee519.jpg",
+      "credit": "Product photo via londondrugs.com · JPEG optimized",
+      "caption": "Y Eau de Toilette bottle"
     }
   ]
 }

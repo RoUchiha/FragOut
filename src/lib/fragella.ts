@@ -92,7 +92,7 @@ export async function fetchFragellaPayload(edition:CatalogEdition,key:string,req
 }
 
 export function createFragellaLookup(request:typeof fetch=fetch) {
- const pending=new Map<string,Promise<LiveRatings|null>>();
+ const pending=new Map<string,Promise<LiveRatings|null|undefined>>();
  let retryAt=0;
  async function load(profile:CatalogProfile,key:string) {
   try {
@@ -102,14 +102,18 @@ export function createFragellaLookup(request:typeof fetch=fetch) {
    return null;
   }
  }
- return async (profile:CatalogProfile,key:string,admit:()=>boolean=()=>true):Promise<LiveRatings|null>=>{
+ return async function lookup(profile:CatalogProfile,key:string,admit:()=>boolean|Promise<boolean>=()=>true):Promise<LiveRatings|null>{
   if(!key||Date.now()<retryAt) return null;
   const existing=pending.get(profile.id);
-  if(existing) return existing;
-  if(!admit()) return null;
-  const lookup=load(profile,key).finally(()=>pending.delete(profile.id));
-  pending.set(profile.id,lookup);
-  return lookup;
+  if(existing){
+   const result=await existing;
+   // If the other requester was denied, this requester can still seek admission.
+   return result===undefined?lookup(profile,key,admit):result;
+  }
+  const task=Promise.resolve().then(async()=>await admit()?load(profile,key):undefined)
+   .finally(()=>pending.delete(profile.id));
+  pending.set(profile.id,task);
+  return (await task)??null;
  };
 }
 

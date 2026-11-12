@@ -1,6 +1,6 @@
 # FragOut
 
-A compact fragrance wardrobe app. The primary interface is an Expo / React Native app for iOS and Android, with a matching browser preview. The desktop companion and API run on this computer.
+A compact fragrance wardrobe app. The primary interface is an Expo / React Native app for iOS and Android, with a matching browser preview. The desktop companion and API can run locally or on a Node.js host.
 
 ## Open it
 
@@ -18,7 +18,7 @@ npm.cmd run build
 npm.cmd run start
 ```
 
-The server binds to loopback. It is not a hosted service. See [the mobile guide](mobile/README.md) for running on a physical phone, development-network setup, and signed native builds. Native iOS/Android code exports have been compiled; an installable, signed APK/IPA and physical-device acceptance are still required.
+The server binds to loopback. See the mobile guide for phone connections, compatibility checks, and signed store builds. [Mobile guide](mobile/README.md)
 
 ## Mood and vibe
 
@@ -43,7 +43,7 @@ The mobile collection reads bottle labels through the selected vision provider a
 
 Save a fragrance or tap one in Collection to open FragDex. It matches the exact house, release and concentration against a local reference catalog. Tap the bottle thumbnail to enlarge it when a reviewed photo is available. Profiles show cross-checked notes and five-star ratings where evidence is available. Tap a score to open its source in a browser sheet. Fragrance and retailer links sit below the ratings.
 
-The catalog includes 215 exact editions with corroborated notes, bundled photos for 31 editions, and reviewed Wikimedia Commons photos available as a web fallback. Unsupported facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [catalog sources, scraper, and setup](catalog/README.md).
+The catalog includes 218 exact editions with corroborated notes and one bundled bottle photo per edition. When a saved public edition needs a photo, FragDex automatically checks product listings for an exact match. Unsupported rating facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [photo lookup, admin setup and catalog sources](catalog/README.md).
 
 ## Free default, optional personal providers
 
@@ -83,11 +83,13 @@ Native bearer sessions use origin-bound SecureStore envelopes; the browser previ
 
 Enable **Settings → Photo privacy → Archive outfit-fragrance looks** to keep selected looks. Sanitized photos are held encrypted for up to 15 minutes while reviewing; only **Archive look** attaches a photo to the confirmed fragrance/pair. Journal → Saved looks reads photos through authenticated endpoints, never public image URLs. Delete a look to remove its photo. Turning archiving off atomically deletes all saved looks/photos, removes recommendation clothing copies, and invalidates previous upload consent even after a rapid off/on toggle.
 
-Unsaved clothing descriptions and their recommendation copies expire after 15 minutes. Pending photos and expired descriptions are purged on access/startup and by a 60-second timer while the server runs. Saved looks remain until deletion or archive opt-out. Export includes the full journal, current descriptions and saved-look metadata, without passwords, tokens, provider keys or photo bytes. Native export copies use separate operation filenames, are removed after sharing, and cannot continue across account/server changes.
+Unsaved clothing descriptions and their recommendation copies expire after 15 minutes. The local server purges expired data on access and on a timer. Hosted FragOut also runs scheduled cleanup in Postgres. Saved looks remain until deletion or archive opt-out. Export includes the full journal, current descriptions and saved-look metadata, without passwords, tokens, provider keys or photo bytes. Native export copies use separate operation filenames, are removed after sharing, and cannot continue across account/server changes.
 
 Images are resized and stripped of EXIF before reaching the selected model. Qwen requests unload their local model context after use. OpenAI requests use `store:false`; cloud processing still follows the provider's separate retention policy. Speech recognition uses the device/browser service; FragOut receives the transcript, not a recorded audio upload.
 
-The SQLite database is `data/fragout.sqlite`. Use a dedicated data directory: startup rejects unrelated files/leaf links and restricts permissions to the service user plus Windows SYSTEM/Administrators (700/600 on POSIX). Ordinary account metadata is not encrypted at rest. Provider credentials and archived photos use AES-256-GCM with separated keys and owner-bound authentication. The installation secret is a generated `data/credential-key`, or `FRAGOUT_VAULT_KEY`. Preserve it securely with backups; changing it makes existing encrypted data unreadable. A compromised service account/administrator is outside the app's account boundary. Deletion removes live records and enables SQLite secure deletion; it cannot promise erasure of backups, WAL history, OS caches or forensic traces. This local edition has no email verification or password recovery.
+Local FragOut uses SQLite at `data/fragout.sqlite`. Use a dedicated data directory. Startup rejects unrelated files and links and restricts permissions to the service user plus Windows SYSTEM and Administrators, or 700/600 on POSIX. Provider credentials and archived photos use AES-256-GCM with separate keys and owner-bound authentication. Preserve the installation key securely with your backups. The current account flow uses a password without email verification or recovery.
+
+Hosted FragOut uses a private Postgres schema with the same sign-in and data controls. Use the dedicated database role, a stable server-only vault key, and the host's HTTPS URL. [Cloud setup and deployment](docs/CLOUD.md)
 
 ## Verification and limits
 
