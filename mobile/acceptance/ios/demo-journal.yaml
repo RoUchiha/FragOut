@@ -1,0 +1,37 @@
+appId: app.fragout.mobile
+name: Demo suggestions and wear journal across a relaunch
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- assertVisible: "Demo · fictional fragrances"
+- tapOn: "Find a scent"
+- assertVisible: "Suggestions"
+- tapOn: "Search fragrance suggestions"
+- inputText: "tired clean work"
+- hideKeyboard
+- tapOn: "Find fragrances"
+- scrollUntilVisible:
+    element:
+      text: "View .*"
+      index: 0
+    direction: DOWN
+- tapOn:
+    text: "View .*"
+    index: 0
+- scrollUntilVisible:
+    element: "Wear this"
+    direction: DOWN
+- tapOn: "Wear this"
+- assertVisible: 'Logged\.'
+- tapOn: "Open journal"
+- assertVisible: "Journal"
+- assertVisible: "WORK · Wore"
+- assertVisible: ".*Tired · Clean.*"
+- launchApp
+- assertVisible: "Collection"
+- tapOn: "Open journal"
+- assertVisible: "WORK · Wore"

@@ -1,0 +1,71 @@
+appId: app.fragout.mobile
+name: Native gallery upload, default deletion and opt-in private photo archive
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- tapOn: "Find a scent"
+- tapOn: "Match outfit"
+- tapOn: "Choose photo"
+- tapOn: "Photo,.*"
+- assertVisible: "Remove photo"
+- tapOn: "Review outfit"
+- extendedWaitUntil:
+    visible: 'Photo not retained\.'
+    timeout: 15000
+- assertNotVisible: "Remove photo"
+- tapOn: "Open settings"
+- scrollUntilVisible:
+    element: "Archive outfit-fragrance looks"
+    direction: DOWN
+- tapOn:
+    text: "Archive outfit-fragrance looks"
+    index: 1
+- assertVisible: 'Archiving enabled\. Save a selected look to keep its photo\.'
+- tapOn: "Find a scent"
+- tapOn: "Match outfit"
+- tapOn: "Choose photo"
+- tapOn: "Photo,.*"
+- assertVisible: "Remove photo"
+- tapOn: "Review outfit"
+- extendedWaitUntil:
+    visible: "Photo held privately for up to 15 minutes.*"
+    timeout: 15000
+- scrollUntilVisible:
+    element: "Confirm outfit description"
+    direction: DOWN
+- tapOn: "Confirm outfit description"
+- scrollUntilVisible:
+    element: "Find matches"
+    direction: DOWN
+- tapOn: "Find matches"
+- scrollUntilVisible:
+    element:
+      text: "View .*"
+      index: 0
+    direction: DOWN
+- tapOn:
+    text: "View .*"
+    index: 0
+- tapOn: "Archive look"
+- assertVisible: 'Look and photo archived privately\.'
+- tapOn: "Open journal"
+- tapOn: "Saved looks"
+- tapOn: "View look"
+- assertVisible: "Your privately archived outfit"
+- tapOn: "Close"
+- tapOn: "Open settings"
+- scrollUntilVisible:
+    element: "Archive outfit-fragrance looks"
+    direction: DOWN
+- tapOn:
+    text: "Archive outfit-fragrance looks"
+    index: 1
+- tapOn: "Delete saved looks and turn off"
+- assertVisible: 'Archiving off\. Saved looks and photos deleted\.'
+- tapOn: "Open journal"
+- tapOn: "Saved looks"
+- assertVisible: "Outfit archive is off"

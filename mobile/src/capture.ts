@@ -18,11 +18,50 @@ export async function clearTemporaryPhotos(){
  for(const file of new Directory(Paths.cache).list())if(file instanceof File&&/^fragout-export-\d+-\d+\.json$/.test(file.uri.slice(Paths.cache.uri.length)))file.delete();
  const exported=new File(Paths.cache,'fragout-export.json');if(exported.exists)exported.delete();
 }
-export async function capturePhoto(source:'selfie'|'bottle'|'gallery'):Promise<Capture|null>{
+type PhotoSource='selfie'|'bottle'|'gallery';
+
+async function pickWebPhoto(source:PhotoSource){
+ const file=await new Promise<globalThis.File|null>(resolve=>{
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*';
+  input.hidden=true;
+  if(source!=='gallery')input.setAttribute('capture',source==='selfie'?'user':'environment');
+  const finish=()=>{
+   const file=input.files?.[0]??null;
+   input.removeEventListener('change',finish);
+   input.removeEventListener('cancel',finish);
+   input.remove();
+   resolve(file);
+  };
+  input.addEventListener('change',finish);
+  input.addEventListener('cancel',finish);
+  document.body.append(input);
+  input.click();
+ });
+ if(!file)return null;
+ const uri=trackPhotoUrl(URL.createObjectURL(file));
+ try{
+  const image=new Image();
+  image.src=uri;
+  await image.decode();
+  return {uri,width:image.naturalWidth,height:image.naturalHeight};
+ }catch{
+  revokePhotoUrl(uri);
+  throw new Error('Photo could not be read. Choose a JPG or PNG image.');
+ }
+}
+
+async function pickNativePhoto(source:PhotoSource){
  if(source!=='gallery'){const permission=await ImagePicker.requestCameraPermissionsAsync();if(!permission.granted)throw new Error('Camera access was denied. Choose a photo or type the details instead.');}
  const options:ImagePicker.ImagePickerOptions={mediaTypes:['images'],quality:0.75,exif:false,base64:false,allowsEditing:false};
  const result=source==='gallery'?await ImagePicker.launchImageLibraryAsync(options):await ImagePicker.launchCameraAsync({...options,cameraType:source==='selfie'?ImagePicker.CameraType.front:ImagePicker.CameraType.back});
- if(result.canceled)return null;const asset=result.assets[0];trackPhotoUrl(asset.uri);
+ return result.canceled?null:result.assets[0];
+}
+
+export async function capturePhoto(source:PhotoSource):Promise<Capture|null>{
+ const asset=Platform.OS==='web'?await pickWebPhoto(source):await pickNativePhoto(source);
+ if(!asset)return null;
  let converted:ImageManipulator.ImageResult|undefined;
  try{
   const resize=asset.width>=asset.height?{width:1024}:{height:1024};

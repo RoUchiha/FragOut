@@ -1,0 +1,35 @@
+appId: app.fragout.mobile
+name: Typed outfit review, confirmation and fragrance matching
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- tapOn: "Find a scent"
+- tapOn: "Match outfit"
+- assertVisible: "Outfit"
+- tapOn:
+    text: "Or describe your outfit"
+    index: 1
+- inputText: "White shirt and navy trousers"
+- hideKeyboard
+- tapOn: "Review outfit"
+- extendedWaitUntil:
+    visible: 'Photo not retained\.'
+    timeout: 15000
+- scrollUntilVisible:
+    element: "Confirm outfit description"
+    direction: DOWN
+- tapOn: "Confirm outfit description"
+- scrollUntilVisible:
+    element: "Find matches"
+    direction: DOWN
+- tapOn: "Find matches"
+- scrollUntilVisible:
+    element: "Your matches"
+    direction: DOWN
+- scrollUntilVisible:
+    element: 'Archiving is off\. Enable it in Settings to save looks\.'
+    direction: DOWN

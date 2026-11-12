@@ -1,0 +1,31 @@
+appId: app.fragout.mobile
+name: Opt into experimental pairs and manage liked combos from Home
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- tapOn: "Find a scent"
+- tapOn: "Filters"
+- tapOn: "Pair"
+- scrollUntilVisible:
+    element: "Include experiments"
+    direction: DOWN
+- tapOn: "Include experiments"
+- tapOn: "Apply filters"
+- scrollUntilVisible:
+    element:
+      text: "Like .*"
+      index: 0
+    direction: DOWN
+- tapOn:
+    text: "Like .*"
+    index: 0
+- assertVisible: "Unlike .*"
+- tapOn: "Home"
+- tapOn: "Liked combos"
+- assertVisible: "Liked combos"
+- tapOn: "Unlike .*"
+- assertVisible: "No liked combos yet|No liked pairs yet"

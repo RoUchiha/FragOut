@@ -1,0 +1,76 @@
+appId: app.fragout.mobile
+name: Create an account, add Dior Sauvage, enlarge its photo and delete the account
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- tapOn: "Open settings"
+- tapOn: "Create account / sign in"
+- assertVisible: "Account"
+- tapOn:
+    text: "Name"
+    index: 1
+- inputText: "Simulator QA"
+- tapOn:
+    text: "Email"
+    index: 1
+- inputText: "${QA_EMAIL}"
+- tapOn:
+    text: "Password"
+    index: 1
+- inputText: "Simulator-fixture-pass-72"
+- hideKeyboard
+- tapOn:
+    text: "Create account"
+    index: 1
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 30000
+- assertNotVisible: "Demo · fictional fragrances"
+- tapOn: "Add"
+- assertVisible: "Add fragrance"
+- tapOn:
+    text: "Brand / house"
+    index: 1
+- inputText: "Dior"
+- tapOn:
+    text: "Exact fragrance name"
+    index: 1
+- inputText: "Sauvage"
+- hideKeyboard
+- tapOn: "EDP"
+- scrollUntilVisible:
+    element: "Save fragrance"
+    direction: DOWN
+- tapOn: "Save fragrance"
+- extendedWaitUntil:
+    visible: "Enlarge bottle thumbnail"
+    timeout: 30000
+- tapOn: "Enlarge bottle thumbnail"
+- assertVisible: "Sauvage"
+- tapOn: "Close"
+- assertVisible: "FragDex"
+- scrollUntilVisible:
+    element: "Cross-checked notes"
+    direction: DOWN
+- tapOn: "Close"
+- launchApp
+- assertVisible: "Collection"
+- assertVisible: "Sauvage"
+- tapOn: "Open settings"
+- scrollUntilVisible:
+    element: "Delete account"
+    direction: DOWN
+- tapOn: "Delete account"
+- tapOn:
+    text: "Type DELETE"
+    index: 1
+- inputText: "DELETE"
+- hideKeyboard
+- tapOn: "Permanently delete"
+- extendedWaitUntil:
+    visible: "Demo · fictional fragrances"
+    timeout: 30000

@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-function harness({native=false,conversionFailure=false}={}){
+function harness({native=false,conversionFailure=false,canceled=false}={}){
  const cache='file:///sandbox/cache/';
  const original=native?cache+'ImagePicker/original.jpg':URL.createObjectURL(new Blob(['original-with-sensitive-metadata']));
  const converted=native?cache+'ImageManipulator/converted.jpg':URL.createObjectURL(new Blob(['converted-image']));
@@ -13,7 +13,31 @@ function harness({native=false,conversionFailure=false}={}){
  class File {uri:string;constructor(...parts:any[]){this.uri=parts.length===1?parts[0]:cache+parts.at(-1);}get exists(){return files.has(this.uri);}delete(){deleted.push(this.uri);files.delete(this.uri);}}
  class Directory {uri:string;constructor(...parts:any[]){this.uri=parts.length===1?(typeof parts[0]==='string'?parts[0]:parts[0].uri):cache+parts.at(-1)+'/';}get exists(){return [...files].some(p=>p.startsWith(this.uri));}delete(){deleted.push(this.uri);for(const file of files)if(file.startsWith(this.uri))files.delete(file);}list(){return [...files].filter(p=>p.startsWith(cache)&&!p.slice(cache.length).includes('/')).map(p=>new File(p));}}
  const fileSystem={File,Directory,Paths:{cache:{uri:cache}}};
- const context:any={URL,Error,Set,Promise,console,require:(name:string)=>{
+ const selectedFile=new Blob(['synthetic picker file'],{type:'image/jpeg'});
+ const picked={removed:0,urls:0,capture:''};
+ class PickerInput extends EventTarget {
+  files=canceled?[]:[selectedFile];
+  setAttribute(name:string,value:string){if(name==='capture')picked.capture=value;}
+  click(){
+   this.dispatchEvent(new Event(canceled?'cancel':'change'));
+   this.dispatchEvent(new Event('cancel'));
+  }
+  remove(){picked.removed++;}
+ }
+ class PickerUrl extends URL {
+  static createObjectURL(file:Blob){
+   assert.equal(file,selectedFile);
+   picked.urls++;
+   return original;
+  }
+ }
+ class Image {
+  naturalWidth=100;
+  naturalHeight=100;
+  async decode(){}
+ }
+ const document={createElement:()=>new PickerInput(),body:{append:()=>{}}};
+ const context:any={URL:PickerUrl,document,Image,Error,Set,Promise,console,require:(name:string)=>{
   if(name==='react-native')return {Platform:{OS:native?'android':'web'}};
   if(name==='expo-image-picker')return {requestCameraPermissionsAsync:async()=>({granted:true}),launchImageLibraryAsync:async()=>({canceled:false,assets:[{uri:original,width:100,height:100}]})};
   if(name==='expo-image-manipulator')return {SaveFormat:{JPEG:'jpeg'},manipulateAsync:async()=>{if(conversionFailure)throw new Error('synthetic conversion failure');return {uri:converted,base64:'c3ludGhldGlj'};}};
@@ -22,12 +46,20 @@ function harness({native=false,conversionFailure=false}={}){
   throw new Error('Unexpected dependency '+name);
  }};
  function load(name:string){const module={exports:{}};const code=ts.transpileModule(readFileSync(new URL('../mobile/src/'+name,import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;vm.runInNewContext(code,{...context,module,exports:module.exports});return module.exports as any;}
- return {capture:load('capture.ts'),original,converted,files,deleted,cache,release:()=>{if(!native){URL.revokeObjectURL(original);URL.revokeObjectURL(converted);}}};
+ return {capture:load('capture.ts'),original,converted,files,deleted,cache,picked,release:()=>{if(!native){URL.revokeObjectURL(original);URL.revokeObjectURL(converted);}}};
 }
 
 test('discard revokes both original web picker blob and converted preview',async()=>{
  const h=harness();try{const photo=await h.capture.capturePhoto('gallery');await h.capture.discardPhoto(photo);
   await assert.rejects(()=>fetch(h.original));await assert.rejects(()=>fetch(h.converted));assert.equal(photo.data,'');
+  assert.deepEqual(h.picked,{removed:1,urls:1,capture:''});
+ }finally{h.release();}
+});
+
+test('canceling a web selfie removes the picker once without creating a photo URL',async()=>{
+ const h=harness({canceled:true});try{
+  assert.equal(await h.capture.capturePhoto('selfie'),null);
+  assert.deepEqual(h.picked,{removed:1,urls:0,capture:'user'});
  }finally{h.release();}
 });
 

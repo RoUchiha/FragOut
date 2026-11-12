@@ -8,7 +8,20 @@ export async function shareAccountExport(){
  const data=JSON.stringify(await exportData(),null,2);check();
  if(Platform.OS==='web'){
   const url=URL.createObjectURL(new Blob([data],{type:'application/json'}));
-  try{check();const link=document.createElement('a');link.href=url;link.download='fragout-export.json';link.click();}finally{URL.revokeObjectURL(url);}
+  const link=document.createElement('a');
+  try{
+   check();
+   link.href=url;
+   link.download='fragout-export.json';
+   link.hidden=true;
+   document.body.append(link);
+   link.click();
+   // The browser reads the blob asynchronously after dispatching the click.
+   setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch(error){
+   URL.revokeObjectURL(url);
+   throw error;
+  }finally{link.remove();}
   return;
  }
  const {isAvailableAsync,shareAsync}=await import('expo-sharing');check();
