@@ -120,7 +120,7 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
    <Btn label="Choose photo" kind="secondary" disabled={busy||listening} icon={<ImagePlus size={16} color={colors.muted}/>} onPress={()=>void take('gallery')} style={{flex:1}}/>
   </View>
   {photo&&<View><Image source={{uri:photo.uri}} style={styles.image} resizeMode="contain"/><Pressable accessibilityRole="button" accessibilityLabel="Remove photo" onPress={()=>{void discardPhoto(livePhoto.current);livePhoto.current=null;setPhoto(null);}} style={{position:'absolute',right:8,top:8,padding:8,backgroundColor:colors.paper,borderRadius:20}}><X size={18} color={colors.muted}/></Pressable></View>}
-  <Field label="Or describe your outfit" multiline maxLength={1800} value={text} onChangeText={setText} placeholder="White shirt, navy trousers, brown loafers…"/>
+  <Field label="Or describe your outfit" testID="outfit-description" multiline maxLength={1800} value={text} onChangeText={setText} placeholder="White shirt, navy trousers, brown loafers…"/>
   <View style={styles.spread}>
    <Btn label={listening?'Stop dictation':'Dictate'} kind="secondary" disabled={busy} icon={listening?<Square size={14} color={colors.accentInk}/>:<Mic size={15} color={colors.muted}/>} onPress={()=>void dictate()}/>
    {!cloudName&&analyzeButton}

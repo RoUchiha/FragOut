@@ -11,14 +11,14 @@ name: Typed outfit review, confirmation and fragrance matching
 - tapOn: "Match outfit"
 - assertVisible: "Outfit"
 - tapOn:
-    text: "Or describe your outfit"
-    index: 1
+    id: "outfit-description"
 - inputText: "White shirt and navy trousers"
 - hideKeyboard
 - tapOn: "Review outfit"
 - extendedWaitUntil:
     visible: 'Photo not retained\.'
     timeout: 15000
+- assertVisible: "Details from your description"
 - scrollUntilVisible:
     element: "Confirm outfit description"
     direction: DOWN

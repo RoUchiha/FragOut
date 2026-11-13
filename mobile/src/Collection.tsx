@@ -225,8 +225,8 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
  }
  async function remove(){if(!bottle)return;setBusy(true);try{await api('bottles/'+bottle.id,'DELETE');await refresh();notify('Bottle removed.');onClose();}catch(e){notify((e as Error).message);}finally{setBusy(false);}}
  return <Sheet title={bottle?'Edit fragrance':'Add fragrance'} onClose={onClose}>
-  <Field label="Brand / house" value={brand} onChangeText={v=>{setBrand(v);if(candidate)setVerified(false);}} maxLength={120}/>
-  <Field label="Exact fragrance name" value={name} onChangeText={v=>{setName(v);if(candidate)setVerified(false);}} maxLength={120}/>
+  <Field label="Brand / house" testID="bottle-brand" value={brand} onChangeText={v=>{setBrand(v);if(candidate)setVerified(false);}} maxLength={120}/>
+  <Field label="Exact fragrance name" testID="bottle-name" value={name} onChangeText={v=>{setName(v);if(candidate)setVerified(false);}} maxLength={120}/>
   <Choices label="Concentration" value={concentration}
    items={concentrationOptions}
    onChange={v=>{setConc(v);if(candidate)setVerified(false);}}/>

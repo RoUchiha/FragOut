@@ -19,11 +19,11 @@ name: Native gallery upload, default deletion and opt-in private photo archive
 - assertNotVisible: "Remove photo"
 - tapOn: "Open settings"
 - scrollUntilVisible:
-    element: "Archive outfit-fragrance looks"
+    element:
+      id: "archive-outfits"
     direction: DOWN
 - tapOn:
-    text: "Archive outfit-fragrance looks"
-    index: 1
+    id: "archive-outfits"
 - assertVisible: 'Archiving enabled\. Save a selected look to keep its photo\.'
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
@@ -50,20 +50,24 @@ name: Native gallery upload, default deletion and opt-in private photo archive
 - tapOn:
     text: "View .*"
     index: 0
+- scrollUntilVisible:
+    element: "Archive look"
+    direction: DOWN
 - tapOn: "Archive look"
 - assertVisible: 'Look and photo archived privately\.'
 - tapOn: "Open journal"
 - tapOn: "Saved looks"
 - tapOn: "View look"
 - assertVisible: "Your privately archived outfit"
+- takeScreenshot: archived-outfit
 - tapOn: "Close"
 - tapOn: "Open settings"
 - scrollUntilVisible:
-    element: "Archive outfit-fragrance looks"
+    element:
+      id: "archive-outfits"
     direction: DOWN
 - tapOn:
-    text: "Archive outfit-fragrance looks"
-    index: 1
+    id: "archive-outfits"
 - tapOn: "Delete saved looks and turn off"
 - assertVisible: 'Archiving off\. Saved looks and photos deleted\.'
 - tapOn: "Open journal"

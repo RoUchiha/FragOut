@@ -11,21 +11,21 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
 - tapOn: "Create account / sign in"
 - assertVisible: "Account"
 - tapOn:
-    text: "Name"
-    index: 1
+    id: "account-name"
 - inputText: "Simulator QA"
 - tapOn:
-    text: "Email"
-    index: 1
+    id: "account-email"
 - inputText: "${QA_EMAIL}"
 - tapOn:
-    text: "Password"
-    index: 1
+    id: "account-password"
 - inputText: "Simulator-fixture-pass-72"
-- hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: "submit-account"
+    direction: DOWN
 - tapOn:
-    text: "Create account"
-    index: 1
+    id: "submit-account"
+    enabled: true
 - extendedWaitUntil:
     visible: "Collection"
     timeout: 30000
@@ -33,12 +33,10 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
 - tapOn: "Add"
 - assertVisible: "Add fragrance"
 - tapOn:
-    text: "Brand / house"
-    index: 1
+    id: "bottle-brand"
 - inputText: "Dior"
 - tapOn:
-    text: "Exact fragrance name"
-    index: 1
+    id: "bottle-name"
 - inputText: "Sauvage"
 - hideKeyboard
 - tapOn: "EDP"
@@ -47,10 +45,14 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
     direction: DOWN
 - tapOn: "Save fragrance"
 - extendedWaitUntil:
-    visible: "Enlarge bottle thumbnail"
+    visible:
+      text: "Enlarge bottle thumbnail"
+      enabled: true
     timeout: 30000
 - tapOn: "Enlarge bottle thumbnail"
 - assertVisible: "Sauvage"
+- assertNotVisible: "FragDex"
+- takeScreenshot: fragdex-enlarged-bottle
 - tapOn: "Close"
 - assertVisible: "FragDex"
 - scrollUntilVisible:
@@ -58,16 +60,18 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
     direction: DOWN
 - tapOn: "Close"
 - launchApp
-- assertVisible: "Collection"
-- assertVisible: "Sauvage"
+- extendedWaitUntil:
+    visible: "Details for Sauvage"
+    timeout: 20000
+- assertNotVisible: "Demo · fictional fragrances"
 - tapOn: "Open settings"
 - scrollUntilVisible:
     element: "Delete account"
     direction: DOWN
 - tapOn: "Delete account"
+- assertVisible: "Delete account"
 - tapOn:
-    text: "Type DELETE"
-    index: 1
+    id: "account-delete-confirmation"
 - inputText: "DELETE"
 - hideKeyboard
 - tapOn: "Permanently delete"

@@ -99,13 +99,13 @@ export function IconButton({label,icon,onPress,disabled}:{
  </Pressable>;
 }
 
-export function Btn({label,onPress,kind='primary',disabled=false,icon,style}:{
+export function Btn({label,onPress,kind='primary',disabled=false,icon,style,testID}:{
  label:string; onPress:()=>void; kind?:'primary'|'secondary'|'quiet'|'danger';
- disabled?:boolean; icon?:React.ReactNode; style?:ViewStyle;
+ disabled?:boolean; icon?:React.ReactNode; style?:ViewStyle; testID?:string;
 }) {
  const {styles,colors} = useUi();
  const ink = {primary:colors.accentInk,secondary:colors.ink,quiet:colors.link,danger:colors.danger}[kind];
- return <Pressable accessibilityRole="button" accessibilityLabel={label} disabled={disabled} onPress={onPress}
+ return <Pressable accessibilityRole="button" accessibilityLabel={label} disabled={disabled} onPress={onPress} testID={testID}
   style={({pressed})=>[styles.button,styles[kind],pressed&&{opacity:.72},disabled&&{opacity:.5},style]}>
   {icon}<Text style={[styles.buttonText,{color:ink}]}>{label}</Text>
  </Pressable>;
@@ -167,17 +167,15 @@ export function Section({title,action,onAction}:{title:string;action?:string;onA
 export function Sheet({title,children,onClose}:{title:string;children:React.ReactNode;onClose:()=>void}) {
  const {styles,colors} = useUi();
  return <Modal visible transparent animationType="slide" onRequestClose={onClose}>
-  <View style={styles.backdrop}>
+  <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':undefined} style={styles.backdrop}>
    <SafeAreaView style={styles.sheet} edges={['bottom']}>
     <View style={styles.sheetTitle}>
      <Text accessibilityRole="header" style={styles.h2}>{title}</Text>
      <IconButton label="Close" onPress={onClose} icon={<X size={21} color={colors.muted}/>}/>
     </View>
-    <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':undefined} style={{flex:1}}>
-     <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.sheetBody}>{children}</ScrollView>
-    </KeyboardAvoidingView>
+    <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.sheetBody}>{children}</ScrollView>
    </SafeAreaView>
-  </View>
+  </KeyboardAvoidingView>
  </Modal>;
 }
 
