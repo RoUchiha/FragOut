@@ -1,7 +1,7 @@
 import type {CatalogRating} from './catalog-ratings.ts';
 
 export type Ownership = 'OWNED' | 'WISHLIST' | 'REMOVED';
-export type Provenance = 'demo' | 'personal' | 'unknown';
+export type Provenance = 'demo' | 'personal' | 'catalog' | 'unknown';
 export interface Bottle {
   id:string; variantId:string; brand:string; name:string; concentration:string;
   ownership:Ownership; family:string; notes:string[]; strength:number;
@@ -10,6 +10,9 @@ export interface Bottle {
   sizeMl:number; fillPct:number; rating:number; favorite:boolean; memo:string;
   catalogPhoto?:string;
   catalogPhotos?:string[];
+  catalogNotes?:string[];
+  catalogSource?:{label:string;url:string};
+  strengthUnknown?:true;
 }
 export interface CatalogSource {
  id:string; publisher:string; url:string;
@@ -70,7 +73,7 @@ export interface SoloResult {bottle:Bottle; score:number; reasons:Reason[]; conf
 export type Tier = 'brand_guidance'|'community_corroborated'|'single_anecdote'|'dupe_adapted_hypothesis'|'model_hypothesis';
 export interface EvidenceReport {author:string; firsthand:boolean; rights:string; url:string}
 export interface Evidence {kind:'brand'|'community'; reports:EvidenceReport[]; adapted?:boolean}
-export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:string; status:'approved'|'draft'}
+export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:string; status:'approved'|'draft';note?:string}
 export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string}
 export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
 export interface User {id:string; name:string; email:string|null; demo:boolean; catalogAdmin?:true}

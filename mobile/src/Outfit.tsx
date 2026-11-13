@@ -135,7 +135,8 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
 
  {profile&&receipt&&<>
   <Section title="Review outfit" action="Start over" onAction={()=>{setProfile(null);setReceipt(null);invalidate();}}/>
-  {receipt.method==='offline_rules'&&<Text style={styles.small}>Offline description rules - Qwen unavailable</Text>}
+  {receipt.method==='offline_rules'&&<Text style={styles.small}>Details from your description</Text>}
+  {receipt.method==='model'&&profile.hasOutfit&&<Text style={styles.small}>Check the clothing and colors before confirming.</Text>}
   <Text style={styles.small}>{receipt.photoRetained?'Photo held privately for up to 15 minutes. Archive a selected look to keep it.':'Photo not retained.'}</Text>
   <Field label="Description" multiline value={profile.summary} maxLength={300}
    onChangeText={summary=>editProfile({summary,hasOutfit:summary.trim().length>3})}/>

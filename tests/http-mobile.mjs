@@ -33,7 +33,7 @@ try{
  assert.equal((await call('outfit/analyze',{method:'POST',token,data:{provider:'qwen',image:{mime:'image/png',data:Buffer.from('bad photo').toString('base64')}}})).status,400);pass('invalid image rejected');
  const analysis=await call('outfit/analyze',{method:'POST',token,data:{provider:'qwen',text:'White linen shirt, navy trousers and brown loafers. Smart casual.'}});
  assert.equal(analysis.status,200);assert.ok(analysis.body.profile.hasOutfit);
- if(status.body.local.installed)assert.equal(analysis.body.method,'model');else assert.equal(analysis.body.method,'offline_rules');pass('typed outfit has an explicit model or offline-rules receipt');
+ assert.equal(analysis.body.method,'offline_rules');pass('typed outfit uses explicit description rules');
  const input={analysisId:analysis.body.id,profile:analysis.body.profile,occasion:'WORK',mode:'both',evidenceMode:'experimental'};
  assert.equal((await call('outfit/recommend',{method:'POST',cookie:web.cookie,data:input})).status,404);pass('analysis receipt cannot cross accounts');
  const matches=await call('outfit/recommend',{method:'POST',token,data:input});assert.equal(matches.status,200);assert.ok(matches.body.solo.length>0);

@@ -4,6 +4,8 @@ import {ChevronDown,Heart,Layers} from 'lucide-react-native';
 import {BottleArt,Btn,Empty,useUi} from './ui';
 import type {SoloResult,ComboResult,Tier,WearEvent} from '../../src/lib/types';
 import {intentSummary} from '../../src/lib/intent';
+import {openBrowserAsync} from 'expo-web-browser';
+import FragDexLink from './FragDexLink';
 
 export type Feedback = (ids:string[],reaction:'wore'|'loved'|'disliked'|'saved',occasion:string,requestId?:string)=>void;
 export type ComboLikes = {
@@ -57,13 +59,22 @@ export function Results({solo,combos,occasion,requestId,onFeedback,comboLikes,bu
 }) {
  const {styles} = useUi();
  const [expanded,setExpanded] = useState<string|null>(null);
+ const [sourceError,setSourceError] = useState('');
+ const visit=(url:string)=>{
+  setSourceError('');
+  void openBrowserAsync(url).catch(()=>setSourceError('Could not open this source.'));
+ };
  const toggle = (id:string) => setExpanded(current=>current===id?null:id);
  return <View>
+  {!!sourceError&&<Text accessibilityRole="alert" style={styles.muted}>{sourceError}</Text>}
   {solo.map(({bottle,reasons,caution})=>
    <ResultRow key={bottle.id} title={bottle.name}
     subtitle={[bottle.brand,bottle.concentration,bottle.family].filter(Boolean).join(' · ')}
     art={<BottleArt bottle={bottle} size={46}/>} open={expanded===bottle.id} onToggle={()=>toggle(bottle.id)}>
     {reasons.map(reason=><Text key={reason.ruleId} style={styles.muted}>{reason.text}</Text>)}
+    {bottle.catalogSource&&<FragDexLink url={bottle.catalogSource.url} visit={visit}>
+     <Text style={styles.link}>Notes source · {bottle.catalogSource.label}</Text>
+    </FragDexLink>}
     <Text style={styles.small}>{caution}</Text>
     <View style={[styles.row,{flexWrap:'wrap'}]}>
      <Btn label="Wear this" disabled={busy} onPress={()=>onFeedback([bottle.id],'wore',occasion,requestId)}/>
@@ -83,6 +94,9 @@ export function Results({solo,combos,occasion,requestId,onFeedback,comboLikes,bu
     open={expanded===key} onToggle={()=>toggle(key)}>
     <Text style={styles.small}>{pair.a.brand} {pair.a.concentration} · {pair.b.brand} {pair.b.concentration}</Text>
     <Text style={styles.muted}>{pair.reason}</Text>
+    {pair.sources.map((url,index)=><FragDexLink key={url} url={url} visit={visit}>
+     <Text style={styles.link}>{pair.sources.length===1?'View pairing source':'Pairing source '+(index+1)}</Text>
+    </FragDexLink>)}
     <Text style={styles.small}>{pair.caution}</Text>
     <View style={[styles.row,{flexWrap:'wrap'}]}>
      <Btn label="Tried it" disabled={busy} onPress={()=>onFeedback(ids,'wore',occasion,requestId)}/>

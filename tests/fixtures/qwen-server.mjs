@@ -16,11 +16,7 @@ const bottle = {
   candidates: [{
     brand: 'Dior',
     name: 'Sauvage',
-    concentration: 'EDP',
-    confidence: 'likely',
-    clue: 'Dior Sauvage Eau de Parfum test image.',
   }],
-  message: 'Check the exact label before saving.',
 };
 
 function send(response, status, data) {

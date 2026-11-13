@@ -7,7 +7,7 @@ const words = (value:string) => value.normalize('NFKD').replace(/\p{M}/gu,'').to
 export function matchesBottleSearch(bottle:Bottle,search:string) {
  if (!search.trim()) return true;
  const terms = words(search);
- const profile = words([bottle.name,bottle.brand,bottle.family,bottle.concentration,...bottle.notes].join(' ')).join(' ');
+ const profile = words([bottle.name,bottle.brand,bottle.family,bottle.concentration,...bottle.notes,...(bottle.catalogNotes??[])].join(' ')).join(' ');
  return terms.length>0 && terms.every(term => profile.includes(term));
 }
 

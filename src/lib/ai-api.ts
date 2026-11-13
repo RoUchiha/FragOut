@@ -8,6 +8,7 @@ import {PrivateLooks} from './private-looks.ts';
 import {imageSchema,outfitSchema,parseOutfitText,rankForOutfit} from './outfit.ts';
 import {LOCAL_MODEL,ProviderError,localModelStatus,prepareImage,runVision,testProvider} from './providers.ts';
 import {intentFields} from './validation.ts';
+import {enrichRecommendationBottles,reviewedPairsFor} from './recommendation-evidence.ts';
 const json=(data:unknown,status=200)=>NextResponse.json(data,{status,headers:{'Cache-Control':'no-store','Vary':'Cookie, Authorization','Referrer-Policy':'no-referrer'}});
 const providerSchema=z.enum(['qwen','openai','claude']);
 const occasionSchema=z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']);
@@ -78,8 +79,12 @@ export async function handleAiApi(
      return await privateJson({...result,provider,model});
     }
     let profile,method:'model'|'offline_rules'='model';
-    try{profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image}));}
-    catch(error){await verifySession();if(provider==='qwen'&&!image&&input.text){profile=parseOutfitText(input.text);method='offline_rules';}else throw error;}
+    if(provider==='qwen'&&!image&&input.text){
+     profile=parseOutfitText(input.text);
+     method='offline_rules';
+    }else{
+     profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image}));
+    }
     await verifySession();
     const receipt:OutfitReceipt={id:randomUUID(),profile,provider,model:method==='model'?model:'offline-description-rules',method,createdAt:new Date().toISOString()};
     if(authorize){
@@ -104,7 +109,8 @@ export async function handleAiApi(
    const archiveEpoch=await db.archiveConsent(user.id);
    if(!await db.getOutfit(user.id,d.analysisId))return json({error:'Outfit analysis not found or expired. Analyze the outfit again.'},404);
    const state=await db.state(user.id),context={...state.context,occasion:d.occasion,mood:d.mood,vibe:d.vibe};
-   const result=rankForOutfit(state.bottles,context,state.preferences,d.profile,d.mode,d.evidenceMode,[],state.history.filter(h=>h.reaction==='disliked'&&h.bottleIds.length===2).map(h=>h.bottleIds));
+   const bottles=enrichRecommendationBottles(state.bottles);
+   const result=rankForOutfit(bottles,context,state.preferences,d.profile,d.mode,d.evidenceMode,reviewedPairsFor(bottles),state.history.filter(h=>h.reaction==='disliked'&&h.bottleIds.length===2).map(h=>h.bottleIds));
    const offered=[...result.solo.map(r=>r.bottle),...result.combos.flatMap(r=>[r.a,r.b])];
    const choices=[...result.solo.map(r=>[r.bottle.id]),...result.combos.map(r=>[r.a.id,r.b.id])];
    const outfit=archiveEpoch!==null?{analysisId:d.analysisId,profile:d.profile,choices,variants:Object.fromEntries(offered.map(b=>[b.id,b.variantId]))}:undefined;

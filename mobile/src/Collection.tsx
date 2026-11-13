@@ -176,7 +176,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos}:{
    <Text style={styles.muted}>Check the exact bottle before adding. The scan photo has already been deleted.</Text>
    {candidates.map((item,index)=><View key={index} style={styles.card}>
     <Text style={styles.h3}>{item.brand} {item.name}</Text>
-    <Text style={styles.small}>{item.concentration} · {item.confidence==='likely'?'Likely match':'Uncertain'}</Text>
+    <Text style={styles.small}>{item.concentration==='UNKNOWN'?'Concentration unclear':item.concentration} · Check label</Text>
     <Text style={styles.muted}>{item.clue}</Text>
     <Btn label="Use these details" onPress={()=>{setCandidate(item);setEditing(null);setCandidates(null);}}/>
    </View>)}

@@ -10,6 +10,8 @@ import {handleAiApi} from '../src/lib/ai-api.ts';
 import * as database from '../src/lib/database.ts';
 import * as validation from '../src/lib/validation.ts';
 import * as engine from '../src/lib/engine.ts';
+import * as recommendationEvidence from '../src/lib/recommendation-evidence.ts';
+import {demoBottles} from '../src/lib/seed.ts';
 import * as security from '../src/lib/security.ts';
 import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
@@ -28,6 +30,7 @@ function harness({key='',lookup=async()=>null,select=async()=>null}:{
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,process:{env:{FRAGOUT_FRAGELLA_API_KEY:key}},Buffer,console,Error,Uint8Array,require:(name:string)=>{
   if(name==='next/server')return {...next,after:(task:()=>Promise<void>)=>scheduled.push(task)};if(name==='zod')return require('zod');
   if(name==='@/lib/catalog')return catalog;
+  if(name==='@/lib/recommendation-evidence')return recommendationEvidence;
   if(name==='@/lib/catalog-editions')return editions;
   if(name==='@/lib/outfit')return outfit;
   if(name==='@/lib/database')return database;
@@ -69,6 +72,41 @@ test('recommendations validate mood/vibe and preserve selected context in an own
   const worn=await h.db.feedback(a.id,[response.body.solo[0].bottle.id],'wore','GENERAL',response.body.requestId);assert.equal(worn.context.vibe,'CLEAN');
   for(const patch of [{mood:'unsupported'},{vibe:'unsupported'},{mood:['HAPPY']},{vibe:{value:'CLEAN'}}])assert.equal((await h.call('recommend',{method:'POST',token,body:{occasion:'GENERAL',mode:'solo',...patch}})).status,400);
   assert.equal((await h.db.state(a.id)).context.mood,undefined,'Request choices must not change persistent account conditions');
+ }finally{await h.db.close();}
+});
+
+test('catalog recommendations use exact sourced editions and brand-reviewed pairs with no personal profile required',async()=>{
+ const h=harness();
+ try {
+  const owner=await h.db.register('Catalog QA','catalog-qa@example.test','synthetic-password');
+  const token=await h.db.createSession(owner.id);
+  const {id,variantId,catalogPhoto,catalogPhotos,...base}=demoBottles[0];
+  const add=(name:string,concentration:string)=>h.call('bottles',{method:'POST',token,body:{
+   ...base,brand:'Jo Malone',name,concentration,profileKnown:false,notes:[],family:'',climate:'UNKNOWN',provenance:'unknown',
+  }});
+  const first=await add('Wood Sage & Sea Salt','EDC');
+  const second=await add('Peony & Blush Suede','EDC');
+  const wrongEdition=await add('Peony & Blush Suede','EDP');
+  for(const item of [first,second,wrongEdition])assert.equal(item.status,201);
+  const single=await h.call('recommend',{method:'POST',token,body:{mode:'solo',occasion:'GENERAL',search:'ambrette'}});
+  assert.equal(single.status,200);
+  assert.deepEqual(single.body.solo.map((result:{bottle:{id:string}})=>result.bottle.id),[first.body.id]);
+  assert.equal(single.body.solo[0].bottle.provenance,'catalog');
+  assert.equal(single.body.solo[0].bottle.strengthUnknown,true);
+  assert.match(single.body.solo[0].bottle.catalogSource.url,/^https:\/\/www\.jomalone\.com\//);
+  const gym=await h.call('recommend',{method:'POST',token,body:{mode:'solo',occasion:'GYM'}});
+  assert.deepEqual(gym.body.solo,[]);
+  const pair=await h.call('recommend',{method:'POST',token,body:{mode:'combo',occasion:'GENERAL',evidenceMode:'evidence'}});
+  assert.equal(pair.status,200);
+  assert.equal(pair.body.combos.length,1);
+  assert.deepEqual(new Set([pair.body.combos[0].a.id,pair.body.combos[0].b.id]),new Set([first.body.id,second.body.id]));
+  assert.equal(pair.body.combos[0].tier,'brand_guidance');
+  assert.deepEqual(pair.body.combos[0].sources,['https://www.jomalone.com/scent-layering']);
+  const state=await h.db.state(owner.id);
+  await h.db.saveSettings(owner.id,{preferences:{...state.preferences,dislikedNotes:['sage']}});
+  const filtered=await h.call('recommend',{method:'POST',token,body:{mode:'combo',occasion:'GENERAL'}});
+  assert.deepEqual(filtered.body.combos,[]);
+  assert.equal((await h.db.getBottle(owner.id,first.body.id))?.profileKnown,false);
  }finally{await h.db.close();}
 });
 
