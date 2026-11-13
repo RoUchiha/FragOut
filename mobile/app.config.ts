@@ -2,6 +2,8 @@ import type {ExpoConfig} from 'expo/config';
 import {getAdMobConfig} from './admob.config.cjs';
 
 const dictationPermission='Dictate your outfit description.';
+const iosBundleId='app.fragout.mobile';
+const simulatorAcceptance=process.env.FRAGOUT_IOS_SIMULATOR_ACCEPTANCE==='1';
 const ads=getAdMobConfig(process.env);
 const adPlugins:NonNullable<ExpoConfig['plugins']>=ads.android||ads.ios ? [
  ['react-native-google-mobile-ads',{
@@ -12,7 +14,9 @@ const adPlugins:NonNullable<ExpoConfig['plugins']>=ads.android||ads.ios ? [
 ] : [];
 const config:ExpoConfig={
  name:'FragOut',slug:'fragout-mobile',version:'0.2.0',scheme:'fragout',orientation:'portrait',icon:'./assets/icon.png',
- ios:{supportsTablet:true,bundleIdentifier:'app.fragout.mobile',userInterfaceStyle:'light',
+ ios:{supportsTablet:true,bundleIdentifier:iosBundleId,userInterfaceStyle:'light',
+  // Xcode embeds this identity in the simulator executable for SecureStore.
+  ...(simulatorAcceptance?{entitlements:{'application-identifier':`SIMULATOR0.${iosBundleId}`}}:{}),
   infoPlist:{UIFileSharingEnabled:false,LSSupportsOpeningDocumentsInPlace:false,
    NSAppTransportSecurity:{NSAllowsArbitraryLoads:false,NSAllowsLocalNetworking:true}}},
  android:{package:'app.fragout.mobile',allowBackup:false,adaptiveIcon:{foregroundImage:'./assets/icon.png',backgroundColor:'#f8f8f5'},
