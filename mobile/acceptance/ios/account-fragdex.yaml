@@ -43,9 +43,10 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
           when:
             notVisible: "Add fragrance"
           commands:
-            - tapOn:
-                point: "32%,63%"
-- assertVisible: "Add fragrance"
+            - tapOn: "Add"
+- extendedWaitUntil:
+    visible: "Add fragrance"
+    timeout: 20000
 - tapOn:
     id: "bottle-brand"
 - inputText: "Dior"

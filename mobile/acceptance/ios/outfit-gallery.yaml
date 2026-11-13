@@ -61,12 +61,14 @@ name: Native gallery upload, default deletion and opt-in private photo archive
       text: "View .*"
       index: 0
     direction: DOWN
+    centerElement: true
 - tapOn:
     text: "View .*"
     index: 0
 - scrollUntilVisible:
     element: "Archive look"
     direction: DOWN
+    centerElement: true
 - tapOn: "Archive look"
 - extendedWaitUntil:
     visible:
