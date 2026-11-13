@@ -107,7 +107,7 @@ jobs:
       - name: Install and verify the simulator app
         run: |
           app="$RUNNER_TEMP/fragout-release/FragOut.app"
-          lipo -verify_arch arm64 "$app/FragOut"
+          lipo "$app/FragOut" -verify_arch arm64
           xcrun simctl install "$FRAGOUT_SIMULATOR" "$app"
           xcrun simctl get_app_container "$FRAGOUT_SIMULATOR" app.fragout.mobile
 
