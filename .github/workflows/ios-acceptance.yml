@@ -121,6 +121,7 @@ jobs:
           set -euo pipefail
           evidence="$RUNNER_TEMP/fragout-evidence"
           export FRAGOUT_DB="$RUNNER_TEMP/fragout-private/state.sqlite"
+          export FRAGOUT_IOS_QA_EMAIL="ios-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT@example.test"
           node tests/fixtures/qwen-server.mjs 11447 > "$evidence/qwen-fixture.log" 2>&1 &
           model_pid=$!
           node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3215 > "$evidence/api.log" 2>&1 &
@@ -144,7 +145,7 @@ jobs:
           maestro --no-ansi --device "$FRAGOUT_SIMULATOR" test \
             --format junit --output "$evidence/results.xml" \
             --test-output-dir "$evidence/maestro" \
-            -e "QA_EMAIL=ios-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT@example.test" \
+            -e "QA_EMAIL=$FRAGOUT_IOS_QA_EMAIL" \
             mobile/acceptance/ios || maestro_status=$?
           node --input-type=module -e '
             import assert from "node:assert/strict";
@@ -152,9 +153,14 @@ jobs:
             const db = new DatabaseSync(process.env.FRAGOUT_DB, {readOnly: true});
             assert.equal(db.prepare("SELECT COUNT(*) AS count FROM private_photos").get().count, 0);
             assert.equal(db.prepare("SELECT COUNT(*) AS count FROM saved_looks").get().count, 0);
+            if (process.argv[1] === "0") {
+              assert.equal(db.prepare("SELECT COUNT(*) AS count FROM users WHERE email=?")
+                .get(process.env.FRAGOUT_IOS_QA_EMAIL).count, 0);
+              console.log("The registered test account was deleted.");
+            }
             db.close();
             console.log("The test database contains zero private photos and saved looks.");
-          '
+          ' "$maestro_status"
           exit "$maestro_status"
 
       - name: Preserve simulator evidence

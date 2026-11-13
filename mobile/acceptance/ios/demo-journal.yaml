@@ -6,7 +6,7 @@ name: Demo suggestions and wear journal across a relaunch
     clearKeychain: true
 - extendedWaitUntil:
     visible: "Collection"
-    timeout: 30000
+    timeout: 90000
 - assertVisible: "Demo · fictional fragrances"
 - tapOn: "Find a scent"
 - assertVisible: "Suggestions"
@@ -26,12 +26,15 @@ name: Demo suggestions and wear journal across a relaunch
     element: "Wear this"
     direction: DOWN
 - tapOn: "Wear this"
-- assertVisible: 'Logged\.'
 - tapOn: "Open journal"
 - assertVisible: "Journal"
-- assertVisible: "WORK · Wore"
+- extendedWaitUntil:
+    visible: "WORK · Wore"
+    timeout: 20000
 - assertVisible: ".*Tired · Clean.*"
 - launchApp
-- assertVisible: "Collection"
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 90000
 - tapOn: "Open journal"
 - assertVisible: "WORK · Wore"

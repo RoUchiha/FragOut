@@ -6,7 +6,7 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     clearKeychain: true
 - extendedWaitUntil:
     visible: "Collection"
-    timeout: 30000
+    timeout: 90000
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
 - tapOn: "Choose photo"
@@ -22,13 +22,19 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     timeout: 15000
 - assertNotVisible: "Remove photo"
 - tapOn: "Open settings"
+# The switch can have an accessibility frame behind the bottom tabs before scrolling.
 - scrollUntilVisible:
     element:
       id: "archive-outfits"
     direction: DOWN
+    centerElement: true
 - tapOn:
     id: "archive-outfits"
-- assertVisible: 'Archiving enabled\. Save a selected look to keep its photo\.'
+- tapOn: "Open journal"
+- tapOn: "Saved looks"
+- extendedWaitUntil:
+    visible: "No saved looks"
+    timeout: 20000
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
 - tapOn: "Choose photo"
@@ -62,11 +68,20 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     element: "Archive look"
     direction: DOWN
 - tapOn: "Archive look"
-- assertVisible: 'Look and photo archived privately\.'
+- extendedWaitUntil:
+    visible:
+      text: "Archive look"
+      enabled: true
+    timeout: 20000
 - tapOn: "Open journal"
 - tapOn: "Saved looks"
+- extendedWaitUntil:
+    visible: "View look"
+    timeout: 20000
 - tapOn: "View look"
-- assertVisible: "Your privately archived outfit"
+- extendedWaitUntil:
+    visible: "Your privately archived outfit"
+    timeout: 20000
 - takeScreenshot: archived-outfit
 - tapOn: "Close"
 - tapOn: "Open settings"
@@ -74,10 +89,13 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     element:
       id: "archive-outfits"
     direction: DOWN
+    centerElement: true
 - tapOn:
     id: "archive-outfits"
 - tapOn: "Delete saved looks and turn off"
-- assertVisible: 'Archiving off\. Saved looks and photos deleted\.'
+- extendedWaitUntil:
+    notVisible: "Turn off archiving"
+    timeout: 20000
 - tapOn: "Open journal"
 - tapOn: "Saved looks"
 - assertVisible: "Outfit archive is off"

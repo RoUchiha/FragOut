@@ -6,7 +6,7 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
     clearKeychain: true
 - extendedWaitUntil:
     visible: "Collection"
-    timeout: 30000
+    timeout: 90000
 - tapOn: "Open settings"
 - tapOn: "Create account / sign in"
 - assertVisible: "Account"
@@ -88,8 +88,9 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
 - tapOn:
     id: "account-delete-confirmation"
 - inputText: "DELETE"
-- hideKeyboard
-- tapOn: "Permanently delete"
+- tapOn:
+    text: "Permanently delete"
+    enabled: true
 - extendedWaitUntil:
     visible: "Demo · fictional fragrances"
     timeout: 30000

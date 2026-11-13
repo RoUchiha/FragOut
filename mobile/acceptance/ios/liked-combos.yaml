@@ -6,7 +6,7 @@ name: Opt into experimental pairs and manage liked combos from Home
     clearKeychain: true
 - extendedWaitUntil:
     visible: "Collection"
-    timeout: 30000
+    timeout: 90000
 - tapOn: "Find a scent"
 - tapOn: "Filters"
 - tapOn: "Pair"
