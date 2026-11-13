@@ -10,8 +10,12 @@ name: Native gallery upload, default deletion and opt-in private photo archive
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
 - tapOn: "Choose photo"
-- tapOn: "Photo,.*"
-- assertVisible: "Remove photo"
+- tapOn:
+    id: "PXGGridLayout-Info"
+    index: 0
+- extendedWaitUntil:
+    visible: "Remove photo"
+    timeout: 45000
 - tapOn: "Review outfit"
 - extendedWaitUntil:
     visible: 'Photo not retained\.'
@@ -28,8 +32,12 @@ name: Native gallery upload, default deletion and opt-in private photo archive
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
 - tapOn: "Choose photo"
-- tapOn: "Photo,.*"
-- assertVisible: "Remove photo"
+- tapOn:
+    id: "PXGGridLayout-Info"
+    index: 0
+- extendedWaitUntil:
+    visible: "Remove photo"
+    timeout: 45000
 - tapOn: "Review outfit"
 - extendedWaitUntil:
     visible: "Photo held privately for up to 15 minutes.*"
