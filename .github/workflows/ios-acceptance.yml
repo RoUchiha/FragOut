@@ -16,7 +16,7 @@ jobs:
   simulator:
     name: iPhone 17 simulator
     runs-on: macos-26
-    timeout-minutes: 45
+    timeout-minutes: 120
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       EXPO_NO_TELEMETRY: '1'
@@ -67,6 +67,7 @@ jobs:
           xcrun simctl addmedia "$FRAGOUT_SIMULATOR" "$RUNNER_TEMP/fragout-outfit.png"
 
       - name: Build and install native release
+        timeout-minutes: 100
         working-directory: mobile
         env:
           EXPO_USE_PRECOMPILED_MODULES: '1'
@@ -82,11 +83,12 @@ jobs:
             -sdk iphonesimulator \
             -destination "platform=iOS Simulator,id=$FRAGOUT_SIMULATOR" \
             -derivedDataPath "$build" \
-            -jobs 2 -quiet CODE_SIGNING_ALLOWED=NO build \
+            -jobs 3 CODE_SIGNING_ALLOWED=NO build \
             2>&1 | tee "$RUNNER_TEMP/fragout-evidence/xcode.log"
           xcrun simctl install "$FRAGOUT_SIMULATOR" "$build/Build/Products/Release-iphonesimulator/FragOut.app"
 
       - name: Exercise the native UI and private API
+        timeout-minutes: 15
         run: |
           set -euo pipefail
           evidence="$RUNNER_TEMP/fragout-evidence"
