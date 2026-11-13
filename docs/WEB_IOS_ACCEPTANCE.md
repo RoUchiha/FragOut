@@ -2,7 +2,7 @@
 
 ## Web
 
-The optimized Next.js build and Expo web export passed. The build check inspected 10 deployment traces and 248 public assets for private databases, keys, environment files, and source maps. The browser compatibility pass had 182 automated tests and 45 production HTTP checks. The grounding follow-up brought the automated suite to 187 passing tests.
+The optimized Next.js build and Expo web export passed. The build check inspected 10 deployment traces and 248 public assets for private databases, keys, environment files, and source maps. The browser compatibility pass had 182 automated tests and 45 production HTTP checks. The grounding follow-up passed 187 automated tests, all 45 HTTP checks, and 173 privacy and session assertions.
 
 | Browser engine | Mobile layout | Desktop companion |
 | --- | ---: | ---: |
@@ -52,5 +52,7 @@ The installed free model is Qwen3-VL 2B Instruct through loopback Ollama. The mo
 The bottle reader uses bundled local OCR. Product identity needs independently read brand and fragrance text. Concentration comes from the printed label when readable. Clear exact catalog matches can be returned directly from OCR. The server discards the image data after processing. The Chromium bottle confirmation flow took 1.6 seconds on the clear EDP fixture. Outfit photos still use Qwen and require user review because visible colors and garments can be misread.
 
 The catalog has 218 exact profiles, 1,089 note claims, 196 wear estimates, and 241 dupe relationships. Automated checks validate source attribution and exact editions. Live spot checks confirmed Dior's bergamot and vanilla notes for Sauvage EDP and Creed's bergamot, pineapple, and birch for Aventus. Dossier identifies Musky Oakmoss as inspired by Aventus. [Dior Sauvage EDP](https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html), [Creed Aventus](https://creedboutique.com/products/aventus), [Dossier Musky Oakmoss](https://dossier.co/products/musky-oakmoss)
+
+The three archived source snapshots matched the documented SHA-256 digests. Recompiling with them regenerated both published catalog JSON files byte for byte. The 196 ratings in the bundled snapshot are labeled wear estimates. Unsupported facets show N/A. Live ratings from the optional Fragella connection require its configured API key. [Catalog sources and rating methodology](../catalog/README.md)
 
 FragOut now uses the exact catalog profile for recommendations when a bottle has no personal notes. An unsupported projection stays unknown and the bottle is excluded from settings that require a known projection limit. The first published layering entry covers Jo Malone Wood Sage & Sea Salt Cologne with Peony & Blush Suede Cologne. The browser and API checks verified the exact pair and its citation. Other combinations without approved direct evidence remain opt-in experiments. [Jo Malone scent layering guide](https://www.jomalone.com/scent-layering)
