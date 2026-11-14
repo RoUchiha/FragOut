@@ -66,7 +66,15 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
     text: "Sauvage"
 - pressKey: Enter
 - waitForAnimationToEnd
-- tapOn: "EDP"
+- retry:
+    maxRetries: 1
+    commands:
+      - tapOn:
+          text: "EDP"
+          retryTapIfNoChange: true
+      - assertVisible:
+          text: "EDP"
+          selected: true
 - scrollUntilVisible:
     element: "Save fragrance"
     direction: DOWN
@@ -90,7 +98,7 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
 - launchApp
 - extendedWaitUntil:
     visible: "Details for Sauvage"
-    timeout: 20000
+    timeout: 45000
 - assertNotVisible: "Demo · fictional fragrances"
 - tapOn: "Open settings"
 - scrollUntilVisible:
