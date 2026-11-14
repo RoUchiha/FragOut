@@ -9,13 +9,7 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     timeout: 90000
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
-- tapOn: "Choose photo"
-- tapOn:
-    id: "PXGGridLayout-Info"
-    index: 0
-- extendedWaitUntil:
-    visible: "Remove photo"
-    timeout: 45000
+- runFlow: ../system/select-outfit-photo.yaml
 - tapOn: "Review outfit"
 - extendedWaitUntil:
     visible: 'Photo not retained\.'
@@ -37,13 +31,7 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     timeout: 20000
 - tapOn: "Find a scent"
 - tapOn: "Match outfit"
-- tapOn: "Choose photo"
-- tapOn:
-    id: "PXGGridLayout-Info"
-    index: 0
-- extendedWaitUntil:
-    visible: "Remove photo"
-    timeout: 45000
+- runFlow: ../system/select-outfit-photo.yaml
 - tapOn: "Review outfit"
 - extendedWaitUntil:
     visible: "Photo held privately for up to 15 minutes.*"

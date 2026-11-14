@@ -1,0 +1,28 @@
+appId: app.fragout.mobile
+---
+# The external iOS picker can dismiss during a simulated tap without returning a selection.
+- retry:
+    maxRetries: 1
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Remove photo"
+          commands:
+            - runFlow:
+                when:
+                  notVisible:
+                    id: "PXGGridLayout-Info"
+                commands:
+                  - tapOn: "Choose photo"
+            - extendedWaitUntil:
+                visible:
+                  id: "PXGGridLayout-Info"
+                timeout: 30000
+            - waitForAnimationToEnd
+            - tapOn:
+                id: "PXGGridLayout-Info"
+                index: 0
+                retryTapIfNoChange: false
+      - extendedWaitUntil:
+          visible: "Remove photo"
+          timeout: 45000

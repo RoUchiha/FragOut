@@ -13,9 +13,17 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
 - tapOn:
     id: "account-name"
 - inputText: "Simulator QA"
+# Let the sheet settle at its resting position before focusing the next input.
+- pressKey: Enter
+- waitForAnimationToEnd
 - tapOn:
     id: "account-email"
 - inputText: "${QA_EMAIL}"
+- assertVisible:
+    id: "account-email"
+    text: "${QA_EMAIL}"
+- pressKey: Enter
+- waitForAnimationToEnd
 - tapOn:
     id: "account-password"
 - inputText: "Simulator-fixture-pass-72"
@@ -30,30 +38,34 @@ name: Create an account, add Dior Sauvage, enlarge its photo and delete the acco
     visible: "Collection"
     timeout: 30000
 - assertNotVisible: "Demo · fictional fragrances"
-- tapOn: "Add"
-# iOS may present Passwords over this sheet. The prompt lives outside FragOut's hierarchy.
-- runFlow:
-    when:
-      notVisible: "Add fragrance"
+# Passwords can appear after registration and consume the first tap on Add.
+- retry:
+    maxRetries: 1
     commands:
-      - tapOn:
-          text: "Not Now"
-          optional: true
       - runFlow:
           when:
             notVisible: "Add fragrance"
           commands:
-            - tapOn: "Add"
-- extendedWaitUntil:
-    visible: "Add fragrance"
-    timeout: 20000
+            - tapOn:
+                text: "Not Now"
+                optional: true
+            - tapOn:
+                text: "Add"
+                retryTapIfNoChange: true
+      - assertVisible: "Add fragrance"
 - tapOn:
     id: "bottle-brand"
 - inputText: "Dior"
+- pressKey: Enter
+- waitForAnimationToEnd
 - tapOn:
     id: "bottle-name"
 - inputText: "Sauvage"
-- hideKeyboard
+- assertVisible:
+    id: "bottle-name"
+    text: "Sauvage"
+- pressKey: Enter
+- waitForAnimationToEnd
 - tapOn: "EDP"
 - scrollUntilVisible:
     element: "Save fragrance"
