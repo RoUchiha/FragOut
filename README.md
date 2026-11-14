@@ -26,7 +26,7 @@ In the mobile app, the home icon opens your collection, bottle scanning and Add.
 
 The mobile palette follows the device's local time and the hemisphere in **Settings → Conditions**. Each season has morning, day, evening and night variations.
 
-Matches use the notes and families you recorded for owned bottles. Your desired vibe has more influence than mood. Venue rules, exclusions and pair evidence still apply. Tap a suggestion to see the matching note or family. Wear logs and saved looks keep the choices from the recommendation.
+Matches use your recorded notes and families or an exact FragDex profile for owned bottles. Your desired vibe has more influence than mood. Venue rules, exclusions and pair evidence still apply. Tap a suggestion to see the matching note or family. Wear logs and saved looks keep the choices from the recommendation.
 
 ## Outfit matching
 
@@ -35,9 +35,9 @@ Matches use the notes and families you recorded for owned bottles. Your desired 
 3. Confirm the outfit, select an occasion, and request a fragrance, pair, or both.
 4. The engine uses only owned bottles with known profiles, applying venue rules and exclusions before outfit style. Wear a choice or save a pair to the journal.
 
-Outfit style is a heuristic, not measured fragrance compatibility. The model interprets clothing; it never chooses arbitrary catalog IDs or creates pair evidence. Experimental pairs require deliberate opt-in and remain labeled untested. Unknown scent profiles stay unknown.
+Outfit matching uses a style heuristic based on clothing you review. Fragrance details and pair evidence come from FragDex and your collection. Experimental pairs require deliberate opt-in and remain labeled untested. Unknown scent profiles stay unknown.
 
-The mobile collection reads bottle labels through the selected vision provider and presents up to three candidates. Confirm the exact house, edition and concentration before adding.
+The mobile collection reads bottle labels with local OCR. An exact catalog match can appear immediately. When the label is ambiguous, the selected vision provider can propose a name that the app checks against the printed text. Confirm the exact house, edition and concentration before adding.
 
 ## FragDex
 
@@ -47,7 +47,7 @@ The catalog includes 218 exact editions with corroborated notes and one bundled 
 
 ## Free default, optional personal providers
 
-**Qwen3-VL 2B Instruct through Ollama is the default.** It runs on the backend computer/server, not on the phone. There is no API fee; it still needs hardware, disk space and a running server. The first download is approximately 1.9 GB.
+**Qwen3-VL 2B Instruct through Ollama is the default.** It runs on the FragOut server with no API fee. The first download is approximately 1.9 GB.
 
 Install [Ollama](https://ollama.com/download), then:
 
@@ -62,7 +62,7 @@ In mobile **Settings → Model connection**, users can connect their own OpenAI 
 
 Photos/descriptions go only to the explicitly selected provider. The server rejects analysis if that selection changed after the screen loaded. There is no automatic paid fallback. Provider API charges belong to the user's account; a ChatGPT or Claude chat subscription is separate from API access. Users can test, switch, replace or disconnect a connection. Disconnecting the active paid connection returns to Qwen.
 
-If Qwen is unavailable, typed descriptions can use clearly labeled offline clothing rules. Photos never receive a fabricated offline result. OpenAI/Claude adapters were verified with fixtures; live paid inference was not tested with a real key. Local Qwen text and image calls were tested.
+With the default Qwen setting, typed and dictated descriptions use local clothing rules. Qwen interprets outfit photos, and a model error prompts the user to retry or describe the outfit. The OpenAI and Claude adapters were verified with fixtures. Local Qwen was tested with photo inputs.
 
 Optional backend settings are documented in `.env.example`, including a dedicated private data directory and the explicit HTTPS public origin. A model override must support images and the structured contract.
 
@@ -93,7 +93,7 @@ Hosted FragOut uses a private Postgres schema with the same sign-in and data con
 
 ## Verification and limits
 
-See the [12 November 2026 acceptance report](docs/ACCEPTANCE_REPORT.md) for the browser, Android, API, photo, and cloud checks.
+See the [web, iOS and model grounding report](docs/WEB_IOS_ACCEPTANCE.md) for the latest results and the [12 November 2026 acceptance report](docs/ACCEPTANCE_REPORT.md) for Android and cloud checks.
 
 ```powershell
 npm.cmd run typecheck
@@ -109,13 +109,14 @@ node tests/http-mobile.mjs
 node scripts/security-lab.mjs --test
 # With the isolated lab running separately (default port 3210):
 node tests/http-intent.mjs
-# Optional real local-model smoke checks:
+# Optional checks with the installed local model
 node --experimental-strip-types scripts/check-local-qwen.mjs
 node --experimental-strip-types scripts/check-qwen-photo.mjs
+node --experimental-strip-types --test scripts/check-qwen-grounding.mjs
 ```
 
-The current build passed 128 tests, 7 mood and vibe HTTP checks, 173 security assertions and 37 existing HTTP checks. Production builds also check deployment traces and public assets for private files. Browser and native bundle checks run separately. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
+The current build passed 191 automated tests, 45 production HTTP checks and 173 privacy and session assertions. Production builds also check deployment traces and public assets for private files. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
-Remaining production work includes signed phone builds and device acceptance, broader catalog evidence and photo coverage, a reviewed pair evidence registry, measured recommendation/vision quality, live weather, managed identity/recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database. This build runs locally.
+Remaining production work includes signed phone builds and device acceptance, broader catalog and layering evidence, measured recommendation and vision quality, live weather, managed identity and recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database.
 
 Provider references: [Ollama chat API](https://docs.ollama.com/api/chat), [Qwen model](https://ollama.com/library/qwen3-vl:2b-instruct), [OpenAI image input](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses), [Claude vision](https://platform.claude.com/docs/en/build-with-claude/vision).

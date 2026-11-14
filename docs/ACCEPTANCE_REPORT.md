@@ -2,6 +2,8 @@
 
 **12 November 2026** · FragOut 0.2.0 mobile and 0.1.0 server · Acceptance changes based on `bab58a9`
 
+The [web and iOS acceptance report](WEB_IOS_ACCEPTANCE.md) has the later browser, iOS simulator, and model grounding results.
+
 ## Scope
 
 I exercised the mobile app first, then the desktop companion and shared API. The runs used Chromium at 320–390 px for mobile and 1366 px and 390 px for the desktop companion, a Windows production Next.js build, an Android 16 emulator, local Qwen3-VL 2B, a disposable SQLite database, and synthetic accounts in the managed Supabase project. Photo tests used an illustrated outfit and a public bottle packshot. The regular local wardrobe and cloud accounts were outside the test fixtures.
