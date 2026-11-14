@@ -149,18 +149,20 @@ jobs:
             mobile/acceptance/ios || maestro_status=$?
           node --input-type=module -e '
             import assert from "node:assert/strict";
+            import {readFileSync} from "node:fs";
             import {DatabaseSync} from "node:sqlite";
             const db = new DatabaseSync(process.env.FRAGOUT_DB, {readOnly: true});
             assert.equal(db.prepare("SELECT COUNT(*) AS count FROM private_photos").get().count, 0);
             assert.equal(db.prepare("SELECT COUNT(*) AS count FROM saved_looks").get().count, 0);
-            if (process.argv[1] === "0") {
+            const results = readFileSync(process.argv[1], "utf8");
+            if (results.split("\n").some(line => line.includes("file=\"mobile/acceptance/ios/account-fragdex.yaml\"") && line.includes("status=\"SUCCESS\""))) {
               assert.equal(db.prepare("SELECT COUNT(*) AS count FROM users WHERE email=?")
                 .get(process.env.FRAGOUT_IOS_QA_EMAIL).count, 0);
               console.log("The registered test account was deleted.");
             }
             db.close();
             console.log("The test database contains zero private photos and saved looks.");
-          ' "$maestro_status"
+          ' "$evidence/results.xml"
           exit "$maestro_status"
 
       - name: Preserve simulator evidence

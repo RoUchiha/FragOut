@@ -30,7 +30,21 @@ name: Native gallery upload, default deletion and opt-in private photo archive
     visible: "No saved looks"
     timeout: 20000
 - tapOn: "Find a scent"
-- tapOn: "Match outfit"
+# The settings confirmation can clear and move the button during this tap.
+- runFlow:
+    when:
+      visible: "Dismiss"
+    commands:
+      - tapOn: "Dismiss"
+- retry:
+    maxRetries: 1
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Choose photo"
+          commands:
+            - tapOn: "Match outfit"
+      - assertVisible: "Choose photo"
 - runFlow: ../system/select-outfit-photo.yaml
 - tapOn: "Review outfit"
 - extendedWaitUntil:
