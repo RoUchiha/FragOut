@@ -100,6 +100,14 @@ test('the readable Dior Sauvage EDP label produces one reviewable candidate',asy
  ]);
 });
 
+test('the three-line Bleu de Chanel EDP label produces one reviewable candidate',async()=>{
+ const image = await read('public/catalog/bottles/chanel-bleu-de-chanel-edp-2e677fe2601b.jpg');
+ const {candidates} = await analyze('bottle',image,'image/jpeg');
+ assert.deepEqual(candidates.map(({brand,name,concentration,confidence})=>({brand,name,concentration,confidence})),[
+  {brand:'Chanel',name:'Bleu de Chanel',concentration:'EDP',confidence:'uncertain'},
+ ]);
+});
+
 test('the ambiguous Dior Sauvage packshot cannot acquire a concentration',async()=>{
  const image = await read('public/catalog/bottles/dior-sauvage-edt-73f6c1636540.jpg');
  const {candidates} = await analyze('bottle',image,'image/jpeg');

@@ -32,13 +32,28 @@ const concentrations=[
 ] as const;
 
 export function groundedBottleCandidates(readings:string[],proposal:z.infer<typeof modelBottleSchema>['candidates']) {
- const labelWords=readings.flatMap(reading=>reading.split('\n').map(normalize)).filter(Boolean);
+ const labelLines:string[]=[];
+ const printedNames=new Set<string>();
  const visibleConcentrations=new Set<string>();
- for(const reading of readings)for(const line of reading.split('\n')){
-  const normalized=normalize(line);
-  const concentration=concentrations.find(([,pattern])=>pattern.test(normalized));
-  if(concentration)visibleConcentrations.add(concentration[0]);
+ for(const reading of readings) {
+  const lines=reading.split('\n').map(normalize);
+  lines.forEach((line,index)=>{
+   if(!line)return;
+   labelLines.push(line);
+   printedNames.add(line);
+   const concentration=concentrations.find(([,pattern])=>pattern.test(line));
+   if(concentration)visibleConcentrations.add(concentration[0]);
+   // Some front labels stack a name over several lines. Keep words in the
+   // same reading and in order. The full joined name must match exactly.
+   const next=lines[index+1];
+   const last=lines[index+2];
+   if(next) {
+    printedNames.add(line+' '+next);
+    if(last)printedNames.add(line+' '+next+' '+last);
+   }
+  });
  }
+ const hasVisibleBrand=(brand:string)=>labelLines.some(line=>visibleBrand(line,brand));
  const concentration=visibleConcentrations.size===1?[...visibleConcentrations][0]:'UNKNOWN';
  const candidates:BottleCandidate[]=[];
  const knownLabels=new Set<string>();
@@ -54,7 +69,7 @@ export function groundedBottleCandidates(readings:string[],proposal:z.infer<type
   const house=normalize(candidate.brand);
   const normalizedName=normalize(candidate.name);
   const printedName=normalizedName.startsWith(house+' ')?normalizedName.slice(house.length+1):normalizedName;
-  if(house&&printedName!==house&&labelWords.some(words=>visibleBrand(words,house))&&labelWords.some(words=>words===printedName||words===house+' '+printedName)){
+  if(house&&printedName!==house&&hasVisibleBrand(house)&&(printedNames.has(printedName)||printedNames.has(house+' '+printedName))){
    add(candidate.brand,candidate.name);
   }
  }
@@ -64,10 +79,9 @@ export function groundedBottleCandidates(readings:string[],proposal:z.infer<type
    if(!key)return false;
    const [house,name]=JSON.parse(key) as [string,string,string];
    const printedName=normalize(edition.name);
-   const nameIsVisible=(line:string)=>line===printedName||line===house+' '+printedName||
-    (concentration!=='UNKNOWN'&&(line===name||line===house+' '+name));
-   return (concentration==='UNKNOWN'||edition.concentration===concentration)&&
-    labelWords.some(line=>visibleBrand(line,house))&&labelWords.some(nameIsVisible);
+   const nameIsVisible=printedNames.has(printedName)||printedNames.has(house+' '+printedName)||
+    (concentration!=='UNKNOWN'&&(printedNames.has(name)||printedNames.has(house+' '+name)));
+   return (concentration==='UNKNOWN'||edition.concentration===concentration)&&nameIsVisible&&hasVisibleBrand(house);
   });
   const matches=new Map(editions.map(edition=>[JSON.stringify([normalize(edition.brand),normalize(edition.name)]),edition]));
   if(matches.size===1) {

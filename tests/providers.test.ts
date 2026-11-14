@@ -81,8 +81,30 @@ test('bottle results require independent label evidence and never guess concentr
  assert.deepEqual(blankResult.candidates,[]);
 });
 
-test('independent OCR passes can corroborate the same label without joining names across lines',()=>{
+test('independent OCR passes can corroborate the same label',()=>{
  const result=groundedBottleCandidates(['SAUVAG\nEAU DE PARFUM\nDior','SAUVAGE\nEAU DE PARFUM'],[]);
  assert.deepEqual(result.candidates.map(candidate=>[candidate.brand,candidate.name,candidate.concentration]),[['Dior','Sauvage','EDP']]);
  assert.deepEqual(groundedBottleCandidates(['SAUVAGE\nDior'],[]).candidates.map(candidate=>candidate.concentration),['UNKNOWN']);
+});
+
+test('consecutive lines in one OCR pass can identify the exact printed catalog name',()=>{
+ const label='BLEU\nDE\nCHANEL\nEAU DE PARFUM';
+ const result=groundedBottleCandidates([label],[]);
+ assert.deepEqual(result.candidates.map(candidate=>[candidate.brand,candidate.name,candidate.concentration]),[
+  ['Chanel','Bleu de Chanel','EDP'],
+ ]);
+});
+
+test('split label recognition cannot fill in missing words or join separate OCR passes',()=>{
+ const model=[{brand:'Chanel',name:'Bleu de Chanel'}];
+ for(const readings of [
+  ['BLEU\nCHANEL\nPARFUM'],
+  ['BLEU\nDE','CHANEL\nEAU DE PARFUM'],
+  ['BLEU\nBOTTLE SIZE\nDE\nCHANEL\nEAU DE PARFUM'],
+ ])assert.deepEqual(groundedBottleCandidates(readings,model).candidates,[]);
+});
+
+test('conflicting printed concentrations cannot become a known edition',()=>{
+ const result=groundedBottleCandidates(['BLEU\nDE\nCHANEL\nEAU DE PARFUM','PARFUM'],[]);
+ assert.deepEqual(result.candidates.map(candidate=>[candidate.name,candidate.concentration]),[['Bleu de Chanel','UNKNOWN']]);
 });
