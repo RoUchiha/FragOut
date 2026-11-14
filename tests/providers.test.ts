@@ -108,3 +108,14 @@ test('conflicting printed concentrations cannot become a known edition',()=>{
  const result=groundedBottleCandidates(['BLEU\nDE\nCHANEL\nEAU DE PARFUM','PARFUM'],[]);
  assert.deepEqual(result.candidates.map(candidate=>[candidate.name,candidate.concentration]),[['Bleu de Chanel','UNKNOWN']]);
 });
+
+test('a split concentration resolves only when all its words are readable',()=>{
+ const concentration=(lines:string)=>groundedBottleCandidates(['BLEU\nDE\nCHANEL\n'+lines],[]).candidates
+  .map(candidate=>candidate.concentration);
+ assert.deepEqual(concentration('EAU DE\nPARFUM'),['EDP']);
+ assert.deepEqual(concentration('EAU\nDE\nPARFUM'),['EDP']);
+ assert.deepEqual(concentration('EAU\n\nPARFUM'),['PARFUM']);
+ assert.deepEqual(concentration('DE PARFUM'),['UNKNOWN']);
+ assert.deepEqual(concentration('GE PARFUM /'),['UNKNOWN']);
+ assert.deepEqual(concentration('PARFUM'),['PARFUM']);
+});

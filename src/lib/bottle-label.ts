@@ -28,8 +28,9 @@ const concentrations=[
  ['ELIXIR',/\belixir\b/],
  ['MIST',/\b(?:perfume mist|fragrance mist|body mist|hair mist)\b/],
  ['OIL',/\b(?:perfume oil|fragrance oil)\b/],
- ['PARFUM',/\bparfum\b/],
+ ['PARFUM',/^parfum$/],
 ] as const;
+const concentrationPrefixes=/^(?:eau(?: de)?|extrait de)$/;
 
 export function groundedBottleCandidates(readings:string[],proposal:z.infer<typeof modelBottleSchema>['candidates']) {
  const labelLines:string[]=[];
@@ -37,12 +38,18 @@ export function groundedBottleCandidates(readings:string[],proposal:z.infer<type
  const visibleConcentrations=new Set<string>();
  for(const reading of readings) {
   const lines=reading.split('\n').map(normalize);
+  let concentrationPrefix='';
   lines.forEach((line,index)=>{
+   // Preserve an incomplete concentration across consecutive printed lines.
+   const printedConcentration=concentrationPrefix?concentrationPrefix+' '+line:line;
+   concentrationPrefix=concentrationPrefixes.test(printedConcentration)?printedConcentration:
+    concentrationPrefixes.test(line)?line:'';
+   const concentration=concentrations.find(([,pattern])=>pattern.test(printedConcentration));
+   if(concentration)visibleConcentrations.add(concentration[0]);
+
    if(!line)return;
    labelLines.push(line);
    printedNames.add(line);
-   const concentration=concentrations.find(([,pattern])=>pattern.test(line));
-   if(concentration)visibleConcentrations.add(concentration[0]);
    // Some front labels stack a name over several lines. Keep words in the
    // same reading and in order. The full joined name must match exactly.
    const next=lines[index+1];
