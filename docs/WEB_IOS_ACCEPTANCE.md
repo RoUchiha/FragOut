@@ -48,7 +48,7 @@ The privacy checks used synthetic accounts, keys, and images. They verified acco
 
 ## iOS simulator
 
-The release configuration built for arm64 in Xcode 26.6, and the app installed and opened on an iPhone 17 simulator with iOS 26.5. The app used Expo SecureStore and a disposable Next.js server backed by SQLite. The model endpoint returned a fixed response for the synthetic gallery image. The separate model checks below used installed Qwen. [Signed simulator build](https://github.com/RoUchiha/FragOut/actions/runs/43393491200)
+The release configuration built for arm64 in Xcode 26.6 and passed signature verification and installation on an iPhone 17 simulator with iOS 26.5. The app used Expo SecureStore and a disposable Next.js server backed by SQLite. The model endpoint returned a fixed response for the synthetic gallery image. The separate model checks below used installed Qwen. [Passing iPhone simulator run](https://github.com/RoUchiha/FragOut/actions/runs/43570811595)
 
 The first unsigned build could launch but could not store the session in Keychain. The workflow now embeds the Keychain entitlement during Xcode compilation. The synthetic signing identifier applies only to the simulator workflow. The store configuration and signing credentials are separate.
 
@@ -56,13 +56,13 @@ The iOS keyboard covered the lower part of the account sheet and could leave the
 
 | Native journey | Observed result |
 | --- | --- |
-| Account and FragDex | Created a test account, added Dior Sauvage EDP, enlarged the loaded bottle thumbnail, and viewed the cross-checked notes. Relaunch restored the account and its collection. Typing DELETE returned the app to demo. |
+| Account and FragDex | Created a test account, added Dior Sauvage EDP, enlarged the loaded bottle thumbnail, and viewed the cross-checked notes. Relaunch restored the account and its collection. Typing DELETE returned the app to demo, and the database confirmed the registered account was gone. |
 | Mood, vibe and wear journal | Searched for tired, clean and work. Logging a wear preserved the occasion and cues across relaunch. |
 | Liked combos | Opted into experimental pairs, liked one, opened it from Home and removed it with Unlike. |
 | Typed outfit | Reviewed and confirmed the description, then matched a fragrance from the collection. |
-| Native gallery and archive | The iOS Photos picker returned the fixture. The default review said the photo was discarded, and the database had no private photo or saved look at the end of the run. A separate run reached the private staging receipt after opting in. The save, reopen, and opt-out sequence is still under test on iOS. |
+| Native gallery and archive | Uploaded and reviewed a photo with default settings and saw the disposal notice. Enabled archiving, uploaded again, archived a chosen match and reopened its private photo from Saved looks. Turning archiving off cleared the saved look and photo. Both database tables had zero rows after the walkthrough. |
 
-The 14 November simulator run passed four of five complete flows. The gallery test stopped after enabling the archive when a confirmation banner changed the position of the next control. The replay waits for the outfit screen before opening the picker a second time. [14 November simulator results](https://github.com/RoUchiha/FragOut/actions/runs/43565564611)
+All five journeys passed together in 6 minutes 15 seconds. Earlier runs exposed inconsistent simulator timing around system photo selection, the Passwords prompt, and the concentration control. The flow now waits for observable screen changes and verifies the selected concentration before saving. The passing run contains JUnit results and screenshots of the enlarged bottle and privately saved outfit.
 
 Run **iOS acceptance** in GitHub Actions to repeat the simulator walkthrough. It saves Maestro results and screenshots of the synthetic accounts. The workflow starts a private API on the runner with a fresh test database and verifies that no retained photos or saved looks remain after the flows finish. [iOS acceptance workflow](../.github/workflows/ios-acceptance.yml)
 
