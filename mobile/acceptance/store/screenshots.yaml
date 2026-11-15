@@ -1,0 +1,22 @@
+appId: app.fragout.mobile
+name: FragOut App Store screenshots
+---
+- launchApp:
+    clearState: true
+    clearKeychain: true
+- extendedWaitUntil:
+    visible: "Collection"
+    timeout: 90000
+- assertVisible: "Demo · fictional fragrances"
+- assertVisible: "Details for Soft Suede"
+- waitForAnimationToEnd
+- takeScreenshot: 01-collection
+- tapOn: "Find a scent"
+- assertVisible: "Suggestions"
+- waitForAnimationToEnd
+- takeScreenshot: 02-find-a-scent
+- tapOn: "Match outfit"
+- assertVisible: "Take selfie"
+- assertVisible: "Choose photo"
+- waitForAnimationToEnd
+- takeScreenshot: 03-outfit
