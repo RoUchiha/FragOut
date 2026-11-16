@@ -57,3 +57,5 @@ Run `npx.cmd eas-cli@27.10.0 submit --platform ios --id` with the verified EAS b
 ## Screenshots
 
 Run **iOS acceptance** with `store_screenshots` enabled. The workflow captures the collection, scent search, and outfit screen directly from the signed simulator build using fictional demo data. The `ios-simulator-evidence/store-screenshots` artifact contains the iPhone 6.3-inch and iPad 13-inch images at native resolution. [Apple screenshot sizes](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications)
+
+The 16 November capture passed and verified all six PNGs. iPhone images are 1206 × 2622. iPad images are 2064 × 2752. [Passing screenshot run](https://github.com/RoUchiha/FragOut/actions/runs/43813360516)
