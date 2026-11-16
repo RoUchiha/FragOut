@@ -46,7 +46,7 @@ npx.cmd expo run:ios
 
 Both platforms use `app.fragout.mobile`. The Expo SDK 58 build profiles support Android 7+ and iOS 16.4+. The production Android profile creates a Play App Bundle. The iOS profile uses the matching macOS/Xcode image for App Store builds. [Expo platform support](https://docs.expo.dev/versions/v58.0.0/) · [Expo build images](https://docs.expo.dev/build-reference/infrastructure/)
 
-Connect the Expo project to the owner's account and set `EXPO_PUBLIC_API_URL` in the EAS production environment to the live HTTPS backend. On that backend, configure `FRAGOUT_PUBLIC_ORIGIN` and a real `FRAGOUT_PRIVACY_CONTACT_EMAIL`. Use its `/privacy` and `/delete-account` addresses in the store listings. Keep the backend reachable during app review.
+Connect the Expo project to the owner's account and set `EXPO_PUBLIC_API_URL` in the EAS production environment to the live HTTPS backend. On that backend, configure `FRAGOUT_PUBLIC_ORIGIN` and a real `FRAGOUT_PRIVACY_CONTACT_EMAIL`. Use the public support, privacy, and account-deletion links for the applicable store fields. Keep the backend reachable during app review. [iOS listing and submission details](../docs/APP_STORE.md)
 
 From this folder, use the Android preview profile for an installable test APK and the production profile for store signing.
 

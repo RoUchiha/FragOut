@@ -13,7 +13,8 @@ Use **Session pooler** under **Connect** in the Supabase dashboard. The FragOut 
 | `FRAGOUT_DATABASE_URL` | The session pooler connection string for `fragout_app` on port `5432`. URL-encode the password if it contains reserved characters. |
 | `FRAGOUT_VAULT_KEY` | A stable 32-byte key encoded as base64. Keep the same key across deploys so existing encrypted photos and provider keys stay readable. |
 | `FRAGOUT_PUBLIC_ORIGIN` | The exact HTTPS origin for the FragOut API. Render supplies its own origin when this is unset. |
-| `FRAGOUT_PRIVACY_CONTACT_EMAIL` | Your contact for the public privacy policy. |
+| `FRAGOUT_PRIVACY_CONTACT_EMAIL` | Your contact for the public privacy policy and the default support address. |
+| `FRAGOUT_SUPPORT_CONTACT_EMAIL` | Optional separate contact for the public support page. |
 
 Store the database URL and vault key as server secrets. FragOut checks the pooler's certificate against Supabase's CA and verifies the hostname. The schema is private and inaccessible to the public Data API roles. The scheduled cleanup removes expired sessions, staging photos, outfit analyses, and other temporary records. A cloud deployment starts with its own accounts. Existing SQLite accounts and collections stay on the local installation.
 

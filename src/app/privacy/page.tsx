@@ -40,6 +40,7 @@ export default function PrivacyPage() {
         <h2>Privacy contact</h2>
         <p>For privacy questions, email <a className="policy-link" href={'mailto:' + contact}>{contact}</a>.</p>
       </section>}
+      <p>For help with the app, visit <a className="policy-link" href="/support">FragOut support</a>.</p>
     </main>
   );
 }

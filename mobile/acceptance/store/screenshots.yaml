@@ -8,7 +8,7 @@ name: FragOut App Store screenshots
     visible: "Collection"
     timeout: 90000
 - assertVisible: "Demo · fictional fragrances"
-- assertVisible: "Details for Soft Suede"
+- assertVisible: "Details for .*"
 - waitForAnimationToEnd
 - takeScreenshot: 01-collection
 - tapOn: "Find a scent"

@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ios-acceptance-${{ github.ref }}
+  group: ios-acceptance-${{ github.ref }}-${{ inputs.store_screenshots && 'screenshots' || 'tests' }}
   cancel-in-progress: true
 
 jobs:
