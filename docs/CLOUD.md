@@ -26,7 +26,13 @@ node --env-file=/secure/fragout.env --experimental-strip-types scripts/start-clo
 
 Supabase Free includes 500 MB per project and can pause a project after a week of low activity. Encrypted photo archives count toward that database limit. Store database backups and the vault key securely before relying on the service for production data. [Supabase Free plan](https://supabase.com/pricing) · [Supabase TLS](https://supabase.com/docs/guides/platform/ssl-enforcement)
 
-## HTTPS preview
+## Vercel
+
+Attach the FragOut repository to a Next.js project using Node 24. [vercel.json](../vercel.json) builds the desktop app and the Expo web client and places the API in Cleveland, near the existing Supabase database. Enable Vercel's system environment variables and set the production variables above. Set `FRAGOUT_PUBLIC_ORIGIN` to the exact public domain. Production and preview deployments require managed storage. Keep production database credentials scoped to production.
+
+Open the project domain for the desktop app or its `/mobile` route for the Expo client. Use the same origin as `EXPO_PUBLIC_API_URL` when building the native app. This deployment supports typed outfit recommendations and bottle label scanning. Outfit photo analysis on Vercel requires an explicitly connected provider. The default Qwen model needs a server that can run Ollama alongside the API.
+
+## Render preview
 
 On Render, create a Blueprint from the FragOut repository. The Blueprint defines a Free Node web service in Ohio. Enter the database URL, the same vault key, and your privacy contact in Render's environment prompts. When it deploys, open the service's `/api/health` and `/mobile` routes. Use the service's HTTPS URL as `EXPO_PUBLIC_API_URL` for a native build. [Blueprint file](../render.yaml) · [Render Blueprints](https://render.com/docs/infrastructure-as-code)
 

@@ -32,6 +32,12 @@ test('managed storage requires valid Postgres settings and a stable vault key',(
   assert.throws(()=>openConfiguredDatabase({FRAGOUT_DATABASE_URL:'https://db.example.test',FRAGOUT_VAULT_KEY:secret}),DatabaseUnavailable);
 });
 
+test('Vercel production and preview deployments require managed storage',()=>{
+  for(const VERCEL_ENV of ['production','preview']){
+    assert.throws(()=>openConfiguredDatabase({VERCEL:'1',VERCEL_ENV}),DatabaseUnavailable);
+  }
+});
+
 test('Supabase transaction pooling is rejected before opening connections',()=>{
   const url='postgres://fragout_app:synthetic@aws-1-us-east-2.pooler.supabase.com:6543/postgres';
   const secret=Buffer.alloc(32,1).toString('base64');

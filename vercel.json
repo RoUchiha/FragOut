@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "installCommand": "npm ci --include=dev",
+  "buildCommand": "npm ci --prefix mobile --include=dev && npm run export:web --prefix mobile && npm run build",
+  "regions": ["cle1"]
+}

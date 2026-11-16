@@ -209,7 +209,10 @@ class PostgresConnection implements DataConnection {
 
 export function openConfiguredDatabase(env: Record<string, string | undefined> = process.env): DataConnection {
   const url = env.FRAGOUT_DATABASE_URL?.trim();
-  if (!url) return openSqlite(privateDataPath(env.FRAGOUT_DB));
+  if (!url) {
+    if (env.VERCEL === '1' && env.VERCEL_ENV !== 'development') throw new DatabaseUnavailable();
+    return openSqlite(privateDataPath(env.FRAGOUT_DB));
+  }
   const key = env.FRAGOUT_VAULT_KEY;
   if (!key || Buffer.from(key, 'base64').length !== 32) throw new DatabaseUnavailable();
 
