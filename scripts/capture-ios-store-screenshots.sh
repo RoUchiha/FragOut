@@ -28,7 +28,7 @@ capture() {
   local results="$evidence/maestro-$directory" dest="$output/$directory"
   mkdir -p "$results" "$dest"
   xcrun simctl status_bar "$device" override --time '9:41' --dataNetwork wifi --wifiMode active \
-    --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState unplugged --batteryLevel 100
+    --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState discharging --batteryLevel 100
   maestro --no-ansi --device "$device" test --test-output-dir "$results" mobile/acceptance/store/screenshots.yaml
 
   node --input-type=module - "$results" "$dest" "$width" "$height" <<'JS'
