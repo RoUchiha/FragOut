@@ -9,7 +9,7 @@ import * as catalogPhotos from '../src/lib/catalog-photos.ts';
 type Provider = 'qwen' | 'openai' | 'claude';
 type Element = { type: string; props: { children?: unknown; label?: string; disabled?: boolean; onPress?: () => void; onClose?: () => void; onChangeText?: (value: string) => void } };
 
-function screen(name: 'Collection' | 'Outfit', provider: Provider) {
+function screen(name: 'Collection' | 'Outfit', provider: Provider, qwen?:{mode:'hosted';configured:boolean;destination:string;model:string;policyVersion:string}) {
  const hooks: unknown[] = [];
  const effects: (() => void | (() => void))[] = [];
  const cleanups: (() => void)[] = [];
@@ -38,7 +38,7 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider) {
     sessionScope: () => () => current,
     api: async (path: string, method: string, body: (typeof requests)[number]['body']) => {
      if (method === 'POST') requests.push({ path, body: structuredClone(body) });
-     return { selected: provider, candidates: [{}], profile: null };
+     return { selected: provider, candidates: [{}], profile: null, qwen };
     },
    };
    if (dependency === './capture') return {
@@ -84,6 +84,21 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider) {
  render();
  return { action, changeOutfitText, disclosure, flush, photo, requests, changeSession: () => { current = false; }, closeSheet: () => visit(render(), element => element.type === 'Sheet')?.props.onClose?.(), unmount: () => cleanups.forEach(cleanup => cleanup()) };
 }
+
+const hostedQwen={mode:'hosted' as const,configured:true,destination:'Vercel AI Gateway',model:'alibaba/qwen3.8-27b',policyVersion:'qwen-cloud-v1'};
+const qwenConsent={destination:hostedQwen.destination,model:hostedQwen.model,policyVersion:hostedQwen.policyVersion};
+test('hosted Qwen bottle scanning waits for cloud permission and binds the approved destination',async()=>{
+ const app=screen('Collection','qwen',hostedQwen);await app.flush();app.action('Scan bottle');await app.flush();
+ assert.deepEqual(app.requests,[]);assert.ok(app.disclosure(/bottle photo.*Qwen Cloud/i));
+ app.action('Send to Qwen Cloud');await app.flush();
+ assert.deepEqual(app.requests,[{path:'vision/bottle',body:{provider:'qwen',image:{data:'synthetic',mime:'image/jpeg'},cloudConsent:qwenConsent}}]);
+});
+test('hosted Qwen selfies disclose cloud processing before the user sends the photo',async()=>{
+ const app=screen('Outfit','qwen',hostedQwen);await app.flush();app.action('Take selfie');await app.flush();
+ assert.deepEqual(app.requests,[]);assert.ok(app.disclosure(/outfit photo.*Qwen Cloud/i));
+ app.action('Send to Qwen Cloud');await app.flush();
+ assert.deepEqual(app.requests,[{path:'outfit/analyze',body:{provider:'qwen',archivePhoto:false,image:{data:'synthetic',mime:'image/jpeg'},cloudConsent:qwenConsent}}]);
+});
 
 test('a bottle scan clears its cached photo and waits for permission to send it to Anthropic', async () => {
  const app = screen('Collection', 'claude');

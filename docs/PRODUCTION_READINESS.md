@@ -2,6 +2,8 @@
 
 This is an engineering status report, not a claim of enterprise certification or guaranteed security.
 
+Activation update later on 18 November: the owner explicitly approved the three destinations. Production database/vault secrets are now Sensitive and Production-only; public storage and all 20 web, 17 mobile/API and 133 discovery/journal checks passed with disposable-account cleanup. The backup reader is SELECT-only and enabled; encrypted vault escrow is off-site with anonymous access denied. The first [main-only GitHub backup run passed](https://github.com/RoUchiha/FragOut/actions/runs/44418997892), and the daily schedule is enabled. Exact-value credential comparison found no matches in 37 built text assets or 12 referenced live assets/responses; test had no production secret and seven private-file paths returned 404. The initial activation holds below are historical. Hosted default Qwen integration and live model activation are being verified separately with a pending prepaid-budget choice.
+
 ## Initial public status
 
 The latest source had deployed successfully to Vercel, but the app was not fully operational: `/api/health` returned HTTP 500. Runtime logs identified an unresolved hashed external OCR-language package, and the function ran on Node 26 rather than the intended Node 24. Only the public-origin variable existed in production; the database URL and vault key had not been authorized for upload under the earlier impossible-to-expose condition.
@@ -33,7 +35,7 @@ The real local Qwen vision smoke test identified clothing in the synthetic outfi
 
 Browser visual review was not completed. Computer Use stopped because it could not confidently determine the Windows browser URL. No certificate warning was bypassed and no visual pass is claimed. Signed native builds and physical-device acceptance were not performed in this pass; native JavaScript bundle exports are not App Store/TestFlight publication.
 
-## Remaining activation requirements
+## Initial activation holds and remaining launch requirements
 
 - Public app storage still requires specific approval to put the existing database URL and vault key in Production-only Vercel server secrets. No security control makes any system impossible to hack.
 - Automatic approval review rejected creating/exporting a production reader login into the local operator destination. The role is defined and its no-write privileges verified, but it remains NOLOGIN. Its specific local/GitHub destinations need consent before daily automation is enabled.

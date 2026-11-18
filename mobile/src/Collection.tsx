@@ -3,7 +3,7 @@ import {Image,Pressable,Switch,Text,View} from 'react-native';
 import {Camera,ChevronRight,Heart,Plus,SlidersHorizontal} from 'lucide-react-native';
 import {api,serverUrl,sessionScope,type AiStatus,type AppState,type BottleCandidate} from './api';
 import {capturePhoto,discardPhoto,type Capture} from './capture';
-import {cloudAiNames} from './cloud-ai';
+import {cloudDestination,type CloudDestination} from './cloud-ai';
 import {BottleArt,Btn,Choices,Empty,Field,IconButton,SearchBox,Sheet,Spinner,useUi} from './ui';
 import {scentSearchLimit} from '../../src/lib/scent-search';
 import {browseCollection,collectionDefaults,collectionNotes,collectionProfile,collectionSortOptions,type CollectionSort} from '../../src/lib/collection-browse';
@@ -16,7 +16,7 @@ import CompareFragrances from './CompareFragrances';
 import CollectionProfile from './CollectionProfile';
 
 type ScanImage = Pick<Capture,'data'|'mime'>;
-type ScanConsent = {provider:keyof typeof cloudAiNames};
+type ScanConsent = CloudDestination;
 type PendingScan = {consent:ScanConsent; image:ScanImage};
 
 export default function Collection({state,refresh,notify,onOpenLikedCombos,onWear,wearBusy}:{
@@ -82,10 +82,10 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    image={data:photo.data,mime:photo.mime};
    await discardPhoto(photo);
    if (!active.current||!stillCurrent()) return;
-   if (provider==='qwen') {
+   const consent=cloudDestination(status,true);
+   if (!consent) {
     await sendScan(provider,image);
    } else {
-    const consent={provider};
     pendingScanRef.current={consent,image};
     setScanConsent(consent);
     image=undefined;
@@ -98,8 +98,8 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
   }
  }
 
- async function sendScan(provider:AiProvider,image:ScanImage) {
-  const reply=await api<{candidates:BottleCandidate[];message:string}>('vision/bottle','POST',{provider,image});
+ async function sendScan(provider:AiProvider,image:ScanImage,consent?:ScanConsent) {
+  const reply=await api<{candidates:BottleCandidate[];message:string}>('vision/bottle','POST',{provider,image,...(consent?.cloudConsent?{cloudConsent:consent.cloudConsent}:{})});
   if (!active.current||!stillCurrent()) return;
   setCandidates(reply.candidates);
   if (!reply.candidates.length) notify(reply.message||'No readable label. Try again or enter details manually.');
@@ -113,7 +113,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
   try {
    if (approved&&active.current&&stillCurrent()) {
     setBusy(true);
-    await sendScan(consent.provider,pending.image);
+    await sendScan(consent.provider,pending.image,consent);
    }
   } catch (error) {
    if (active.current&&stillCurrent()) notify((error as Error).message);
@@ -234,8 +234,8 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    onFilter={(type,value)=>{if(type==='note')setNote(value);if(type==='brand')setBrand(value);if(type==='family')setFamilyFilter(value);if(type==='shelf')setShelf(value);setProfiler(false);}}/>}
   {comparing&&<CompareFragrances left={comparing} state={state} onClose={()=>setComparing(null)} notify={notify}/>}
   {scanConsent&&<Sheet title="Share bottle photo?" onClose={()=>void resolveScanConsent(scanConsent,false)}>
-   <Text style={styles.text}>FragOut will send this bottle photo to {cloudAiNames[scanConsent.provider]} to read the label. The provider’s retention policy applies and your API account may be billed.</Text>
-   <Btn label={`Send to ${cloudAiNames[scanConsent.provider]}`} onPress={()=>void resolveScanConsent(scanConsent,true)}/>
+   <Text style={styles.text}>FragOut will send this bottle photo to {scanConsent.name} to read the label. {scanConsent.provider==='qwen'?'Hosted through Vercel AI Gateway with zero-data-retention routing.':'The provider’s retention policy applies and your API account may be billed.'}</Text>
+   <Btn label={`Send to ${scanConsent.name}`} onPress={()=>void resolveScanConsent(scanConsent,true)}/>
    <Btn label="Cancel" kind="secondary" onPress={()=>void resolveScanConsent(scanConsent,false)}/>
   </Sheet>}
   {candidates!==null&&<Sheet title="Confirm the label" onClose={()=>setCandidates(null)}>

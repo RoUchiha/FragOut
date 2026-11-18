@@ -42,7 +42,15 @@ The operator verifies a full restore in an isolated in-memory database, includin
 
 Database snapshots have seven-day remote TTL and local/remote pruning after a verified replacement. The encrypted vault escrow is retained for recovery. Deleted account/archive data may remain in encrypted snapshots until the retention window expires; operators must replay subsequent deletion/consent changes after a disaster restore. Recovery keys must be preserved separately, including an owner-controlled offline copy. Losing both the vault material and its decryptable escrow prevents recovery of archived images and connected keys.
 
-The initial production snapshot has verified local and private off-site copies. The encrypted vault escrow currently remains local pending specific approval. The reader remains NOLOGIN pending specific approval. The daily GitHub workflow is present but intentionally disabled until its credentials are authorized and a successful manual run is verified. These facts do not establish a running daily backup schedule or a guaranteed recovery point.
+The owner specifically approved the production-only application secrets, local/main-only GitHub reader and backup-store credentials, and private off-site encrypted vault escrow. All three are activated. The reader has LOGIN with SELECT-only grants and no administrative or write privileges. The escrow has authenticated checksum read-back and anonymous HTTP 403. The daily GitHub workflow is enabled at 06:17 UTC; its first manual [GitHub run passed](https://github.com/RoUchiha/FragOut/actions/runs/44418997892). This is verified automation, not a guaranteed recovery point or availability SLA.
+
+## Hosted photo analysis
+
+`FRAGOUT_QWEN_BACKEND=gateway` selects production-only hosted Qwen3.8 27B through the fixed AI Gateway endpoint with deployment OIDC. No long-lived default model API key is stored in the app or exposed to clients. Local test startup strips this flag and all deployment credentials; it keeps using local Ollama.
+
+Hosted photo requests require a current destination/model/policy consent receipt. The adapter requests zero data retention and no prompt training and restricts routing to the currently verified Wafer/Parasail endpoints. The response is schema-validated; the model cannot supply fragrance facts, personal traits or unowned recommendations. Typed descriptions continue to use local rules. Default photos remain memory-only; the existing separate archive-confirmation flow governs retained photos. Provider policies can permit transient processing/caching, as the privacy page discloses.
+
+Hosted usage is limited to ten photo requests per user per rolling day and 150 per installation per rolling day, in addition to per-minute limits. Use a project-specific AI Gateway budget and prepaid balance with auto-reload disabled. A quota or unavailable provider returns a generic failure; the code does not remove privacy filters or borrow a user's paid connection as a fallback. Hobby-account ZDR needs purchased credits; do not enable the hosted flag until the authorized budget and live synthetic-photo check succeed.
 
 ## CI, release and rollback
 
