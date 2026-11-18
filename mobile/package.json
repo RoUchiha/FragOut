@@ -16,7 +16,7 @@
     "expo-speech-recognition": "~58.0.1",
     "expo-status-bar": "~58.0.5",
     "expo-web-browser": "~58.0.8",
-    "lucide-react-native": "^1.70.0",
+    "lucide-react-native": "^1.73.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",
