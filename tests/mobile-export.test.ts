@@ -7,7 +7,7 @@ function deferred(){let resolve!:(value:any)=>void;const promise=new Promise<any
 function harness({holdWrite=false,failShare=false}={}){
  let account='A';const available=deferred(),write=deferred(),writes:string[]=[],shares:string[]=[],files=new Set<string>();
  class File {uri:string;constructor(...parts:any[]){this.uri='file:///synthetic-cache/'+parts.at(-1);}get exists(){return files.has(this.uri);}async write(data:string){files.add(this.uri);writes.push(data);if(holdWrite)await write.promise;}delete(){files.delete(this.uri);}}
- const api={exportData:async()=>({owner:account,memo:'synthetic private account data'}),sessionScope:()=>{const captured=account;return ()=>account===captured;}};
+ const api={exportData:async()=>({owner:account,memo:'synthetic private account data'}),api:async()=>({csv:'"Date","Private note"\r\n"2026-03-08","synthetic private wear"\r\n'}),sessionScope:()=>{const captured=account;return ()=>account===captured;}};
  const dependencies:any={'react-native':{Platform:{OS:'ios'}},'expo-file-system':{File,Paths:{cache:{uri:'file:///synthetic-cache/'}}},'./api':api,'expo-sharing':{isAvailableAsync:()=>available.promise,shareAsync:async(uri:string)=>{shares.push(uri);if(failShare)throw new Error('Synthetic OS share failure');}}};
  const module={exports:{} as any},path=new URL('../mobile/src/export-data.ts',import.meta.url);
  let source:string;if(existsSync(path))source=readFileSync(path,'utf8');else{
@@ -15,7 +15,7 @@ function harness({holdWrite=false,failShare=false}={}){
   const visit=(node:ts.Node)=>{if(ts.isFunctionDeclaration(node)&&node.name?.text==='exportAll')fn=node.getText(settings);else ts.forEachChild(node,visit);};visit(settings);source=fn+'\nexports.shareAccountExport=exportAll;';
  }
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,{module,exports:module.exports,Error,JSON,Date,Math,console,...dependencies['react-native'],...dependencies['expo-file-system'],...api,notify:()=>{},require:(name:string)=>{if(dependencies[name])return dependencies[name];throw new Error(name);}});
- return {run:()=>module.exports.shareAccountExport(),change:()=>{account='B';},available,write,writes,shares,files};
+ return {run:()=>module.exports.shareAccountExport(),journal:()=>module.exports.shareWearJournal(),change:()=>{account='B';},available,write,writes,shares,files};
 }
 const tick=()=>new Promise<void>(done=>setImmediate(done));
 test('account switch during native sharing availability cannot write or share the earlier export',async()=>{
@@ -31,4 +31,12 @@ test('concurrent export operations use distinct temporary files and remove them 
 });
 test('OS sharing failure still removes the app-owned export copy',async()=>{
  const h=harness({failShare:true});h.available.resolve(true);await assert.rejects(h.run(),/share failure/);assert.equal(h.files.size,0);
+});
+
+test('wear CSV shares a temporary CSV and cleans it up after the OS returns',async()=>{
+ const h=harness();h.available.resolve(true);await h.journal();assert.equal(h.shares.length,1);assert.ok(h.shares[0].endsWith('.csv'));assert.equal(h.files.size,0);
+});
+test('switching account while CSV sharing is pending prevents sharing the earlier wear notes',async()=>{
+ const h=harness(),pending=h.journal();await tick();h.change();h.available.resolve(true);
+ await assert.rejects(pending,/session|account|server/i);assert.equal(h.shares.length,0);assert.equal(h.files.size,0);
 });

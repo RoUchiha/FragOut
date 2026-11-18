@@ -17,6 +17,9 @@ import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
 import * as editions from '../src/lib/catalog-editions.ts';
 import * as layering from '../src/lib/layering-catalog.ts';
+import * as discovery from '../src/lib/catalog-discovery.ts';
+import * as journal from '../src/lib/journal.ts';
+import * as catalogPhotos from '../src/lib/catalog-photos.ts';
 import * as outfit from '../src/lib/outfit.ts';
 import type {AutomaticCatalogPhoto} from '../src/lib/catalog-photo-store.ts';
 import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
@@ -34,6 +37,9 @@ function harness({key='',lookup=async()=>null,select=async()=>null}:{
   if(name==='@/lib/recommendation-evidence')return recommendationEvidence;
   if(name==='@/lib/catalog-editions')return editions;
   if(name==='@/lib/layering-catalog')return layering;
+  if(name==='@/lib/catalog-discovery')return discovery;
+  if(name==='@/lib/journal')return journal;
+  if(name==='@/lib/catalog-photos')return catalogPhotos;
   if(name==='@/lib/outfit')return outfit;
   if(name==='@/lib/database')return database;
   if(name==='sharp')return {default:require('sharp')};
@@ -58,6 +64,68 @@ function useFixtureVaultKey(t:TestContext){
   else process.env.FRAGOUT_VAULT_KEY=previous;
  });
 }
+
+test('catalog, comparisons and journal tools enforce authentication and owner boundaries',async()=>{
+ const h=harness();try{
+  for(const [path,method,body] of [['catalog/search','POST',{}],['catalog/detail','POST',{id:'x'}],['compare','POST',{}],['journal/2026-11','GET',undefined],['journal/export','GET',undefined]] as const)
+   assert.equal((await h.call(path,{method,body})).status,401);
+  const a=await h.db.createDemo(),b=await h.db.createDemo(),token=await h.db.createSession(a.id);
+  const owned=(await h.db.state(a.id)).bottles[0],foreign=(await h.db.state(b.id)).bottles[0];
+  const results=await h.call('catalog/search',{method:'POST',token,body:{query:'Dior'}});
+  assert.equal(results.status,200);assert.ok(results.body.entries.length);
+  const target={kind:'catalog',id:results.body.entries[0].id};
+  assert.equal((await h.call('compare',{method:'POST',token,body:{left:{kind:'bottle',id:owned.id},right:target}})).status,200);
+  assert.equal((await h.call('compare',{method:'POST',token,body:{left:{kind:'bottle',id:foreign.id},right:target}})).status,404);
+  assert.equal((await h.call('journal',{method:'POST',token,body:{bottleIds:[foreign.id],date:'2026-03-08',note:'foreign'}})).status,400);
+  const created=await h.call('journal',{method:'POST',token,body:{bottleIds:[owned.id],date:'2026-03-08',note:'SYNTHETIC_OWNER_A'}});
+  assert.equal(created.status,201);
+  const tokenB=await h.db.createSession(b.id);
+  assert.equal((await h.call('journal/'+created.body.id,{method:'PATCH',token:tokenB,body:{date:'2026-03-09',note:'intrusion'}})).status,404);
+  assert.ok((await h.call('journal/export',{token})).body.csv.includes('SYNTHETIC_OWNER_A'));
+  assert.ok(!(await h.call('journal/export',{token:tokenB})).body.csv.includes('SYNTHETIC_OWNER_A'));
+  assert.equal((await h.call('journal/'+created.body.id,{method:'PATCH',token,body:{date:'2026-02-30',note:''}})).status,400);
+  assert.equal((await h.call('journal/2026-13',{token})).status,400);
+  assert.equal((await h.call('catalog/search',{method:'POST',token,body:{offset:-1}})).status,400);
+  assert.equal((await h.call('catalog/search',{method:'POST',token,body:{include:Array(11).fill('musk')}})).status,400);
+ }finally{await h.db.close();}
+});
+
+test('view preferences preserve sensitive settings and shelf metadata is validated',async()=>{
+ const h=harness();try{
+  const a=await h.db.createDemo(),token=await h.db.createSession(a.id),state=await h.db.state(a.id);
+  await h.db.saveSettings(a.id,{preferences:{...state.preferences,archiveOutfits:true,dislikedNotes:['rose']}});
+  assert.equal((await h.call('collection/view',{method:'PUT',token,body:{sort:'brand',layout:'list'}})).status,200);
+  const after=await h.db.state(a.id);
+  assert.equal(after.preferences.archiveOutfits,true);assert.deepEqual(after.preferences.dislikedNotes,['rose']);
+  assert.deepEqual(after.preferences.collectionView,{sort:'brand',layout:'list'});
+  const path='bottles/'+state.bottles[0].id;
+  assert.equal((await h.call(path,{method:'PATCH',token,body:{sizeMl:0.5,shelves:['Samples','samples','Tested']}})).status,200);
+  assert.equal((await h.db.getBottle(a.id,state.bottles[0].id))?.shelves?.length,2);
+  assert.equal((await h.call(path,{method:'PATCH',token,body:{shelves:Array(13).fill('x')}})).status,400);
+ }finally{await h.db.close();}
+});
+
+test('a session revoked before the journal transaction cannot store private notes',async()=>{
+ const h=harness();try{
+  const user=await h.db.createDemo(),token=await h.db.createSession(user.id),bottle=(await h.db.state(user.id)).bottles[0];
+  const original=h.db.logWear.bind(h.db);
+  h.db.logWear=async(...args)=>{await h.db.revokeSession(token);return original(...args);};
+  assert.equal((await h.call('journal',{method:'POST',token,body:{bottleIds:[bottle.id],date:'2026-03-08',note:'Do not store'}})).status,401);
+  assert.equal((await h.db.wearHistory(user.id)).length,0);
+ }finally{await h.db.close();}
+});
+
+test('catalog reads respect an admin-hidden thumbnail rather than resurrecting bundled images',async()=>{
+ const h=harness();try{
+  const user=await h.db.createDemo(),token=await h.db.createSession(user.id);
+  const edition=editions.catalogEditionById(catalog.catalogProfiles.find(profile=>profile.photo)?.id??'')!;
+  await h.db.catalogPhotos.setOverride(edition,null);
+  const results=await h.call('catalog/search',{method:'POST',token,body:{query:edition.name}});
+  assert.equal(results.status,200);assert.equal(results.body.entries.find((entry:CatalogEdition)=>entry.id===edition.id)?.photo,undefined);
+  const detail=await h.call('catalog/detail',{method:'POST',token,body:{id:edition.id}});
+  assert.equal(detail.status,200);assert.equal(detail.body.profile.photo,undefined);
+ }finally{await h.db.close();}
+});
 
 test('layering discovery requires a session and contains only the signed-in collection matches',async()=>{
  const h=harness();

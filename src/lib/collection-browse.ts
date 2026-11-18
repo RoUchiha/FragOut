@@ -4,6 +4,7 @@ import type {Bottle,WearEvent} from './types.ts';
 export type CollectionSort='name'|'brand'|'rating'|'least-worn';
 export interface CollectionFilters {
  query:string;ownership:string;favorites:boolean;concentration:string;note:string;sort:CollectionSort;
+ brand?:string;family?:string;shelf?:string;
 }
 export const collectionDefaults:CollectionFilters={
  query:'',ownership:'OWNED',favorites:false,concentration:'ALL',note:'',sort:'name',
@@ -34,6 +35,9 @@ export function browseCollection(bottles:Bottle[],history:WearEvent[],filters:Co
   (filters.ownership==='ALL'||bottle.ownership===filters.ownership)&&
   (!filters.favorites||bottle.favorite)&&
   (filters.concentration==='ALL'||bottle.concentration===filters.concentration)&&
+  (!filters.brand||normalize(bottle.brand)===normalize(filters.brand))&&
+  (!filters.family||normalize(bottle.family)===normalize(filters.family))&&
+  (!filters.shelf||bottle.shelves?.some(shelf=>normalize(shelf)===normalize(filters.shelf??'')))&&
   (!filters.note||notesFor(bottle).some(([key])=>key===normalize(filters.note)))&&
   matchesBottleSearch(bottle,filters.query));
  return visible.sort((a,b)=>{
@@ -42,4 +46,24 @@ export function browseCollection(bottles:Bottle[],history:WearEvent[],filters:Co
    filters.sort==='least-worn'?(wearCounts.get(a.id)??0)-(wearCounts.get(b.id)??0):0;
   return primary||a.name.localeCompare(b.name)||a.concentration.localeCompare(b.concentration)||a.id.localeCompare(b.id);
  });
+}
+
+export function collectionProfile(bottles:Bottle[],ownership='OWNED',stage='any') {
+ const selected=bottles.filter(bottle=>ownership==='ALL'||bottle.ownership===ownership);
+ const count=(values:string[][])=>{
+  const counts=new Map<string,{name:string;count:number}>();
+  for(const names of values)for(const [key,name] of new Map(names.filter(Boolean).map(name=>[normalize(name),name]))){
+   const current=counts.get(key);counts.set(key,{name:current?.name??name,count:(current?.count??0)+1});
+  }
+  return [...counts.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));
+ };
+ const rated=selected.filter(bottle=>bottle.rating>0);
+ const physical=selected.filter(bottle=>bottle.ownership==='OWNED');
+ return {total:selected.length,catalogCoverage:selected.filter(bottle=>bottle.catalogNotes?.length).length,
+  notes:stage==='any'?collectionNotes(selected,'ALL'):count(selected.map(bottle=>bottle.catalogNoteGroups?.filter(note=>note.stage===stage).map(note=>note.name)??[])),
+  brands:count(selected.map(bottle=>[bottle.brand])),families:count(selected.map(bottle=>[bottle.family])),
+  shelves:count(selected.map(bottle=>bottle.shelves??[])),
+  ratedBottles:rated.length,averageRating:rated.length?Math.round(rated.reduce((sum,bottle)=>sum+bottle.rating,0)/rated.length*10)/10:null,
+  totalMl:Math.round(physical.reduce((sum,bottle)=>sum+bottle.sizeMl,0)*10)/10,
+  remainingMl:Math.round(physical.reduce((sum,bottle)=>sum+bottle.sizeMl*bottle.fillPct/100,0)*10)/10};
 }

@@ -13,6 +13,8 @@ export interface Bottle {
   catalogNotes?:string[];
   catalogSource?:{label:string;url:string};
   strengthUnknown?:true;
+  shelves?:string[];
+  catalogNoteGroups?:{name:string;stage:'top'|'heart'|'base'|'listed'}[];
 }
 export interface CatalogSource {
  id:string; publisher:string; url:string;
@@ -68,6 +70,7 @@ export interface BottleProfileReply {
 export interface Preferences {
   likedNotes:string[]; dislikedNotes:string[]; excludedIds:string[];
   maxStrength:number; sensitivity:boolean; units:'C'|'F'; archiveOutfits:boolean;
+  collectionView?:{sort:'name'|'brand'|'rating'|'least-worn';layout:'grid'|'list'};
 }
 export type Mood='ANY'|'HAPPY'|'TIRED'|'SAD'|'CALM'|'STRESSED'|'CONFIDENT';
 export type Vibe='ANY'|'CLEAN'|'MYSTERIOUS'|'WARM'|'FRESH'|'COZY'|'BOLD'|'ROMANTIC';
@@ -89,7 +92,23 @@ export interface EvidenceReport {author:string; firsthand:boolean; rights:string
 export interface Evidence {kind:'brand'|'community'; reports:EvidenceReport[]; adapted?:boolean}
 export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:string; status:'approved'|'draft';note?:string}
 export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string;reference?:LayeringReference}
-export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
+export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext;note?:string}
+export interface JournalReply {
+ month:string;timezone:string;entries:WearEvent[];days:Record<string,number>;
+ totalWears:number;monthWears:number;layeredWears:number;distinctBottles:number;
+ mostWorn:{id:string;name:string;count:number}[];
+}
+export interface CatalogSearchEntry extends CatalogEdition {photo?:string;hasNotes:boolean}
+export interface CatalogSearchReply {entries:CatalogSearchEntry[];total:number;offset:number}
+export type CatalogTarget={kind:'bottle'|'catalog';id:string};
+export interface ComparisonNotes {sharedNotes:string[];leftOnly:string[];rightOnly:string[];noteOverlap:number|null}
+export interface ComparisonReply extends ComparisonNotes {
+ left:{edition:CatalogEdition;profile:CatalogProfile|null};right:{edition:CatalogEdition;profile:CatalogProfile|null};
+}
+export interface CatalogDetailReply {
+ edition:CatalogEdition;profile:CatalogProfile|null;dupes:CatalogDupeLinks;
+ similar:{edition:CatalogEdition;sharedNotes:string[];overlap:number}[];
+}
 export interface User {id:string; name:string; email:string|null; demo:boolean; catalogAdmin?:true}
 export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[]}
 export type AiProvider='qwen'|'openai'|'claude';

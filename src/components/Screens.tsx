@@ -9,14 +9,16 @@ import {intentSummary} from '@/lib/intent';
 import {concentrationOptions} from '@/lib/concentrations';
 import IntentPicker from './IntentPicker';
 import LayeringLibrary from './LayeringLibrary';
-import {browseCollection,collectionDefaults,collectionNotes,collectionSortOptions,type CollectionSort} from '@/lib/collection-browse';
-import type {AppState,Bottle,ComboResult,ScentIntent,SoloResult} from '@/lib/types';
+import {browseCollection,collectionDefaults,collectionNotes,collectionProfile,collectionSortOptions,type CollectionSort} from '@/lib/collection-browse';
+import CatalogTools,{CatalogThumb,type FeatureMutation} from './CatalogTools';
+import WearJournal from './WearJournal';
+import type {AppState,Bottle,CatalogTarget,ComboResult,ScentIntent,SoloResult} from '@/lib/types';
 export type View='home'|'collection'|'layering'|'journal'|'learn'|'profile';
 export const occasionName=(o:string)=>occasions.find(([v])=>v===o)?.[1]??o;
 export const temperature=(c:number,unit:string)=>`${Math.round(unit==='F'?c*9/5+32:c)}°${unit}`;
-interface Common {state:AppState;navigate:(v:View)=>void;add:()=>void;edit:(b:Bottle)=>void;recommend:(occasion?:string,shortcutId?:string)=>void;feedback:(ids:string[],reaction:'wore'|'loved'|'disliked'|'saved',occasion?:string)=>void;favorite:(b:Bottle)=>void;busy:boolean}
-export function BottleCard({bottle,onClick,onFavorite}:{bottle:Bottle;onClick:()=>void;onFavorite:()=>void}){
- return <article className="bottle-card"><div className="bottle-stage" style={{background:`linear-gradient(145deg,${bottle.color}18,${bottle.color}35)`}}><button className="bottle-open" onClick={onClick} aria-label={'View '+bottle.name}><BottleArt bottle={bottle}/></button><button className={'favorite-button '+(bottle.favorite?'is-favorite':'')} aria-label={(bottle.favorite?'Unfavorite ':'Favorite ')+bottle.name} onClick={onFavorite}><Heart size={17} fill={bottle.favorite?'currentColor':'none'} strokeWidth={1.6}/></button><span className="mini-tag">{bottle.concentration}</span></div><button className="bottle-card-copy" onClick={onClick}><span className="eyebrow">{bottle.brand}</span><h3>{bottle.name}</h3><span className="muted tiny">{bottle.family||'Profile not yet added'}<span className="dot-separator">·</span>{bottle.sizeMl} ml</span></button><div className="bottle-meta"><span className={'ownership '+bottle.ownership.toLowerCase()}><span/>{bottle.ownership==='OWNED'?'Owned':bottle.ownership==='WISHLIST'?'Wishlist':'Not owned'}</span>{bottle.rating>0&&<span className="rating"><Star size={12} fill="currentColor"/>{bottle.rating.toFixed(1)}</span>}</div></article>;
+interface Common {state:AppState;navigate:(v:View)=>void;add:()=>void;edit:(b:Bottle)=>void;recommend:(occasion?:string,shortcutId?:string)=>void;feedback:(ids:string[],reaction:'wore'|'loved'|'disliked'|'saved',occasion?:string)=>void;favorite:(b:Bottle)=>void;busy:boolean;mutate:FeatureMutation}
+export function BottleCard({bottle,onClick,onFavorite,onCompare}:{bottle:Bottle;onClick:()=>void;onFavorite:()=>void;onCompare?:()=>void}){
+ return <article className="bottle-card"><div className="bottle-stage" style={{background:`linear-gradient(145deg,${bottle.color}18,${bottle.color}35)`}}><button className="bottle-open" onClick={onClick} aria-label={'View '+bottle.name}>{bottle.provenance==='demo'?<BottleArt bottle={bottle}/>:<CatalogThumb key={bottle.catalogPhoto} path={bottle.catalogPhoto} name={bottle.name}/>}</button><button className={'favorite-button '+(bottle.favorite?'is-favorite':'')} aria-label={(bottle.favorite?'Unfavorite ':'Favorite ')+bottle.name} onClick={onFavorite}><Heart size={17} fill={bottle.favorite?'currentColor':'none'} strokeWidth={1.6}/></button><span className="mini-tag">{bottle.concentration}</span></div><button className="bottle-card-copy" onClick={onClick}><span className="eyebrow">{bottle.brand}</span><h3>{bottle.name}</h3><span className="muted tiny">{bottle.family?bottle.family+' · ':''}{bottle.sizeMl} ml{bottle.shelves?.length?' · '+bottle.shelves.join(', '):''}</span></button><div className="bottle-meta"><span className={'ownership '+bottle.ownership.toLowerCase()}><span/>{bottle.ownership==='OWNED'?'Owned':bottle.ownership==='WISHLIST'?'Wishlist':'Not owned'}</span>{bottle.rating>0&&<span className="rating"><Star size={12} fill="currentColor"/>{bottle.rating.toFixed(1)}</span>}{onCompare&&<button className="text-button" onClick={onCompare}>Compare</button>}</div></article>;
 }
 export function Dashboard(props:Common&{intent:ScentIntent;onIntentChange:(value:ScentIntent)=>void;onWearPick:(id:string)=>void;context:()=>void;shortcuts:()=>void;why:(r:SoloResult)=>void}) {
  const {state,navigate,add,recommend,favorite,context,shortcuts,why,intent,onIntentChange,onWearPick}=props;
@@ -42,14 +44,24 @@ export function Dashboard(props:Common&{intent:ScentIntent;onIntentChange:(value
 }
 export function Collection(props:Common){
  const [query,setQuery]=useState(''),[filter,setFilter]=useState('OWNED'),[favoriteOnly,setFavoriteOnly]=useState(false),[concentration,setConcentration]=useState('ALL');
- const [sort,setSort]=useState<CollectionSort>(collectionDefaults.sort),[note,setNote]=useState('');
- const bottles=browseCollection(props.state.bottles,props.state.history,{query,ownership:filter,favorites:favoriteOnly,concentration,note,sort});
+ const [sort,setSort]=useState<CollectionSort>(props.state.preferences.collectionView?.sort??collectionDefaults.sort),[note,setNote]=useState('');
+ const [layout,setLayout]=useState(props.state.preferences.collectionView?.layout??'grid');
+ const [shelf,setShelf]=useState(''),[brand,setBrand]=useState(''),[family,setFamily]=useState('');
+ const [comparing,setComparing]=useState<CatalogTarget|null>(null);
+ const viewQueue=useRef<Promise<unknown>>(Promise.resolve());
+ const active=useRef(true);useEffect(()=>{active.current=true;return ()=>{active.current=false;};},[]);
+ function remember(nextSort:CollectionSort,nextLayout:'grid'|'list'){
+  setSort(nextSort);setLayout(nextLayout);
+  viewQueue.current=viewQueue.current.catch(()=>{}).then(()=>active.current?props.mutate('collection/view','PUT',{sort:nextSort,layout:nextLayout},''):undefined);
+ }
+ const bottles=browseCollection(props.state.bottles,props.state.history,{query,ownership:filter,favorites:favoriteOnly,concentration,note,sort,shelf,brand,family});
  const notes=collectionNotes(props.state.bottles,filter).slice(0,8);
+ const profile=collectionProfile(props.state.bottles,filter);
  return <>
   <div className="page-heading"><h1>Collection</h1><button className="button primary" onClick={props.add}><Plus size={17}/>Add fragrance</button></div>
   <div className="collection-tools">
    <label className="search-input"><Search size={19}/><input aria-label="Search your collection" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Name, brand, or note"/></label>
-   <select aria-label="Sort collection" value={sort} onChange={event=>setSort(event.target.value as CollectionSort)}>
+   <select aria-label="Sort collection" value={sort} onChange={event=>remember(event.target.value as CollectionSort,layout)}>
     {collectionSortOptions.map(([id,label])=><option key={id} value={id}>{label}</option>)}
    </select>
    <select aria-label="Filter concentration" value={concentration} onChange={event=>setConcentration(event.target.value)}>
@@ -57,6 +69,14 @@ export function Collection(props:Common){
    </select>
    <button className={'button secondary '+(favoriteOnly?'active-filter':'')} aria-pressed={favoriteOnly} onClick={()=>setFavoriteOnly(value=>!value)}><Heart size={16}/>Favorites</button>
   </div>
+  <div className="catalog-actions collection-extra-tools"><CatalogTools state={props.state} mutate={props.mutate}/>
+   <button className="text-button" onClick={()=>remember(sort,layout==='grid'?'list':'grid')}>{layout==='grid'?'Compact list':'Grid view'}</button>
+   {profile.shelves.length>0&&<select aria-label="Filter shelf" value={shelf} onChange={event=>setShelf(event.target.value)}><option value="">All shelves</option>{profile.shelves.map(item=><option key={item.name} value={item.name}>{item.name} · {item.count}</option>)}</select>}
+   {(note||shelf||brand||family)&&<button className="text-button" onClick={()=>{setNote('');setShelf('');setBrand('');setFamily('');}}>Clear filters{[note,shelf,brand,family].filter(Boolean).length?' · '+[note,shelf,brand,family].filter(Boolean).join(', '):''}</button>}
+  </div>
+  <details className="collection-profiler"><summary>Collection profile</summary><p className="muted tiny">{profile.total} fragrances · {profile.catalogCoverage} with catalog notes · {profile.ratedBottles} personally rated · {profile.averageRating??'—'}/5 average · {profile.remainingMl} ml left</p>
+   <div className="catalog-comparison">{[['Notes',profile.notes,'note'],['Houses',profile.brands,'brand'],['My scent families',profile.families,'family']] .map(([title,items,type])=><section key={title as string}><h3>{title as string}</h3>{(items as {name:string;count:number}[]).slice(0,12).map(item=><button className="profile-facet" key={item.name} onClick={()=>{if(type==='note')setNote(item.name);if(type==='brand')setBrand(item.name);if(type==='family')setFamily(item.name);}}><span>{item.name}</span><small>{item.count}</small></button>)}</section>)}</div>
+  </details>
   <div className="collection-tabs">{[['OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned'],['ALL','All bottles']].map(([id,label])=>
    <button className={filter===id?'active':''} key={id} onClick={()=>{setFilter(id);setNote('');}}>
     {label}<span>{props.state.bottles.filter(bottle=>id==='ALL'||bottle.ownership===id).length}</span>
@@ -66,9 +86,10 @@ export function Collection(props:Common){
    {notes.map(item=><button key={item.name} className="button secondary" aria-pressed={note===item.name}
     onClick={()=>setNote(current=>current===item.name?'':item.name)}>{item.name} · {item.count}</button>)}
   </div>}
-  {bottles.length?<div className="bottle-grid collection-grid">{bottles.map(bottle=>
-   <BottleCard key={bottle.id} bottle={bottle} onClick={()=>props.edit(bottle)} onFavorite={()=>props.favorite(bottle)}/>)}
+  {bottles.length?<div className={layout==='list'?'collection-list':'bottle-grid collection-grid'}>{bottles.map(bottle=>
+   <BottleCard key={bottle.id} bottle={bottle} onClick={()=>props.edit(bottle)} onFavorite={()=>props.favorite(bottle)} onCompare={()=>setComparing({kind:'bottle',id:bottle.id})}/>)}
   </div>:<Empty title="No matching fragrances" detail="Try another search or reset the collection filters."/>}
+  {comparing&&<CatalogTools key={comparing.id} state={props.state} mutate={props.mutate} start={comparing} onClosed={()=>setComparing(null)}/>}
  </>;
 }
 const tierLabels:Record<string,string>={brand_guidance:'Brand-suggested',community_corroborated:'Community corroborated',single_anecdote:'Single user report',dupe_adapted_hypothesis:'Dupe-adapted — experimental variation',model_hypothesis:'Experimental · untested'};
@@ -84,8 +105,8 @@ export function Layering({state,busy,generate,results,feedback,intent,onIntentCh
 export function SoloResults({results,state,feedback,why,busy}:{results:SoloResult[];state:AppState;feedback:Common['feedback'];why:(r:SoloResult)=>void;busy:boolean}){
  return <div>{!results.length?<Empty title={state.context.policy==='NO_FRAGRANCE'?'No fragrance advised':'No matching fragrances'} detail={state.context.policy==='NO_FRAGRANCE'?'This venue is fragrance-free.':'Check your profiles, preferences and conditions.'}/>:<div className="solo-results">{results.map((r,i)=><article className="solo-card" key={r.bottle.id}><div className="solo-art" style={{background:r.bottle.color+'22'}}><span className="rank-label">0{i+1}</span><BottleArt bottle={r.bottle}/></div><div className="solo-copy"><span className="eyebrow">{i===0?'First choice':'Alternative'}</span><h3>{r.bottle.name}</h3><p className="variant-line">{r.bottle.brand} · {r.bottle.concentration}</p><span className="data-label">{r.bottle.provenance==='demo'?'Demo profile':r.bottle.provenance==='catalog'?'FragDex profile':'Your profile'}</span><ul>{[r.reasons.find(reason=>reason.ruleId==='v1.vibe')??r.reasons.find(reason=>reason.ruleId==='v1.mood')??r.reasons[0]].map(reason=><li key={reason.ruleId}>{reason.text}</li>)}</ul><details className="inline-details"><summary>Application</summary><p>{r.caution}</p></details><div className="solo-actions"><button className="button dark" disabled={busy} onClick={()=>feedback([r.bottle.id],'wore')}>Wear this<ArrowUpRight size={15}/></button><button className="icon-button" disabled={busy} aria-label={'Love '+r.bottle.name} onClick={()=>feedback([r.bottle.id],'loved')}><Heart size={18}/></button><button className="text-button" disabled={busy} onClick={()=>feedback([r.bottle.id],'disliked')}>Not my style</button><button className="text-button" onClick={()=>why(r)}>Why?</button></div></div></article>)}</div>}</div>;
 }
-export function Journal({state,remove,busy}:{state:AppState;remove:(id:string)=>void;busy:boolean}){
- return <><div className="page-heading"><div><h1>Journal</h1></div></div>{!state.history.length?<Empty title="No wear logs yet" detail="Wear a recommendation or save a pairing."/>:<div className="journal-list">{state.history.map(h=><article className="journal-entry" key={h.id}><span className="journal-icon">{h.reaction==='loved'?<Heart size={22}/>:h.bottleIds.length===2?<Layers size={22}/>:<Leaf size={22}/>}</span><div><span className="eyebrow">{occasionName(h.occasion)} · {h.reaction==='saved'?'SAVED PAIRING':h.reaction==='loved'?'LOVED IT':h.reaction==='disliked'?'NOT MY STYLE':'WORE IT'}</span><h3>{h.names.join(' + ')}</h3><p className="muted tiny">{new Date(h.at).toLocaleString(undefined,{timeZone:h.context.timezone})} · {temperature(h.context.tempC,state.preferences.units)} · {h.context.setting.toLowerCase()}{intentSummary(h.context)?' · '+intentSummary(h.context):''} · Manual conditions</p></div><button className="icon-button danger-text" aria-label={'Delete journal entry '+h.names.join(' and ')} disabled={busy} onClick={()=>remove(h.id)}><Trash2 size={17}/></button></article>)}</div>}<p className="muted tiny journal-note">Feedback stays private.</p></>;
+export function Journal({state,mutate,busy}:{state:AppState;mutate:FeatureMutation;busy:boolean}){
+ return <WearJournal state={state} mutate={mutate} busy={busy}/>;
 }
 export function Learn() {
  const topics=[

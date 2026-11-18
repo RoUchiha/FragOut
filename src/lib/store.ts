@@ -3,6 +3,7 @@ import {defaultContext,defaultPreferences,defaultShortcuts,demoBottles} from './
 import {openConfiguredDatabase,openSqlite,type DataConnection} from './database.ts';
 import {CatalogPhotoStore} from './catalog-photo-store.ts';
 import {catalogThumbnailPhotos} from './catalog-photos.ts';
+import {journalSummary,wearDateAt} from './journal.ts';
 import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
 
 const DAY_MS=86400000;
@@ -139,7 +140,7 @@ export class Store {
       const catalogPhotos=catalogThumbnailPhotos(profiles[index]).map(photo=>photo.path);
       const catalogNotes=profiles[index]?.notes.map(note=>note.name);
       return {...bottle,...(catalogPhotos.length?{catalogPhoto:catalogPhotos[0],catalogPhotos}:{}),
-        ...(catalogNotes?.length?{catalogNotes}:{})};
+        ...(catalogNotes?.length?{catalogNotes,catalogNoteGroups:profiles[index]!.notes.map(({name,stage})=>({name,stage}))}:{})};
     });
     const likes=new Map<string,WearEvent>();
     for(const event of comboEvents){
@@ -289,6 +290,50 @@ export class Store {
 
   async feedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){
     return this.withOwnerTransaction(userId,store=>store.writeFeedback(userId,ids,reaction,occasion,requestId));
+  }
+
+  async saveCollectionView(userId:string,view:NonNullable<Preferences['collectionView']>,canWrite?:(store:Store)=>Promise<boolean>){
+    await this.withOwnerTransaction(userId,async store=>{
+      if(canWrite&&!await canWrite(store))throw new Error('Session expired. Please sign in again.');
+      const settings=await store.settings(userId);
+      await store.db.run('UPDATE settings SET body=? WHERE user_id=?',JSON.stringify({...settings,preferences:{...settings.preferences,collectionView:view}}),userId);
+    });
+  }
+
+  async wearHistory(userId:string){
+    const rows=await this.db.all<BodyRow>('SELECT body FROM wear_events WHERE user_id=? ORDER BY created DESC,'+this.insertionOrder+' DESC',userId);
+    return rows.map(row=>JSON.parse(row.body) as WearEvent).filter(event=>event.reaction==='wore');
+  }
+
+  async journal(userId:string,month:string){
+    const [settings,history]=await Promise.all([this.settings(userId),this.wearHistory(userId)]);
+    return journalSummary(history,month,settings.context.timezone);
+  }
+
+  async logWear(userId:string,ids:string[],date:string,note:string,canWrite?:(store:Store)=>Promise<boolean>){
+    return this.withOwnerTransaction(userId,async store=>{
+      if(canWrite&&!await canWrite(store))throw new Error('Session expired. Please sign in again.');
+      const settings=await store.settings(userId);
+      const at=wearDateAt(date,settings.context.timezone);
+      const event=await store.writeFeedback(userId,ids,'wore',settings.context.occasion);
+      const result={...event,at,note:note.trim()};
+      await store.db.run('UPDATE wear_events SET body=? WHERE id=? AND user_id=?',JSON.stringify(result),event.id,userId);
+      return result;
+    });
+  }
+
+  async editWear(userId:string,id:string,date:string,note:string,canWrite?:(store:Store)=>Promise<boolean>){
+    return this.withOwnerTransaction(userId,async store=>{
+      if(canWrite&&!await canWrite(store))throw new Error('Session expired. Please sign in again.');
+      const row=await store.db.get<BodyRow>('SELECT body FROM wear_events WHERE id=? AND user_id=?'+store.rowLock,id,userId);
+      if(!row)return null;
+      const event=JSON.parse(row.body) as WearEvent;
+      if(event.reaction!=='wore')return null;
+      const settings=await store.settings(userId);
+      const result={...event,at:wearDateAt(date,settings.context.timezone),note:note.trim(),context:{...event.context,timezone:settings.context.timezone}};
+      await store.db.run('UPDATE wear_events SET body=? WHERE id=? AND user_id=?',JSON.stringify(result),id,userId);
+      return result;
+    });
   }
 
   private async writeFeedback(userId:string,ids:string[],reaction:WearEvent['reaction'],occasion:string,requestId?:string){

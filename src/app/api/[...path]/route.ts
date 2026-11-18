@@ -3,7 +3,7 @@ import {z} from 'zod';
 import sharp from 'sharp';
 import {getStore,type Store} from '@/lib/store';
 import {DatabaseUnavailable} from '@/lib/database';
-import {bottleSchema,settingsSchema,intentFields} from '@/lib/validation';
+import {bottleSchema,settingsSchema,intentFields,collectionViewSchema} from '@/lib/validation';
 import {rankCombos,rankSolo,ENGINE_VERSION} from '@/lib/engine';
 import {enrichRecommendationBottles,reviewedPairsFor} from '@/lib/recommendation-evidence';
 import {matchesBottleSearch,scentSearchLimit} from '@/lib/scent-search';
@@ -16,6 +16,9 @@ import {findAutomaticCatalogPhoto} from '@/lib/catalog-photo-selector';
 import {lookupFragellaRatings} from '@/lib/fragella';
 import {layeringReferenceFor,searchLayeringCatalog} from '@/lib/layering-catalog';
 import {imageSchema,validateImage,type ImageInput} from '@/lib/outfit';
+import {discoverCatalog,compareProfiles,similarCatalog} from '@/lib/catalog-discovery';
+import {journalCsv} from '@/lib/journal';
+import {catalogThumbnailPhotos} from '@/lib/catalog-photos';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
@@ -30,6 +33,7 @@ const storeValidationErrors=new Set([
   'Choose two distinct bottles you own.',
   'This recommendation has expired. Please generate a new pick.',
   'Bottle does not belong to this recommendation.',
+  'Choose a valid wear date no later than today.',
 ]);
 const bottleProfile=(bottle:Bottle,profile:ReturnType<typeof findCatalogProfile>):BottleProfileReply=>({
   variantId:bottle.variantId,profile,dupes:findCatalogDupes(bottle,profile),
@@ -158,6 +162,64 @@ async function handle(req:NextRequest){
     if(aiResponse)return aiResponse;
     if(!await isActive())return signInRequired();
     if(path.length===1&&path[0]==='state'&&method==='GET')return await privateReply(await db.state(user.id));
+    if(path.length===2&&path[0]==='catalog'&&path[1]==='search'&&method==='POST'){
+      const data=z.object({query:z.string().trim().max(120).optional(),
+        include:z.array(z.string().trim().min(1).max(50)).max(10).optional(),exclude:z.array(z.string().trim().min(1).max(50)).max(10).optional(),
+        stage:z.enum(['any','top','heart','base','listed']).optional(),match:z.enum(['all','any']).optional(),
+        offset:z.number().int().min(0).max(10000).optional()}).strict().parse(body);
+      const result=discoverCatalog(data),profiles=await db.catalogPhotos.profiles(result.entries);
+      return await privateReply({...result,entries:result.entries.map((entry,index)=>({
+        ...entry,photo:catalogThumbnailPhotos(profiles[index])[0]?.path,
+      }))});
+    }
+    if(path.length===2&&path[0]==='catalog'&&path[1]==='detail'&&method==='POST'){
+      const {id}=z.object({id:z.string().min(1).max(180)}).strict().parse(body);
+      const edition=catalogEditionById(id);
+      if(!edition)return reply({error:'Catalog edition not found.'},404);
+      await lookupPhoto(db,user.id,edition,false,isActive);
+      const profile=await db.catalogPhotos.profile(edition);
+      return await privateReply({edition,profile,dupes:findCatalogDupes(edition,profile),similar:similarCatalog(profile)});
+    }
+    if(path.length===1&&path[0]==='compare'&&method==='POST'){
+      const target=z.object({kind:z.enum(['bottle','catalog']),id:z.string().min(1).max(180)}).strict();
+      const data=z.object({left:target,right:target}).strict().parse(body);
+      const resolve=async(ref:z.infer<typeof target>)=>{
+        const label=ref.kind==='bottle'?await db.getBottle(user.id,ref.id):catalogEditionById(ref.id);
+        if(!label)return null;
+        const edition={id:label.id,brand:label.brand,name:label.name,concentration:label.concentration};
+        const profile=await db.catalogPhotos.profile(label);
+        return {edition,profile};
+      };
+      const [left,right]=await Promise.all([resolve(data.left),resolve(data.right)]);
+      if(!left||!right)return reply({error:'Fragrance not found.'},404);
+      return await privateReply({left,right,...compareProfiles(left.profile,right.profile)});
+    }
+    if(path.length===2&&path[0]==='collection'&&path[1]==='view'&&method==='PUT'){
+      await db.saveCollectionView(user.id,collectionViewSchema.parse(body),scoped=>isActive(scoped,true));
+      return await privateReply({ok:true});
+    }
+    if(path[0]==='journal'){
+      if(method==='GET'&&path.length===2&&path[1]==='export'){
+        if(!await db.limit('wear-export:'+user.id,8,60000))return reply({error:'Please wait before exporting again.'},429);
+        const [history,state]=await Promise.all([db.wearHistory(user.id),db.state(user.id)]);
+        return await privateReply({filename:'fragout-wear-journal.csv',csv:journalCsv(history,state.context.timezone)});
+      }
+      if(method==='GET'&&path.length===2){
+        const month=z.string().regex(/^(19|20|21)\d{2}-(0[1-9]|1[0-2])$/).parse(path[1]);
+        return await privateReply(await db.journal(user.id,month));
+      }
+      const wearFields={date:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),note:z.string().trim().max(2000)};
+      if(method==='POST'&&path.length===1){
+        const data=z.object({...wearFields,bottleIds:z.array(z.string().min(1).max(100)).min(1).max(2).refine(ids=>new Set(ids).size===ids.length)}).strict().parse(body);
+        return await privateReply(await db.logWear(user.id,data.bottleIds,data.date,data.note,scoped=>isActive(scoped,true)),201);
+      }
+      if(method==='PATCH'&&path.length===2){
+        const data=z.object(wearFields).strict().parse(body);
+        const saved=await db.editWear(user.id,path[1],data.date,data.note,scoped=>isActive(scoped,true));
+        return saved?await privateReply(saved):reply({error:'Wear entry not found.'},404);
+      }
+      return reply({error:'Not found.'},404);
+    }
     if(path.length===2&&path[0]==='layering'&&path[1]==='search'&&method==='GET'){
       const query=z.string().trim().max(120).parse(req.nextUrl.searchParams.get('q')??'');
       const offset=z.coerce.number().int().min(0).max(10000).parse(req.nextUrl.searchParams.get('offset')??0);
@@ -254,6 +316,7 @@ async function handle(req:NextRequest){
     if(error instanceof DatabaseUnavailable)return reply({error:'Storage is temporarily unavailable. Try again shortly.'},503);
     if(error instanceof z.ZodError)return reply({error:error.issues.map(i=>`${i.path.join('.')}: ${i.message}`).slice(0,3).join('; ')},400);
     if(error instanceof Error&&error.message==='Account not found.')return signInRequired();
+    if(error instanceof Error&&error.message==='Session expired. Please sign in again.')return signInRequired();
     if(error instanceof Error&&storeValidationErrors.has(error.message))return reply({error:error.message},400);
     console.error('FragOut request failed',error instanceof Error?error.name:'UnknownError');return reply({error:'Something went wrong. Please try again.'},500);
   }

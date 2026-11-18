@@ -6,11 +6,14 @@ import {capturePhoto,discardPhoto,type Capture} from './capture';
 import {cloudAiNames} from './cloud-ai';
 import {BottleArt,Btn,Choices,Empty,Field,IconButton,SearchBox,Sheet,Spinner,useUi} from './ui';
 import {scentSearchLimit} from '../../src/lib/scent-search';
-import {browseCollection,collectionDefaults,collectionNotes,collectionSortOptions,type CollectionSort} from '../../src/lib/collection-browse';
+import {browseCollection,collectionDefaults,collectionNotes,collectionProfile,collectionSortOptions,type CollectionSort} from '../../src/lib/collection-browse';
 import {isCatalogPhotoPath} from '../../src/lib/catalog-photos';
 import {concentrationOptions} from '../../src/lib/concentrations';
-import type {AiProvider,Bottle} from '../../src/lib/types';
+import type {AiProvider,Bottle,CatalogTarget} from '../../src/lib/types';
 import FragranceProfile from './FragranceProfile';
+import CatalogBrowser from './CatalogBrowser';
+import CompareFragrances from './CompareFragrances';
+import CollectionProfile from './CollectionProfile';
 
 type ScanImage = Pick<Capture,'data'|'mime'>;
 type ScanConsent = {provider:keyof typeof cloudAiNames};
@@ -25,7 +28,12 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
  const [filter,setFilter] = useState('OWNED');
  const [filtersOpen,setFiltersOpen]=useState(false),[favorites,setFavorites]=useState(false);
  const [concentration,setConcentration]=useState('ALL'),[note,setNote]=useState('');
- const [sort,setSort]=useState<CollectionSort>('name');
+ const [sort,setSort]=useState<CollectionSort>(state.preferences.collectionView?.sort??'name');
+ const [layout,setLayout]=useState<'grid'|'list'>(state.preferences.collectionView?.layout??'grid');
+ const [brand,setBrand]=useState(''),[familyFilter,setFamilyFilter]=useState(''),[shelf,setShelf]=useState('');
+ const [addChoice,setAddChoice]=useState(false),[catalog,setCatalog]=useState(false),[profiler,setProfiler]=useState(false);
+ const [comparing,setComparing]=useState<CatalogTarget|null>(null);
+ const viewQueue=useRef<Promise<unknown>>(Promise.resolve());
  const [viewing,setViewing] = useState<Bottle|null>(null);
  const [editing,setEditing] = useState<Bottle|null|undefined>(undefined);
  const [candidate,setCandidate] = useState<BottleCandidate|null>(null);
@@ -49,10 +57,19 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
  },[notify,stillCurrent]);
 
  const ownedCount = state.bottles.filter(bottle=>bottle.ownership==='OWNED').length;
- const visible=browseCollection(state.bottles,state.history,{query,ownership:filter,favorites,concentration,note,sort});
+ const visible=browseCollection(state.bottles,state.history,{query,ownership:filter,favorites,concentration,note,sort,brand,family:familyFilter,shelf});
  const notes=collectionNotes(state.bottles,filter).slice(0,8);
- const hasFilters=favorites||concentration!=='ALL'||!!note;
+ const facets=collectionProfile(state.bottles,filter);
+ const hasFilters=favorites||concentration!=='ALL'||!!note||!!brand||!!familyFilter||!!shelf;
  const openForm = (bottle:Bottle|null) => {setCandidate(null);setEditing(bottle);};
+ function remember(nextSort:CollectionSort,nextLayout:'grid'|'list'){
+  setSort(nextSort);setLayout(nextLayout);
+  viewQueue.current=viewQueue.current.catch(()=>{}).then(async()=>{
+   if(!stillCurrent())return;
+   await api('collection/view','PUT',{sort:nextSort,layout:nextLayout});
+   if(stillCurrent())await refresh();
+  }).catch(error=>{if(active.current&&stillCurrent())notify(error.message);});
+ }
 
  async function scan() {
   const provider = status?.selected;
@@ -134,11 +151,15 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    <View style={[styles.row,{gap:4}]}>
     <IconButton label="Scan bottle" icon={<Camera size={18} color={colors.link}/>}
      disabled={busy||!status||!!scanConsent} onPress={()=>void scan()}/>
-    <Btn label="Add" icon={<Plus size={15} color={colors.accentInk}/>} onPress={()=>openForm(null)}/>
+    <Btn label="Add" icon={<Plus size={15} color={colors.accentInk}/>} onPress={()=>setAddChoice(true)}/>
    </View>
   </View>
   <SearchBox label="Search collection" placeholder="Name, brand, or note" value={query}
    onChange={setQuery} onClear={()=>setQuery('')} maxLength={scentSearchLimit}/>
+  <View style={styles.spread}>
+   <Btn label="Browse FragDex" kind="quiet" onPress={()=>setCatalog(true)}/>
+   <Btn label="Collection profile" kind="quiet" onPress={()=>setProfiler(true)}/>
+  </View>
   <Pressable accessibilityRole="button" accessibilityLabel="Liked combos" onPress={onOpenLikedCombos}
    style={[styles.spread,{minHeight:40,borderBottomWidth:1,borderBottomColor:colors.line,paddingHorizontal:3}]}>
    <View style={styles.row}>
@@ -155,21 +176,25 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    <Btn label={hasFilters?'Sort & filter · On':'Sort & filter'} kind="quiet"
     icon={<SlidersHorizontal size={15} color={colors.link}/>} onPress={()=>setFiltersOpen(true)}/>
   </View>
-  {note&&<Btn label={'Clear note · '+note} kind="quiet" onPress={()=>setNote('')}/>}
+  {hasFilters&&<View style={[styles.row,{flexWrap:'wrap'}]}>
+   {([['note',note],['brand',brand],['family',familyFilter],['shelf',shelf]] as const).filter(([,value])=>!!value).map(([type,value])=>
+    <Btn key={type} label={value+' ×'} kind="quiet" onPress={()=>{if(type==='note')setNote('');if(type==='brand')setBrand('');if(type==='family')setFamilyFilter('');if(type==='shelf')setShelf('');}}/>)}
+  </View>}
   {busy&&<Spinner label="Scanning bottle…"/>}
-  {visible.length ? <View style={styles.grid}>
+  {visible.length ? <View style={layout==='grid'?styles.grid:{gap:8}}>
    {visible.map(bottle=>{
     const demo=bottle.provenance==='demo';
-    return <View key={bottle.id} style={[!demo&&styles.card,styles.tile,!demo&&{padding:9}]}>
+    return <View key={bottle.id} style={[!demo&&styles.card,layout==='grid'?styles.tile:{width:'100%'},!demo&&{padding:9},layout==='list'&&{flexDirection:'row',alignItems:'center',gap:12}]}>
      {(demo||isCatalogPhotoPath(bottle.catalogPhoto))&&<Pressable accessibilityRole="button" accessibilityLabel={'Open profile for '+bottle.name}
-      onPress={()=>setViewing(bottle)} style={[styles.bottleStage,{backgroundColor:bottle.color+'28'}]}>
-      {demo?<BottleArt bottle={bottle} size={114}/>:<CollectionThumbnail key={bottle.catalogPhoto} bottle={bottle}/>}
+      onPress={()=>setViewing(bottle)} style={[styles.bottleStage,{backgroundColor:bottle.color+'28'},layout==='list'&&{width:66,height:78}]}>
+      {demo?<BottleArt bottle={bottle} size={layout==='list'?62:114}/>:<CollectionThumbnail key={bottle.catalogPhoto} bottle={bottle} compact={layout==='list'}/>}
      </Pressable>}
      <Pressable accessibilityRole="button" accessibilityLabel={'Details for '+bottle.name}
-      onPress={()=>setViewing(bottle)} style={{paddingVertical:7,paddingRight:demo?0:32,gap:2}}>
+      onPress={()=>setViewing(bottle)} style={[{paddingVertical:7,paddingRight:demo?0:32,gap:2},layout==='list'&&{flex:1}]}>
       <Text style={styles.h3} numberOfLines={2}>{bottle.name}</Text>
       <Text style={styles.small} numberOfLines={1}>{bottle.brand} · {bottle.concentration}</Text>
       {!!bottle.family&&<Text style={styles.small} numberOfLines={1}>{bottle.family}</Text>}
+      {!!bottle.shelves?.length&&<Text style={styles.small} numberOfLines={1}>{bottle.shelves.join(' · ')}</Text>}
      </Pressable>
      <Pressable accessibilityRole="button" accessibilityLabel={(bottle.favorite?'Unfavorite ':'Favorite ')+bottle.name}
       accessibilityState={{selected:bottle.favorite}} onPress={()=>void favorite(bottle)}
@@ -182,18 +207,32 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    detail={query.trim()||hasFilters?'Try another search or reset your filters.':'Add a fragrance by name or scan the label.'}/>}
 
   {filtersOpen&&<Sheet title="Collection filters" onClose={()=>setFiltersOpen(false)}>
-   <Choices label="Sort by" value={sort} items={collectionSortOptions} onChange={setSort}/>
+   <Choices label="Sort by" value={sort} items={collectionSortOptions} onChange={value=>remember(value,layout)}/>
+   <Choices label="View" value={layout} items={[[ 'grid','Grid'],['list','Compact list']]} onChange={value=>remember(sort,value)}/>
    <View style={styles.spread}><Text style={styles.text}>Favorites only</Text>
     <Switch accessibilityLabel="Favorites only" value={favorites} onValueChange={setFavorites}/>
    </View>
    <Choices label="Concentration" value={concentration} items={[[ 'ALL','All concentrations'],...concentrationOptions]} onChange={setConcentration}/>
    {notes.length>0&&<Choices label="Notes in your collection" value={note}
     items={[[ '', 'All notes'],...notes.map(item=>[item.name,item.name+' · '+item.count] as const)]} onChange={setNote}/>}
+   {facets.shelves.length>0&&<Choices label="Shelf" value={shelf} items={[[ '', 'All shelves'],...facets.shelves.map(item=>[item.name,item.name+' · '+item.count] as const)]} onChange={setShelf}/>}
+   {facets.brands.length>1&&<Choices label="House" value={brand} items={[[ '', 'All houses'],...facets.brands.map(item=>[item.name,item.name] as const)]} onChange={setBrand}/>}
    <View style={styles.spread}>
-    <Btn label="Reset filters" kind="quiet" onPress={()=>{setFavorites(false);setConcentration('ALL');setNote('');setSort(collectionDefaults.sort);}}/>
+    <Btn label="Reset filters" kind="quiet" onPress={()=>{setFavorites(false);setConcentration('ALL');setNote('');setBrand('');setFamilyFilter('');setShelf('');remember(collectionDefaults.sort,layout);}}/>
     <Btn label={'Show '+visible.length} onPress={()=>setFiltersOpen(false)}/>
    </View>
   </Sheet>}
+  {addChoice&&<Sheet title="Add fragrance" onClose={()=>setAddChoice(false)}>
+   <Btn label="Find in FragDex" onPress={()=>{setAddChoice(false);setCatalog(true);}}/>
+   <Btn label="Scan bottle label" kind="secondary" disabled={busy||!status} onPress={()=>{setAddChoice(false);void scan();}}/>
+   <Btn label="Enter manually" kind="quiet" onPress={()=>{setAddChoice(false);openForm(null);}}/>
+  </Sheet>}
+  {catalog&&<CatalogBrowser onClose={()=>setCatalog(false)} notify={notify}
+   onAdded={(saved,open=true)=>{if(open&&active.current){setCatalog(false);setViewing(saved);}void refresh().catch(error=>{if(active.current&&stillCurrent())notify(error.message);});}}
+   onCompare={target=>{setCatalog(false);setComparing(target);}}/>}
+  {profiler&&<CollectionProfile bottles={state.bottles} ownership={filter} onClose={()=>setProfiler(false)}
+   onFilter={(type,value)=>{if(type==='note')setNote(value);if(type==='brand')setBrand(value);if(type==='family')setFamilyFilter(value);if(type==='shelf')setShelf(value);setProfiler(false);}}/>}
+  {comparing&&<CompareFragrances left={comparing} state={state} onClose={()=>setComparing(null)} notify={notify}/>}
   {scanConsent&&<Sheet title="Share bottle photo?" onClose={()=>void resolveScanConsent(scanConsent,false)}>
    <Text style={styles.text}>FragOut will send this bottle photo to {cloudAiNames[scanConsent.provider]} to read the label. The provider’s retention policy applies and your API account may be billed.</Text>
    <Btn label={`Send to ${cloudAiNames[scanConsent.provider]}`} onPress={()=>void resolveScanConsent(scanConsent,true)}/>
@@ -212,6 +251,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
   </Sheet>}
   {viewing&&<FragranceProfile key={viewing.id+':'+viewing.variantId} bottle={viewing} onClose={()=>setViewing(null)}
    onEdit={()=>{setViewing(null);openForm(viewing);}} onRefresh={()=>void refreshProfile()}
+   onCompare={()=>{setComparing({kind:'bottle',id:viewing.id});setViewing(null);}}
    onWear={()=>onWear(viewing)} wearBusy={wearBusy}/>}
   {editing!==undefined&&<BottleForm key={editing?.id??candidate?.name??'new'} bottle={editing??undefined}
    candidate={candidate} onClose={()=>setEditing(undefined)}
@@ -219,11 +259,11 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
  </View>;
 }
 
-function CollectionThumbnail({bottle}:{bottle:Bottle}) {
+function CollectionThumbnail({bottle,compact=false}:{bottle:Bottle;compact?:boolean}) {
  const [unavailable,setUnavailable]=useState<string[]>([]);
  const path=[bottle.catalogPhoto,...(bottle.catalogPhotos??[])].find(path=>isCatalogPhotoPath(path)&&!unavailable.includes(path));
  return path?<Image source={{uri:serverUrl()+path}} accessibilityLabel={bottle.brand+' '+bottle.name+' bottle'}
-  resizeMode="contain" style={{width:'100%',height:122}} onError={()=>setUnavailable(current=>[...current,path])}/>:null;
+  resizeMode="contain" style={{width:'100%',height:compact?70:122}} onError={()=>setUnavailable(current=>[...current,path])}/>:null;
 }
 
 function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
@@ -234,6 +274,7 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
  const [name,setName]=useState(bottle?.name??candidate?.name??''),[brand,setBrand]=useState(bottle?.brand??candidate?.brand??''),[concentration,setConc]=useState(bottle?.concentration??candidate?.concentration??'UNKNOWN'),[ownership,setOwnership]=useState(bottle?.ownership??'OWNED'),[known,setKnown]=useState(bottle?.profileKnown??false),[family,setFamily]=useState(bottle?.family??''),[notes,setNotes]=useState(bottle?.notes.join(', ')??''),[strength,setStrength]=useState(String(bottle?.strength??1)),[climate,setClimate]=useState(bottle?.climate??'UNKNOWN'),[memo,setMemo]=useState(bottle?.memo??''),[busy,setBusy]=useState(false),[deleteConfirm,setDeleteConfirm]=useState(false),[verified,setVerified]=useState(!candidate);
  const active=useRef(true);
  const [rating,setRating]=useState(String(bottle?.rating??0));
+ const [shelves,setShelves]=useState(bottle?.shelves?.join(', ')??''),[size,setSize]=useState(String(bottle?.sizeMl??100)),[fill,setFill]=useState(String(bottle?.fillPct??100));
  useEffect(()=>{
   active.current=true;
   return ()=>{active.current=false;};
@@ -247,8 +288,9 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
     name:name.trim(),brand:brand.trim(),concentration,ownership,family,
     notes:notes.split(',').map(note=>note.trim().toLowerCase()).filter(Boolean),
     strength:Number(strength),climate,profileKnown:known&&!changed,provenance:known&&!changed?'personal':'unknown',
-    color:bottle?.color??'#b8c986',shape:bottle?.shape??'square',sizeMl:bottle?.sizeMl??100,
-    fillPct:bottle?.fillPct??100,rating:Number(rating),favorite:bottle?.favorite??false,memo,
+    color:bottle?.color??'#b8c986',shape:bottle?.shape??'square',sizeMl:Number(size),
+    fillPct:Number(fill),rating:Number(rating),favorite:bottle?.favorite??false,memo,
+    shelves:shelves.split(',').map(value=>value.trim()).filter(Boolean),
    });
    if(!stillCurrent()) return;
    if(active.current) onSaved(saved);
@@ -267,6 +309,9 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
    items={concentrationOptions}
    onChange={v=>{setConc(v);if(candidate)setVerified(false);}}/>
   <Choices label="Status" value={ownership} items={[['OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned']]} onChange={setOwnership}/>
+  <Field label="Shelves" placeholder="Samples, Summer, Tested…" maxLength={380} value={shelves} onChangeText={setShelves}/>
+  <View style={[styles.row,{alignItems:'flex-start'}]}><View style={{flex:1}}><Field label="Volume · ml" keyboardType="decimal-pad" value={size} onChangeText={setSize}/></View>
+   <View style={{flex:1}}><Field label="Remaining · %" keyboardType="decimal-pad" value={fill} onChangeText={setFill}/></View></View>
   {changed&&<View style={styles.warm}><Text style={styles.small}>Changing the edition clears its personal scent observations.</Text></View>}
   <View style={styles.spread}>
    <Text style={[styles.text,{flex:1}]}>Use my scent observations</Text>
@@ -285,7 +330,7 @@ function BottleForm({bottle,candidate,onClose,onSaved,refresh,notify}:{
    <Text style={[styles.text,{flex:1}]}>I checked the exact fragrance and concentration</Text>
    <Switch accessibilityLabel="Confirm accurate fragrance label" value={verified} onValueChange={setVerified}/>
   </View>}
-  <Btn label={busy?'Saving…':'Save fragrance'} disabled={busy||!name.trim()||!brand.trim()||!verified} onPress={()=>void save()}/>
+  <Btn label={busy?'Saving…':'Save fragrance'} disabled={busy||!name.trim()||!brand.trim()||!verified||!size.trim()||!fill.trim()||!Number.isFinite(Number(size))||Number(size)<0.1||Number(size)>2000||!Number.isFinite(Number(fill))||Number(fill)<0||Number(fill)>100} onPress={()=>void save()}/>
   {bottle&&(deleteConfirm?<View style={styles.warm}>
    <Text style={styles.small}>Remove this bottle from your collection? Existing wear logs remain.</Text>
    <View style={styles.row}>

@@ -13,8 +13,8 @@ import type {Bottle,BottleProfileReply} from '../../src/lib/types';
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
 type Lookup=BottleProfileReply|{error:string};
 
-export default function FragranceProfile({bottle,onClose,onEdit,onRefresh,onWear,wearBusy}:{
- bottle:Bottle;onClose:()=>void;onEdit:()=>void;onRefresh:()=>void;onWear:()=>void;wearBusy:boolean;
+export default function FragranceProfile({bottle,onClose,onEdit,onRefresh,onWear,onCompare,wearBusy}:{
+ bottle:Bottle;onClose:()=>void;onEdit:()=>void;onRefresh:()=>void;onWear:()=>void;onCompare:()=>void;wearBusy:boolean;
 }){
  const {styles,colors}=useUi();
  const [lookup,setLookup]=useState<Lookup|null>(null);
@@ -82,12 +82,14 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh,onWear
     <Text style={styles.small}>{profile?.brand??bottle.brand}</Text>
     <Text style={styles.h2}>{name}</Text>
     <Text style={styles.small}>{bottle.concentration==='UNKNOWN'?'Concentration unknown':bottle.concentration}</Text>
+    <Text style={styles.small}>{bottle.sizeMl} ml · {bottle.fillPct}% left{bottle.shelves?.length?' · '+bottle.shelves.join(', '):''}</Text>
     <Btn label="Edit bottle" kind="secondary" disabled={!lookup||changed}
      onPress={onEdit} style={{alignSelf:'flex-start',marginTop:3}}/>
     {bottle.ownership==='OWNED'&&bottle.fillPct>0&&<Btn label="Log wear" kind="quiet"
      disabled={wearBusy||changed} onPress={onWear} style={{alignSelf:'flex-start'}}/>}
    </View>
   </View>
+  <Btn label="Compare fragrances" kind="quiet" disabled={changed} onPress={onCompare}/>
   {!lookup&&<Spinner label="Checking catalog…"/>}
   {lookup&&'error' in lookup&&<View style={styles.notice}>
    <Text style={styles.muted}>{lookup.error}</Text>

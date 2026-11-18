@@ -5,6 +5,7 @@
   --line: #e2e5dd;
   --accent: #e2e9d8;
   --forest: #303e32;
+  --surface: #fff;
 }
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--ink); background: var(--paper); font: 13px/1.5 'DM Sans Variable', 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
@@ -472,3 +473,49 @@ input[type=checkbox] { min-height: 16px; width: 16px; height: 16px; flex-shrink:
 .layering-library-pagination { display: flex; justify-content: space-between; margin-top: 12px; }
 .collection-notes { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 12px; }
 .collection-notes button { flex-shrink: 0; }
+.catalog-tools { gap: 15px; }
+.catalog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.collection-extra-tools { padding-bottom: 12px; }
+.catalog-filter-fields { padding-top: 12px; }
+.catalog-result { width: 100%; display: flex; gap: 15px; text-align: left; padding: 13px 0; border-bottom: 1px solid var(--line); background: transparent; }
+.catalog-result > span { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.catalog-result small { color: var(--muted); font-size: 11px; }
+.catalog-photo { width: 70px; height: 85px; object-fit: contain; }
+.catalog-photo.large { width: min(300px, 75vw); height: 360px; }
+.catalog-detail-heading { display: flex; gap: 18px; align-items: center; }
+.catalog-detail-heading > button { background: transparent; }
+.catalog-detail-heading .catalog-photo:not(.large) { width: 100px; height: 130px; }
+.catalog-comparison { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.catalog-comparison > section { min-width: 0; overflow-wrap: anywhere; }
+.catalog-comparison h4 { margin: 15px 0 8px; }
+.catalog-note-groups p { font-size: 12px; line-height: 1.7; margin: 6px 0; }
+.catalog-note-groups strong { text-transform: capitalize; color: var(--muted); margin-right: 8px; }
+.catalog-rating { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; font-size: 12px; border-bottom: 1px solid var(--line); }
+.catalog-rating > div { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; text-align: right; }
+.catalog-rating a { display: block; font-size: 12px; line-height: 1.6; }
+.catalog-rating small { display: block; font-size: 10px; color: var(--muted); }
+.catalog-stars { display: inline-block; position: relative; font-size: 13px; line-height: 1; margin-right: 6px; white-space: nowrap; }
+.catalog-stars > span:last-child { position: absolute; left: 0; top: 0; overflow: hidden; color: var(--ink); }
+.collection-profiler { padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+.collection-profiler > summary { cursor: pointer; font-size: 12px; }
+.collection-profiler > p { padding: 12px 0; }
+.collection-profiler .catalog-comparison { grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); }
+.profile-facet { width: 100%; display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 10px 0; text-align: left; border-bottom: 1px solid var(--line); }
+.collection-list { display: grid; gap: 9px; }
+.collection-list .bottle-card { display: flex; align-items: center; gap: 12px; }
+.collection-list .bottle-stage { width: 100px; height: 115px; flex-shrink: 0; }
+.collection-list .bottle-card-copy { flex: 1; text-align: left; }
+.collection-list .bottle-meta { flex-direction: column; align-items: flex-end; gap: 8px; padding-right: 12px; border: 0; }
+.bottle-open > .catalog-photo { width: 100%; height: 100%; max-height: 170px; }
+.wear-layout { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(220px,1fr); gap: 30px; }
+.wear-calendar { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 4px; text-align: center; }
+.wear-calendar button { position: relative; min-height: 48px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.wear-calendar button:disabled { opacity: .35; }
+.wear-calendar button.selected { background: var(--accent); }
+.wear-calendar button.today { border-color: var(--ink); }
+.wear-day-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink); position: absolute; bottom: 6px; left: calc(50% - 2px); }
+.wear-entry { border-bottom: 1px solid var(--line); padding: 12px 0; display: flex; flex-direction: column; gap: 6px; }
+.wear-entry > small { color: var(--muted); font-size: 11px; }
+.wear-private-note { white-space: pre-wrap; font-size: 12px; line-height: 1.7; }
+.wear-stats { font-size: 12px; padding-top: 10px; }
+@media(max-width:650px) { .wear-layout { grid-template-columns: 1fr; gap: 20px; } .catalog-comparison { gap: 10px; } .catalog-rating { flex-direction: column; } .catalog-rating > div { align-items: flex-start; text-align: left; } .collection-list .bottle-stage { width: 75px; } }

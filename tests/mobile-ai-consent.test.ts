@@ -57,7 +57,7 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider) {
  const Screen = load(`${name}.tsx`).default;
  function render() {
   cursor = 0;
-  const tree = Screen({ state: { bottles: [],history:[] }, onError: () => {}, notify: () => {} });
+  const tree = Screen({ state: { bottles: [],history:[],preferences:{} }, onError: () => {}, notify: () => {} });
   for (const effect of effects.splice(0)) { const cleanup = effect(); if (cleanup) cleanups.push(cleanup); }
   return tree;
  }
