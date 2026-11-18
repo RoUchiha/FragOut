@@ -43,7 +43,7 @@ The mobile collection reads bottle labels with local OCR. An exact catalog match
 
 Save a fragrance or tap one in Collection to open FragDex. It matches the exact house, release and concentration against a local reference catalog. Tap the bottle thumbnail to enlarge it when a reviewed photo is available. Profiles show cross-checked notes and five-star ratings where evidence is available. Tap a score to open its source in a browser sheet. Fragrance and retailer links sit below the ratings.
 
-The catalog includes 218 exact editions with corroborated notes and one bundled bottle photo per edition. When a saved public edition needs a photo, FragDex automatically checks product listings for an exact match. Unsupported rating facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [photo lookup, admin setup and catalog sources](catalog/README.md).
+The catalog includes 218 exact editions with corroborated notes and one bundled bottle photo per edition. When a saved public edition needs a photo, FragDex checks Parfumo first, the reviewed official manufacturer next, then trusted retailers for an exact match. Unsupported rating facets show **N/A**. A server-side Fragella developer key enables live overall ratings and additional supported estimates for signed-in users. See the [photo lookup, admin setup and catalog sources](catalog/README.md).
 
 ## Free default, optional personal providers
 

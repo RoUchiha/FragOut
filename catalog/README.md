@@ -52,9 +52,11 @@ Set \`FRAGOUT_FRAGELLA_API_KEY\` in the server's private environment and restart
 
 ## Bottle thumbnails
 
-FragDex shows one front or three-quarter bottle photo and enlarges the same image on tap. Photos are selected from web image results and manufacturer or retailer product pages, then bundled as optimized JPEGs. The [photo registry](photos.json) records each product page, original image URL, view, and caption. Credits appear under **Sources & credits**.
+FragDex shows one front or three-quarter bottle photo and enlarges the same image on tap. Automatic lookup uses **Parfumo → official manufacturer → trusted retailers**. The current 218 bundled thumbnails include 189 Parfumo main bottle photos, eight verified official product images and 21 retained product-page images. The [photo registry](photos.json) records each product page, original image URL, view, and caption. Credits appear under **Sources & credits**.
 
-Saving or editing a recognized public edition queues photo lookup when it needs a thumbnail. FragDex checks the seller's search result and product record for the exact house, release, concentration, and any distinguishing year. It checks that the image belongs to a full-size product and screens for packaging, alternative views, and poorly isolated bottles. It stores accepted photos as cleaned JPEGs with the product source. Edits and simultaneous saves share the cached result. An ambiguous or unavailable result leaves the entry eligible for retry.
+Saving or editing a recognized public edition queues photo lookup when it needs a thumbnail. FragDex checks the exact house, release, concentration, and any distinguishing year. Official lookup uses reviewed manufacturer links and exact products from known official storefronts. It screens for packaging, overhead/rear views, lifestyle scenes and poorly isolated bottles, trying another gallery candidate if an image is broken. It stores accepted photos as cleaned JPEGs with the product source. Edits and simultaneous saves share the cached result. An ambiguous or unavailable result falls through to the next source and remains eligible for retry if none succeeds.
+
+Run `npm run catalog:photos:manufacturer` to refresh eligible retailer thumbnails from official sources. Parfumo images and database admin overrides take precedence. See the [manufacturer image verification report](../docs/MANUFACTURER_IMAGES.md) and the [Parfumo source investigation](../docs/PARFUMO_IMAGES.md).
 
 The catalog and the public edition index supply the query labels. Custom labels and personal images stay within their own account flows. Both bundled and discovered thumbnails load from FragOut.
 

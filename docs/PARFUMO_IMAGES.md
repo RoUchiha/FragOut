@@ -2,6 +2,8 @@
 
 Implemented and verified on 2026-11-18.
 
+The subsequent [official manufacturer fallback](MANUFACTURER_IMAGES.md) preserves all 189 Parfumo thumbnails and replaces eight of the remaining 29 product-page images. Current source order is Parfumo, official manufacturer, then trusted retailers.
+
 ## Source investigation
 
 Parfumo accepts official images and press material from brands through its [press-material submission workflow](https://www.parfumo.com/support.php). Its [main-image guidelines](https://www.parfumo.com/forums/topic/how-to-propose-a-main-picture-for-fragrances) favor a clear bottle without packaging, a white background and no watermark. The community photography gallery is a separate feature.
