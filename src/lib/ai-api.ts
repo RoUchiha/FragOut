@@ -80,9 +80,14 @@ export async function handleAiApi(
     if(currentProvider!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
     if(provider!=='qwen'&&!connection)throw new ProviderError('Connect your own API key first.',409);
     const model=provider==='qwen'?qwen.model:connection!.model;
+    const authorizeTransport=async()=>{
+     await verifySession();
+     if(await vault.selected(user.id)!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
+     await verifySession();
+    };
     if(route==='vision/bottle'){
      if(!image)throw new ProviderError('Take or choose a bottle photo.',400);
-     const result=await runVision(provider,model,connection?.key,'bottle',{image,text:'Read the exact visible fragrance label. Return only uncertain candidates.'});
+     const result=await runVision(provider,model,connection?.key,'bottle',{image,text:'Read the exact visible fragrance label. Return only uncertain candidates.'},undefined,authorizeTransport);
      return await privateJson({...result,provider,model});
     }
     let profile,method:'model'|'offline_rules'='model';
@@ -90,7 +95,7 @@ export async function handleAiApi(
      profile=parseOutfitText(input.text);
      method='offline_rules';
     }else{
-     profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image}));
+     profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image},undefined,authorizeTransport));
     }
     await verifySession();
     const receipt:OutfitReceipt={id:randomUUID(),profile,provider,model:method==='model'?model:'offline-description-rules',method,createdAt:new Date().toISOString()};

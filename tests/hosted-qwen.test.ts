@@ -6,24 +6,30 @@ import {Store} from '../src/lib/store.ts';
 import {handleAiApi} from '../src/lib/ai-api.ts';
 import {NextRequest} from 'next/server.js';
 import sharp from 'sharp';
+import vm from 'node:vm';
+import ts from 'typescript';
+import {readFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
 
 const model='alibaba/qwen3.8-27b';
+const invocationToken=(tag:string)=>[Buffer.from('{"alg":"none"}').toString('base64url'),Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600,sub:tag})).toString('base64url'),'synthetic-signature'].join('.');
+const syntheticToken=invocationToken('synthetic-deployment-token');
 function hosted(t:TestContext,extra:Record<string,string|undefined>={}){
- const values={FRAGOUT_QWEN_BACKEND:'gateway',FRAGOUT_ENVIRONMENT:'production',VERCEL_OIDC_TOKEN:'synthetic-deployment-token',...extra};
+ const values={FRAGOUT_QWEN_BACKEND:'gateway',FRAGOUT_ENVIRONMENT:'production',VERCEL_OIDC_TOKEN:syntheticToken,...extra};
  const previous=Object.fromEntries(Object.keys(values).map(key=>[key,process.env[key]]));
  for(const [key,value] of Object.entries(values)){if(value===undefined)delete process.env[key];else process.env[key]=value;}
  t.after(()=>{for(const [key,value] of Object.entries(previous)){if(value===undefined)delete process.env[key];else process.env[key]=value;}});
 }
 test('hosted Qwen uses fixed HTTPS, deployment credentials and enforced private provider routing',t=>{
  hosted(t);
- const request=buildProviderRequest('qwen',model,undefined,'outfit',{image:{mime:'image/jpeg',data:'synthetic-image'}});
+ const request=buildProviderRequest('qwen',model,syntheticToken,'outfit',{image:{mime:'image/jpeg',data:'synthetic-image'}});
  assert.equal(request.url,'https://ai-gateway.vercel.sh/v1/chat/completions');
- assert.equal(request.headers.Authorization,'Bearer synthetic-deployment-token');
- assert.ok(!request.url.includes('synthetic-deployment-token'));
+ assert.equal(request.headers.Authorization,'Bearer '+syntheticToken);
+ assert.ok(!request.url.includes(syntheticToken));
  assert.equal(request.body.store,false);assert.equal(request.body.model,model);
  assert.deepEqual(request.body.providerOptions,{gateway:{only:['wafer','parasail'],zeroDataRetention:true,disallowPromptTraining:true}});
  assert.equal((request.body.response_format as {type:string}).type,'json_schema');
- assert.ok(!JSON.stringify(request.body).includes('synthetic-deployment-token'));
+ assert.ok(!JSON.stringify(request.body).includes(syntheticToken));
 });
 test('hosted Qwen refuses missing credentials and non-production runtime before any outbound request',async t=>{
  hosted(t,{VERCEL_OIDC_TOKEN:undefined});let calls=0;
@@ -45,6 +51,16 @@ test('hosted quota and provider errors disclose no response data and never trigg
  const fake:typeof fetch=async()=>{calls++;return new Response('synthetic-secret-private-photo',{status:402});};
  await assert.rejects(()=>runVision('qwen',model,undefined,'outfit',{},fake),error=>error instanceof Error&&!error.message.includes('synthetic-secret'));
  assert.equal(calls,1);
+});
+
+test('hosted requests use each invocation token without a build-time token or stale cached credential',async t=>{
+ hosted(t,{VERCEL_OIDC_TOKEN:undefined});
+ const symbol=Symbol.for('@vercel/request-context'),target=globalThis as unknown as Record<symbol,unknown>,previous=target[symbol];
+ let current=invocationToken('first');const sent:string[]=[];
+ target[symbol]={get:()=>({headers:{'x-vercel-oidc-token':current}})};t.after(()=>{if(previous===undefined)delete target[symbol];else target[symbol]=previous;});
+ const fake:typeof fetch=async(_url,options)=>{sent.push((options!.headers as Record<string,string>).Authorization);return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(parseOutfitText('White shirt'))}}]}));};
+ await runVision('qwen',model,undefined,'outfit',{},fake);const first=current;current=invocationToken('second');await runVision('qwen',model,undefined,'outfit',{},fake);
+ assert.deepEqual(sent,['Bearer '+first,'Bearer '+current]);
 });
 
 test('hosted photos require current cloud consent and leave no image record by default',async t=>{
@@ -72,10 +88,26 @@ test('hosted status exposes destination metadata without deployment credentials 
  try{
   const status=await handleAiApi(new NextRequest('https://fragout.example/api/ai/status'),['ai','status'],undefined,user,db);
   const metadata=await status!.json();assert.equal(metadata.qwen.mode,'hosted');assert.equal(metadata.qwen.model,model);
-  assert.ok(!JSON.stringify(metadata).includes('synthetic-deployment-token'));
+  assert.ok(!JSON.stringify(metadata).includes(syntheticToken));
   for(let i=0;i<10;i++)assert.ok(await db.limit('hosted-vision-user:'+user.id,10,86400000));
   const image={mime:'image/png',data:Buffer.from('must-not-reach-image-processing').toString('base64')};
   const denied=await handleAiApi(new NextRequest('https://fragout.example/api/outfit/analyze',{method:'POST'}),['outfit','analyze'],{provider:'qwen',image,cloudConsent:{destination:'Vercel AI Gateway',model,policyVersion:'qwen-cloud-v1'}},user,db);
   assert.equal(denied?.status,429);assert.equal((await db.db.get<{n:number}>('SELECT count(*) AS n FROM private_photos'))?.n,0);
  }finally{await db.close();}
+});
+
+test('revoking the session or changing provider during OCR prevents every later cloud upload',async t=>{
+ hosted(t);
+ for(const status of [401,409]){
+  let release!:(value:string[])=>void,started!:()=>void;const entered=new Promise<void>(resolve=>{started=resolve;});
+  const readings=new Promise<string[]>(resolve=>{release=resolve;});
+  const require=createRequire(new URL('../src/lib/providers.ts',import.meta.url)),module={exports:{} as Record<string,any>};
+  const source=readFileSync(new URL('../src/lib/providers.ts',import.meta.url),'utf8');
+  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText,{module,exports:module.exports,process,Buffer,AbortSignal,Response,fetch,require:(name:string)=>name==='./bottle-label-ocr.ts'?{readBottleLabel:()=>{started();return readings;}}:require(name)});
+  let allowed=true,calls=0;
+  const fake:typeof fetch=async()=>{calls++;return new Response(JSON.stringify({choices:[{message:{content:'{"candidates":[]}'}}]}));};
+  const pending=module.exports.runVision('qwen',model,undefined,'bottle',{image:{mime:'image/jpeg',data:'synthetic'}},fake,async()=>{if(!allowed)throw new module.exports.ProviderError('Authorization changed.',status);});
+  await entered;allowed=false;release(['Ambiguous synthetic label']);
+  await assert.rejects(()=>pending,error=>(error as {status?:number}).status===status);assert.equal(calls,0);
+ }
 });
