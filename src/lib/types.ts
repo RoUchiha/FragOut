@@ -110,7 +110,7 @@ export interface CatalogDetailReply {
  similar:{edition:CatalogEdition;sharedNotes:string[];overlap:number}[];
 }
 export interface User {id:string; name:string; email:string|null; demo:boolean; catalogAdmin?:true}
-export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[]}
+export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[];environment?:'staging'}
 export type AiProvider='qwen'|'openai'|'claude';
 export interface OutfitProfile {
  summary:string; garments:string[]; colors:string[];

@@ -21,6 +21,8 @@ import * as discovery from '../src/lib/catalog-discovery.ts';
 import * as journal from '../src/lib/journal.ts';
 import * as catalogPhotos from '../src/lib/catalog-photos.ts';
 import * as outfit from '../src/lib/outfit.ts';
+import * as environment from '../src/lib/environment.ts';
+import * as observability from '../src/lib/observability.ts';
 import type {AutomaticCatalogPhoto} from '../src/lib/catalog-photo-store.ts';
 import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
 import type {CatalogEdition} from '../src/lib/types.ts';
@@ -41,6 +43,8 @@ function harness({key='',lookup=async()=>null,select=async()=>null}:{
   if(name==='@/lib/journal')return journal;
   if(name==='@/lib/catalog-photos')return catalogPhotos;
   if(name==='@/lib/outfit')return outfit;
+  if(name==='@/lib/environment')return environment;
+  if(name==='@/lib/observability')return observability;
   if(name==='@/lib/database')return database;
   if(name==='sharp')return {default:require('sharp')};
   if(name==='@/lib/catalog-photo-selector')return {findAutomaticCatalogPhoto:select};
@@ -51,7 +55,7 @@ function harness({key='',lookup=async()=>null,select=async()=>null}:{
   const req=new next.NextRequest(url+'/api/'+path,{method,headers:{...((body===undefined&&raw===undefined)?{}:{'content-type':'application/json'}),...(origin?{origin}:{}),...(token?{authorization:'Bearer '+token}:{}),...(cookie?{cookie}:{}),...headers},...((body===undefined&&raw===undefined)?{}:{body:raw??JSON.stringify(body)})});
   const response=await module.exports[method](req);
   const type=response.headers.get('content-type');
-  return {status:response.status,body:type==='image/jpeg'?Buffer.from(await response.arrayBuffer()):await response.json(),type,cookie:response.headers.get('set-cookie') as string|null};
+  return {status:response.status,body:type==='image/jpeg'?Buffer.from(await response.arrayBuffer()):await response.json(),type,cookie:response.headers.get('set-cookie') as string|null,requestId:response.headers.get('x-request-id'),retryAfter:response.headers.get('retry-after')};
  }
  return {db,call,finishBackground:()=>Promise.all(scheduled.splice(0).map(task=>task()))};
 }
@@ -64,6 +68,15 @@ function useFixtureVaultKey(t:TestContext){
   else process.env.FRAGOUT_VAULT_KEY=previous;
  });
 }
+
+test('liveness stays available during a storage outage and readiness fails safely with correlation and retry headers',async()=>{
+ const h=harness();
+ const ready=await h.call('ready');assert.equal(ready.status,200);assert.equal(ready.body.status,'ready');assert.match(ready.requestId??'',/^[a-f\d-]{36}$/);
+ await h.db.close();
+ assert.equal((await h.call('health')).status,200);
+ const unavailable=await h.call('ready');assert.equal(unavailable.status,503);assert.equal(unavailable.retryAfter,'30');
+ assert.match(unavailable.requestId??'',/^[a-f\d-]{36}$/);assert.doesNotMatch(JSON.stringify(unavailable.body),/sqlite|postgres|password|vault|secret/i);
+});
 
 test('catalog, comparisons and journal tools enforce authentication and owner boundaries',async()=>{
  const h=harness();try{

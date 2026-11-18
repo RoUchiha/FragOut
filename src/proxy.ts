@@ -1,6 +1,7 @@
 import {randomBytes} from 'node:crypto';
 import {NextRequest,NextResponse} from 'next/server';
 import {contentPolicy,requestPolicy} from './lib/security';
+import {runtimeEnvironment} from './lib/environment';
 
 export function proxy(req:NextRequest){
  const policy=requestPolicy(req.nextUrl,req.headers);
@@ -12,6 +13,7 @@ export function proxy(req:NextRequest){
  const nonce=randomBytes(24).toString('base64'),csp=contentPolicy(nonce,process.env.NODE_ENV==='development');
  const headers=new Headers(req.headers);headers.set('x-nonce',nonce);headers.set('Content-Security-Policy',csp);
  const response=NextResponse.next({request:{headers}});
+ if(runtimeEnvironment()==='staging')response.headers.set('X-Robots-Tag','noindex, nofollow, noarchive');
  if(req.nextUrl.pathname!=='/mobile')response.headers.set('Content-Security-Policy',req.nextUrl.pathname.startsWith('/api/')?"default-src 'none'; frame-ancestors 'none'; base-uri 'none'":csp);
  response.headers.set('Referrer-Policy','no-referrer');response.headers.set('Cross-Origin-Resource-Policy','same-origin');response.headers.set('Cross-Origin-Opener-Policy','same-origin');
  if(req.nextUrl.pathname.startsWith('/api/'))response.headers.set('Cache-Control','no-store');

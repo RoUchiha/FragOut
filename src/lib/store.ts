@@ -4,6 +4,7 @@ import {openConfiguredDatabase,openSqlite,type DataConnection} from './database.
 import {CatalogPhotoStore} from './catalog-photo-store.ts';
 import {catalogThumbnailPhotos} from './catalog-photos.ts';
 import {journalSummary,wearDateAt} from './journal.ts';
+import {runtimeEnvironment} from './environment.ts';
 import type {AppState,Bottle,OutfitReceipt,OutfitSnapshot,Preferences,RecommendationSnapshot,SavedLook,Shortcut,User,WearContext,WearEvent} from './types.ts';
 
 const DAY_MS=86400000;
@@ -148,7 +149,7 @@ export class Store {
       if(!likes.has(key))likes.set(key,event);
     }
     const history=historyRows.map(row=>JSON.parse(row.body) as WearEvent);
-    return {user,bottles,history,...settings,likedCombos:[...likes.values()]};
+    return {user,bottles,history,...settings,likedCombos:[...likes.values()],...(runtimeEnvironment()==='staging'?{environment:'staging' as const}:{})};
   }
 
   async pruneOutfits(){

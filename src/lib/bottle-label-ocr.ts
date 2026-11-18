@@ -1,10 +1,9 @@
-import {dirname,join} from 'node:path';
+import {join} from 'node:path';
 import sharp from 'sharp';
-import {createWorker,OEM,PSM,type Worker} from 'tesseract.js';
-import english from '@tesseract.js-data/eng';
+import type {Worker} from 'tesseract.js';
 import type {ImageInput} from './outfit.ts';
 
-const englishData = join(dirname(english.langPath), '4.0.0_best_int');
+const englishData = join(process.cwd(),'node_modules','@tesseract.js-data','eng','4.0.0_best_int');
 
 async function readPass(worker:Worker,jpeg:Buffer,threshold:boolean){
  const image = sharp(jpeg).resize({width:1250,height:1550,fit:'inside'}).grayscale();
@@ -30,6 +29,7 @@ export async function readBottleLabel(image:ImageInput):Promise<string[]> {
  let timer:ReturnType<typeof setTimeout>|undefined;
  let ended=false;
  const read=async()=>{
+  const {createWorker,OEM,PSM}=await import('tesseract.js');
   worker=await createWorker('eng',OEM.LSTM_ONLY,{langPath:englishData,cacheMethod:'none',errorHandler:()=>{}});
   if(ended){await worker.terminate();return [];}
   await worker.setParameters({tessedit_pageseg_mode:PSM.SPARSE_TEXT});

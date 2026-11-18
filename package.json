@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
-    "build": "next build && node scripts/check-public-build.mjs",
+    "build": "next build --webpack && node scripts/exclude-private-runtime.mjs && node scripts/check-public-build.mjs && node scripts/check-server-artifact.mjs",
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "start:cloud": "node --experimental-strip-types scripts/start-cloud.mjs",
     "typecheck": "next typegen && tsc --noEmit",
@@ -33,9 +33,13 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vercel/blob": "2.9.0",
     "typescript": "^5.9.0"
   },
+  "overrides": {
+    "@vercel/cli-config": { "zod": "4.6.6" }
+  },
   "engines": {
-    "node": ">=24.0.0"
+    "node": "24.x"
   }
 }

@@ -131,6 +131,7 @@ function Workspace() {
        {view!==activeTab&&<IconButton label={activeTab==='home'?'Back to Home':'Back to scent search'}
         icon={<ArrowLeft size={19} color={colors.link}/>} onPress={()=>navigate(activeTab)}/>}
        <Text style={styles.brand}>FragOut.</Text>
+       {state.environment==='staging'&&<Text accessibilityLabel="Private test environment" style={[styles.small,{color:colors.link,fontSize:10}]}>TEST</Text>}
       </View>
       <View style={[styles.row,{gap:2}]}>
        <IconButton label="Open journal" icon={<BookOpen size={18} color={colors.link}/>} onPress={()=>navigate('journal')}/>

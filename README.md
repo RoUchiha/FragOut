@@ -91,6 +91,8 @@ Local FragOut uses SQLite at `data/fragout.sqlite`. Use a dedicated data directo
 
 Hosted FragOut uses a private Postgres schema with the same sign-in and data controls. Use the dedicated database role, a stable server-only vault key, and the host's HTTPS URL. [Cloud setup and deployment](docs/CLOUD.md)
 
+The private test runtime has a separate local database, key and address. Production snapshots can be sanitized into it; the refresh tool refuses production destinations. Encrypted backups, restore checks and the release gates are described in the [operations runbook](docs/OPERATIONS.md) and [production readiness report](docs/PRODUCTION_READINESS.md).
+
 ## Verification and limits
 
 See the [web, iOS and model grounding report](docs/WEB_IOS_ACCEPTANCE.md) for the latest results and the [12 November 2026 acceptance report](docs/ACCEPTANCE_REPORT.md) for Android and cloud checks.

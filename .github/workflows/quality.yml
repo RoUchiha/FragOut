@@ -1,0 +1,74 @@
+name: Quality
+on:
+  pull_request:
+  push:
+    branches: [main, 'build/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    name: Quality gates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      EXPO_NO_TELEMETRY: '1'
+      FRAGOUT_ENVIRONMENT: development
+      FRAGOUT_TEST_URL: http://127.0.0.1:3214
+      FRAGOUT_PUBLIC_ORIGIN: http://127.0.0.1:3214
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.16.0'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            mobile/package-lock.json
+      - name: Install pinned dependencies
+        run: |
+          npm ci --include=dev
+          npm ci --prefix mobile --include=dev
+      - name: Audit production dependencies
+        run: |
+          npm audit --audit-level=high
+          npm audit --prefix mobile --omit=dev --audit-level=high
+      - name: Check root and mobile source
+        run: |
+          npm run typecheck
+          npm run lint --prefix mobile
+          npm run typecheck --prefix mobile
+          npm test
+      - name: Build web, native bundles and the isolated server artifact
+        run: |
+          npm run export:web --prefix mobile
+          npm run export:native --prefix mobile
+          npm run build
+      - name: Verify synthetic API journeys
+        run: |
+          set -euo pipefail
+          export FRAGOUT_DB="$RUNNER_TEMP/fragout-quality/state.sqlite"
+          node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3214 > "$RUNNER_TEMP/fragout-quality.log" 2>&1 &
+          api_pid=$!
+          trap 'kill "$api_pid" 2>/dev/null || true' EXIT
+          node --input-type=module -e '
+            for (let i=0;i<80;i++) {
+              try { const r=await fetch(process.env.FRAGOUT_TEST_URL+"/api/ready"); if(r.ok)process.exit(0); } catch {}
+              await new Promise(r=>setTimeout(r,250));
+            }
+            process.exit(1);
+          '
+          node tests/http-operations.mjs
+          node tests/http.mjs
+          node tests/http-mobile.mjs
+          node tests/http-discovery.mjs
+      - name: Verify privacy and session attack cases in an isolated fixture server
+        run: |
+          unset FRAGOUT_PUBLIC_ORIGIN
+          node scripts/security-lab.mjs --test
