@@ -5,6 +5,8 @@ import postgres from 'postgres';
 import {privateDataPath} from './private-path.ts';
 import {protectPrivateDirectory} from './private-directory.ts';
 import {supabaseRootCa} from './supabase-ca.ts';
+import {randomUUID} from 'node:crypto';
+import {runtimeEnvironment,type DeploymentEnvironment} from './environment.ts';
 
 type SqlValue = string | number | bigint | Uint8Array | null;
 
@@ -30,6 +32,7 @@ const localSchema = `
   PRAGMA journal_mode=WAL;
   PRAGMA secure_delete=ON;
   CREATE TABLE IF NOT EXISTS schema_migrations(version INTEGER PRIMARY KEY,applied_at TEXT NOT NULL);
+  CREATE TABLE IF NOT EXISTS deployment_identity(id INTEGER PRIMARY KEY CHECK(id=1),environment TEXT NOT NULL CHECK(environment IN ('development','staging','production')),instance_id TEXT NOT NULL UNIQUE);
   CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,name TEXT NOT NULL,email TEXT UNIQUE,password TEXT,demo INTEGER NOT NULL DEFAULT 0,created INTEGER NOT NULL);
   CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,expires INTEGER NOT NULL);
   CREATE TABLE IF NOT EXISTS bottles(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,body TEXT NOT NULL);
@@ -117,7 +120,7 @@ class SqliteConnection implements DataConnection {
   }
 }
 
-export function openSqlite(path: string): DataConnection {
+export function openSqlite(path: string,options:{environment?:DeploymentEnvironment}={}): DataConnection {
   if (path !== ':memory:') {
     path = privateDataPath(path);
     protectPrivateDirectory(path);
@@ -126,6 +129,9 @@ export function openSqlite(path: string): DataConnection {
   const db = new DatabaseSync(path);
   try {
     db.exec(localSchema);
+    const environment=options.environment??'development';
+    db.prepare('INSERT OR IGNORE INTO deployment_identity VALUES (1,?,?)').run(environment,randomUUID());
+    if(db.prepare('SELECT environment FROM deployment_identity WHERE id=1').get()?.environment!==environment)throw new DatabaseUnavailable();
     const now = Date.now();
     db.prepare('DELETE FROM sessions WHERE expires <= ?').run(now);
     db.prepare('DELETE FROM users WHERE demo = 1 AND created <= ?').run(now - 7 * 86400000);
@@ -156,10 +162,12 @@ class PostgresConnection implements DataConnection {
   readonly engine = 'postgres';
   private readonly client: PgClient;
   private readonly pool?: PgPool;
+  private readonly ready:()=>Promise<void>;
 
-  constructor(client: PgClient, pool?: PgPool) {
+  constructor(client: PgClient, pool?: PgPool,ready:()=>Promise<void>=async()=>{}) {
     this.client = client;
     this.pool = pool;
+    this.ready=ready;
   }
 
   private async query(statement: string, values: SqlValue[]) {
@@ -167,6 +175,7 @@ class PostgresConnection implements DataConnection {
     // Repository statements use positional bindings. Values never enter the SQL text.
     const sql = statement.replace(/\?/g, () => '$' + ++index);
     try {
+      await this.ready();
       return await this.client.unsafe(sql, values.map(value =>
         value instanceof Uint8Array ? Buffer.from(value) : value));
     } catch (cause) {
@@ -190,6 +199,7 @@ class PostgresConnection implements DataConnection {
     if (!this.pool) throw new Error('A scoped connection is already in a transaction.');
     let workFailed = false;
     try {
+      await this.ready();
       const result = await this.pool.begin(async client => {
         try { return {value: await work(new PostgresConnection(client))}; }
         catch (error) { workFailed = true; throw error; }
@@ -207,14 +217,16 @@ class PostgresConnection implements DataConnection {
   }
 }
 
-export function openConfiguredDatabase(env: Record<string, string | undefined> = process.env): DataConnection {
+export function openConfiguredDatabase(env: Record<string, string | undefined> = process.env,options:{backupReadOnly?:boolean}={}): DataConnection {
+  let environment:DeploymentEnvironment;
+  try{environment=runtimeEnvironment(env);}catch{throw new DatabaseUnavailable();}
   const url = env.FRAGOUT_DATABASE_URL?.trim();
   if (!url) {
-    if (env.VERCEL === '1' && env.VERCEL_ENV !== 'development') throw new DatabaseUnavailable();
-    return openSqlite(privateDataPath(env.FRAGOUT_DB));
+    if (environment==='production'||env.VERCEL === '1' && env.VERCEL_ENV !== 'development'||environment==='staging'&&!env.FRAGOUT_DB?.trim()) throw new DatabaseUnavailable();
+    return openSqlite(privateDataPath(env.FRAGOUT_DB),{environment});
   }
   const key = env.FRAGOUT_VAULT_KEY;
-  if (!key || Buffer.from(key, 'base64').length !== 32) throw new DatabaseUnavailable();
+  if (!options.backupReadOnly&&(!key || Buffer.from(key, 'base64').length !== 32)) throw new DatabaseUnavailable();
 
   try {
     const address = new URL(url);
@@ -240,9 +252,17 @@ export function openConfiguredDatabase(env: Record<string, string | undefined> =
       connect_timeout: 10,
       queue_timeout: 10,
       query_timeout: 25,
+      connection:options.backupReadOnly?{default_transaction_read_only:true,application_name:'fragout-backup-reader'}:{application_name:'fragout-'+environment},
       types: pgTypes,
     });
-    return new PostgresConnection(pool, pool);
+    let checking:Promise<void>|undefined;
+    const ready=()=>checking??=(async()=>{
+      try{
+        const [row]=await pool.unsafe('SELECT current_user AS role,current_schema() AS schema,environment FROM fragout.deployment_identity WHERE id=1');
+        if(row?.role!==(options.backupReadOnly?'fragout_backup_reader':'fragout_app')||row?.schema!=='fragout'||row?.environment!==environment)throw new Error('Database environment mismatch.');
+      }catch(error){checking=undefined;throw error;}
+    })();
+    return new PostgresConnection(pool, pool,ready);
   } catch (cause) {
     throw new DatabaseUnavailable(cause);
   }

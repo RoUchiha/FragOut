@@ -1,0 +1,11 @@
+data/
+**/*.sqlite
+**/*.sqlite-*
+**/credential-key
+.env*
+!.env.example
+mobile/node_modules/
+mobile/native-dist/
+ops/
+tests/
+docs/

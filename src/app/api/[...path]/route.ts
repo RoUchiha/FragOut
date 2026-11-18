@@ -19,6 +19,8 @@ import {imageSchema,validateImage,type ImageInput} from '@/lib/outfit';
 import {discoverCatalog,compareProfiles,similarCatalog} from '@/lib/catalog-discovery';
 import {journalCsv} from '@/lib/journal';
 import {catalogThumbnailPhotos} from '@/lib/catalog-photos';
+import {runtimeEnvironment,releaseIdentity,assertDatabaseEnvironment} from '@/lib/environment';
+import {beginRequest,finishRequest} from '@/lib/observability';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const COOKIE='fragout_session';
@@ -68,13 +70,17 @@ async function normalizeAdminPhoto(input:ImageInput) {
   finally {bytes?.fill(0);}
 }
 
-async function handle(req:NextRequest){
+async function handleRequest(req:NextRequest){
   try{
     const policy=requestPolicy(req.nextUrl,req.headers);if(policy.status!==200)return reply({error:policy.error},policy.status);
     const cookieName=policy.secureCookie?SECURE_COOKIE:COOKIE;
     const clearCookies=(res:NextResponse)=>{res.cookies.delete(COOKIE);res.cookies.set(SECURE_COOKIE,'',{httpOnly:true,secure:true,sameSite:'lax',path:'/',maxAge:0});return res;};
     const path=req.nextUrl.pathname.replace('/api/','').split('/'),method=req.method,authRoute=path.length===1&&path[0]==='auth';
-    if(method==='GET'&&path.length===1&&path[0]==='health')return reply({status:'ok',engine:ENGINE_VERSION,weather:'manual',photoIdentification:'provider-selectable',outfit:'enabled'});
+    if(method==='GET'&&path.length===1&&path[0]==='health')return reply({status:'ok',environment:runtimeEnvironment(process.env),revision:releaseIdentity(process.env),engine:ENGINE_VERSION,weather:'manual',photoIdentification:'provider-selectable',outfit:'enabled'});
+    if(method==='GET'&&path.length===1&&path[0]==='ready'){
+      const db=getStore();await assertDatabaseEnvironment(db.db,runtimeEnvironment(process.env));
+      return reply({status:'ready',environment:runtimeEnvironment(process.env),revision:releaseIdentity(process.env)});
+    }
     if(method!=='GET'){
       const origin=req.headers.get('origin');if(origin&&origin!==policy.origin)return reply({error:'This request must come from FragOut.'},403);
       if(req.headers.get('sec-fetch-site')==='cross-site')return reply({error:'Cross-site requests are not accepted.'},403);
@@ -318,7 +324,15 @@ async function handle(req:NextRequest){
     if(error instanceof Error&&error.message==='Account not found.')return signInRequired();
     if(error instanceof Error&&error.message==='Session expired. Please sign in again.')return signInRequired();
     if(error instanceof Error&&storeValidationErrors.has(error.message))return reply({error:error.message},400);
-    console.error('FragOut request failed',error instanceof Error?error.name:'UnknownError');return reply({error:'Something went wrong. Please try again.'},500);
+    return reply({error:'Something went wrong. Please try again.'},500);
   }
+}
+async function handle(req:NextRequest){
+  const context=beginRequest(req,process.env),response=await handleRequest(req);
+  response.headers.set('X-Request-ID',context.id);response.headers.set('X-FragOut-Environment',context.environment);
+  if(context.environment==='staging')response.headers.set('X-Robots-Tag','noindex, nofollow, noarchive');
+  if(response.status===429)response.headers.set('Retry-After','60');
+  if(response.status===503)response.headers.set('Retry-After','30');
+  finishRequest(context,response.status,process.env);return response;
 }
 export const GET=handle,POST=handle,PUT=handle,PATCH=handle,DELETE=handle;

@@ -1,0 +1,36 @@
+name: Encrypted production backup
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: production-backup
+  cancel-in-progress: false
+jobs:
+  backup:
+    # Enable only after the separate reader and backup secrets are authorized.
+    if: vars.FRAGOUT_BACKUPS_ENABLED == 'true'
+    environment: production-backups
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.16.0'
+          cache: npm
+      - run: npm ci --include=dev
+      - name: Snapshot, restore-check, encrypt, upload and verify
+        env:
+          FRAGOUT_BACKUP_DATABASE_URL: ${{ secrets.FRAGOUT_BACKUP_DATABASE_URL }}
+          FRAGOUT_BACKUP_BLOB_TOKEN: ${{ secrets.FRAGOUT_BACKUP_BLOB_TOKEN }}
+          FRAGOUT_BACKUP_VAULT_KEY_ID: ${{ vars.FRAGOUT_BACKUP_VAULT_KEY_ID }}
+          FRAGOUT_BACKUP_DIR: ${{ runner.temp }}/fragout-encrypted-backups
+        run: node --experimental-strip-types scripts/ops.mjs backup
+      # No database snapshots, recovery keys, photos or provider keys are uploaded
+      # as Actions artifacts. Only encrypted objects enter the private Blob store.
