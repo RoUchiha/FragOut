@@ -151,7 +151,8 @@ function Workspace() {
       contentContainerStyle={[styles.content,{width:'100%',maxWidth:contentMaxWidth,alignSelf:'center'}]}
       keyboardShouldPersistTaps="handled">
       {view==='home'&&<>
-       <Collection state={state} refresh={refresh} notify={notify} onOpenLikedCombos={()=>navigate('liked-combos')}/>
+       <Collection state={state} refresh={refresh} notify={notify} onOpenLikedCombos={()=>navigate('liked-combos')}
+        onWear={bottle=>{void feedback([bottle.id],'wore',state.context.occasion);}} wearBusy={feedbackBusy}/>
        <AdBanner maxWidth={contentMaxWidth} gutter={styles.content.padding}/>
       </>}
       {view==='suggester'&&<Suggester state={state} intent={intent} onIntentChange={setIntent}

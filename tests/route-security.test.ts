@@ -16,6 +16,7 @@ import * as security from '../src/lib/security.ts';
 import * as search from '../src/lib/scent-search.ts';
 import * as catalog from '../src/lib/catalog.ts';
 import * as editions from '../src/lib/catalog-editions.ts';
+import * as layering from '../src/lib/layering-catalog.ts';
 import * as outfit from '../src/lib/outfit.ts';
 import type {AutomaticCatalogPhoto} from '../src/lib/catalog-photo-store.ts';
 import type {lookupFragellaRatings} from '../src/lib/fragella.ts';
@@ -32,6 +33,7 @@ function harness({key='',lookup=async()=>null,select=async()=>null}:{
   if(name==='@/lib/catalog')return catalog;
   if(name==='@/lib/recommendation-evidence')return recommendationEvidence;
   if(name==='@/lib/catalog-editions')return editions;
+  if(name==='@/lib/layering-catalog')return layering;
   if(name==='@/lib/outfit')return outfit;
   if(name==='@/lib/database')return database;
   if(name==='sharp')return {default:require('sharp')};
@@ -56,6 +58,40 @@ function useFixtureVaultKey(t:TestContext){
   else process.env.FRAGOUT_VAULT_KEY=previous;
  });
 }
+
+test('layering discovery requires a session and contains only the signed-in collection matches',async()=>{
+ const h=harness();
+ try{
+  assert.equal((await h.call('layering/search')).status,401);
+  const a=await h.db.createDemo(),b=await h.db.createDemo();
+  const tokenA=await h.db.createSession(a.id),tokenB=await h.db.createSession(b.id);
+  await h.db.addBottle(a.id,{...demoBottles[0],id:'',variantId:'',brand:'Rabanne',name:'1 Million',concentration:'EDT',provenance:'personal'});
+  const owner=await h.call('layering/search?owned=true&q=1%20million',{token:tokenA});
+  assert.equal(owner.status,200);assert.ok(owner.body.total>0);
+  assert.equal((await h.call('layering/search?owned=true&q=1%20million',{token:tokenB})).body.total,0);
+  assert.equal((await h.call('layering/search?offset=-1',{token:tokenA})).status,400);
+  assert.equal((await h.call('layering/search?q='+('x'.repeat(121)),{token:tokenA})).status,400);
+ }finally{await h.db.close();}
+});
+
+test('checking a selected pair rejects duplicate, foreign, and non-owned bottle IDs',async()=>{
+ const h=harness();
+ try{
+  const a=await h.db.createDemo(),b=await h.db.createDemo();
+  const token=await h.db.createSession(a.id);
+  const state=await h.db.state(a.id),foreign=await h.db.state(b.id);
+  const ids=state.bottles.slice(0,2).map(bottle=>bottle.id);
+  const request={occasion:'GENERAL',mode:'combo',evidenceMode:'experimental',pairIds:ids};
+  const result=await h.call('recommend',{method:'POST',token,body:request});
+  assert.equal(result.status,200);assert.equal(result.body.combos.length,1);
+  assert.ok(result.body.combos[0].a.id!==result.body.combos[0].b.id);
+  for(const pairIds of [[ids[0],ids[0]],[ids[0],foreign.bottles[0].id]]){
+   assert.equal((await h.call('recommend',{method:'POST',token,body:{...request,pairIds}})).status,400);
+  }
+  await h.db.updateBottle(a.id,ids[1],{ownership:'WISHLIST'});
+  assert.equal((await h.call('recommend',{method:'POST',token,body:request})).status,400);
+ }finally{await h.db.close();}
+});
 
 test('malformed anonymous login requests cannot exhaust another account login bucket',async()=>{
  const h=harness();try{const user=await h.db.register('Synthetic','synthetic@example.test','synthetic-password');

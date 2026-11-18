@@ -6,6 +6,8 @@ import {intentSummary} from '../../src/lib/intent';
 import type {ComboResult,ScentIntent,SoloResult,WearContext} from '../../src/lib/types';
 import {api,type AppState} from './api';
 import IntentPicker from './IntentPicker';
+import LayeringExplorer from './LayeringExplorer';
+import PairPicker from './PairPicker';
 import {Results,type ComboLikes,type Feedback} from './Results';
 import {Btn,Choices,SearchBox,Section,Spinner,useUi} from './ui';
 
@@ -14,6 +16,7 @@ type Options = {
  shortcutId?:string;
  mode:'solo'|'combo';
  evidenceMode:'evidence'|'experimental';
+ pairIds?:[string,string];
 };
 type Request = Options & ScentIntent & {search?:string};
 type Picks = {solo:SoloResult[];combos:ComboResult[];context:WearContext;requestId:string};
@@ -31,6 +34,7 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
  const {styles,colors} = useUi();
  const [query,setQuery] = useState('');
  const [filtersOpen,setFiltersOpen] = useState(false);
+ const [libraryOpen,setLibraryOpen]=useState(false),[pairPickerOpen,setPairPickerOpen]=useState(false);
  const [options,setOptions] = useState<Options>({occasion:'GENERAL',mode:'solo',evidenceMode:'evidence'});
  const [request,setRequest] = useState<Request|null>(()=>({...options,...intent}));
  const [reply,setReply] = useState<Reply|null>(null);
@@ -61,10 +65,11 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
   setQuery(text);
   setRequest(null);
   setReply(null);
+  setOptions(previous=>({...previous,pairIds:undefined}));
  }
 
  function changeOptions(next:Partial<Options>) {
-  setOptions(previous=>({...previous,...next}));
+  setOptions(previous=>({...previous,...next,...(next.mode==='solo'?{pairIds:undefined}:{})}));
   setRequest(null);
   setReply(null);
  }
@@ -72,23 +77,34 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
  function submit(text=query,useSearchCues=true) {
   const parsed = resolveScentSearch(text,state.bottles);
   const nextIntent = useSearchCues ? {mood:parsed.mood??intent.mood,vibe:parsed.vibe??intent.vibe} : intent;
-  const nextOptions = {...options};
+  const nextOptions = {...options,pairIds:undefined};
   if (useSearchCues&&parsed.occasion) {
    nextOptions.occasion = parsed.occasion;
    nextOptions.shortcutId = shortcuts.find(shortcut=>shortcut.occasion===parsed.occasion)?.id;
    setOptions(nextOptions);
   }
   onIntentChange(nextIntent);
+  setOptions(nextOptions);
   setQuery(parsed.search??'');
   setReply(null);
   setRequest({...nextOptions,...nextIntent,search:parsed.search});
   Keyboard.dismiss();
+ }
+ function checkPair(pairIds:[string,string]) {
+  const next:Options={...options,mode:'combo',evidenceMode:'experimental',pairIds};
+  setOptions(next);setQuery('');setReply(null);
+  setRequest({...next,...intent});
+  setLibraryOpen(false);setPairPickerOpen(false);
  }
 
  return <View style={{gap:11}}>
   <Text accessibilityRole="header" style={styles.h1}>Find a scent</Text>
   <SearchBox label="Search fragrance suggestions" placeholder="Clean, tired, or a fragrance" value={query}
    onChange={editQuery} onSubmit={()=>submit()} onClear={()=>submit('')} maxLength={scentSearchLimit}/>
+  <View style={[styles.row,{gap:15}]}>
+   <Btn label="Check a pair" kind="quiet" onPress={()=>setPairPickerOpen(true)}/>
+   <Btn label="Explore layers" kind="quiet" onPress={()=>setLibraryOpen(true)}/>
+  </View>
   <View style={[styles.row,{justifyContent:'space-between',gap:6}]}>
    <Pressable accessibilityRole="button" accessibilityLabel="Filters" accessibilityState={{expanded:filtersOpen}}
     style={[styles.row,{minHeight:37,flex:1}]} onPress={()=>setFiltersOpen(open=>!open)}>
@@ -116,6 +132,7 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
   </View>}
 
   <Section title="Suggestions"/>
+  {request?.pairIds&&<Text style={styles.small}>Checking {request.pairIds.map(id=>state.bottles.find(bottle=>bottle.id===id)?.name).join(' + ')}</Text>}
   {request&&!current&&<Spinner label="Finding picks…"/>}
   {!request&&<Text style={styles.small}>Search or apply filters to see picks.</Text>}
   {error&&<Text accessibilityRole="alert" style={styles.muted}>{error}</Text>}
@@ -131,5 +148,7 @@ export default function Suggester({state,intent,onIntentChange,onOutfit,onFeedba
     occasion={result.context.occasion} requestId={result.requestId}
     onFeedback={onFeedback} comboLikes={comboLikes} busy={feedbackBusy}/>
   </>}
+  {libraryOpen&&<LayeringExplorer onClose={()=>setLibraryOpen(false)} onCheck={checkPair}/>}
+  {pairPickerOpen&&<PairPicker bottles={state.bottles} onClose={()=>setPairPickerOpen(false)} onCheck={checkPair}/>}
  </View>;
 }

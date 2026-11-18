@@ -1,0 +1,1028 @@
+[
+  {
+    "original": {
+      "brand": "Balenciaga",
+      "name": "Florabotanica"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Garden Of Botanical Dreams",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/garden-of-botanical-dreams"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Blndrgrphy",
+      "name": "Vanilla Mudslide"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Vanilla Liqueur Luxe",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/vanilla-liqueur-luxe"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Borntostandout",
+      "name": "Dirty Rice"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Dawn Of Rice",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/dawn-of-rice"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "By Rosie Jane",
+      "name": "Dulce"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Affair Of Sweets",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/affair-of-sweets"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Byredo",
+      "name": "Bal d'Afrique"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Azonto",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/azonto"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Aventus"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Pineapple Intense",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/pineapple-intense"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Aventus"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Pineapple Musk",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/pineapple-musk"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Aventus"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Pineapple Royale",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/pineappleroyale"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Royal Oud"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "King of Oudhania",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/king-of-oudhania"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Royal Oud"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Royal Aoud",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/royal-aoud-inspired-by-creed-royal-oud"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Virgin Island Water"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Buko",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/buko"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Virgin Island Water"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Buko Intense",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/buko-intense"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Creed",
+      "name": "Virgin Island Water"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Caribbean Waters",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/caribbean-waters"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Ellis Brooklyn",
+      "name": "Marshmallows"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Mallow Pop",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/mallow-pop"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Escentric Molecules",
+      "name": "Molecule 01"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Dua Molecule 01",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/dua-molecule-01"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Fragrance Du Bois",
+      "name": "Santal Complet"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Rich Santal",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/richsantal"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Glossier",
+      "name": "You Fleur"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Dearest Fleur",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/dearest-fleur"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Glossier",
+      "name": "You"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Moi?",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/moi"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Goldfield Banks Australia",
+      "name": "Sunset Hour"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Hour Of Nectar",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/hour-of-nectar"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Guerlain",
+      "name": "Vanille Planifolia Extrait 21"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Spiced Vanilla Extrait 21",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/spiced-vanilla-extrait-21"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Indult",
+      "name": "Tihota"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Vanillac Dreams",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/vanillac-dreams"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Indult",
+      "name": "Tihota"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Vanille Supreme",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/inspired-by-indult-tihota"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Initio Parfums Prives",
+      "name": "Musk Therapy"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Musk Ritual",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/musk-ritual-inspired-by-initio-musk-therapy"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Juliette Has a Gun",
+      "name": "Vanilla Vibes"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Not Your Usual Vanilla",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/not-your-usual-vanilla"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Kilian Paris",
+      "name": "Angels' Share"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Angelic Elixir",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/angelic-elixir"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Kilian Paris",
+      "name": "Angels' Share"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Cognac D'Ange",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/cognacangel"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Kilian Paris",
+      "name": "Love, Don't Be Shy"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Be In Love",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/be-in-love"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "LancÔMe",
+      "name": "Oud Bouquet"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Aoud Bouquet",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/aoud-bouquet"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Le Labo",
+      "name": "Another 13"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Another 13 Shades",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/another-13-shades"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Le Labo",
+      "name": "Another 13"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Another 14",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/another-14"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Le Labo",
+      "name": "Thé Matcha 26"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Eau Matcha",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/eau-matcha"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Le Labo",
+      "name": "Thé Matcha 26"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Matcha Ritual",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/matcha-ritual"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Le Labo",
+      "name": "Thé Noir 29"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Eau Noir",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/eau-noir-inspired-by-le-labo-the-noir-29"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Les Liquides Imaginaires",
+      "name": "Blanche Bete"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Milkylicious",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/milkylicious"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Louis Vuitton",
+      "name": "Imagination"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Imaginary",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/imaginary-inspired-by-louis-vuitton-imagination"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Maison Crivelli",
+      "name": "Musc Nurasana"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Meditation Musk",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/meditation-musk"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Maison Francis Kurkdjian",
+      "name": "Baccarat Rouge 540"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Le Bonbon",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/le-bonbon-1"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Nest",
+      "name": "Indigo"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Midnight Fig",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/midnight-fig"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums De Marly",
+      "name": "Althair"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Ambre Vanille",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/ambre-vanille-inspired-by-parfums-de-marly-althar"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums de Marly",
+      "name": "Carlisle"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Carlyle",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/carlyle-inspired-by-parfums-de-marly-carlisle"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums de Marly",
+      "name": "Delina La Rosée"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Pink Rose Frozen",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/pink-rose-frozen-inspired-by-parfums-de-marly-delina-la-rose"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums de Marly",
+      "name": "Herod"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Tobacco Noir",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/tobacconoir"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums de Marly",
+      "name": "Herod"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Tobacco Noir Intense",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/tobacco-noir-intense"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Parfums de Marly",
+      "name": "Valaya"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Opaline",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/opaline-inspired-by-parfums-de-marly-valaya"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Tom Ford",
+      "name": "Bitter Peach"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Georgia Peach",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/georgia-peach"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Tom Ford",
+      "name": "Lost Cherry"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Parfum De Cerise",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/parfum-de-cerise"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Tom Ford",
+      "name": "Lost Cherry"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Popped Cherry",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/popped-cherry"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Tom Ford",
+      "name": "Tobacco Vanille"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Tabac Vanille",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/tabac-vanille"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Viktor Rolf",
+      "name": "Flowerbomb Tiger Lily"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Floral Explosion Of Tiger Lilies",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/floral-explosion-of-tiger-lilies"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Xerjoff",
+      "name": "Naxos"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Fortune",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/fortune"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Xerjoff",
+      "name": "Naxos"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Sicilian Tobacco",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/siciliantobacco"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Xerjoff",
+      "name": "Torino 21"
+    },
+    "alternative": {
+      "brand": "Montagne Parfums",
+      "name": "Torino 2021",
+      "concentration": "EDP"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "Montagne Parfums",
+        "url": "https://www.montagneparfums.com/fragrance/torino-2021"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Yves Saint Laurent",
+      "name": "Libre Intense"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Intensely Liberated",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/intensely-liberated"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  },
+  {
+    "original": {
+      "brand": "Zadig Voltaire",
+      "name": "This Is Her"
+    },
+    "alternative": {
+      "brand": "DUA Fragrances",
+      "name": "Simply Hers",
+      "concentration": "EXTRAIT"
+    },
+    "evidence": "brand",
+    "sources": [
+      {
+        "publisher": "DUA Fragrances",
+        "url": "https://theduabrand.com/products/simply-hers"
+      }
+    ],
+    "checkedAt": "2026-11-18"
+  }
+]

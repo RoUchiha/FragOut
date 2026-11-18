@@ -459,3 +459,16 @@ input[type=checkbox] { min-height: 16px; width: 16px; height: 16px; flex-shrink:
 @media(prefers-reduced-motion:reduce) { *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 
 @media (max-width: 520px) { .mobile-app-link { display: none; } }
+.layering-library { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 14px; }
+.layering-library > summary { cursor: pointer; font-weight: 600; padding: 10px 0; }
+.layering-library-entry { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.layering-library-entry > summary { cursor: pointer; font-weight: 500; padding: 6px 0; }
+.layering-library-entry > summary > span { display: block; margin-top: 4px; }
+.layering-library-pair { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 18px; padding: 14px 0; }
+.layering-library-side h3 { font-size: 14px; }
+.layering-library-side ul { list-style: none; padding: 0; }
+.layering-library-side li { display: flex; flex-direction: column; gap: 3px; margin-top: 9px; font-size: 12px; }
+.layering-library-side a { text-decoration: underline; font-size: 11px; }
+.layering-library-pagination { display: flex; justify-content: space-between; margin-top: 12px; }
+.collection-notes { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 12px; }
+.collection-notes button { flex-shrink: 0; }

@@ -8,6 +8,8 @@ import {enrichRecommendationBottles} from '@/lib/recommendation-evidence';
 import {intentSummary} from '@/lib/intent';
 import {concentrationOptions} from '@/lib/concentrations';
 import IntentPicker from './IntentPicker';
+import LayeringLibrary from './LayeringLibrary';
+import {browseCollection,collectionDefaults,collectionNotes,collectionSortOptions,type CollectionSort} from '@/lib/collection-browse';
 import type {AppState,Bottle,ComboResult,ScentIntent,SoloResult} from '@/lib/types';
 export type View='home'|'collection'|'layering'|'journal'|'learn'|'profile';
 export const occasionName=(o:string)=>occasions.find(([v])=>v===o)?.[1]??o;
@@ -40,8 +42,34 @@ export function Dashboard(props:Common&{intent:ScentIntent;onIntentChange:(value
 }
 export function Collection(props:Common){
  const [query,setQuery]=useState(''),[filter,setFilter]=useState('OWNED'),[favoriteOnly,setFavoriteOnly]=useState(false),[concentration,setConcentration]=useState('ALL');
- const bs=props.state.bottles.filter(b=>(filter==='ALL'||b.ownership===filter)&&(!favoriteOnly||b.favorite)&&(concentration==='ALL'||b.concentration===concentration)&&`${b.brand} ${b.name} ${b.concentration} ${b.family} ${b.notes.join(' ')}`.toLowerCase().includes(query.toLowerCase()));
- return <><div className="page-heading"><div><h1>Collection</h1></div><button className="button primary" onClick={props.add}><Plus size={17}/>Add fragrance</button></div><div className="collection-tools"><label className="search-input"><Search size={19}/><input aria-label="Search your collection" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search collection"/></label><select aria-label="Filter concentration" value={concentration} onChange={e=>setConcentration(e.target.value)}><option value="ALL">All concentrations</option>{concentrationOptions.map(([code,label])=><option key={code} value={code}>{label}</option>)}</select><button className={'button secondary '+(favoriteOnly?'active-filter':'')} aria-pressed={favoriteOnly} onClick={()=>setFavoriteOnly(!favoriteOnly)}><Heart size={16}/>Favorites</button></div><div className="collection-tabs">{[['OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned'],['ALL','All bottles']].map(([v,n])=><button className={filter===v?'active':''} key={v} onClick={()=>setFilter(v)}>{n}<span>{props.state.bottles.filter(b=>v==='ALL'||b.ownership===v).length}</span></button>)}</div>{bs.length?<div className="bottle-grid collection-grid">{bs.map(b=><BottleCard key={b.id} bottle={b} onClick={()=>props.edit(b)} onFavorite={()=>props.favorite(b)}/>)}</div>:<Empty title={query?'No matches':'No bottles here'} detail={query?'Try a name, brand or note.':'Add a fragrance by name.'} action="Add fragrance" onAction={props.add}/>}<div className="form-note collection-note"><Info size={17}/><span>{props.state.user.demo?'Fictional demo scents. Create an account to add your own.':'Scent profiles use your own observations.'}</span></div></>;
+ const [sort,setSort]=useState<CollectionSort>(collectionDefaults.sort),[note,setNote]=useState('');
+ const bottles=browseCollection(props.state.bottles,props.state.history,{query,ownership:filter,favorites:favoriteOnly,concentration,note,sort});
+ const notes=collectionNotes(props.state.bottles,filter).slice(0,8);
+ return <>
+  <div className="page-heading"><h1>Collection</h1><button className="button primary" onClick={props.add}><Plus size={17}/>Add fragrance</button></div>
+  <div className="collection-tools">
+   <label className="search-input"><Search size={19}/><input aria-label="Search your collection" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Name, brand, or note"/></label>
+   <select aria-label="Sort collection" value={sort} onChange={event=>setSort(event.target.value as CollectionSort)}>
+    {collectionSortOptions.map(([id,label])=><option key={id} value={id}>{label}</option>)}
+   </select>
+   <select aria-label="Filter concentration" value={concentration} onChange={event=>setConcentration(event.target.value)}>
+    <option value="ALL">All concentrations</option>{concentrationOptions.map(([code,label])=><option key={code} value={code}>{label}</option>)}
+   </select>
+   <button className={'button secondary '+(favoriteOnly?'active-filter':'')} aria-pressed={favoriteOnly} onClick={()=>setFavoriteOnly(value=>!value)}><Heart size={16}/>Favorites</button>
+  </div>
+  <div className="collection-tabs">{[['OWNED','Owned'],['WISHLIST','Wishlist'],['REMOVED','Not owned'],['ALL','All bottles']].map(([id,label])=>
+   <button className={filter===id?'active':''} key={id} onClick={()=>{setFilter(id);setNote('');}}>
+    {label}<span>{props.state.bottles.filter(bottle=>id==='ALL'||bottle.ownership===id).length}</span>
+   </button>)}
+  </div>
+  {notes.length>0&&<div className="collection-notes" aria-label="Notes in your collection">
+   {notes.map(item=><button key={item.name} className="button secondary" aria-pressed={note===item.name}
+    onClick={()=>setNote(current=>current===item.name?'':item.name)}>{item.name} · {item.count}</button>)}
+  </div>}
+  {bottles.length?<div className="bottle-grid collection-grid">{bottles.map(bottle=>
+   <BottleCard key={bottle.id} bottle={bottle} onClick={()=>props.edit(bottle)} onFavorite={()=>props.favorite(bottle)}/>)}
+  </div>:<Empty title="No matching fragrances" detail="Try another search or reset the collection filters."/>}
+ </>;
 }
 const tierLabels:Record<string,string>={brand_guidance:'Brand-suggested',community_corroborated:'Community corroborated',single_anecdote:'Single user report',dupe_adapted_hypothesis:'Dupe-adapted — experimental variation',model_hypothesis:'Experimental · untested'};
 export function Layering({state,busy,generate,results,feedback,intent,onIntentChange}:{state:AppState;busy:boolean;generate:(occasion:string,mode:string,isCurrent:()=>boolean)=>void;results:ComboResult[]|null;feedback:Common['feedback'];intent:ScentIntent;onIntentChange:(value:ScentIntent)=>void}){
@@ -50,6 +78,7 @@ export function Layering({state,busy,generate,results,feedback,intent,onIntentCh
  const invalidate=()=>{revision.current++;setStale(true);};
  return <><div className="page-heading"><h1>Layering</h1></div><IntentPicker value={intent} onChange={value=>{invalidate();onIntentChange(value);}}/><div className="lab-controls"><label>Occasion<select required value={occasion} onChange={e=>{setOccasion(e.target.value);invalidate();}}><option value="">Choose an occasion</option>{occasions.map(([v,n])=><option key={v} value={v}>{n}</option>)}</select></label><label>Mode<select value={mode} onChange={e=>{setMode(e.target.value);invalidate();}}><option value="evidence">Evidence-backed only</option><option value="single">Include single user reports</option><option value="experimental">Explore experimental pairings</option></select></label><button className="button primary" disabled={!occasion||busy} onClick={()=>{const requestRevision=++revision.current;generate(occasion,mode,()=>revision.current===requestRevision);setStale(false);}}><Plus size={16}/>{busy?'Finding…':'Find pair'}</button></div>{mode==='experimental'&&<div className="form-note warm"><Info size={18}/><span>Untested pairs based on your scent profiles.</span></div>}
  {state.bottles.filter(b=>b.ownership==='OWNED').length<2?<Empty title="Two owned bottles required" detail="Add another owned fragrance to continue."/>:results===null||stale?<div className="lab-placeholder"><p>Choose an occasion to find a pair.</p></div>:results.length===0?<Empty title={state.context.policy==='NO_FRAGRANCE'?'No fragrance advised':mode==='experimental'?'No pairs fit these conditions':'No documented pairs'} detail={state.context.policy==='NO_FRAGRANCE'?'Your selected venue is fragrance-free.':mode==='experimental'?'Your preferences or venue rules exclude the available pairs.':'No reviewed evidence for these bottles. Choose experimental mode to try an untested pair.'}/>:<div className="combo-grid">{results.map((r,i)=><article className="combo-card" key={r.a.id+r.b.id}><div className="combo-art"><BottleArt bottle={r.a}/><span>+</span><BottleArt bottle={r.b}/><span className="combo-number">0{i+1}</span></div><div className="combo-copy"><span className="badge amber">{tierLabels[r.tier]}</span><h2>{r.a.name} <span>+</span> {r.b.name}</h2><p className="variant-line">{r.a.brand} {r.a.concentration} · {r.b.brand} {r.b.concentration}</p><details className="inline-details"><summary>Pair details</summary><p>{r.reason}</p><p>{r.caution}</p></details>{r.sources.length>0&&<div className="source-links">{r.sources.map((url,i)=><a href={url} key={url} target="_blank" rel="noreferrer">Evidence source {i+1}<ArrowUpRight size={13}/></a>)}<span>Reviewed: {r.reviewedAt}</span></div>}<div className="combo-actions"><button className="button dark" disabled={busy} onClick={()=>feedback([r.a.id,r.b.id],'wore',occasion)}>Tried it<Check size={16}/></button><button className="button secondary" disabled={busy} onClick={()=>feedback([r.a.id,r.b.id],'saved',occasion)}><Heart size={16}/>Save pairing</button><button className="text-button" disabled={busy} onClick={()=>feedback([r.a.id,r.b.id],'disliked',occasion)}>Didn’t work</button></div></div></article>)}</div>}
+ <LayeringLibrary/>
  <details className="inline-details evidence-help"><summary>About evidence labels</summary><p>Brand guidance, community reports and experiments are separate. Matching notes alone do not verify a pairing. Apply separately; never mix liquids in a bottle.</p></details></>;
 }
 export function SoloResults({results,state,feedback,why,busy}:{results:SoloResult[];state:AppState;feedback:Common['feedback'];why:(r:SoloResult)=>void;busy:boolean}){

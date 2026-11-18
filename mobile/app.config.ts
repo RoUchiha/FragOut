@@ -13,11 +13,12 @@ const adPlugins:NonNullable<ExpoConfig['plugins']>=ads.android||ads.ios ? [
  }],
 ] : [];
 const config:ExpoConfig={
- name:'FragOut',slug:'fragout-mobile',version:'0.2.0',scheme:'fragout',orientation:'portrait',icon:'./assets/icon.png',
+ name:'FragOut',slug:'fragout-mobile',owner:'rosingh',version:'0.2.0',scheme:'fragout',orientation:'portrait',icon:'./assets/icon.png',
  ios:{supportsTablet:true,bundleIdentifier:iosBundleId,userInterfaceStyle:'light',
   // Xcode embeds this identity in the simulator executable for SecureStore.
   ...(simulatorAcceptance?{entitlements:{'application-identifier':`SIMULATOR0.${iosBundleId}`}}:{}),
   infoPlist:{UIFileSharingEnabled:false,LSSupportsOpeningDocumentsInPlace:false,
+   NSLocalNetworkUsageDescription:'Connect to your FragOut server on this Wi-Fi network.',
    NSAppTransportSecurity:{NSAllowsArbitraryLoads:false,NSAllowsLocalNetworking:true}}},
  android:{package:'app.fragout.mobile',allowBackup:false,adaptiveIcon:{foregroundImage:'./assets/icon.png',backgroundColor:'#f8f8f5'},
   ...(ads.android?{blockedPermissions:['com.google.android.gms.permission.AD_ID']}:{}),
@@ -31,11 +32,14 @@ const config:ExpoConfig={
   'expo-secure-store','expo-sharing','expo-status-bar','expo-web-browser',
   ...adPlugins,
  ],
- extra:{admob:{
-  ...(ads.android?{androidBannerId:ads.android.bannerId}:{}),
-  ...(ads.ios?{iosBannerId:ads.ios.bannerId}:{}),
-  testMode:ads.testMode,
- }},
+ extra:{
+  eas:{projectId:'0b9aabf4-fe4d-4a6a-a847-3a2a82cc9ffa'},
+  admob:{
+   ...(ads.android?{androidBannerId:ads.android.bannerId}:{}),
+   ...(ads.ios?{iosBannerId:ads.ios.bannerId}:{}),
+   testMode:ads.testMode,
+  },
+ },
  experiments:{baseUrl:'/mobile'}
 };
 export default config;

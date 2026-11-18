@@ -17,6 +17,16 @@ The app compares the saved house, release, and concentration with this snapshot 
 - The optional Fragella API supplies its weighted overall score on the publisher's five-point scale. FragDex can also map its documented duration and projection bands to one through five stars and its three value categories to two through four stars when local wear estimates are absent. These mappings carry an **Est.** label and preserve the source category. [Fragella data methodology](https://api.fragella.com/docs.html#data-methodology)
 - **View on Fragrantica** and **View on Jomashop** point to reviewed editions in the [link list](links.json).
 
+## Layering library
+
+[layering.json](layering.json) records the 249 public `/layer/` pages in Will It Layer's November 18, 2026 sitemap. Entries retain the source URL, check date, named fragrances, and any published score. The importer extracts pairing identities from canonical URLs because long page titles can be truncated. Its copy stays on the source site.
+
+Will It Layer describes a system using fragrance profiles, accords, sillage, longevity, AI, and live research. These records are **AI predictions**. Imported scores remain attached to the original source pair. A source that omits concentration is marked accordingly. Catalog matches list their own concentrations. FragOut uses these references in experimental recommendations while applying owned-bottle, venue, projection, disliked-note and rejected-pair constraints.
+
+The library attaches existing reviewed dupes and [additional maker-stated inspirations](layering-dupes.json) from Montagne and DUA's public product listings. Those records name both fragrances, the alternative's documented concentration, and its product page. The importer excludes hybrids, incidental comparisons, and mismatched flankers. Dupe substitutions remain experimental. Entries without a supported comparison show that the reference is pending.
+
+Refresh the pairing snapshot with `node --experimental-strip-types scripts/import-layering-catalog.mjs`. Stage Montagne's public `https://www.montagneparfums.com/fragrance?format=json` response locally, then run `node --experimental-strip-types scripts/import-layering-dupes.mjs PATH_TO_MONTAGNE_JSON` to refresh the additional inspiration records. Optional filenames after that argument add staged pages from DUA's public `/products.json` listing.
+
 ## Affordable dupes
 
 The November 9, 2026 review records 241 relationships for 147 originals in [the dupe registry](dupes.json). A premium entry shows up to three alternatives. Saving a recognized alternative shows the original under **Dupe of**, including when the alternative has no notes profile. Both directions use the saved house, name, and format.

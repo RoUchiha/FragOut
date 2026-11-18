@@ -13,8 +13,8 @@ import type {Bottle,BottleProfileReply} from '../../src/lib/types';
 const stages=[['top','Top'],['heart','Heart'],['base','Base'],['listed','Notes']] as const;
 type Lookup=BottleProfileReply|{error:string};
 
-export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
- bottle:Bottle;onClose:()=>void;onEdit:()=>void;onRefresh:()=>void;
+export default function FragranceProfile({bottle,onClose,onEdit,onRefresh,onWear,wearBusy}:{
+ bottle:Bottle;onClose:()=>void;onEdit:()=>void;onRefresh:()=>void;onWear:()=>void;wearBusy:boolean;
 }){
  const {styles,colors}=useUi();
  const [lookup,setLookup]=useState<Lookup|null>(null);
@@ -84,6 +84,8 @@ export default function FragranceProfile({bottle,onClose,onEdit,onRefresh}:{
     <Text style={styles.small}>{bottle.concentration==='UNKNOWN'?'Concentration unknown':bottle.concentration}</Text>
     <Btn label="Edit bottle" kind="secondary" disabled={!lookup||changed}
      onPress={onEdit} style={{alignSelf:'flex-start',marginTop:3}}/>
+    {bottle.ownership==='OWNED'&&bottle.fillPct>0&&<Btn label="Log wear" kind="quiet"
+     disabled={wearBusy||changed} onPress={onWear} style={{alignSelf:'flex-start'}}/>}
    </View>
   </View>
   {!lookup&&<Spinner label="Checking catalog…"/>}

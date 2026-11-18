@@ -1,6 +1,6 @@
-import type {Bottle,ComboResult,Evidence,PairRecord,Preferences,SoloResult,Tier,WearContext} from './types.ts';
+import type {Bottle,ComboResult,Evidence,LayeringReference,PairRecord,Preferences,SoloResult,Tier,WearContext} from './types.ts';
 import {intentFit,intentSummary} from './intent.ts';
-export const ENGINE_VERSION='1.2.0';
+export const ENGINE_VERSION='1.3.0';
 const normal=(s:string)=>s.toLowerCase().trim();
 export function seasonFor(month:number,latitude:number){const seasons=['Winter','Spring','Summer','Autumn'] as const;const i=Math.floor((month%12)/3);return seasons[(i+(latitude<0?2:0))%4];}
 export function effectiveTemperature(c:WearContext){return c.setting==='INDOOR'?c.indoorTempC:c.tempC;}
@@ -38,7 +38,7 @@ export function evidenceTier(e:Evidence):Tier|null{
   if(e.kind==='brand')return 'brand_guidance';
   return new Set(valid.map(r=>r.author)).size>=2&&new Set(valid.map(r=>r.url)).size>=2?'community_corroborated':'single_anecdote';
 }
-export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preferences,mode:'evidence'|'single'|'experimental',records:PairRecord[],excludedPairs:string[][]=[],limit=3,searchMatches?:ReadonlySet<string>):ComboResult[]{
+export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preferences,mode:'evidence'|'single'|'experimental',records:PairRecord[],excludedPairs:string[][]=[],limit=3,searchMatches?:ReadonlySet<string>,lookupReference?:(a:Bottle,b:Bottle)=>LayeringReference|undefined):ComboResult[]{
   let solo=rankSolo(bottles,context,prefs,100);
   if (searchMatches) {
     const anchors=rankSolo(bottles.filter(bottle=>searchMatches.has(bottle.id)),context,prefs,100);
@@ -55,7 +55,8 @@ export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preference
     if((context.occasion==='GYM'||context.occasion==='WORK'||context.occasion==='DATE'||context.policy==='LOW_SCENT')&&a.strength+b.strength>2)continue;
     const record=records.find(r=>r.status==='approved'&&((r.a===a.variantId&&r.b===b.variantId)||(r.b===a.variantId&&r.a===b.variantId)));
     let tier=record?evidenceTier(record):null;
-    if(!tier&&mode==='experimental')tier='model_hypothesis';
+    const external=!tier&&mode==='experimental'?lookupReference?.(a,b):undefined;
+    if(!tier&&mode==='experimental')tier=external?.dupeAdapted?'dupe_adapted_hypothesis':'model_hypothesis';
     if(!tier)continue;
     if(mode==='evidence'&&!['brand_guidance','community_corroborated'].includes(tier))continue;
     if(mode==='single'&&!['brand_guidance','community_corroborated','single_anecdote'].includes(tier))continue;
@@ -64,10 +65,11 @@ export function rankCombos(bottles:Bottle[],context:WearContext,prefs:Preference
     const cited=record&&tier!=='model_hypothesis';
     const reason=cited?(record.note??(tier==='brand_guidance'?'The fragrance house recommends wearing these two releases together.':'See the linked wearer reports for this exact pair.'))
       :shared.length?'Both profiles list '+shared.join(', ')+'. Experimental pairing.':a.family&&b.family?'Combines '+a.family.toLowerCase()+' and '+b.family.toLowerCase()+'. Experimental pairing.':'Two eligible fragrances from your collection. Experimental pairing.';
-    results.push({a,b,score:(solo[i].score+solo[j].score)/2+(tier==='brand_guidance'||tier==='community_corroborated'?20:0),tier,
-      sources:record&&tier!=='model_hypothesis'?record.reports.filter(r=>r.rights==='approved'&&r.firsthand).map(r=>r.url):[],
+    results.push({a,b,score:(solo[i].score+solo[j].score)/2+(tier==='brand_guidance'||tier==='community_corroborated'?20:external?3:0),tier,
+      sources:external?[external.url]:record&&tier!=='model_hypothesis'?record.reports.filter(r=>r.rights==='approved'&&r.firsthand).map(r=>r.url):[],
       reason:reason+(direction?' Scent direction: '+direction+'.':''),
-      caution:'Try a small application of each separately. Do not mix liquids in a bottle. Stop if the combination feels overwhelming.',reviewedAt:record?.reviewedAt});
+      caution:'Try a small application of each separately. Do not mix liquids in a bottle. Stop if the combination feels overwhelming.',reviewedAt:record?.reviewedAt,
+      ...(external?{reference:external}:{})});
   }
   return results.sort((a,b)=>b.score-a.score).slice(0,limit);
 }

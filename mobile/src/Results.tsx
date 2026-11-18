@@ -94,6 +94,11 @@ export function Results({solo,combos,occasion,requestId,onFeedback,comboLikes,bu
     open={expanded===key} onToggle={()=>toggle(key)}>
     <Text style={styles.small}>{pair.a.brand} {pair.a.concentration} · {pair.b.brand} {pair.b.concentration}</Text>
     <Text style={styles.muted}>{pair.reason}</Text>
+    {pair.reference&&<View style={{gap:3}}>
+     <Text style={styles.small}>{pair.reference.publisher} · AI prediction{pair.reference.score===null?'':' '+pair.reference.score+'/'+pair.reference.scale}</Text>
+     {pair.reference.dupeAdapted&&<Text style={styles.small}>Source pair · {pair.reference.originalPair.join(' + ')}. Its score applies to that pair.</Text>}
+     {pair.reference.editionUnconfirmed&&<Text style={styles.small}>The source leaves a concentration unspecified.</Text>}
+    </View>}
     {pair.sources.map((url,index)=><FragDexLink key={url} url={url} visit={visit}>
      <Text style={styles.link}>{pair.sources.length===1?'View pairing source':'Pairing source '+(index+1)}</Text>
     </FragDexLink>)}

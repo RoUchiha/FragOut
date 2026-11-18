@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import * as collectionBrowse from '../src/lib/collection-browse.ts';
+import * as catalogPhotos from '../src/lib/catalog-photos.ts';
 
 type Provider = 'qwen' | 'openai' | 'claude';
 type Element = { type: string; props: { children?: unknown; label?: string; disabled?: boolean; onPress?: () => void; onClose?: () => void; onChangeText?: (value: string) => void } };
@@ -44,6 +46,8 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider) {
     discardPhoto: async (value: typeof photo | null) => { if (value) value.data = ''; },
    };
    if (dependency === './cloud-ai') return load('cloud-ai.ts');
+   if (dependency === '../../src/lib/collection-browse') return collectionBrowse;
+   if (dependency === '../../src/lib/catalog-photos') return catalogPhotos;
    if (dependency === './ui') return new Proxy({ useUi: () => ({ styles: {}, colors: {} }) }, { get: (target, key) => key === 'useUi' ? target.useUi : key });
    if (dependency === 'react-native' || dependency === 'lucide-react-native') return new Proxy({}, { get: (_target, key) => key });
    return {};
@@ -53,7 +57,7 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider) {
  const Screen = load(`${name}.tsx`).default;
  function render() {
   cursor = 0;
-  const tree = Screen({ state: { bottles: [] }, onError: () => {}, notify: () => {} });
+  const tree = Screen({ state: { bottles: [],history:[] }, onError: () => {}, notify: () => {} });
   for (const effect of effects.splice(0)) { const cleanup = effect(); if (cleanup) cleanups.push(cleanup); }
   return tree;
  }

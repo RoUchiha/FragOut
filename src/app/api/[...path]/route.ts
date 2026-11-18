@@ -14,6 +14,7 @@ import {findCatalogDupes,findCatalogProfile} from '@/lib/catalog';
 import {catalogEditionById,findPublicCatalogEdition} from '@/lib/catalog-editions';
 import {findAutomaticCatalogPhoto} from '@/lib/catalog-photo-selector';
 import {lookupFragellaRatings} from '@/lib/fragella';
+import {layeringReferenceFor,searchLayeringCatalog} from '@/lib/layering-catalog';
 import {imageSchema,validateImage,type ImageInput} from '@/lib/outfit';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
@@ -157,6 +158,13 @@ async function handle(req:NextRequest){
     if(aiResponse)return aiResponse;
     if(!await isActive())return signInRequired();
     if(path.length===1&&path[0]==='state'&&method==='GET')return await privateReply(await db.state(user.id));
+    if(path.length===2&&path[0]==='layering'&&path[1]==='search'&&method==='GET'){
+      const query=z.string().trim().max(120).parse(req.nextUrl.searchParams.get('q')??'');
+      const offset=z.coerce.number().int().min(0).max(10000).parse(req.nextUrl.searchParams.get('offset')??0);
+      const owned=z.enum(['true','false']).parse(req.nextUrl.searchParams.get('owned')??'false')==='true';
+      const state=await db.state(user.id);
+      return await privateReply(searchLayeringCatalog(state.bottles,query,owned,offset));
+    }
     if(path[0]==='bottles'){
       if(method==='POST'&&path.length===1){
         const saved=await db.addBottle(user.id,{...bottleSchema.parse(body),id:'',variantId:''} as Bottle);
@@ -201,18 +209,21 @@ async function handle(req:NextRequest){
         evidenceMode:z.enum(['evidence','single','experimental']).default('evidence'),
         shortcutId:z.string().max(100).optional(),
         search:z.string().trim().max(scentSearchLimit).optional(),
+        pairIds:z.array(z.string().min(1).max(100)).length(2).refine(ids=>new Set(ids).size===2).optional(),
         ...intentFields,
       }).strict().parse(body);
       const s=await db.state(user.id);const shortcut=data.shortcutId?s.shortcuts.find(c=>c.id===data.shortcutId):undefined;
       const context={...s.context,occasion:shortcut?.occasion??data.occasion,...(shortcut?{setting:shortcut.setting}:{}),mood:data.mood,vibe:data.vibe};
       const prefs={...s.preferences,maxStrength:Math.min(s.preferences.maxStrength,shortcut?.maxStrength??3)};
       const search = data.search;
-      const bottles=enrichRecommendationBottles(s.bottles);
+      if(data.pairIds&&(data.mode!=='combo'||data.pairIds.some(id=>!s.bottles.some(bottle=>bottle.id===id&&bottle.ownership==='OWNED'))))
+        return reply({error:'Choose two distinct bottles you own.'},400);
+      const bottles=enrichRecommendationBottles(data.pairIds?s.bottles.filter(bottle=>data.pairIds!.includes(bottle.id)):s.bottles);
       const matching = search ? new Set(bottles.filter(bottle => matchesBottleSearch(bottle,search)).map(bottle => bottle.id)) : null;
       const soloPool = matching ? bottles.filter(bottle => matching.has(bottle.id)) : bottles;
       const solo = data.mode==='solo' ? rankSolo(soloPool,context,prefs) : [];
       const rejectedPairs = s.history.filter(event => event.reaction==='disliked' && event.bottleIds.length===2).map(event => event.bottleIds);
-      const combos = data.mode==='combo' ? rankCombos(bottles,context,prefs,data.evidenceMode,reviewedPairsFor(bottles),rejectedPairs,3,matching??undefined) : [];
+      const combos = data.mode==='combo' ? rankCombos(bottles,context,prefs,data.evidenceMode,reviewedPairsFor(bottles),rejectedPairs,3,matching??undefined,layeringReferenceFor) : [];
       if(!await isActive())return signInRequired();
       const requestId=await db.recordRecommendation(user.id,context,[...new Set([...solo.map(r=>r.bottle.id),...combos.flatMap(r=>[r.a.id,r.b.id])])]);
       return await privateReply({solo,combos,context,requestId,engine:ENGINE_VERSION});

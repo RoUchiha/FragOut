@@ -1,0 +1,6513 @@
+{
+  "publisher": "Will It Layer?",
+  "methodologyUrl": "https://willitlayer.com/",
+  "checkedAt": "2026-11-18",
+  "listed": 249,
+  "entries": [
+    {
+      "id": "wil-096fe89500b90c3e",
+      "a": {
+        "label": "1 Million by Paco Rabanne",
+        "name": "1 Million",
+        "brand": "Rabanne",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "rabanne-1-million-edt"
+        ]
+      },
+      "b": {
+        "label": "Angels' Share by Kilian",
+        "name": "Angels' Share",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-angels-share-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/1-million-by-paco-rabanne/angels-share-by-kilian",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-cc774370b7f3823d",
+      "a": {
+        "label": "11 11 Moon by Lake Skye",
+        "name": "11 11 Moon",
+        "brand": "Lake Skye",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sunny Side Up by Juliette Has A Gun",
+        "name": "Sunny Side Up",
+        "brand": "Juliette Has A Gun",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/11-11-moon-by-lake-skye/sunny-side-up-by-juliette-has-a-gun",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e2c41996e017cbc8",
+      "a": {
+        "label": "Aariz L'Absolu by Arabiyat Prestige",
+        "name": "Aariz L Absolu",
+        "brand": "Arabiyat Prestige",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Guidance by Amouage",
+        "name": "Guidance",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "amouage-guidance-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aariz-l-absolu-by-arabiyat-prestige/guidance-by-amouage",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c99dd0945760865f",
+      "a": {
+        "label": "Accento Overdose by Xerjoff",
+        "name": "Accento Overdose",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Valaya by Parfums de Marly",
+        "name": "Valaya",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "parfums-de-marly-valaya-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/accento-overdose-by-xerjoff/valaya-by-parfums-de-marly",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-256a8366394355ee",
+      "a": {
+        "label": "Addictive Vibration by Initio Parfums Privés",
+        "name": "Addictive Vibration",
+        "brand": "Initio Parfums Prives",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Bianco Latte by Giardini di Toscana",
+        "name": "Bianco Latte",
+        "brand": "Giardini di Toscana",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:giardini-di-toscana-bianco-latte"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/addictive-vibration-by-initio-parfums-prives/bianco-latte-by-giardini-di-toscana",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-59ed6d2c70538ff9",
+      "a": {
+        "label": "Addictive Vibration by Initio Parfums Privés",
+        "name": "Addictive Vibration",
+        "brand": "Initio Parfums Prives",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Paradoxe by Prada",
+        "name": "Paradoxe",
+        "brand": "Prada",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "prada-paradoxe-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/addictive-vibration-by-initio-parfums-prives/paradoxe-by-prada",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a78b0ff490dc1ef9",
+      "a": {
+        "label": "Ajwad by Lattafa Perfumes",
+        "name": "Ajwad",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lost Cherry by Tom Ford",
+        "name": "Lost Cherry",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "tom-ford-lost-cherry-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ajwad-by-lattafa-perfumes/lost-cherry-by-tom-ford",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ce481df42f4d5c69",
+      "a": {
+        "label": "Akro Bake",
+        "name": "Akro Bake",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Dulce by By/Rosie Jane",
+        "name": "Dulce",
+        "brand": "By Rosie Jane",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/akro-bake/dulce-by-by-rosie-jane",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-880e862cdb5f23d2",
+      "a": {
+        "label": "Alien by Mugler",
+        "name": "Alien",
+        "brand": "Mugler",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "mugler-alien-edp"
+        ]
+      },
+      "b": {
+        "label": "Cosmic",
+        "name": "Cosmic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/alien-by-mugler/cosmic",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-4536644a2b49a6d0",
+      "a": {
+        "label": "Alien by Mugler",
+        "name": "Alien",
+        "brand": "Mugler",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "mugler-alien-edp"
+        ]
+      },
+      "b": {
+        "label": "Grand Soir by Maison Francis Kurkdjian",
+        "name": "Grand Soir",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-grand-soir-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/alien-by-mugler/grand-soir-by-maison-francis-kurkdjian",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2dbb04be9c8ec694",
+      "a": {
+        "label": "Alien by Mugler",
+        "name": "Alien",
+        "brand": "Mugler",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "mugler-alien-edp"
+        ]
+      },
+      "b": {
+        "label": "Kayali Vanilla | 28 by Kayali",
+        "name": "Vanilla 28",
+        "brand": "Kayali",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kayali-vanilla-28-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/alien-by-mugler/kayali-vanilla-28-by-kayali",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d307d6e7cdfc7592",
+      "a": {
+        "label": "Althair by Parfums de Marly",
+        "name": "Althair",
+        "brand": "Parfums De Marly",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Libre Intense by Yves Saint Laurent",
+        "name": "Libre Intense",
+        "brand": "Yves Saint Laurent",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "yves-saint-laurent-libre-intense-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/althair-by-parfums-de-marly/libre-intense-by-yves-saint-laurent",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-955fe18fc4b5a8fa",
+      "a": {
+        "label": "Althair by Parfums de Marly",
+        "name": "Althair",
+        "brand": "Parfums De Marly",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Teriaq intense",
+        "name": "Teriaq Intense",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/althair-by-parfums-de-marly/teriaq-intense",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2f6077e2cf64a4a0",
+      "a": {
+        "label": "Althair",
+        "name": "Althair",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lait de Coco by Le Monde Gourmand",
+        "name": "Lait De Coco",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/althair/lait-de-coco-by-le-monde-gourmand",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-062812d00dafac38",
+      "a": {
+        "label": "Ambre Nuit by Dior",
+        "name": "Ambre Nuit",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Florabotanica by Balenciaga",
+        "name": "Florabotanica",
+        "brand": "Balenciaga",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ambre-nuit-by-dior/florabotanica-by-balenciaga",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9a00416e24417ae0",
+      "a": {
+        "label": "Amouage Crimson Rocks by Amouage",
+        "name": "Amouage Crimson Rocks",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Angels' Share by Kilian",
+        "name": "Angels' Share",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-angels-share-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/amouage-crimson-rocks-by-amouage/angels-share-by-kilian",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-6b9462bbfd555a7c",
+      "a": {
+        "label": "Amouage Memoir Woman by Amouage",
+        "name": "Amouage Memoir Woman",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Fille en Aiguilles by Serge Lutens",
+        "name": "Fille en Aiguilles",
+        "brand": "Serge Lutens",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:serge-lutens-fille-en-aiguilles"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/amouage-memoir-woman-by-amouage/fille-en-aiguilles-by-serge-lutens",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-63579207d5240c3b",
+      "a": {
+        "label": "Amouage Memoir Woman by Amouage",
+        "name": "Amouage Memoir Woman",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Portrait of a Lady by Frédéric Malle",
+        "name": "Portrait of a Lady",
+        "brand": "Frédéric Malle",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "frederic-malle-portrait-of-a-lady-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/amouage-memoir-woman-by-amouage/portrait-of-a-lady-by-frederic-malle",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0ca779c4592ee25f",
+      "a": {
+        "label": "Amouage Memoir Woman by Amouage",
+        "name": "Amouage Memoir Woman",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/amouage-memoir-woman-by-amouage/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2dc98d3830b8bd35",
+      "a": {
+        "label": "Angélique Noire by Guerlain",
+        "name": "Angélique Noire",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-angelique-noire"
+        ]
+      },
+      "b": {
+        "label": "Black Opium by Yves Saint Laurent",
+        "name": "Black Opium",
+        "brand": "Yves Saint Laurent",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "yves-saint-laurent-black-opium-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/angelique-noire-by-guerlain/black-opium-by-yves-saint-laurent",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-88ddd278ec6b7684",
+      "a": {
+        "label": "Angélique Noire by Guerlain",
+        "name": "Angélique Noire",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-angelique-noire"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/angelique-noire-by-guerlain/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-546c4afddb1169cb",
+      "a": {
+        "label": "Angels' Share By Kilian",
+        "name": "Angels' Share",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-angels-share-edp"
+        ]
+      },
+      "b": {
+        "label": "Bright Peach by Maison Asrar",
+        "name": "Bright Peach",
+        "brand": "Maison Asrar",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/angels-share-by-kilian/bright-peach-by-maison-asrar",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-93406e3f266cf001",
+      "a": {
+        "label": "Angels' Share by Kilian",
+        "name": "Angels' Share",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-angels-share-edp"
+        ]
+      },
+      "b": {
+        "label": "Carlisle by Parfums de Marly",
+        "name": "Carlisle",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:parfums-de-marly-carlisle"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/angels-share-by-kilian/carlisle-by-parfums-de-marly",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c8e39131a27ac958",
+      "a": {
+        "label": "Ani X by Nishane",
+        "name": "Ani X",
+        "brand": "Nishane",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Ingenious Ginger by Goldfield Banks",
+        "name": "Ingenious Ginger",
+        "brand": "Goldfield Banks",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ani-x-by-nishane/ingenious-ginger-by-goldfield-banks",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-18074e19096fbc92",
+      "a": {
+        "label": "Another 13 by Le Labo",
+        "name": "Another 13",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "le-labo-another-13-edp"
+        ]
+      },
+      "b": {
+        "label": "Xtra Milk by DedCool",
+        "name": "Xtra Milk",
+        "brand": "Dedcool",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/another-13-by-le-labo/xtra-milk-by-dedcool",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1ecbfb774435d0ce",
+      "a": {
+        "label": "Aqua Allegoria Coconut Fizz by Guerlain",
+        "name": "Aqua Allegoria Coconut Fizz",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Rum Tropique by Le Monde Gourmand",
+        "name": "Rum Tropique",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aqua-allegoria-coconut-fizz-by-guerlain/rum-tropique-by-le-monde-gourmand",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e830b24dd795158c",
+      "a": {
+        "label": "Aqua Allegoria Forte Bosca Vanilla by Guerlain",
+        "name": "Aqua Allegoria Forte Bosca Vanilla",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Wood Sage Sea Salt by Jo Malone",
+        "name": "Wood Sage Sea Salt",
+        "brand": "Jo Malone",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aqua-allegoria-forte-bosca-vanilla-by-guerlain/wood-sage-sea-salt-by-jo-malone",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9c1e35ab811d510b",
+      "a": {
+        "label": "Aqva Divina by Bvlgari",
+        "name": "Aqva Divina",
+        "brand": "Bvlgari",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Olympea by Paco Rabanne",
+        "name": "Olympéa",
+        "brand": "Rabanne",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "rabanne-olympea-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aqva-divina-by-bvlgari/olympea-by-paco-rabanne",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ca532ea95cbd0ca4",
+      "a": {
+        "label": "Ardent By Boadicea The Victorious",
+        "name": "Ardent",
+        "brand": "Boadicea The Victorious",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Roses Berberanza by LancÔMe",
+        "name": "Roses Berberanza",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ardent-by-boadicea-the-victorious/roses-berberanza-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-78f99ba9eaf7c7a4",
+      "a": {
+        "label": "Art of Arabia III by Lattafa Pride",
+        "name": "Art Of Arabia Iii",
+        "brand": "Lattafa Pride",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Eau Duelle by Diptyque",
+        "name": "Eau Duelle",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/art-of-arabia-iii-by-lattafa-pride/eau-duelle-by-diptyque",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-580d5a7ddc927cd8",
+      "a": {
+        "label": "Atlantis By French Avenue",
+        "name": "Atlantis",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vanilla Mudslide by Blndrgrphy",
+        "name": "Vanilla Mudslide",
+        "brand": "Blndrgrphy",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/atlantis-by-french-avenue/vanilla-mudslide-by-blndrgrphy",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e613ec52cffd2971",
+      "a": {
+        "label": "Atomic Rose by Initio",
+        "name": "Atomic Rose",
+        "brand": "Initio Parfums Prives",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "initio-atomic-rose-edp"
+        ]
+      },
+      "b": {
+        "label": "Mon Parfum Cristal by M Micallef",
+        "name": "Mon Parfum Cristal",
+        "brand": "M Micallef",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/atomic-rose-by-initio/mon-parfum-cristal-by-m-micallef",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8721fa56f474b88e",
+      "a": {
+        "label": "Aventus Absolu by Creed",
+        "name": "Aventus Absolu",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Molecule 02 by Escentric Molecules",
+        "name": "Molecule 02",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aventus-absolu-by-creed/molecule-02-by-escentric-molecules",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-72d98370858336a2",
+      "a": {
+        "label": "Aventus by Creed",
+        "name": "Aventus",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "creed-aventus-edp"
+        ]
+      },
+      "b": {
+        "label": "Baccarat Rouge 540 by Maison Francis Kurkdjian",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait",
+          "maison-francis-kurkdjian-baccarat-rouge-540-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aventus-by-creed/baccarat-rouge-540-by-maison-francis-kurkdjian",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-27312a7a10b93902",
+      "a": {
+        "label": "Aventus by Creed",
+        "name": "Aventus",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "creed-aventus-edp"
+        ]
+      },
+      "b": {
+        "label": "Baccarat Rouge 540 by MFK",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait",
+          "maison-francis-kurkdjian-baccarat-rouge-540-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aventus-by-creed/baccarat-rouge-540-by-mfk",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b3be53af512388a1",
+      "a": {
+        "label": "Aventus by Creed",
+        "name": "Aventus",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "creed-aventus-edp"
+        ]
+      },
+      "b": {
+        "label": "Baccarat Rouge 540 by Maison Francis Kurkdjian",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": true,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aventus-by-creed/baccarat-rouge-540-extrait-de-parfum-by-maison-francis-kurkdjian",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ee11015365a79c82",
+      "a": {
+        "label": "Aventus by Creed",
+        "name": "Aventus",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "creed-aventus-edp"
+        ]
+      },
+      "b": {
+        "label": "Escentric 02 by Escentric Molecules",
+        "name": "Escentric 02",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/aventus-by-creed/escentric-02-by-escentric-molecules",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b152b10e6702d448",
+      "a": {
+        "label": "Azonto By Montagne Parfums",
+        "name": "Azonto",
+        "brand": "Montagne Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "dupe:9f63a7552dc3799d53d9"
+        ]
+      },
+      "b": {
+        "label": "Bal D'Afrique by Byredo",
+        "name": "Bal d'Afrique",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-bal-dafrique-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/azonto-by-montagne-parfums/bal-d-afrique-by-byredo",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-235550153089867c",
+      "a": {
+        "label": "Baccarat Rouge 540 by Maison Francis Kurkdjian",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait",
+          "maison-francis-kurkdjian-baccarat-rouge-540-edp"
+        ]
+      },
+      "b": {
+        "label": "Golden Sand by Al Rehab",
+        "name": "Golden Sand",
+        "brand": "Al Rehab",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/baccarat-rouge-540-by-maison-francis-kurkdjian/golden-sand-by-al-rehab",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-73dca03167e3dada",
+      "a": {
+        "label": "Baccarat Rouge 540 By MFK (extrait)",
+        "name": "Baccarat Rouge 540",
+        "brand": "Mfk Extrait",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Brit by Burberry",
+        "name": "Brit",
+        "brand": "Burberry",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:burberry-brit-toilette"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/baccarat-rouge-540-by-mfk-extrait/brit-by-burberry",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-61c67e72b181290e",
+      "a": {
+        "label": "Baccarat Rouge 540 By MFK (extrait)",
+        "name": "Baccarat Rouge 540",
+        "brand": "Mfk Extrait",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/baccarat-rouge-540-by-mfk-extrait/molecule-01-by-escentric-molecules",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c43aa14566d36975",
+      "a": {
+        "label": "Baccarat Rouge 540 by MFK",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait",
+          "maison-francis-kurkdjian-baccarat-rouge-540-edp"
+        ]
+      },
+      "b": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/baccarat-rouge-540-by-mfk/molecule-01-by-escentric-molecules",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-15163c87da8a08dc",
+      "a": {
+        "label": "Baccarat Rouge 540 by MFK",
+        "name": "Baccarat Rouge 540",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-baccarat-rouge-540-extrait",
+          "maison-francis-kurkdjian-baccarat-rouge-540-edp"
+        ]
+      },
+      "b": {
+        "label": "Tihota By Indult",
+        "name": "Tihota",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/baccarat-rouge-540-by-mfk/tihota-by-indult",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d8692330733c216e",
+      "a": {
+        "label": "Bade'e Al Oud Noble Blush by Lattafa Perfumes",
+        "name": "Bade E Al Oud Noble Blush",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Italica 2021 by Xerjoff",
+        "name": "Italica 2021",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bade-e-al-oud-noble-blush-by-lattafa-perfumes/italica-2021-by-xerjoff",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8c3a2b2a638e7fd4",
+      "a": {
+        "label": "Bake By Akro",
+        "name": "Bake",
+        "brand": "Akro",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Miel Bourbon by Le Monde Gourmand",
+        "name": "Miel Bourbon",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bake-by-akro/miel-bourbon-by-le-monde-gourmand",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-4798862bf370c036",
+      "a": {
+        "label": "Balinese Coconut by NEST New York",
+        "name": "Balinese Coconut",
+        "brand": "Nest New York",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Cheirosa 48 by Sol De Janeiro",
+        "name": "Cheirosa 48",
+        "brand": "Sol De Janeiro",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/balinese-coconut-by-nest-new-york/cheirosa-48-by-sol-de-janeiro",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a7200c5917f2be77",
+      "a": {
+        "label": "BDK Gris Charnel by BDK Parfums",
+        "name": "Bdk Gris Charnel",
+        "brand": "BDK Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Thé Noir 29 by Le Labo",
+        "name": "Thé Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": true,
+        "catalogIds": [
+          "scento:le-labo-the-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bdk-gris-charnel-by-bdk-parfums/le-labo-the-noir-29-eau-de-parfum-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c8e659cf8b43b6c6",
+      "a": {
+        "label": "BDK Gris Charnel by BDK Parfums",
+        "name": "Bdk Gris Charnel",
+        "brand": "BDK Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "The Noir 29 by Le Labo",
+        "name": "Thé Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-the-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bdk-gris-charnel-by-bdk-parfums/the-noir-29-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7f8aea262a5f2cc9",
+      "a": {
+        "label": "BDK Gris Charnel",
+        "name": "Bdk Gris Charnel",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Indigo by Nest",
+        "name": "Indigo",
+        "brand": "Nest",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bdk-gris-charnel/indigo-by-nest",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3051b423fbbeaeaa",
+      "a": {
+        "label": "Beach Party By Armaf",
+        "name": "Beach Party",
+        "brand": "Armaf",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/beach-party-by-armaf/virgin-island-water-by-creed",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-49a868180a629c98",
+      "a": {
+        "label": "Beach Walk by Maison Margiela",
+        "name": "Beach Walk",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Neroli Woods by Banana Republic",
+        "name": "Neroli Woods",
+        "brand": "Banana Republic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/beach-walk-by-maison-margiela/neroli-woods-by-banana-republic",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d680f450c560b0f7",
+      "a": {
+        "label": "Bee by Ellis Brooklyn",
+        "name": "Bee",
+        "brand": "Ellis Brooklyn",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Milk by Commodity",
+        "name": "Milk",
+        "brand": "Commodity",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bee-by-ellis-brooklyn/milk-by-commodity",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9404fa8fcba3c60d",
+      "a": {
+        "label": "Bee by Ellis Brooklyn",
+        "name": "Bee",
+        "brand": "Ellis Brooklyn",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Philosophy Fresh Cream Warm Cashmere by Philosophy",
+        "name": "Philosophy Fresh Cream Warm Cashmere",
+        "brand": "Philosophy",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bee-by-ellis-brooklyn/philosophy-fresh-cream-warm-cashmere-by-philosophy",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1723c4e6442eb7aa",
+      "a": {
+        "label": "Bee By Zoologist Perfumes",
+        "name": "Bee",
+        "brand": "Zoologist Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Nectare Extradose by French Avenue",
+        "name": "Nectare Extradose",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bee-by-zoologist-perfumes/nectare-extradose-by-french-avenue",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7ea5a53aa632b7b7",
+      "a": {
+        "label": "Bee By Zoologist Perfumes",
+        "name": "Bee",
+        "brand": "Zoologist Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Velours by Keiko Mecheri",
+        "name": "Vetiver Velours",
+        "brand": "Keiko Mecheri",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bee-by-zoologist-perfumes/vetiver-velours-by-keiko-mecheri",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9f013576bb8465c5",
+      "a": {
+        "label": "Bianco Latte By Giardini Di Toscana",
+        "name": "Bianco Latte",
+        "brand": "Giardini di Toscana",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:giardini-di-toscana-bianco-latte"
+        ]
+      },
+      "b": {
+        "label": "Love, Don't Be Shy by Kilian Paris",
+        "name": "Love, Don't Be Shy",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-love-dont-be-shy-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bianco-latte-by-giardini-di-toscana/kilian-love-don-t-be-shy-by-by-kilian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-fc10604b906141c3",
+      "a": {
+        "label": "Bitter Peach by Tom Ford",
+        "name": "Bitter Peach",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:tom-ford-bitter-peach"
+        ]
+      },
+      "b": {
+        "label": "Blue Panther By Merve Perfumes",
+        "name": "Blue Panther",
+        "brand": "Merve Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bitter-peach-by-tom-ford/blue-panther-by-merve-perfumes",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ec2adfd69259d4e4",
+      "a": {
+        "label": "Black Chamomile by Bath Body Works",
+        "name": "Black Chamomile",
+        "brand": "Bath Body Works",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sandalwood Vanilla by Bath Body Works",
+        "name": "Sandalwood Vanilla",
+        "brand": "Bath Body Works",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/black-chamomile-by-bath-body-works/sandalwood-vanilla-by-bath-body-works",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8ab6eb89637983ce",
+      "a": {
+        "label": "Black Sapphire By Jo Milano",
+        "name": "Black Sapphire",
+        "brand": "Jo Milano",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Blue Talisman Extrait",
+        "name": "Blue Talisman Extrait",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/black-sapphire-by-jo-milano/blue-talisman-extrait",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-054a558d4df92b55",
+      "a": {
+        "label": "Black Sapphire by Jo Milano",
+        "name": "Black Sapphire",
+        "brand": "Jo Milano",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Guidance 46 Exceptional Extrait by Amouage",
+        "name": "Guidance 46 Exceptional Extrait",
+        "brand": "Amouage",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/black-sapphire-by-jo-milano/guidance-46-exceptional-extrait-by-amouage",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8b0447a7c8e7a6c7",
+      "a": {
+        "label": "Blanche Bete By Les Liquides Imaginaires",
+        "name": "Blanche Bete",
+        "brand": "Les Liquides Imaginaires",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Musky Buttercream by Dossier",
+        "name": "Musky Buttercream",
+        "brand": "Dossier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/blanche-bete-by-les-liquides-imaginaires/musky-buttercream-by-dossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d64556ab82efdee0",
+      "a": {
+        "label": "Bleu De Chanel by Chanel",
+        "name": "Bleu de Chanel",
+        "brand": "Chanel",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "chanel-bleu-de-chanel-edp",
+          "chanel-bleu-de-chanel-edt",
+          "chanel-bleu-de-chanel-parfum"
+        ]
+      },
+      "b": {
+        "label": "Molecule 04 by Escentric Molecules",
+        "name": "Molecule 04",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bleu-de-chanel-by-chanel/molecule-04-by-escentric-molecules",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-222e44ac024d26cb",
+      "a": {
+        "label": "Blue Talisman Extrait",
+        "name": "Blue Talisman Extrait",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Valaya by Parfums de Marly",
+        "name": "Valaya",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "parfums-de-marly-valaya-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/blue-talisman-extrait/valaya-by-parfums-de-marly",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2ac3435b3d3d43fa",
+      "a": {
+        "label": "Bois D'Argent by Dior",
+        "name": "Bois D Argent",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Bottled Absolu",
+        "name": "Bottled Absolu",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bois-d-argent-by-dior/bottled-absolu",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-78140b2138f089d5",
+      "a": {
+        "label": "Boss Bottled Elixir by Hugo Boss",
+        "name": "Boss Bottled Elixir",
+        "brand": "Hugo Boss",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Herod by Parfums de Marly",
+        "name": "Herod",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "parfums-de-marly-herod-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/boss-bottled-elixir-by-hugo-boss/herod-by-parfums-de-marly",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ccf33a09f3100c25",
+      "a": {
+        "label": "Boy Smells Coco Cream",
+        "name": "Boy Smells Coco Cream",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Coco Vanille by Mancera",
+        "name": "Coco Vanille",
+        "brand": "Mancera",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:mancera-coco-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/boy-smells-coco-cream/coco-vanille-by-mancera",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-89ae33affb43ce30",
+      "a": {
+        "label": "Brazilian Crush Cheirosa '62 By Sol De Janeiro",
+        "name": "Cheirosa 62",
+        "brand": "Sol de Janeiro",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "sol-de-janeiro-cheirosa-62-mist"
+        ]
+      },
+      "b": {
+        "label": "Hypnotic Poison Eau de Parfum by Dior",
+        "name": "Hypnotic Poison Eau de Parfum",
+        "brand": "Dior",
+        "concentrationSpecified": true,
+        "catalogIds": [
+          "scento:dior-hypnotic-poison-eau-de-parfum"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brazilian-crush-cheirosa-62-by-sol-de-janeiro/hypnotic-poison-eau-de-parfum-by-dior",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-42f6cd3eed31d0e5",
+      "a": {
+        "label": "Brazilian Crush Cheirosa '62 By Sol De Janeiro",
+        "name": "Cheirosa 62",
+        "brand": "Sol de Janeiro",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "sol-de-janeiro-cheirosa-62-mist"
+        ]
+      },
+      "b": {
+        "label": "Vanilla 28 by Kayali",
+        "name": "Vanilla 28",
+        "brand": "Kayali",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kayali-vanilla-28-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brazilian-crush-cheirosa-62-by-sol-de-janeiro/kayali-vanilla-28-by-kayali",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2bf0c3f9a25fff8f",
+      "a": {
+        "label": "Brazilian Crush Cheirosa '62 By Sol De Janeiro",
+        "name": "Cheirosa 62",
+        "brand": "Sol de Janeiro",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "sol-de-janeiro-cheirosa-62-mist"
+        ]
+      },
+      "b": {
+        "label": "Shaghaf Tonka by Swiss Arabian",
+        "name": "Shaghaf Tonka",
+        "brand": "Swiss Arabian",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brazilian-crush-cheirosa-62-by-sol-de-janeiro/shaghaf-tonka-by-swiss-arabian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ba7d89bf1b20922c",
+      "a": {
+        "label": "Brazilian Crush Cheirosa '62 By Sol De Janeiro",
+        "name": "Cheirosa 62",
+        "brand": "Sol de Janeiro",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "sol-de-janeiro-cheirosa-62-mist"
+        ]
+      },
+      "b": {
+        "label": "Yara Elixir",
+        "name": "Yara Elixir",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brazilian-crush-cheirosa-62-by-sol-de-janeiro/yara-elixir",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9e500c815af4b233",
+      "a": {
+        "label": "Bright Peach by Maison Asrar",
+        "name": "Bright Peach",
+        "brand": "Maison Asrar",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vanilla Diorama by Dior",
+        "name": "Vanilla Diorama",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bright-peach-by-maison-asrar/vanilla-diorama-by-dior",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-607e1251c0c8c586",
+      "a": {
+        "label": "Brilliant Peony By Clean Reserve",
+        "name": "Brilliant Peony",
+        "brand": "Clean Reserve",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Good Girl Blush by Carolina Herrera",
+        "name": "Good Girl Blush",
+        "brand": "Carolina Herrera",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "carolina-herrera-good-girl-blush-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brilliant-peony-by-clean-reserve/good-girl-blush-by-carolina-herrera",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0bdb4f7f608f6465",
+      "a": {
+        "label": "Brioche Vanille by Lattafa Pride",
+        "name": "Brioche Vanille",
+        "brand": "Lattafa Pride",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Noir Extreme by Tom Ford",
+        "name": "Noir Extreme",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "tom-ford-noir-extreme-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/brioche-vanille-by-lattafa-pride/noir-extreme-by-tom-ford",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ae5949c023bed703",
+      "a": {
+        "label": "Bronze Goddess Azur by Estée Lauder",
+        "name": "Bronze Goddess Azur",
+        "brand": "EstÉE Lauder",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tommy Girl Poolside by Tommy Hilfiger",
+        "name": "Tommy Girl Poolside",
+        "brand": "Tommy Hilfiger",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bronze-goddess-azur-by-estee-lauder/tommy-girl-poolside-by-tommy-hilfiger",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9b12258eb0651319",
+      "a": {
+        "label": "Bubble Bath by Maison Margiela",
+        "name": "Replica Bubble Bath",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-margiela-replica-bubble-bath-edt"
+        ]
+      },
+      "b": {
+        "label": "Infini Musk by Maison Alhambra",
+        "name": "Infini Musk",
+        "brand": "Maison Alhambra",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/bubble-bath-by-maison-margiela/infini-musk-by-maison-alhambra",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f6ca5e586e38c979",
+      "a": {
+        "label": "Carnal Gray Extrait By Montagne Parfums",
+        "name": "Carnal Gray Extrait",
+        "brand": "Montagne Parfums",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Noir 29 by Le Labo",
+        "name": "Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/carnal-gray-extrait-by-montagne-parfums/noir-29-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2679fd18a70efb9f",
+      "a": {
+        "label": "Cedar chic",
+        "name": "Cedar Chic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Kilian Love Don'T Be Shy By By Kilian",
+        "name": "Love, Don't Be Shy",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-love-dont-be-shy-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cedar-chic/kilian-love-don-t-be-shy-by-by-kilian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9888a064c4413dc7",
+      "a": {
+        "label": "Cedar chic",
+        "name": "Cedar Chic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Milk by Commodity",
+        "name": "Milk",
+        "brand": "Commodity",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cedar-chic/milk-by-commodity",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-330089453fcf99cb",
+      "a": {
+        "label": "Cedar chic",
+        "name": "Cedar Chic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Peaches by Ellis Brooklyn",
+        "name": "Peaches",
+        "brand": "Ellis Brooklyn",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cedar-chic/peaches-by-ellis-brooklyn",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-27a7127f1c0c5cf3",
+      "a": {
+        "label": "Cedar chic",
+        "name": "Cedar Chic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Pure Musc For Her by Narciso Rodriguez",
+        "name": "Pure Musc For Her",
+        "brand": "Narciso Rodriguez",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cedar-chic/pure-musc-for-her-by-narciso-rodriguez",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8ca0e262368a9129",
+      "a": {
+        "label": "Chergui by Serge Lutens",
+        "name": "Chergui",
+        "brand": "Serge Lutens",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Man in Black by Bvlgari",
+        "name": "Man In Black",
+        "brand": "Bvlgari",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:bvlgari-man-in-black-parfum"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/chergui-by-serge-lutens/man-in-black-by-bvlgari",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ec1b9abc7669234a",
+      "a": {
+        "label": "Cherry Bouquet by Afnan",
+        "name": "Cherry Bouquet",
+        "brand": "Afnan",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Feve Delicieuse by Dior",
+        "name": "Feve Delicieuse",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cherry-bouquet-by-afnan/feve-delicieuse-by-dior",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ecbd4d5a0ed07754",
+      "a": {
+        "label": "Choco Musk By Al-Rehab",
+        "name": "Choco Musk",
+        "brand": "Al Rehab",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "La Danza Delle Libellule by Nobile 1942",
+        "name": "La Danza Delle Libellule",
+        "brand": "Nobile 1942",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/choco-musk-by-al-rehab/la-danza-delle-libellule-by-nobile-1942",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ca2d0be9468a8d49",
+      "a": {
+        "label": "Choco Musk by ALREHAB PERFUMES",
+        "name": "Choco Musk",
+        "brand": "Alrehab Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Coffee Break by Maison Margiela",
+        "name": "Coffee Break",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/choco-musk-by-alrehab-perfumes/coffee-break-by-maison-margiela",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0fae95582f9ab04f",
+      "a": {
+        "label": "Ciao Citrus by Paris Corner",
+        "name": "Ciao Citrus",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ciao-citrus-by-paris-corner/virgin-island-water-by-creed",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ccd70aca45dd6900",
+      "a": {
+        "label": "Clean Reserve Whipped Cherry by Clean",
+        "name": "Clean Reserve Whipped Cherry",
+        "brand": "Clean",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "La Danza Delle Libellule by Nobile 1942",
+        "name": "La Danza Delle Libellule",
+        "brand": "Nobile 1942",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/clean-reserve-whipped-cherry-by-clean/la-danza-delle-libellule-by-nobile-1942",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-730e50248f732076",
+      "a": {
+        "label": "Coco Mademoiselle by Chanel",
+        "name": "Coco Mademoiselle",
+        "brand": "Chanel",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "chanel-coco-mademoiselle-edp"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/coco-mademoiselle-by-chanel/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-46d67677ef328cc2",
+      "a": {
+        "label": "Coromandel by Chanel",
+        "name": "Coromandel",
+        "brand": "Chanel",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/coromandel-by-chanel/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-82e45df394849b02",
+      "a": {
+        "label": "Cosmic By Kylie Jenner",
+        "name": "Cosmic",
+        "brand": "Kylie Jenner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Forever Red by Bath Body Works",
+        "name": "Forever Red",
+        "brand": "Bath Body Works",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cosmic-by-kylie-jenner/forever-red-by-bath-body-works",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5ebac63410111a04",
+      "a": {
+        "label": "Cotton Blush by Arabiyat Prestige",
+        "name": "Cotton Blush",
+        "brand": "Arabiyat Prestige",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Love, Don't Be Shy by Kilian Paris",
+        "name": "Love, Don't Be Shy",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-love-dont-be-shy-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cotton-blush-by-arabiyat-prestige/love-don-t-be-shy-by-by-kilian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7fa1af38c529dfa9",
+      "a": {
+        "label": "Cotton Blush by Arabiyat Prestige",
+        "name": "Cotton Blush",
+        "brand": "Arabiyat Prestige",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tihota By Indult",
+        "name": "Tihota",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cotton-blush-by-arabiyat-prestige/tihota-by-indult",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1c646fff9a0e77df",
+      "a": {
+        "label": "Creation De Reve By Khadlaj Perfumes",
+        "name": "Creation De Reve",
+        "brand": "Khadlaj Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Dior Homme 2020 by Dior",
+        "name": "Dior Homme 2020",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/creation-de-reve-by-khadlaj-perfumes/dior-homme-2020-by-dior",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-61759fe29e30b624",
+      "a": {
+        "label": "Creed Aventus Absolu by Creed",
+        "name": "Creed Aventus Absolu",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Le Gemme Tygar by Bvlgari",
+        "name": "Le Gemme Tygar",
+        "brand": "Bvlgari",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "bvlgari-le-gemme-tygar-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/creed-aventus-absolu-by-creed/le-gemme-tygar-by-bvlgari",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-dfe8f9b3dcc211eb",
+      "a": {
+        "label": "Creed Aventus Absolu by Creed",
+        "name": "Creed Aventus Absolu",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Orage by Louis Vuitton",
+        "name": "Orage",
+        "brand": "Louis Vuitton",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/creed-aventus-absolu-by-creed/orage-by-louis-vuitton",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-952bd4689be3048f",
+      "a": {
+        "label": "Creme Vanille By Le Monde Gourmand",
+        "name": "Creme Vanille",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Gorgeous Gardenia by Gucci",
+        "name": "Gorgeous Gardenia",
+        "brand": "Gucci",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/creme-vanille-by-le-monde-gourmand/gorgeous-gardenia-by-gucci",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-389ccc5e5a4a4357",
+      "a": {
+        "label": "Crystal Noir Eau De Toilette by Versace",
+        "name": "Crystal Noir Eau De Toilette",
+        "brand": "Versace",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Fortuna by Kenaz Perfumes",
+        "name": "Fortuna",
+        "brand": "Kenaz Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/crystal-noir-eau-de-toilette-by-versace/fortuna-by-kenaz-perfumes",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1e292b35a30142fa",
+      "a": {
+        "label": "Cuir Beluga by Guerlain",
+        "name": "Cuir Béluga",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-cuir-beluga"
+        ]
+      },
+      "b": {
+        "label": "Musky Buttercream by Dossier",
+        "name": "Musky Buttercream",
+        "brand": "Dossier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/cuir-beluga-by-guerlain/musky-buttercream-by-dossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-038c43c5301d744f",
+      "a": {
+        "label": "Dama Bianca By Casamorati 1888",
+        "name": "Dama Bianca",
+        "brand": "Casamorati 1888",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "You Rêve by Glossier",
+        "name": "You Reve",
+        "brand": "Glossier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dama-bianca-by-casamorati-1888/you-reve-by-glossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-30fbe69179318957",
+      "a": {
+        "label": "Delina La Rosée by Parfums de Marly",
+        "name": "Delina La Rosée",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:parfums-de-marly-delina-la-rosee"
+        ]
+      },
+      "b": {
+        "label": "Lust in Paradise by Ex Nihilo",
+        "name": "Lust in Paradise",
+        "brand": "Ex Nihilo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:ex-nihilo-lust-in-paradise"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/delina-la-rosee-by-parfums-de-marly/lust-in-paradise-by-ex-nihilo",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3469df9ef418ce70",
+      "a": {
+        "label": "Dior Homme 2020 by Dior",
+        "name": "Dior Homme 2020",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lalique Encre Noire by Lalique",
+        "name": "Lalique Encre Noire",
+        "brand": "Lalique",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dior-homme-2020-by-dior/lalique-encre-noire-by-lalique",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-57dc65d80244b1de",
+      "a": {
+        "label": "Dirty Rice By Borntostandout®",
+        "name": "Dirty Rice",
+        "brand": "Borntostandout",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Remember Me by Jovoy Paris",
+        "name": "Remember Me",
+        "brand": "Jovoy Paris",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dirty-rice-by-borntostandout/remember-me-by-jovoy-paris",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9954ff18134df7fa",
+      "a": {
+        "label": "Do Son by Diptyque",
+        "name": "Do Son",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:diptyque-do-son-parfum"
+        ]
+      },
+      "b": {
+        "label": "Fleur De Peau by Diptyque",
+        "name": "Fleur de Peau",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:diptyque-fleur-de-peau"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/do-son-by-diptyque/fleur-de-peau-by-diptyque",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-6d4e5cc486a68478",
+      "a": {
+        "label": "Dolce Garden by Dolce Gabbana",
+        "name": "Dolce Garden",
+        "brand": "Dolce Gabbana",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dolce-garden-by-dolce-gabbana/virgin-island-water-by-creed",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-902948b3347f9e37",
+      "a": {
+        "label": "Dulce De Leche By My Perfumes (arabiyat)",
+        "name": "Dulce De Leche",
+        "brand": "My Perfumes Arabiyat",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Feve Delicieuse by Dior",
+        "name": "Feve Delicieuse",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dulce-de-leche-by-my-perfumes-arabiyat/feve-delicieuse-by-dior",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-46a0a798cd6560a8",
+      "a": {
+        "label": "Dulce De Leche By My Perfumes (arabiyat)",
+        "name": "Dulce De Leche",
+        "brand": "My Perfumes Arabiyat",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Girl of Now by Elie Saab",
+        "name": "Girl of Now",
+        "brand": "Elie Saab",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:elie-saab-girl-of-now"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dulce-de-leche-by-my-perfumes-arabiyat/girl-of-now-by-elie-saab",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-94e04d115ac2b810",
+      "a": {
+        "label": "Dulce De Leche By My Perfumes (arabiyat)",
+        "name": "Dulce De Leche",
+        "brand": "My Perfumes Arabiyat",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lactea Divina by Paris Corner",
+        "name": "Lactea Divina",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dulce-de-leche-by-my-perfumes-arabiyat/lactea-divina-by-paris-corner",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c4bdb180486b4ca4",
+      "a": {
+        "label": "Dulce De Leche By My Perfumes (arabiyat)",
+        "name": "Dulce De Leche",
+        "brand": "My Perfumes Arabiyat",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Oud Bouquet by LancÔMe",
+        "name": "Oud Bouquet",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dulce-de-leche-by-my-perfumes-arabiyat/oud-bouquet-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9242bc3e96a08575",
+      "a": {
+        "label": "Dulzura By Paris Corner",
+        "name": "Dulzura",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Noble blush",
+        "name": "Noble Blush",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dulzura-by-paris-corner/noble-blush",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c46f0e62e64b1c93",
+      "a": {
+        "label": "Dylan Blue by Versace",
+        "name": "Dylan Blue",
+        "brand": "Versace",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "versace-dylan-blue-edt"
+        ]
+      },
+      "b": {
+        "label": "The One by Dolce Gabbana",
+        "name": "The One",
+        "brand": "Dolce Gabbana",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/dylan-blue-by-versace/the-one-by-dolce-gabbana",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b6297992b109b36e",
+      "a": {
+        "label": "Earl Grey By Shiro",
+        "name": "Earl Grey",
+        "brand": "Shiro",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Eau Duelle by Diptyque",
+        "name": "Eau Duelle",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/earl-grey-by-shiro/eau-duelle-by-diptyque",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b7400c8f236a60a8",
+      "a": {
+        "label": "Eau De Soleil Blanc by Tom Ford",
+        "name": "Eau de Soleil Blanc",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:tom-ford-eau-de-soleil-blanc"
+        ]
+      },
+      "b": {
+        "label": "Myslf Le Parfum by Yves Saint Laurent",
+        "name": "Myslf Le Parfum",
+        "brand": "Yves Saint Laurent",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-de-soleil-blanc-by-tom-ford/myslf-le-parfum-by-yves-saint-laurent",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f01d646b11df021d",
+      "a": {
+        "label": "Eau Duelle by Diptyque",
+        "name": "Eau Duelle",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Gypsy Water by Byredo",
+        "name": "Gypsy Water",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-gypsy-water-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-duelle-by-diptyque/gypsy-water-by-byredo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-34305e002c41731a",
+      "a": {
+        "label": "Eau Duelle by Diptyque",
+        "name": "Eau Duelle",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lattafa Khamrah Qahwa by Lattafa",
+        "name": "Lattafa Khamrah Qahwa",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-duelle-by-diptyque/lattafa-khamrah-qahwa-by-lattafa",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f46f9f880ad994eb",
+      "a": {
+        "label": "Eau Duelle by Diptyque",
+        "name": "Eau Duelle",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lilyphéa by Diptyque",
+        "name": "Lilyphea",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-duelle-by-diptyque/lilyphea-by-diptyque",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f3fdfd15274de041",
+      "a": {
+        "label": "Eau Duelle Eau De Parfum by Diptyque",
+        "name": "Eau Duelle Eau De Parfum",
+        "brand": "Diptyque",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Incense 01 by Swiss Arabian",
+        "name": "Incense 01",
+        "brand": "Swiss Arabian",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-duelle-eau-de-parfum-by-diptyque/incense-01-by-swiss-arabian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a3c1f5b6f12d822d",
+      "a": {
+        "label": "Eau Givree",
+        "name": "Eau Givree",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Glacier by Montblanc",
+        "name": "Vetiver Glacier",
+        "brand": "Montblanc",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-givree/vetiver-glacier-by-montblanc",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-214d51daa7e0155a",
+      "a": {
+        "label": "Eau Moheli by Diptyque",
+        "name": "Eau Moheli",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-moheli-by-diptyque/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-eee3c7e4b58a3463",
+      "a": {
+        "label": "Eau Rose by Diptyque",
+        "name": "Eau Rose",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:diptyque-eau-rose-toilette"
+        ]
+      },
+      "b": {
+        "label": "Fashionably London By Zara",
+        "name": "Fashionably London",
+        "brand": "Zara",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eau-rose-by-diptyque/fashionably-london-by-zara",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5c13219510fb019e",
+      "a": {
+        "label": "Eclaire By Lattafa",
+        "name": "Eclaire",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Mineral Milk by Dedcool",
+        "name": "Mineral Milk",
+        "brand": "Dedcool",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/eclaire-by-lattafa/mineral-milk-by-dedcool",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-4cc19677ff3e92a1",
+      "a": {
+        "label": "Enigma Pour Homme — Roja Parfums",
+        "name": "Enigma Pour Homme Roja Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Noir 29 by Le Labo",
+        "name": "Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/enigma-pour-homme-roja-parfums/noir-29-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7a57191c74da6e59",
+      "a": {
+        "label": "Escentric 01 by Escentric Molecules",
+        "name": "Escentric 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "L'Homme by Prada",
+        "name": "L Homme",
+        "brand": "Prada",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/escentric-01-by-escentric-molecules/l-homme-by-prada",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-6ed3dc3f84d9f0d7",
+      "a": {
+        "label": "Escentric 05 by Escentric Molecules",
+        "name": "Escentric 05",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Thé Noir 29 by Le Labo",
+        "name": "Thé Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-the-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/escentric-05-by-escentric-molecules/the-noir-29-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-79835654a490221c",
+      "a": {
+        "label": "Fashionably London By Zara",
+        "name": "Fashionably London",
+        "brand": "Zara",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Musk Therapy by Initio",
+        "name": "Musk Therapy",
+        "brand": "Initio Parfums Prives",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "initio-musk-therapy-extrait"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/fashionably-london-by-zara/musk-therapy-by-initio",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-60bc41a5ce6b6b92",
+      "a": {
+        "label": "Father Figure by Phlur",
+        "name": "Father Figure",
+        "brand": "Phlur",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Green Sandalwood by Dua Fragrances",
+        "name": "Green Sandalwood",
+        "brand": "DUA Fragrances",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/father-figure-by-phlur/green-sandalwood-by-dua-fragrances",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3dfb05579acde0d1",
+      "a": {
+        "label": "Feve Delicieuse by Dior",
+        "name": "Feve Delicieuse",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Santal Kardamon by Lancôme",
+        "name": "Santal Kardamon",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/feve-delicieuse-by-dior/santal-kardamon-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3b71bf6801030957",
+      "a": {
+        "label": "Feve Delicieuse by Dior",
+        "name": "Feve Delicieuse",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Velvet Gold by Orientica",
+        "name": "Velvet Gold",
+        "brand": "Orientica",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/feve-delicieuse-by-dior/velvet-gold-by-orientica",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-80fb788d5b3e6f85",
+      "a": {
+        "label": "Feve Delicieuse by Dior",
+        "name": "Feve Delicieuse",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Velours by Keiko Mecheri",
+        "name": "Vetiver Velours",
+        "brand": "Keiko Mecheri",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/feve-delicieuse-by-dior/vetiver-velours-by-keiko-mecheri",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f11a20137e6be768",
+      "a": {
+        "label": "Fico Di Amalfi by Acqua di Parma",
+        "name": "Fico di Amalfi",
+        "brand": "Acqua di Parma",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:acqua-di-parma-fico-di-amalfi"
+        ]
+      },
+      "b": {
+        "label": "Summer Vibes by Maison Alhambra",
+        "name": "Summer Vibes",
+        "brand": "Maison Alhambra",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/fico-di-amalfi-by-acqua-di-parma/summer-vibes-by-maison-alhambra",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7d27df185bba1708",
+      "a": {
+        "label": "Fig Hug by Paris Corner",
+        "name": "Fig Hug",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Un Jardin En Mediterranee by HermÈS",
+        "name": "Un Jardin En Mediterranee",
+        "brand": "HermÈS",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/fig-hug-by-paris-corner/un-jardin-en-mediterranee-by-hermes",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d068d3cdb5b85ba5",
+      "a": {
+        "label": "Flowerbomb Tiger Lily by Viktor Rolf",
+        "name": "Flowerbomb Tiger Lily",
+        "brand": "Viktor Rolf",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Happy Dust by Narcotica",
+        "name": "Happy Dust",
+        "brand": "Narcotica",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/flowerbomb-tiger-lily-by-viktor-rolf/happy-dust-by-narcotica",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8b94798b10df9624",
+      "a": {
+        "label": "Frederic Malle Musc Ravageur by Frederic Malle",
+        "name": "Musc Ravageur",
+        "brand": "Frédéric Malle",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "frederic-malle-musc-ravageur-edp"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/frederic-malle-musc-ravageur-by-frederic-malle/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f462cc8f35d366b2",
+      "a": {
+        "label": "Freeze By Riiffs Perfumes",
+        "name": "Freeze",
+        "brand": "Riiffs Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Imagination by Louis Vuitton",
+        "name": "Imagination",
+        "brand": "Louis Vuitton",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "louis-vuitton-imagination-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/freeze-by-riiffs-perfumes/imagination-by-louis-vuitton",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-dee0ae8c7ee12170",
+      "a": {
+        "label": "Fursan White By Khadlaj",
+        "name": "Fursan White",
+        "brand": "Khadlaj",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Noble blush",
+        "name": "Noble Blush",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/fursan-white-by-khadlaj/noble-blush",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-db8a238a738b29c6",
+      "a": {
+        "label": "Fursan White By Khadlaj",
+        "name": "Fursan White",
+        "brand": "Khadlaj",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Soleil Blanc by Tom Ford",
+        "name": "Soleil Blanc",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:tom-ford-soleil-blanc"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/fursan-white-by-khadlaj/soleil-blanc-by-tom-ford",
+        "score": 9.4,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2f3705340ce68537",
+      "a": {
+        "label": "Ganymede By Marc-Antoine Barrois",
+        "name": "Ganymede",
+        "brand": "Marc-Antoine Barrois",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "marc-antoine-barrois-ganymede-edp"
+        ]
+      },
+      "b": {
+        "label": "Lucius Maximus by Fragrance Du Bois",
+        "name": "Lucius Maximus",
+        "brand": "Fragrance Du Bois",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ganymede-by-marc-antoine-barrois/lucius-maximus-by-fragrance-du-bois",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5d8afbfc86383a68",
+      "a": {
+        "label": "Gentle Reminder by Snif",
+        "name": "Gentle Reminder",
+        "brand": "Snif",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lavender Cloud By Being Frenshe",
+        "name": "Lavender Cloud",
+        "brand": "Being Frenshe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gentle-reminder-by-snif/lavender-cloud-by-being-frenshe",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c1b2be36941611bd",
+      "a": {
+        "label": "Glossier You By Glossier",
+        "name": "You",
+        "brand": "Glossier",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "glossier-you-edp"
+        ]
+      },
+      "b": {
+        "label": "Kilian Rolling In Love by By Kilian",
+        "name": "Kilian Rolling In Love",
+        "brand": "By Kilian",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/glossier-you-by-glossier/kilian-rolling-in-love-by-by-kilian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5f121da6f90a42eb",
+      "a": {
+        "label": "Glossier You by Glossier",
+        "name": "You",
+        "brand": "Glossier",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "glossier-you-edp"
+        ]
+      },
+      "b": {
+        "label": "Xtra Milk by DedCool",
+        "name": "Xtra Milk",
+        "brand": "Dedcool",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/glossier-you-by-glossier/xtra-milk-by-dedcool",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-669fd7f19a0ed302",
+      "a": {
+        "label": "Grand Soir by Maison Francis Kurkdjian",
+        "name": "Grand Soir",
+        "brand": "Maison Francis Kurkdjian",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-francis-kurkdjian-grand-soir-edp"
+        ]
+      },
+      "b": {
+        "label": "Molecule 02 by Escentric Molecules",
+        "name": "Molecule 02",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/grand-soir-by-maison-francis-kurkdjian/molecule-02-by-escentric-molecules",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3e7bc219ac3db013",
+      "a": {
+        "label": "Green Tea Nectarine Blossom By Elizabeth Arden",
+        "name": "Green Tea Nectarine Blossom",
+        "brand": "Elizabeth Arden",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Indigo by Nest",
+        "name": "Indigo",
+        "brand": "Nest",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/green-tea-nectarine-blossom-by-elizabeth-arden/indigo-by-nest",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2ce07f446f002eaf",
+      "a": {
+        "label": "Gris Charnel by BDK Parfums",
+        "name": "Gris Charnel",
+        "brand": "BDK Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "bdk-parfums-gris-charnel-edp"
+        ]
+      },
+      "b": {
+        "label": "Indigo by Nest",
+        "name": "Indigo",
+        "brand": "Nest",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gris-charnel-by-bdk-parfums/indigo-by-nest",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f6d2342b6aafcc46",
+      "a": {
+        "label": "Gris Charnel Extrait",
+        "name": "Gris Charnel Extrait",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Liquid Brun by French Avenue",
+        "name": "Liquid Brun",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:french-avenue-liquid-brun"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gris-charnel-extrait/liquid-brun-by-french-avenue",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d9db34a52fb1fa84",
+      "a": {
+        "label": "Gris charnel extrait",
+        "name": "Gris Charnel Extrait",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Neroli Outrenoir by Guerlain",
+        "name": "Néroli Outrenoir",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-neroli-outrenoir"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gris-charnel-extrait/neroli-outrenoir-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-45ce70e74e0310e1",
+      "a": {
+        "label": "Gucci Intense Oud by Gucci",
+        "name": "Gucci Intense Oud",
+        "brand": "Gucci",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:gucci-gucci-intense-oud"
+        ]
+      },
+      "b": {
+        "label": "Portrait of a Lady by Frédéric Malle",
+        "name": "Portrait of a Lady",
+        "brand": "Frédéric Malle",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "frederic-malle-portrait-of-a-lady-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gucci-intense-oud-by-gucci/portrait-of-a-lady-by-frederic-malle",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e6e3fd91d1c79df3",
+      "a": {
+        "label": "Guidance by Amouage",
+        "name": "Guidance",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "amouage-guidance-edp"
+        ]
+      },
+      "b": {
+        "label": "Rôses Berberanza by Lancôme",
+        "name": "Roses Berberanza",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/guidance-by-amouage/roses-berberanza-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1728e672c1b52030",
+      "a": {
+        "label": "Gusto Limone by Zaharoff",
+        "name": "Gusto Limone",
+        "brand": "Zaharoff",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Torino 21 by Xerjoff",
+        "name": "Torino 21",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gusto-limone-by-zaharoff/torino-21-by-xerjoff",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-48ced8a3082b4b03",
+      "a": {
+        "label": "Gypsy Water by Byredo",
+        "name": "Gypsy Water",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-gypsy-water-edp"
+        ]
+      },
+      "b": {
+        "label": "I Don T Know What by D S Durga",
+        "name": "I Don T Know What",
+        "brand": "D S Durga",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gypsy-water-by-byredo/i-don-t-know-what-by-d-s-durga",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f2a11f3d3f5a3081",
+      "a": {
+        "label": "Gypsy Water by Byredo",
+        "name": "Gypsy Water",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-gypsy-water-edp"
+        ]
+      },
+      "b": {
+        "label": "Molecule 01 Iris by Escentric Molecules",
+        "name": "Molecule 01 Iris",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gypsy-water-by-byredo/molecule-01-iris-by-escentric-molecules",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f6e18707aedf21b5",
+      "a": {
+        "label": "Gypsy Water by Byredo",
+        "name": "Gypsy Water",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-gypsy-water-edp"
+        ]
+      },
+      "b": {
+        "label": "Sunny Side Up by Juliette Has a Gun",
+        "name": "Sunny Side Up",
+        "brand": "Juliette Has A Gun",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/gypsy-water-by-byredo/sunny-side-up-by-juliette-has-a-gun",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b40ade0eeb5954bb",
+      "a": {
+        "label": "Habit Rouge Le Parfum by Guerlain",
+        "name": "Habit Rouge Le Parfum",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Shalimar by Guerlain",
+        "name": "Shalimar",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": [
+          "guerlain-shalimar-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/habit-rouge-le-parfum-by-guerlain/shalimar-eau-de-parfum-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-48ef95699f02c37e",
+      "a": {
+        "label": "Happy Chopard Bigaradia By Chopard",
+        "name": "Happy Chopard Bigaradia",
+        "brand": "Chopard",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Nectare Extradose by French Avenue",
+        "name": "Nectare Extradose",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/happy-chopard-bigaradia-by-chopard/nectare-extradose-by-french-avenue",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ff79a3c90b9385af",
+      "a": {
+        "label": "Hareem Al Sultan Gold by Khadlaj",
+        "name": "Hareem Al Sultan Gold",
+        "brand": "Khadlaj",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Hawas Tropical",
+        "name": "Hawas Tropical",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hareem-al-sultan-gold-by-khadlaj/hawas-tropical",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0c9df2184b6e61b4",
+      "a": {
+        "label": "Hawas Kobra By Rasasi",
+        "name": "Hawas Kobra",
+        "brand": "Rasasi",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Imagination by Louis Vuitton",
+        "name": "Imagination",
+        "brand": "Louis Vuitton",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "louis-vuitton-imagination-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hawas-kobra-by-rasasi/imagination-by-louis-vuitton",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-47885c7e5424caa1",
+      "a": {
+        "label": "Hawas Tropical",
+        "name": "Hawas Tropical",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Jungle vibe",
+        "name": "Jungle Vibe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hawas-tropical/jungle-vibe",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-46240b174d590285",
+      "a": {
+        "label": "Hempz Apple Cider And Nutmeg by Lemon8app",
+        "name": "Hempz Apple Cider And Nutmeg",
+        "brand": "Lemon8app",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "La Danza Delle Libellule by Nobile 1942",
+        "name": "La Danza Delle Libellule",
+        "brand": "Nobile 1942",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hempz-apple-cider-and-nutmeg-by-lemon8app/la-danza-delle-libellule-by-nobile-1942",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e638815718c0c6e7",
+      "a": {
+        "label": "Her Confession by Lattafa",
+        "name": "Her Confession",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Paula'S Ibiza Eclectic By Loewe",
+        "name": "Paula S Ibiza Eclectic",
+        "brand": "Loewe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/her-confession-by-lattafa/paula-s-ibiza-eclectic-by-loewe",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8a56c6ea95fc8468",
+      "a": {
+        "label": "Hermes eau givree by Terre D'Hermes",
+        "name": "Hermes Eau Givree",
+        "brand": "Terre D Hermes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hermes-eau-givree-by-terre-d-hermes/molecule-01-by-escentric-molecules",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-11d7ed13fa1e0eaa",
+      "a": {
+        "label": "Hermès Terre d'Hermes Eau Intense Vétiver by Hermès",
+        "name": "Terre d'Hermès Eau Intense Vétiver",
+        "brand": "Hermès",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:hermes-terre-dhermes-eau-intense-vetiver"
+        ]
+      },
+      "b": {
+        "label": "Imagination by Louis Vuitton",
+        "name": "Imagination",
+        "brand": "Louis Vuitton",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "louis-vuitton-imagination-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hermes-terre-d-hermes-eau-intense-vetiver-by-hermes/imagination-by-louis-vuitton",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2725af2ef9bb1d04",
+      "a": {
+        "label": "Herod by Parfums de Marly",
+        "name": "Herod",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "parfums-de-marly-herod-edp"
+        ]
+      },
+      "b": {
+        "label": "Roja Burlington 1819 by Roja Parfums",
+        "name": "Roja Burlington 1819",
+        "brand": "Roja Parfums",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/herod-by-parfums-de-marly/roja-burlington-1819-by-roja-parfums",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9fb2ad2d3d72b889",
+      "a": {
+        "label": "Herod by Parfums de Marly",
+        "name": "Herod",
+        "brand": "Parfums de Marly",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "parfums-de-marly-herod-edp"
+        ]
+      },
+      "b": {
+        "label": "Stronger With You by Emporio Armani",
+        "name": "Stronger With You",
+        "brand": "Emporio Armani",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/herod-by-parfums-de-marly/stronger-with-you-by-emporio-armani",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8fde9c2ea478b7e9",
+      "a": {
+        "label": "Hibiscus Mahajad by Maison Crivelli",
+        "name": "Hibiscus Mahajad",
+        "brand": "Maison Crivelli",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Musc Nurasana by Maison Crivelli",
+        "name": "Musc Nurasana",
+        "brand": "Maison Crivelli",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:maison-crivelli-musc-nurasana"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hibiscus-mahajad-by-maison-crivelli/musc-nurasana-by-maison-crivelli",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2c33dc617ae50fe8",
+      "a": {
+        "label": "Hinoki In Hinoki By Scent Of Wood",
+        "name": "Hinoki In Hinoki",
+        "brand": "Scent Of Wood",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Kyoto by Comme Des GarÇOns",
+        "name": "Kyoto",
+        "brand": "Comme Des GarÇOns",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hinoki-in-hinoki-by-scent-of-wood/kyoto-by-comme-des-garcons",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c165969e0d9066f5",
+      "a": {
+        "label": "Hummingbird By Zoologist",
+        "name": "Hummingbird",
+        "brand": "Zoologist",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Nectare Extradose by French Avenue",
+        "name": "Nectare Extradose",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hummingbird-by-zoologist/nectare-extradose-by-french-avenue",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5c7bf5d45b376e37",
+      "a": {
+        "label": "Hypnotic Poison by Dior",
+        "name": "Hypnotic Poison",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:dior-hypnotic-poison-eau-de-parfum",
+          "dior-hypnotic-poison-edt"
+        ]
+      },
+      "b": {
+        "label": "Musamam White Intense by Lattafa Perfumes",
+        "name": "Musamam White Intense",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hypnotic-poison-by-dior/musamam-white-intense-by-lattafa-perfumes",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0dfddcd576336c5a",
+      "a": {
+        "label": "Hypnotic Poison by Dior",
+        "name": "Hypnotic Poison",
+        "brand": "Dior",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:dior-hypnotic-poison-eau-de-parfum",
+          "dior-hypnotic-poison-edt"
+        ]
+      },
+      "b": {
+        "label": "Vanilla Aura by Maison Asrar",
+        "name": "Vanilla Aura",
+        "brand": "Maison Asrar",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/hypnotic-poison-by-dior/vanilla-aura-by-maison-asrar",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-30e00307f102ac96",
+      "a": {
+        "label": "I Don T Know What By Ds Durga",
+        "name": "I Don T Know What",
+        "brand": "Ds Durga",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Xtra Milk by DedCool",
+        "name": "Xtra Milk",
+        "brand": "Dedcool",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/i-don-t-know-what-by-ds-durga/xtra-milk-by-dedcool",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-25bfff2408ce04e0",
+      "a": {
+        "label": "Ibisco Nirvana by PARIS CORNER",
+        "name": "Ibisco Nirvana",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Narciso by Narciso Rodriguez",
+        "name": "Narciso",
+        "brand": "Narciso Rodriguez",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:narciso-rodriguez-narciso"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ibisco-nirvana-by-paris-corner/narciso-by-narciso-rodriguez",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-738231d320fdb40a",
+      "a": {
+        "label": "Ingenious Ginger by Goldfield Banks",
+        "name": "Ingenious Ginger",
+        "brand": "Goldfield Banks",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Santal Kardamon by LancÔMe",
+        "name": "Santal Kardamon",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ingenious-ginger-by-goldfield-banks/santal-kardamon-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1bd8024f65914926",
+      "a": {
+        "label": "Ingenious Ginger by Goldfield Banks",
+        "name": "Ingenious Ginger",
+        "brand": "Goldfield Banks",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Virgin Island Water",
+        "name": "Virgin Island Water",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/ingenious-ginger-by-goldfield-banks/virgin-island-water",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f9abd39864657be1",
+      "a": {
+        "label": "Insurrection II Wild by Reyane Tradition",
+        "name": "Insurrection Ii Wild",
+        "brand": "Reyane Tradition",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Naxos by Xerjoff",
+        "name": "Naxos",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "xerjoff-naxos-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/insurrection-ii-wild-by-reyane-tradition/naxos-by-xerjoff",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-753f0650de246d83",
+      "a": {
+        "label": "Insurrection II Wild by Reyane Tradition",
+        "name": "Insurrection Ii Wild",
+        "brand": "Reyane Tradition",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sweet Taboo by Chris Collins",
+        "name": "Sweet Taboo",
+        "brand": "Chris Collins",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/insurrection-ii-wild-by-reyane-tradition/sweet-taboo-by-chris-collins",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-cc02b3197e177278",
+      "a": {
+        "label": "Iris Pallida Extrait 6 by Guerlain",
+        "name": "Iris Pallida Extrait 6",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/iris-pallida-extrait-6-by-guerlain/spiritueuse-double-vanille",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b4558c9ee83b12f3",
+      "a": {
+        "label": "Iris Pallida Extrait 6 by Guerlain",
+        "name": "Iris Pallida Extrait 6",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vanille Planifolia Extrait 21 by Guerlain",
+        "name": "Vanille Planifolia Extrait 21",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/iris-pallida-extrait-6-by-guerlain/vanille-planifolia-extrait-21-by-guerlain",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a17ffec60182cc98",
+      "a": {
+        "label": "Jasmin Grandiflorum by Guerlain",
+        "name": "Jasmin Grandiflorum",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/jasmin-grandiflorum-by-guerlain/spiritueuse-double-vanille",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-796ee4209268329f",
+      "a": {
+        "label": "Jasmins Marzipane By Lancome",
+        "name": "Jasmins Marzipane",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Rôses Berberanza by Lancôme",
+        "name": "Roses Berberanza",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/jasmins-marzipane-by-lancome/roses-berberanza-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b166aaa613f21a43",
+      "a": {
+        "label": "Jazz Club by Maison Margiela",
+        "name": "Replica Jazz Club",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-margiela-replica-jazz-club-edt"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/jazz-club-by-maison-margiela/spiritueuse-double-vanille",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-58cca3ab6cf60f56",
+      "a": {
+        "label": "Jazz Club by Maison Margiela",
+        "name": "Replica Jazz Club",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "maison-margiela-replica-jazz-club-edt"
+        ]
+      },
+      "b": {
+        "label": "Vetiver Velours by Keiko Mecheri",
+        "name": "Vetiver Velours",
+        "brand": "Keiko Mecheri",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/jazz-club-by-maison-margiela/vetiver-velours-by-keiko-mecheri",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ec16b47bcf219042",
+      "a": {
+        "label": "Junoon Noir By Al Haramain",
+        "name": "Junoon Noir",
+        "brand": "Al Haramain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Powder Flowers by Montale",
+        "name": "Powder Flowers",
+        "brand": "Montale",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/junoon-noir-by-al-haramain/powder-flowers-by-montale",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a8947844b5e164b2",
+      "a": {
+        "label": "Khair Peach Delulu by PARIS CORNER",
+        "name": "Khair Peach Delulu",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Yum Pistachio Gelato 33 by Kayali Fragrances",
+        "name": "Yum Pistachio Gelato 33",
+        "brand": "Kayali Fragrances",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/khair-peach-delulu-by-paris-corner/yum-pistachio-gelato-33-by-kayali-fragrances",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0b60f5bf06b0f3e6",
+      "a": {
+        "label": "Kilian Love Don'T Be Shy By By Kilian",
+        "name": "Love, Don't Be Shy",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-love-dont-be-shy-edp"
+        ]
+      },
+      "b": {
+        "label": "Vanilla Cashmere by Eos",
+        "name": "Vanilla Cashmere",
+        "brand": "Eos",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/kilian-love-don-t-be-shy-by-by-kilian/vanilla-cashmere-by-eos",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a7d4faabbd5b1aa3",
+      "a": {
+        "label": "Kilian Moonlight in Heaven by By Kilian",
+        "name": "Moonlight in Heaven",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:kilian-moonlight-in-heaven"
+        ]
+      },
+      "b": {
+        "label": "Sunset Hour by Goldfield Banks Australia",
+        "name": "Sunset Hour",
+        "brand": "Goldfield Banks Australia",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/kilian-moonlight-in-heaven-by-by-kilian/sunset-hour-by-goldfield-banks-australia",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-4d2beb1a614ae215",
+      "a": {
+        "label": "Kilian Princess",
+        "name": "Kilian Princess",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Kurky By Mfk",
+        "name": "Kurky",
+        "brand": "Mfk",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/kilian-princess/kurky-by-mfk",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-faf6f4b1c39b6aba",
+      "a": {
+        "label": "La Danza Delle Libellule by Nobile 1942",
+        "name": "La Danza Delle Libellule",
+        "brand": "Nobile 1942",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Lost Cherry by Tom Ford",
+        "name": "Lost Cherry",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "tom-ford-lost-cherry-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/la-danza-delle-libellule-by-nobile-1942/lost-cherry-by-tom-ford",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-fbffa9a751060d46",
+      "a": {
+        "label": "La Danza Delle Libellule By Nobile 1942",
+        "name": "La Danza Delle Libellule",
+        "brand": "Nobile 1942",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Manakara by Indult",
+        "name": "Manakara",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/la-danza-delle-libellule-by-nobile-1942/manakara-by-indult",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-54d74a38c60a9a62",
+      "a": {
+        "label": "Lait de Coco by Le Monde Gourmand",
+        "name": "Lait De Coco",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vanilla Musk by Sand Fog",
+        "name": "Vanilla Musk",
+        "brand": "Sand Fog",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lait-de-coco-by-le-monde-gourmand/vanilla-musk-by-sand-fog",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d4f879e72df4c542",
+      "a": {
+        "label": "Lattafa Khamrah Qahwa by Lattafa",
+        "name": "Lattafa Khamrah Qahwa",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Remember Me by Jovoy Paris",
+        "name": "Remember Me",
+        "brand": "Jovoy Paris",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lattafa-khamrah-qahwa-by-lattafa/remember-me-by-jovoy-paris",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-36b7f280f3fed725",
+      "a": {
+        "label": "Lattafa Nebras by Lattafa",
+        "name": "Lattafa Nebras",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Marshmallows by Ellis Brooklyn",
+        "name": "Marshmallows",
+        "brand": "Ellis Brooklyn",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lattafa-nebras-by-lattafa/marshmallows-by-ellis-brooklyn",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1b3c5bca9f18c0c8",
+      "a": {
+        "label": "Lattafa Qaed Al Fursan by Lattafa",
+        "name": "Qaed Al Fursan",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:lattafa-qaed-al-fursan"
+        ]
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lattafa-qaed-al-fursan-by-lattafa/virgin-island-water-by-creed",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-82c519391f971363",
+      "a": {
+        "label": "Le Male Le Parfum by Jean Paul Gaultier",
+        "name": "Le Male Le Parfum",
+        "brand": "Jean Paul Gaultier",
+        "concentrationSpecified": true,
+        "catalogIds": [
+          "jean-paul-gaultier-le-male-le-parfum-edp"
+        ]
+      },
+      "b": {
+        "label": "Ultra Male by Jean Paul Gaultier",
+        "name": "Ultra Male",
+        "brand": "Jean Paul Gaultier",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "jean-paul-gaultier-ultra-male-edt"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/le-male-le-parfum-by-jean-paul-gaultier/ultra-male-by-jean-paul-gaultier",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-00b5782b8b39f135",
+      "a": {
+        "label": "Leen by Lattafa Perfumes",
+        "name": "Leen",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Signature Pearl by Fragrance World",
+        "name": "Signature Pearl",
+        "brand": "Fragrance World",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/leen-by-lattafa-perfumes/signature-pearl-by-fragrance-world",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e460f15868b980c0",
+      "a": {
+        "label": "Lilyphéa by Diptyque",
+        "name": "Lilyphea",
+        "brand": "Diptyque",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Mojave Ghost by Byredo",
+        "name": "Mojave Ghost",
+        "brand": "Byredo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "byredo-mojave-ghost-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lilyphea-by-diptyque/mojave-ghost-by-byredo",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a2cb6dbd589396a9",
+      "a": {
+        "label": "Linen Vetiver By Banana Republic",
+        "name": "Linen Vetiver",
+        "brand": "Banana Republic",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Orage by Louis Vuitton",
+        "name": "Orage",
+        "brand": "Louis Vuitton",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/linen-vetiver-by-banana-republic/orage-by-louis-vuitton",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1c7e8a6bde92e99a",
+      "a": {
+        "label": "Liquid brun",
+        "name": "Liquid Brun",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:french-avenue-liquid-brun"
+        ]
+      },
+      "b": {
+        "label": "Musc Ravageur by Frederic Malle",
+        "name": "Musc Ravageur",
+        "brand": "Frédéric Malle",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "frederic-malle-musc-ravageur-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/liquid-brun/musc-ravageur-by-frederic-malle",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f7dd803f29245fd2",
+      "a": {
+        "label": "Lost Cherry by Tom Ford",
+        "name": "Lost Cherry",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "tom-ford-lost-cherry-edp"
+        ]
+      },
+      "b": {
+        "label": "Mon Parfum Cristal by M Micallef",
+        "name": "Mon Parfum Cristal",
+        "brand": "M Micallef",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lost-cherry-by-tom-ford/mon-parfum-cristal-by-m-micallef",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-73204bde3a5e2f60",
+      "a": {
+        "label": "Love Don'T Be Shy By Kilian Paris",
+        "name": "Love, Don't Be Shy",
+        "brand": "Kilian Paris",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "kilian-paris-love-dont-be-shy-edp"
+        ]
+      },
+      "b": {
+        "label": "Sweet Tooth by Sabrina Carpenter",
+        "name": "Sweet Tooth",
+        "brand": "Sabrina Carpenter",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/love-don-t-be-shy-by-kilian-paris/sweet-tooth-by-sabrina-carpenter",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-cb35cb2a94532b10",
+      "a": {
+        "label": "Lune Feline By Atelier Des Ors",
+        "name": "Lune Feline",
+        "brand": "Atelier des Ors",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:atelier-des-ors-lune-feline"
+        ]
+      },
+      "b": {
+        "label": "Remember Me by Jovoy Paris",
+        "name": "Remember Me",
+        "brand": "Jovoy Paris",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lune-feline-by-atelier-des-ors/remember-me-by-jovoy-paris",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-bfcf8999c3340054",
+      "a": {
+        "label": "Lyric Woman by Amouage",
+        "name": "Lyric Woman",
+        "brand": "Amouage",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Pour Une Femme de Caron by Caron",
+        "name": "Pour Une Femme De Caron",
+        "brand": "Caron",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/lyric-woman-by-amouage/pour-une-femme-de-caron-by-caron",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-39ea66da4674d8bf",
+      "a": {
+        "label": "Madagascar Vanilla by Nest",
+        "name": "Madagascar Vanilla",
+        "brand": "Nest",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Soleil Blanc by Tom Ford",
+        "name": "Soleil Blanc",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:tom-ford-soleil-blanc"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/madagascar-vanilla-by-nest/soleil-blanc-by-tom-ford",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-be8348929a2c2698",
+      "a": {
+        "label": "Marshmallow Fluff by Hamidi",
+        "name": "Marshmallow Fluff",
+        "brand": "Hamidi",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Yara Candy by Lattafa Perfumes",
+        "name": "Yara Candy",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/marshmallow-fluff-by-hamidi/yara-candy-by-lattafa-perfumes",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-976aa5a93480b1b8",
+      "a": {
+        "label": "Matcha Latte",
+        "name": "Matcha Latte",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tea Escape by Maison Margiela",
+        "name": "Tea Escape",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/matcha-latte/tea-escape-by-maison-margiela",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-484e26814152671d",
+      "a": {
+        "label": "Matilda by By Rosie Jane",
+        "name": "Matilda",
+        "brand": "By Rosie Jane",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Moon Milk By Being Frenshe",
+        "name": "Moon Milk",
+        "brand": "Being Frenshe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/matilda-by-by-rosie-jane/moon-milk-by-being-frenshe",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8d5504fdc8a53575",
+      "a": {
+        "label": "Meharees By L'Erbolario",
+        "name": "Meharees",
+        "brand": "L Erbolario",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tocade By Rochas",
+        "name": "Tocade",
+        "brand": "Rochas",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/meharees-by-l-erbolario/tocade-by-rochas",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f45b7595edc5e0d2",
+      "a": {
+        "label": "Mercedes-benz Club Black By Mercedes-benz",
+        "name": "Mercedes Benz Club Black",
+        "brand": "Mercedes-Benz",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Miel Bourbon by Le Monde Gourmand",
+        "name": "Miel Bourbon",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/mercedes-benz-club-black-by-mercedes-benz/miel-bourbon-by-le-monde-gourmand",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f7691475f35d1036",
+      "a": {
+        "label": "Messy Sexy Just Rolled Out Of Bed By What We Do Is Secret",
+        "name": "Messy Sexy Just Rolled Out Of Bed",
+        "brand": "What We Do Is Secret",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Philosophy Fresh Cream Warm Cashmere by Philosophy",
+        "name": "Philosophy Fresh Cream Warm Cashmere",
+        "brand": "Philosophy",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/messy-sexy-just-rolled-out-of-bed-by-what-we-do-is-secret/philosophy-fresh-cream-warm-cashmere-by-philosophy",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-41d3659b926019a8",
+      "a": {
+        "label": "Messy Sexy Just Rolled Out Of Bed By What We Do Is Secret",
+        "name": "Messy Sexy Just Rolled Out Of Bed",
+        "brand": "What We Do Is Secret",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Santal Complet by Fragrance Du Bois",
+        "name": "Santal Complet",
+        "brand": "Fragrance Du Bois",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/messy-sexy-just-rolled-out-of-bed-by-what-we-do-is-secret/santal-complet-by-fragrance-du-bois",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-fb6cf8e0843f4390",
+      "a": {
+        "label": "Messy Sexy Just Rolled Out Of Bed By What We Do Is Secret",
+        "name": "Messy Sexy Just Rolled Out Of Bed",
+        "brand": "What We Do Is Secret",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "This Is Her by Zadig Voltaire",
+        "name": "This Is Her",
+        "brand": "Zadig Voltaire",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/messy-sexy-just-rolled-out-of-bed-by-what-we-do-is-secret/this-is-her-by-zadig-voltaire",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-ef5e1e7c35130416",
+      "a": {
+        "label": "Miel Bourbon by Le Monde Gourmand",
+        "name": "Miel Bourbon",
+        "brand": "Le Monde Gourmand",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Naxos by Xerjoff",
+        "name": "Naxos",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "xerjoff-naxos-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/miel-bourbon-by-le-monde-gourmand/naxos-by-xerjoff",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a01b819fafa39c17",
+      "a": {
+        "label": "Milk by Commodity",
+        "name": "Milk",
+        "brand": "Commodity",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Papier",
+        "name": "Papier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/milk-by-commodity/papier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-2d3e1d5c86e6ea81",
+      "a": {
+        "label": "Mineral Milk by Dedcool",
+        "name": "Mineral Milk",
+        "brand": "Dedcool",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Missing Person by Phlur",
+        "name": "Missing Person",
+        "brand": "Phlur",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "phlur-missing-person-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/mineral-milk-by-dedcool/missing-person-by-phlur",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-06aadae06148c451",
+      "a": {
+        "label": "Miroir des Majestés by Mugler",
+        "name": "Miroir Des Majestes",
+        "brand": "Mugler",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Oud Bouquet By Lancome",
+        "name": "Oud Bouquet",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/miroir-des-majestes-by-mugler/oud-bouquet-by-lancome",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-8b124af75d52512e",
+      "a": {
+        "label": "Miu Miu Fleur de Lait by Miu Miu",
+        "name": "Fleur de Lait",
+        "brand": "Miu Miu",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:miu-miu-fleur-de-lait"
+        ]
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/miu-miu-fleur-de-lait-by-miu-miu/virgin-island-water-by-creed",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-74f24474c290d275",
+      "a": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Royal Oud by Creed",
+        "name": "Royal Oud",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/molecule-01-by-escentric-molecules/royal-oud-by-creed",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-04c7956a4d32684a",
+      "a": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Terre D Hermes Pure Parfum by HermÈS",
+        "name": "Terre D Hermes Pure Parfum",
+        "brand": "HermÈS",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/molecule-01-by-escentric-molecules/terre-d-hermes-pure-parfum-by-hermes",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a94c2e3411dbf7a9",
+      "a": {
+        "label": "Molecule 01 by Escentric Molecules",
+        "name": "Molecule 01",
+        "brand": "Escentric Molecules",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Turathi Blue by Afnan",
+        "name": "Turathi Blue",
+        "brand": "Afnan",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "afnan-turathi-blue-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/molecule-01-by-escentric-molecules/turathi-blue-by-afnan",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9670d3218d6c3f43",
+      "a": {
+        "label": "Musc Pallida by Hermès",
+        "name": "Musc Pallida",
+        "brand": "HermÈS",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/musc-pallida-by-hermes/spiritueuse-double-vanille",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d106e957fbacf9f0",
+      "a": {
+        "label": "Myrrh Tonka by Jo Malone",
+        "name": "Myrrh Tonka",
+        "brand": "Jo Malone",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Scarlet Poppy by Jo Malone",
+        "name": "Scarlet Poppy",
+        "brand": "Jo Malone",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/myrrh-tonka-by-jo-malone/scarlet-poppy-by-jo-malone",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-78d01e06ce7e6e25",
+      "a": {
+        "label": "MYSLF Le Parfum by Yves Saint Laurent",
+        "name": "Myslf Le Parfum",
+        "brand": "Yves Saint Laurent",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "The One For Men Eau De Parfum by Dolce Gabbana",
+        "name": "The One For Men Eau De Parfum",
+        "brand": "Dolce Gabbana",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/myslf-le-parfum-by-yves-saint-laurent/the-one-for-men-eau-de-parfum-by-dolce-gabbana",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-762328c552e666a0",
+      "a": {
+        "label": "Narciso by Narciso Rodriguez",
+        "name": "Narciso",
+        "brand": "Narciso Rodriguez",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:narciso-rodriguez-narciso"
+        ]
+      },
+      "b": {
+        "label": "Zahri Amara by Paris Corner",
+        "name": "Zahri Amara",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/narciso-by-narciso-rodriguez/zahri-amara-by-paris-corner",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e9834b56fa07954b",
+      "a": {
+        "label": "Naxos by Xerjoff",
+        "name": "Naxos",
+        "brand": "Xerjoff",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "xerjoff-naxos-edp"
+        ]
+      },
+      "b": {
+        "label": "Vanilla Cashmere by EOS",
+        "name": "Vanilla Cashmere",
+        "brand": "Eos",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/naxos-by-xerjoff/vanilla-cashmere-by-eos",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e38ac0146464b6bd",
+      "a": {
+        "label": "Nebras Elixir by Lattafa Perfumes",
+        "name": "Nebras Elixir",
+        "brand": "Lattafa Perfumes",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tobacco Vanille by Tom Ford",
+        "name": "Tobacco Vanille",
+        "brand": "Tom Ford",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "tom-ford-tobacco-vanille-edp"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/nebras-elixir-by-lattafa-perfumes/tobacco-vanille-by-tom-ford",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-0e8f39bbae0583d2",
+      "a": {
+        "label": "Nectare Extradose By French Avenue",
+        "name": "Nectare Extradose",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Remember Me by Jovoy Paris",
+        "name": "Remember Me",
+        "brand": "Jovoy Paris",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/nectare-extradose-by-french-avenue/remember-me-by-jovoy-paris",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-af3666abc0f22da8",
+      "a": {
+        "label": "Nectare Extradose By French Avenue",
+        "name": "Nectare Extradose",
+        "brand": "French Avenue",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Terracotta Le Parfum by Guerlain",
+        "name": "Terracotta Le Parfum",
+        "brand": "Guerlain",
+        "concentrationSpecified": true,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/nectare-extradose-by-french-avenue/terracotta-le-parfum-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-96a1bd995ea74a38",
+      "a": {
+        "label": "Neroli Outrenoir by Guerlain",
+        "name": "Néroli Outrenoir",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-neroli-outrenoir"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse double vanille",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/neroli-outrenoir-by-guerlain/spiritueuse-double-vanille",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-56c31cc396eb9f0e",
+      "a": {
+        "label": "Neroli Outrenoir by Guerlain",
+        "name": "Néroli Outrenoir",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-neroli-outrenoir"
+        ]
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/neroli-outrenoir-by-guerlain/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b7801cf7419c7a3b",
+      "a": {
+        "label": "Neroli Outrenoir By Guerlain",
+        "name": "Néroli Outrenoir",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-neroli-outrenoir"
+        ]
+      },
+      "b": {
+        "label": "The Noir 29 by Le Labo",
+        "name": "Thé Noir 29",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-the-noir-29"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/neroli-outrenoir-by-guerlain/the-noir-29-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-5dd014f1a62f773c",
+      "a": {
+        "label": "Nishane Wulong Cha",
+        "name": "Nishane Wulong Cha",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Thé Matcha 26 by Le Labo",
+        "name": "Thé Matcha 26",
+        "brand": "Le Labo",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:le-labo-the-matcha-26"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/nishane-wulong-cha/the-matcha-26-by-le-labo",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a12d91a325284451",
+      "a": {
+        "label": "Oud Bouquet by Lancôme",
+        "name": "Oud Bouquet",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sensual Instinct By Montale",
+        "name": "Sensual Instinct",
+        "brand": "Montale",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/oud-bouquet-by-lancome/sensual-instinct-by-montale",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-9c7920da23cd13fc",
+      "a": {
+        "label": "Oud Cadenza by Maison Crivelli",
+        "name": "Oud Cadenza",
+        "brand": "Maison Crivelli",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "YSL Babycat",
+        "name": "Ysl Babycat",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/oud-cadenza-by-maison-crivelli/ysl-babycat",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-49bc7e7d60b99895",
+      "a": {
+        "label": "Patchouli Paris by Guerlain",
+        "name": "Patchouli Paris",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/patchouli-paris-by-guerlain/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-e40ee552cabe0f86",
+      "a": {
+        "label": "Plum Japonais",
+        "name": "Plum Japonais",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tihota",
+        "name": "Tihota",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/plum-japonais/tihota",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-bf7ba4a4490533a1",
+      "a": {
+        "label": "Portrait Of A Lady by Frederic Malle",
+        "name": "Portrait of a Lady",
+        "brand": "Frédéric Malle",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "frederic-malle-portrait-of-a-lady-edp"
+        ]
+      },
+      "b": {
+        "label": "Symphony",
+        "name": "Symphony",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/portrait-of-a-lady-by-frederic-malle/symphony",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-94d992879649c7c5",
+      "a": {
+        "label": "Pour Une Femme de Caron by Caron",
+        "name": "Pour Une Femme De Caron",
+        "brand": "Caron",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Velours by Keiko Mecheri",
+        "name": "Vetiver Velours",
+        "brand": "Keiko Mecheri",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/pour-une-femme-de-caron-by-caron/vetiver-velours-by-keiko-mecheri",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-c1dac45488f06b80",
+      "a": {
+        "label": "Qaed Al Fursan Unlimited by Lattafa",
+        "name": "Qaed Al Fursan Unlimited",
+        "brand": "Lattafa",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Virgin Island Water by Creed",
+        "name": "Virgin Island Water",
+        "brand": "Creed",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/qaed-al-fursan-unlimited-by-lattafa/virgin-island-water-by-creed",
+        "score": 9.5,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f5645eddd4e88c3c",
+      "a": {
+        "label": "Replica By the Fireplace by Maison Margiela",
+        "name": "Replica",
+        "brand": "The Fireplace By Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tihota by Indult",
+        "name": "Tihota",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/replica-by-the-fireplace-by-maison-margiela/tihota-by-indult",
+        "score": 9.1,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-25e44ab8c8374659",
+      "a": {
+        "label": "Rifaaqat by Paris Corner",
+        "name": "Rifaaqat",
+        "brand": "Paris Corner",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/rifaaqat-by-paris-corner/spiritueuse-double-vanille-by-guerlain",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a33559143792a1e1",
+      "a": {
+        "label": "Rose Centifolia by Guerlain",
+        "name": "Rose Centifolia",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Spiritueuse Double Vanille",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/rose-centifolia-by-guerlain/spiritueuse-double-vanille",
+        "score": 9.2,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-3c05a0dfde41a6f6",
+      "a": {
+        "label": "Roses Berberanza By Lancome",
+        "name": "Roses Berberanza",
+        "brand": "LancÔMe",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sensual Instinct By Montale",
+        "name": "Sensual Instinct",
+        "brand": "Montale",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/roses-berberanza-by-lancome/sensual-instinct-by-montale",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-7b9b07d647a6524f",
+      "a": {
+        "label": "Rosie by By Rosie Jane",
+        "name": "Rosie",
+        "brand": "By Rosie Jane",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tihota By Indult",
+        "name": "Tihota",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/rosie-by-by-rosie-jane/tihota-by-indult",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-b386101649043a84",
+      "a": {
+        "label": "Shiyaaka Sky by Khadlaj",
+        "name": "Shiyaaka Sky",
+        "brand": "Khadlaj",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Wood Neroli by Bvlgari",
+        "name": "Wood Neroli",
+        "brand": "Bvlgari",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/shiyaaka-sky-by-khadlaj/wood-neroli-by-bvlgari",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-789da20965e2079d",
+      "a": {
+        "label": "Snowflakes Cashmere by Bath Body Works",
+        "name": "Snowflakes Cashmere",
+        "brand": "Bath Body Works",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "White Tea by Elizabeth Arden",
+        "name": "White Tea",
+        "brand": "Elizabeth Arden",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:elizabeth-arden-white-tea"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/snowflakes-cashmere-by-bath-body-works/white-tea-by-elizabeth-arden",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f1158ac655477fc9",
+      "a": {
+        "label": "Soavissima by Profumum Roma",
+        "name": "Soavissima",
+        "brand": "Profumum Roma",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Tihota by Indult",
+        "name": "Tihota",
+        "brand": "Indult",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/soavissima-by-profumum-roma/tihota-by-indult",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-65b4bbc5b93ef0f6",
+      "a": {
+        "label": "Solar Power by Phlur",
+        "name": "Solar Power",
+        "brand": "Phlur",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "White Tea by Elizabeth Arden",
+        "name": "White Tea",
+        "brand": "Elizabeth Arden",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:elizabeth-arden-white-tea"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/solar-power-by-phlur/white-tea-by-elizabeth-arden",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-46a9654e45eceddd",
+      "a": {
+        "label": "Spiritueuse Double Vanille by Guerlain",
+        "name": "Spiritueuse Double Vanille",
+        "brand": "Guerlain",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:guerlain-spiritueuse-double-vanille"
+        ]
+      },
+      "b": {
+        "label": "Tocade By Rochas",
+        "name": "Tocade",
+        "brand": "Rochas",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/spiritueuse-double-vanille-by-guerlain/tocade-by-rochas",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-f2f788e2d0b4f690",
+      "a": {
+        "label": "Summer Hammer By Lorenzo Pazzaglia",
+        "name": "Summer Hammer",
+        "brand": "Lorenzo Pazzaglia",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Sunkissed Goddess by Kilian",
+        "name": "Sunkissed Goddess",
+        "brand": "Kilian",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/summer-hammer-by-lorenzo-pazzaglia/sunkissed-goddess-by-kilian",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-d5cfe612ce056cc8",
+      "a": {
+        "label": "Sunny Side Up by Juliette Has a Gun",
+        "name": "Sunny Side Up",
+        "brand": "Juliette Has A Gun",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "You Fleur by Glossier",
+        "name": "You Fleur",
+        "brand": "Glossier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/sunny-side-up-by-juliette-has-a-gun/you-fleur-by-glossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-95443cf4dbd0703e",
+      "a": {
+        "label": "Tea Escape by Maison Margiela",
+        "name": "Tea Escape",
+        "brand": "Maison Margiela",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "You Soie by Glossier",
+        "name": "You Soie",
+        "brand": "Glossier",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/tea-escape-by-maison-margiela/you-soie-by-glossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-1b26ec5d4f79a2ff",
+      "a": {
+        "label": "Terre D'Hermes by Hermès",
+        "name": "Terre D Hermes",
+        "brand": "HermÈS",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Glacier by Montblanc",
+        "name": "Vetiver Glacier",
+        "brand": "Montblanc",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/terre-d-hermes-by-hermes/vetiver-glacier-by-montblanc",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-cefd3c6740367031",
+      "a": {
+        "label": "Terre D Hermes Eau Givree by Hermès",
+        "name": "Terre D Hermes Eau Givree",
+        "brand": "HermÈS",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "b": {
+        "label": "Vetiver Glacier by Montblanc",
+        "name": "Vetiver Glacier",
+        "brand": "Montblanc",
+        "concentrationSpecified": false,
+        "catalogIds": []
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/terre-d-hermes-eau-givree-by-hermes/vetiver-glacier-by-montblanc",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    },
+    {
+      "id": "wil-a9da005457cbc28f",
+      "a": {
+        "label": "Vanilla Vibes by Juliette Has a Gun",
+        "name": "Vanilla Vibes",
+        "brand": "Juliette Has a Gun",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "scento:juliette-has-a-gun-vanilla-vibes"
+        ]
+      },
+      "b": {
+        "label": "Woody Sage by Dossier",
+        "name": "Woody Sage",
+        "brand": "Dossier",
+        "concentrationSpecified": false,
+        "catalogIds": [
+          "dupe:ea8e1695639376225d46"
+        ]
+      },
+      "source": {
+        "publisher": "Will It Layer?",
+        "url": "https://willitlayer.com/layer/vanilla-vibes-by-juliette-has-a-gun/woody-sage-by-dossier",
+        "score": 9.3,
+        "scale": 10,
+        "method": "algorithmic"
+      },
+      "checkedAt": "2026-11-18"
+    }
+  ],
+  "failures": []
+}

@@ -46,6 +46,20 @@ export interface CatalogDupeLinks {
  alternatives:CatalogDupe[];
  originals:CatalogDupe[];
 }
+export interface LayeringReference {
+ publisher:string;url:string;score:number|null;scale:number;
+ originalPair:[string,string];dupeAdapted:boolean;editionUnconfirmed:boolean;
+}
+export interface LayeringLibrarySide {
+ label:string;
+ editions:(CatalogEdition&{dupes:CatalogDupeLinks;photo?:string})[];
+ alternatives:(CatalogDupe&{originalConcentration?:string})[];
+ owned:{id:string;variantId:string;name:string;brand:string;concentration:string;substitute:boolean}[];
+}
+export interface LayeringLibraryEntry {
+ id:string;a:LayeringLibrarySide;b:LayeringLibrarySide;
+ reference:LayeringReference;checkedAt:string;
+}
 export interface BottleProfileReply {
  variantId:string;
  profile:CatalogProfile|null;
@@ -74,7 +88,7 @@ export type Tier = 'brand_guidance'|'community_corroborated'|'single_anecdote'|'
 export interface EvidenceReport {author:string; firsthand:boolean; rights:string; url:string}
 export interface Evidence {kind:'brand'|'community'; reports:EvidenceReport[]; adapted?:boolean}
 export interface PairRecord extends Evidence {a:string; b:string; reviewedAt:string; status:'approved'|'draft';note?:string}
-export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string}
+export interface ComboResult {a:Bottle; b:Bottle; score:number; tier:Tier; sources:string[]; reason:string; caution:string; reviewedAt?:string;reference?:LayeringReference}
 export interface WearEvent {id:string; bottleIds:string[]; names:string[]; occasion:string; reaction:'wore'|'loved'|'disliked'|'saved'; at:string; context:WearContext}
 export interface User {id:string; name:string; email:string|null; demo:boolean; catalogAdmin?:true}
 export interface AppState {user:User; bottles:Bottle[]; preferences:Preferences; context:WearContext; shortcuts:Shortcut[]; history:WearEvent[]; likedCombos:WearEvent[]}

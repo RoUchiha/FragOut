@@ -10,8 +10,12 @@
     },
     "preview": {
       "distribution": "internal",
+      "environment": "preview",
       "android": {
         "buildType": "apk",
+        "image": "sdk-58"
+      },
+      "ios": {
         "image": "sdk-58"
       }
     },
@@ -26,6 +30,15 @@
       "ios": {
         "image": "sdk-58"
       }
+    },
+    "testflight-preview": {
+      "extends": "production",
+      "environment": "preview"
+    }
+  },
+  "submit": {
+    "testflight-preview": {
+      "ios": {}
     }
   }
 }

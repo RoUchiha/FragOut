@@ -137,7 +137,9 @@ export class Store {
     const profiles=await this.catalogPhotos.profiles(storedBottles);
     const bottles=storedBottles.map((bottle,index)=>{
       const catalogPhotos=catalogThumbnailPhotos(profiles[index]).map(photo=>photo.path);
-      return catalogPhotos.length?{...bottle,catalogPhoto:catalogPhotos[0],catalogPhotos}:bottle;
+      const catalogNotes=profiles[index]?.notes.map(note=>note.name);
+      return {...bottle,...(catalogPhotos.length?{catalogPhoto:catalogPhotos[0],catalogPhotos}:{}),
+        ...(catalogNotes?.length?{catalogNotes}:{})};
     });
     const likes=new Map<string,WearEvent>();
     for(const event of comboEvents){
