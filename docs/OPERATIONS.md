@@ -11,7 +11,7 @@
 
 The local address applies to this prepared workspace. It requires the PC and phone to share Wi-Fi and the existing iPhone preview CA profile. Its current certificate expires 2026-12-01. Renew through the local preview certificate preparation procedure before expiry and install the renewed trust profile on the phone. Do not bypass certificate warnings or expose this local test port through a public tunnel.
 
-Double-click **Start FragOut Test.cmd** after building to start the test server. `scripts/Start-Test.ps1` reads the local TLS key through Windows DPAPI; the Node process strips inherited database, vault, backup, deployment and provider credentials. It uses its own local encryption key. The free Qwen model runs separately on loopback with cloud use disabled. Stopping the PC stops this local test environment.
+Double-click **Start FragOut Test.cmd** after building to start the test server. `scripts/Start-Test.ps1` reads the local TLS key through Windows DPAPI; the Node process inherits only required operating-system settings, then sets its explicit test configuration. Startup refuses repository environment files before Next can reload them; keep secrets in the protected operator directory outside the checkout. The test app uses its own local encryption key. The free Qwen model runs separately on loopback with cloud use disabled. Stopping the PC stops this local test environment.
 
 `GET /api/health` checks API module liveness. `GET /api/ready` checks storage and deployment identity and returns 503 during a storage outage or wrong-environment connection. Every API response carries a server-generated request ID. Access logs, when enabled, contain route groups, status and timing rather than URLs, queries, account IDs, bodies or tokens.
 

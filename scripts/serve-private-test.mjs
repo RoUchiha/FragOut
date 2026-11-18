@@ -7,13 +7,16 @@ import {networkInterfaces} from 'node:os';
 import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {privateDataPath} from '../src/lib/private-path.ts';
+import {privateTestEnvironment} from '../src/lib/private-test-runtime.ts';
 
 const [host,portText,certificate,database]=process.argv.slice(2),port=Number(portText);
 const socket=Object.values(networkInterfaces()).flat().find(item=>item?.address===host&&!item.internal);
 if(!isIPv4(host)||!/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host)||!socket?.cidr||!Number.isInteger(port)||port<1024||port>65535)throw new Error('Use an active private LAN address and an unprivileged port.');
 const appDir=fileURLToPath(new URL('../',import.meta.url)),authority=host+':'+port,testDatabase=privateDataPath(resolve(database));
-// No production, backup, deployment or provider credential is inherited.
-for(const key of Object.keys(process.env))if(/(?:TOKEN|PASSWORD|SECRET|DATABASE|VAULT|API_KEY|ACCESS_KEY)/i.test(key)||key.startsWith('VERCEL'))delete process.env[key];
+// No application or provider setting is inherited. Next must not reload .env.
+const cleanEnvironment=privateTestEnvironment(appDir,process.env);
+for(const key of Object.keys(process.env))delete process.env[key];
+Object.assign(process.env,cleanEnvironment);
 process.chdir(appDir);process.env.NODE_ENV='production';process.env.FRAGOUT_ENVIRONMENT='staging';
 process.env.FRAGOUT_PUBLIC_ORIGIN='https://'+authority;process.env.FRAGOUT_DB=testDatabase;
 process.env.FRAGOUT_OLLAMA_URL='http://127.0.0.1:11434';process.env.FRAGOUT_ACCESS_LOGS='true';

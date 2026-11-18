@@ -69,9 +69,9 @@ try{
   const changed=await call('journal/'+wear.id,{method:'PATCH',token:owner.token,data:{date:'2026-03-09',note:'Edited synthetic note'}});equal(changed.body.names[0],first.name);
   equal((await call('journal/2026-03',{token:owner.token})).body.days['2026-03-09'],1);
  });
- await group('desktop secure cookie session and refreshed app bundles',async()=>{
+ await group('desktop protocol-appropriate cookie session and refreshed app bundles',async()=>{
   const web=await call('auth',{method:'POST',data:{action:'login',email:owner.email,password:owner.password}});
-  const cookie=web.headers.get('set-cookie');ok(cookie?.includes('HttpOnly'));ok(cookie.includes('Secure'));ok(cookie.includes('SameSite=lax'));
+  const cookie=web.headers.get('set-cookie');ok(cookie?.includes('HttpOnly'));equal(cookie.includes('Secure'),new URL(origin).protocol==='https:','Secure cookies must match the transport');ok(cookie.includes('SameSite=lax'));
   const cookieHeader=cookie.split(';')[0];equal((await call('journal/2026-03',{cookie:cookieHeader})).body.totalWears,1);
   for(const path of ['/','/mobile']){const response=await fetch(origin+path);equal(response.status,200);ok(response.headers.get('content-security-policy')?.includes('nonce-'));}
   await call('auth',{method:'POST',cookie:cookieHeader,data:{action:'logout'}});

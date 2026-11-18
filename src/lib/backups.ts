@@ -36,6 +36,10 @@ function checkedSnapshot(input:unknown):DatabaseSnapshot{
  for(const table of names)for(const row of snapshot.tables[table]){
   if(Object.keys(row).length!==backupColumns[table].length||backupColumns[table].some(column=>!(column in row))||Object.keys(row).some(column=>!(backupColumns[table] as readonly string[]).includes(column)))throw new Error('Invalid backup columns.');
  }
+ // PostgreSQL has a composite owner/lookup foreign key; SQLite's legacy
+ // look_id-only key is insufficient evidence for a production restore.
+ const lookOwners=new Map(snapshot.tables.saved_looks.map(row=>[row.id,row.user_id]));
+ for(const row of snapshot.tables.private_photos)if(lookOwners.get(row.look_id)!==row.user_id)throw new Error('Backup photo owner integrity check failed.');
  return snapshot;
 }
 const encode=(row:Record<string,unknown>):Row=>Object.fromEntries(Object.entries(row).map(([key,value])=>[key,value instanceof Uint8Array?{$binary:Buffer.from(value).toString('base64')}:value as Cell]));
@@ -118,7 +122,7 @@ export function openVaultEscrow(bytes:Buffer,pem:string){
 
 function sanitized(snapshot:DatabaseSnapshot){
  const tables=Object.fromEntries(names.map(name=>[name,[]])) as unknown as Record<Table,Row[]>;
- const users=new Map<string,string>(),bottles=new Map<string,{id:string;name:string}>();
+ const users=new Map<string,string>(),bottles=new Map<string,{id:string;name:string;userId:string}>();
  for(const row of snapshot.tables.users){
   if(row.demo!==0)continue;const id=randomUUID();users.set(String(row.id),id);
   tables.users.push({id,name:'Test member '+users.size,email:'test.'+id+'@example.test',password:null,demo:0,created:Date.now()});
@@ -131,11 +135,11 @@ function sanitized(snapshot:DatabaseSnapshot){
   const profile=findCatalogProfile(original),edition=findPublicCatalogEdition(original,profile);if(!edition)continue;
   const safe=bottleSchema.parse({brand:edition.brand,name:edition.name,concentration:edition.concentration,ownership:original.ownership,family:'',notes:[],strength:1,climate:'UNKNOWN',profileKnown:false,provenance:'unknown',color:original.color,shape:original.shape,sizeMl:original.sizeMl,fillPct:original.fillPct,rating:original.rating,favorite:original.favorite,memo:'',shelves:[]});
   const id=randomUUID(),variantId=createHash('sha256').update([safe.brand,safe.name,safe.concentration].map(s=>s.trim().toLowerCase().replace(/\s+/g,' ')).join('|')).digest('hex');
-  bottles.set(String(row.id),{id,name:safe.name});tables.bottles.push({id,user_id:userId,body:JSON.stringify({...safe,id,variantId})});
+  bottles.set(String(row.id),{id,name:safe.name,userId});tables.bottles.push({id,user_id:userId,body:JSON.stringify({...safe,id,variantId})});
  }
  for(const row of snapshot.tables.wear_events){
   const userId=users.get(String(row.user_id));if(!userId)continue;const original=JSON.parse(String(row.body));
-  if(!Array.isArray(original.bottleIds)||!original.bottleIds.length||original.bottleIds.some((id:string)=>!bottles.has(id)))continue;
+  if(!Array.isArray(original.bottleIds)||!original.bottleIds.length||original.bottleIds.some((id:string)=>bottles.get(id)?.userId!==userId))continue;
   if(!['wore','loved','disliked','saved'].includes(original.reaction)||!Number.isFinite(Date.parse(original.at)))continue;
   const id=randomUUID(),selected=original.bottleIds.map((id:string)=>bottles.get(id)!);
   tables.wear_events.push({id,user_id:userId,created:Number(row.created),body:JSON.stringify({id,bottleIds:selected.map((b:{id:string})=>b.id),names:selected.map((b:{name:string})=>b.name),reaction:original.reaction,occasion:'GENERAL',at:new Date(original.at).toISOString(),context:defaultContext})});

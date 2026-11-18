@@ -64,6 +64,15 @@ test('staging refresh anonymizes identities and copies only public fragrance dat
  }finally{await h.store.close();await stage.close();}
 });
 
+test('restore verification rejects an archived photo attached to a different owner saved look',async()=>{
+ const h=await fixture();try{
+  const other=await h.store.register('Another synthetic member','photo-owner@example.test','another-synthetic-password');
+  const snapshot=await captureSnapshot(h.db,{environment:'production',vaultKeyId:'0'.repeat(64)});
+  snapshot.tables.private_photos[0].user_id=other.id;
+  await assert.rejects(()=>verifySnapshotRestore(snapshot),/owner|integrity/i);
+ }finally{await h.store.close();}
+});
+
 test('one-way refresh refuses production, the source itself and an incorrect source environment before any writes',async()=>{
  const h=await fixture(),stage=openSqlite(':memory:',{environment:'staging'});try{
   const before=(await captureSnapshot(h.db,{environment:'production',vaultKeyId:'0'.repeat(64)})).tables;
@@ -73,6 +82,20 @@ test('one-way refresh refuses production, the source itself and an incorrect sou
   const identity=await stage.get<{instance_id:string}>('SELECT instance_id FROM deployment_identity WHERE id=1');
   await assert.rejects(()=>refreshStaging(stage,{...h.snapshot,sourceId:identity!.instance_id}));
   assert.equal((await stage.get<{n:number}>('SELECT count(*) AS n FROM users'))?.n,0);
+ }finally{await h.store.close();await stage.close();}
+});
+
+test('staging refresh omits wear records referencing a different owner collection',async()=>{
+ const h=await fixture(),stage=openSqlite(':memory:',{environment:'staging'});try{
+  const other=await h.store.register('Another synthetic member','other@example.test','another-synthetic-password');
+  const event={id:'valid-event',bottleIds:[h.bottle.id],reaction:'wore',at:'2026-11-18T12:00:00.000Z'};
+  await h.db.run('INSERT INTO wear_events (id,user_id,body,created) VALUES (?,?,?,?)',event.id,h.user.id,JSON.stringify(event),1);
+  await h.db.run('INSERT INTO wear_events (id,user_id,body,created) VALUES (?,?,?,?)','cross-owner-event',other.id,JSON.stringify({...event,id:'cross-owner-event'}),2);
+  const snapshot=await captureSnapshot(h.db,{environment:'production',vaultKeyId:'0'.repeat(64)});
+  const counts=await refreshStaging(stage,snapshot);assert.equal(counts.users,2);assert.equal(counts.wear_events,1);
+  const restored=await stage.get<{user_id:string;body:string}>('SELECT user_id,body FROM wear_events');
+  const bottle=await stage.get<{user_id:string}>('SELECT user_id FROM bottles WHERE id=?',JSON.parse(restored!.body).bottleIds[0]);
+  assert.equal(restored!.user_id,bottle!.user_id);
  }finally{await h.store.close();await stage.close();}
 });
 
