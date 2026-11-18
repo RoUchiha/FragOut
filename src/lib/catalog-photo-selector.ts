@@ -4,6 +4,7 @@ import identity from '../../catalog/identity.json' with {type:'json'};
 import publicEditions from '../../catalog/thumbnail-editions.json' with {type:'json'};
 import {catalogIdentityKey,catalogProfiles} from './catalog.ts';
 import {readLimitedBody} from './catalog-http.ts';
+import {findParfumoCatalogPhoto} from './parfumo-photo.ts';
 import type {CatalogEdition} from './types.ts';
 
 const shops=[
@@ -243,6 +244,8 @@ export async function findAutomaticCatalogPhoto(edition:CatalogEdition,request:t
  const ambiguousYear=(catalogYears.get(key)?.size??0)>1;
  const requiredYear=namedYear||(ambiguousYear?edition.releaseYear:undefined);
  if(ambiguousYear&&!requiredYear) return null;
+ const preferred=await findParfumoCatalogPhoto(edition,request);
+ if(preferred)return preferred;
  const keys=[key];
  if(edition.id==='scento:versace-the-dreamer-toilette') {
   const alias=catalogIdentityKey({...edition,name:'The Dreamer'});

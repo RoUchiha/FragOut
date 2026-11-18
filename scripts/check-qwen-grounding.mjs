@@ -93,7 +93,7 @@ for (const [description,image] of [['blank image',blank],['unmarked bottle',unla
 }
 
 test('the readable Dior Sauvage EDP label produces one reviewable candidate',async()=>{
- const image = await read('public/catalog/bottles/dior-sauvage-edp-7c860abb0e81.jpg');
+ const image = await read('public'+findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDP'}).photo.path);
  const {candidates} = await analyze('bottle',image,'image/jpeg');
  assert.deepEqual(candidates.map(({brand,name,concentration,confidence})=>({brand,name,concentration,confidence})),[
   {brand:'Dior',name:'Sauvage',concentration:'EDP',confidence:'uncertain'},
@@ -101,7 +101,7 @@ test('the readable Dior Sauvage EDP label produces one reviewable candidate',asy
 });
 
 test('the three-line Bleu de Chanel EDP label produces one reviewable candidate',async()=>{
- const image = await read('public/catalog/bottles/chanel-bleu-de-chanel-edp-2e677fe2601b.jpg');
+ const image = await read('public'+findCatalogProfile({brand:'Chanel',name:'Bleu de Chanel',concentration:'EDP'}).photo.path);
  const {candidates} = await analyze('bottle',image,'image/jpeg');
  assert.deepEqual(candidates.map(({brand,name,concentration,confidence})=>({brand,name,concentration,confidence})),[
   {brand:'Chanel',name:'Bleu de Chanel',concentration:'EDP',confidence:'uncertain'},
@@ -109,7 +109,7 @@ test('the three-line Bleu de Chanel EDP label produces one reviewable candidate'
 });
 
 test('the ambiguous Dior Sauvage packshot cannot acquire a concentration',async()=>{
- const image = await read('public/catalog/bottles/dior-sauvage-edt-73f6c1636540.jpg');
+ const image = await read('public'+findCatalogProfile({brand:'Dior',name:'Sauvage',concentration:'EDT'}).photo.path);
  const {candidates} = await analyze('bottle',image,'image/jpeg');
  if (candidates.length) {
   assert.deepEqual(candidates.map(({brand,name,concentration})=>({brand,name,concentration})),[

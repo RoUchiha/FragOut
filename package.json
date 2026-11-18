@@ -12,6 +12,7 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "catalog:scrape": "node --experimental-strip-types scripts/scrape-fragrance-catalog.mjs",
     "catalog:admin": "node --experimental-strip-types scripts/catalog-admin.mjs",
+    "catalog:photos:parfumo": "node --experimental-strip-types scripts/import-parfumo-photos.mjs",
     "verify": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {

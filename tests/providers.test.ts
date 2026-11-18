@@ -5,6 +5,7 @@ import {groundedBottleCandidates} from '../src/lib/bottle-label.ts';
 import {readFile} from 'node:fs/promises';
 import {parseOutfitText} from '../src/lib/outfit.ts';
 import sharp from 'sharp';
+import {findCatalogProfile} from '../src/lib/catalog.ts';
 const profile=parseOutfitText('White shirt and black trousers');
 
 test('local vision unloads context and cloud requests do not enable response or prompt storage',()=>{
@@ -65,13 +66,16 @@ test('typed outfit details only use explicit garments, colors and style',async()
 test('bottle results require independent label evidence and never guess concentration',async()=>{
  const guess={brand:'Dior',name:'Sauvage'};
  const fetcher=replyFromQwen({candidates:[guess,guess]});
- const photo=async(file:string)=>prepareImage({mime:'image/jpeg',data:(await readFile(new URL('../public/catalog/bottles/'+file,import.meta.url))).toString('base64')});
- const edp=await runVision('qwen','test',undefined,'bottle',{image:await photo('dior-sauvage-edp-7c860abb0e81.jpg')},replyFromQwen({candidates:[]}));
+ const photo=async(concentration:string)=>{
+  const path=findCatalogProfile({brand:'Dior',name:'Sauvage',concentration})!.photo!.path;
+  return prepareImage({mime:'image/jpeg',data:(await readFile(new URL('../public'+path,import.meta.url))).toString('base64')});
+ };
+ const edp=await runVision('qwen','test',undefined,'bottle',{image:await photo('EDP')},replyFromQwen({candidates:[]}));
  assert.ok('candidates' in edp);
  assert.deepEqual(edp.candidates.map(c=>[c.brand,c.name,c.concentration,c.confidence]),[['Dior','Sauvage','EDP','uncertain']]);
  assert.doesNotMatch(JSON.stringify(edp),/guaranteed|perfect/i);
 
- const edt=await runVision('qwen','test',undefined,'bottle',{image:await photo('dior-sauvage-edt-73f6c1636540.jpg')},fetcher);
+ const edt=await runVision('qwen','test',undefined,'bottle',{image:await photo('EDT')},fetcher);
  assert.ok('candidates' in edt);
  assert.equal(edt.candidates.some(c=>c.concentration==='EDP'),false);
 
