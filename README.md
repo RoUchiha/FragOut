@@ -2,6 +2,8 @@
 
 A compact fragrance wardrobe app. The primary interface is an Expo / React Native app for iOS and Android, with a matching browser preview. The desktop companion and API can run locally or on a Node.js host.
 
+**Continuing in a new chat?** Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) and [AGENTS.md](AGENTS.md) first. Keep the context file updated with every project change; it records current decisions, architecture, operations, verification and unfinished work.
+
 ## Open it
 
 [Open the mobile preview](http://localhost:3000/mobile). The [desktop companion](http://localhost:3000) remains available.
