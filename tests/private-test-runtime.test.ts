@@ -19,7 +19,7 @@ test('private test startup refuses repository environment files before Next can 
 test('private test runtime inherits only required operating-system settings',()=>{
  const directory=mkdtempSync(join(tmpdir(),'fragout-test-env-'));
  try{
-  const clean=privateTestEnvironment(directory,{Path:'synthetic-path',SystemRoot:'synthetic-windows',TEMP:'synthetic-temp',FRAGOUT_DATABASE_URL:'synthetic-db',FRAGOUT_VAULT_KEY:'synthetic-vault',SUPABASE_SERVICE_ROLE_KEY:'synthetic-role',GITHUB_TOKEN:'synthetic-token',ARBITRARY_CREDENTIAL:'synthetic-credential',NODE_OPTIONS:'--require untrusted.js'});
+  const clean=privateTestEnvironment(directory,{Path:'synthetic-path',SystemRoot:'synthetic-windows',TEMP:'synthetic-temp',FRAGOUT_DATABASE_URL:'synthetic-db',FRAGOUT_VAULT_KEY:'synthetic-vault',GROQ_API_KEY:'synthetic-groq',FRAGOUT_PAID_AI_ENABLED:'true',FRAGOUT_GROQ_FREE_CONFIRMED:'true',FRAGOUT_GROQ_ZDR_CONFIRMED:'true',SUPABASE_SERVICE_ROLE_KEY:'synthetic-role',GITHUB_TOKEN:'synthetic-token',ARBITRARY_CREDENTIAL:'synthetic-credential',NODE_OPTIONS:'--require untrusted.js'});
   assert.deepEqual(clean,{Path:'synthetic-path',SystemRoot:'synthetic-windows',TEMP:'synthetic-temp'});
  }finally{rmdirSync(directory);}
 });
