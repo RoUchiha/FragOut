@@ -112,7 +112,7 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
  const analyzeButton=<Btn label={busy?'Reading outfit…':cloudName?`Send to ${cloudName}`:'Review outfit'}
   disabled={busy||listening||!provider||(!photo&&!description)} onPress={()=>{if(provider)void analyze(provider);}}/>;
 
- return <View style={{gap:17}}><View style={styles.spread}><Text accessibilityRole="header" style={styles.h1}>Outfit</Text>{provider&&<Text style={styles.small}>{provider==='qwen'?(status?.qwen?.mode==='hosted'?'Qwen · Hosted':'Qwen · Local / free'):`${cloudName} · Your API`}</Text>}</View>
+ return <View style={{gap:17}}><View style={styles.spread}><Text accessibilityRole="header" style={styles.h1}>Outfit</Text>{provider&&<Text style={styles.small}>{provider==='qwen'?(status?.qwen?.cost==='free'?'Qwen · Free':status?.qwen?.mode==='hosted'?'Qwen · Hosted':'Qwen · Local / free'):`${cloudName} · Your API`}</Text>}</View>
 
  {!profile&&<>
   <View style={styles.row}>
@@ -126,7 +126,7 @@ export default function Outfit({onError,onFeedback,feedbackBusy,archiveEnabled=f
    {!cloudName&&analyzeButton}
   </View>
   {!busy&&(cloudName?<Text style={styles.text}>
-   FragOut will send {sharedContent} to {cloudName} to identify clothing details. {provider==='qwen'?'Hosted through Vercel AI Gateway with zero-data-retention routing. Photos are deleted by default.':'The provider’s retention policy applies and your API account may be billed.'}
+   FragOut will send {sharedContent} to {cloudName} to identify clothing details. {provider==='qwen'?`Hosted through ${destination?.cloudConsent?.destination} with zero data retention. Photos are deleted by default.`:'The provider’s retention policy applies and your API account may be billed.'}
   </Text>:<Text style={styles.small}>{provider?(status?.qwen?.mode==='hosted'?'Details from your description. Photos need cloud approval.':'Qwen on your server. Photos are deleted by default.'):'Checking analysis destination…'}</Text>)}
   {cloudName&&analyzeButton}
  </>}

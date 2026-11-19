@@ -119,8 +119,8 @@ export interface OutfitProfile {
  hasOutfit:boolean; uncertainty:string[];
 }
 export interface OutfitReceipt {id:string;profile:OutfitProfile;provider:AiProvider;model:string;method:'model'|'offline_rules';createdAt:string;photoRetained?:boolean}
-export interface QwenCloudConsent {destination:string;model:string;policyVersion:string}
-export interface AiStatus {selected:AiProvider;connections:{provider:AiProvider;model:string;configured:boolean}[];local:{reachable:boolean;installed:boolean;model:string};qwen?:QwenCloudConsent&{mode:'local'|'hosted';configured:boolean}}
+export interface QwenCloudConsent {destination:string;model:string;policyVersion:string;disclosureVersion?:'2'}
+export interface AiStatus {selected:AiProvider;connections:{provider:AiProvider;model:string;configured:boolean}[];local:{reachable:boolean;installed:boolean;model:string};qwen?:QwenCloudConsent&{mode:'local'|'hosted';configured:boolean;cost?:'local'|'free'|'paid';paidEnabled?:boolean}}
 export interface OutfitMatches {solo:SoloResult[];combos:ComboResult[];requestId:string;context:WearContext;outfit:OutfitProfile}
 export interface BottleCandidate {brand:string;name:string;concentration:string;confidence:'likely'|'uncertain';clue:string}
 export interface OutfitSnapshot {analysisId:string;profile:OutfitProfile;choices:string[][];variants:Record<string,string>}

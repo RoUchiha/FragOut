@@ -234,7 +234,7 @@ export default function Collection({state,refresh,notify,onOpenLikedCombos,onWea
    onFilter={(type,value)=>{if(type==='note')setNote(value);if(type==='brand')setBrand(value);if(type==='family')setFamilyFilter(value);if(type==='shelf')setShelf(value);setProfiler(false);}}/>}
   {comparing&&<CompareFragrances left={comparing} state={state} onClose={()=>setComparing(null)} notify={notify}/>}
   {scanConsent&&<Sheet title="Share bottle photo?" onClose={()=>void resolveScanConsent(scanConsent,false)}>
-   <Text style={styles.text}>FragOut will send this bottle photo to {scanConsent.name} to read the label. {scanConsent.provider==='qwen'?'Hosted through Vercel AI Gateway with zero-data-retention routing.':'The provider’s retention policy applies and your API account may be billed.'}</Text>
+   <Text style={styles.text}>FragOut will send this bottle photo to {scanConsent.name} to read the label. {scanConsent.provider==='qwen'?`Hosted through ${scanConsent.cloudConsent?.destination} with zero data retention.`:'The provider’s retention policy applies and your API account may be billed.'}</Text>
    <Btn label={`Send to ${scanConsent.name}`} onPress={()=>void resolveScanConsent(scanConsent,true)}/>
    <Btn label="Cancel" kind="secondary" onPress={()=>void resolveScanConsent(scanConsent,false)}/>
   </Sheet>}

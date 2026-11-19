@@ -46,11 +46,30 @@ The owner specifically approved the production-only application secrets, local/m
 
 ## Hosted photo analysis
 
-`FRAGOUT_QWEN_BACKEND=gateway` selects production-only hosted Qwen3.8 27B through the fixed AI Gateway endpoint with deployment OIDC. No long-lived default model API key is stored in the app or exposed to clients. Local test startup strips this flag and all deployment credentials; it keeps using local Ollama.
+Production defaults to `FRAGOUT_QWEN_BACKEND=auto`: Qwen3.8 27B through the fixed Groq HTTPS endpoint while `FRAGOUT_PAID_AI_ENABLED` is absent or false. A legacy `gateway` preference cannot bypass the paid-off flag. Local test startup strips all hosted flags and credentials and keeps using local Ollama. No provider key is exposed through app metadata or client bundles.
 
-Hosted photo requests require a current destination/model/policy consent receipt. The adapter resolves OIDC from the current invocation for each transport, requests zero data retention and no prompt training, and restricts routing to the currently verified Wafer/Parasail endpoints. Session and selected-provider authorization are checked again immediately before transport, after OCR and token resolution. The response is structurally schema-validated; prompts prohibit fragrance facts and personal inference, and users must review clothing details. Recommendations still use owned fragrances and the grounded engine. Typed descriptions continue to use local rules. Default photos remain memory-only; the existing separate archive-confirmation flow governs retained photos. Provider policies can permit transient processing/caching, as the privacy page discloses.
+For free activation, create a dedicated Groq **Free** account/key without adding a payment method. Enable **Zero Data Retention** in its Data Controls, then run the protected owner setup locally:
 
-Hosted usage uses fixed 24-hour windows anchored at the first request, allowing ten photo requests per user and 150 per installation per window, in addition to per-minute limits. These are not sliding-window guarantees. Use a project-specific AI Gateway budget and prepaid balance with auto-reload disabled. A quota or unavailable provider returns a generic failure; the code does not remove privacy filters or borrow a user's paid connection as a fallback. Hobby-account ZDR needs purchased credits; do not enable the hosted flag until the authorized budget and live synthetic-photo check succeed.
+```powershell
+pwsh -NoProfile -File scripts/Configure-Free-AI.ps1
+```
+
+It asks for explicit Free/ZDR confirmations and a hidden key. It verifies model access without a photo request, stores `GROQ_API_KEY` as a Sensitive Production-only Vercel variable, records `FRAGOUT_GROQ_FREE_CONFIRMED=true` and `FRAGOUT_GROQ_ZDR_CONFIRMED=true`, turns paid hosting off, and redeploys. It sends the key through stdin, never a command argument or file. Before each write, it reads undecrypted scope metadata and refuses matching shared, Preview, Development, custom or branch-scoped variables. Review any such record in Vercel before retrying; the command does not broaden credential scope. The adapter fails closed until all three values exist. The documented inference API does not independently prove Free billing status or organization ZDR; these are operator attestations. Reconfirm them after any provider-account change, and remove the flags to suspend uploads if settings are uncertain. See [billing](https://console.groq.com/docs/billing-faqs), [limits](https://console.groq.com/docs/rate-limits) and [data controls](https://console.groq.com/docs/your-data). Free quotas and service availability can change.
+
+Only the operator can enable the separate app-funded paid route:
+
+```powershell
+npm run ai:paid -- off
+npm run ai:paid -- on
+# Preview either action without changing configuration:
+npm run ai:paid -- off --dry-run
+```
+
+These commands require Vercel operator sign-in, target only the production app, verify release support, update server configuration, and redeploy the current published source. Off takes effect when that deployment is ready; it does not cancel already-running requests. On selects the existing Gateway route with request-scoped deployment OIDC and privacy-restricted Wafer/Parasail routing. Commands do not purchase credits, upgrade a plan or enable auto-reload. Keep paid off unless a separate budget is authorized and the paid route is tested. The existing project Gateway budget is $5/month; request-boundary budgets are not an exact spending cap. User-connected OpenAI/Claude choices remain explicit user-funded providers, separate from this operator switch.
+
+Hosted photo requests require a current destination/model/policy consent receipt. Groq additionally requires a disclosure-version acknowledgment added explicitly by the updated client, rather than echoed from status. Older native builds that displayed fixed Gateway wording receive an update-required response before any Groq upload. The refreshed web preview already uses the new disclosure; signed native apps need a new client release. Session, destination and selected-provider authorization are checked again immediately before transport, after OCR and token resolution. Responses are schema-validated; prompts prohibit fragrance facts and personal inference, and users review clothing details. Recommendations still use owned fragrances and grounded evidence. Typed Qwen descriptions use local rules. Default photos remain memory-only; the separate archive-confirmation flow governs retained photos. Provider policies also govern operational metadata and any permitted transient processing.
+
+Free hosting allows two photo requests per installation per minute and 50 per fixed 24-hour window; paid hosting allows 150 per installation per fixed day. Both allow ten hosted photo requests per user per fixed day plus eight analysis requests per user per minute. Fixed windows start at the first request and are not rolling guarantees; provider token/rate quotas may reject earlier. Quota and provider failures never invoke paid fallback, relax privacy filters, or borrow a user's API key. A descriptive error offers typed outfit input, which works without hosted inference.
 
 ## CI, release and rollback
 

@@ -58,22 +58,24 @@ export async function handleAiApi(
   }
   if((route==='outfit/analyze'||route==='vision/bottle')&&method==='POST'){
    if(!await db.limit('vision:'+user.id,8,60000))return json({error:'Analysis limit reached. Please wait a minute.'},429);
-   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false),cloudConsent:z.object({destination:z.string().max(100),model:z.string().max(120),policyVersion:z.string().max(60)}).strict().optional()}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
+   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false),cloudConsent:z.object({destination:z.string().max(100),model:z.string().max(120),policyVersion:z.string().max(60),disclosureVersion:z.literal('2').optional()}).strict().optional()}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
    if(route==='vision/bottle'&&input.archivePhoto)throw new ProviderError('Bottle photos cannot be archived.',400);
    const archiveConsent=input.image&&input.archivePhoto?await db.archiveConsent(user.id):null;
    const provider=await vault.selected(user.id);
    if(input.provider!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
    const qwen=qwenRuntime();
-   if(provider==='qwen'&&qwen.mode==='hosted'&&input.image){
-    if(!input.cloudConsent||(['destination','model','policyVersion'] as const).some(field=>input.cloudConsent![field]!==qwen[field]))throw new ProviderError('Review the hosted Qwen photo destination before sending this image.',409);
-    if(!qwen.configured)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
-    if(!await db.limit('hosted-vision-user:'+user.id,10,86400000)||!await db.limit('hosted-vision-installation',150,86400000))throw new ProviderError('Hosted photo allowance reached. Describe your outfit or try again tomorrow.',429);
-   }
    let image;
    try{
     image=input.image?await prepareImage(input.image):undefined;
     if(input.image)input.image.data='';
     if(body&&typeof body==='object'&&'image' in body&&body.image&&typeof body.image==='object'&&'data' in body.image)body.image.data='';
+    if(provider==='qwen'&&qwen.mode==='hosted'&&image){
+     if(!input.cloudConsent||(['destination','model','policyVersion'] as const).some(field=>input.cloudConsent![field]!==qwen[field]))throw new ProviderError('Review the hosted Qwen photo destination before sending this image.',409);
+     if(qwen.transport==='groq'&&input.cloudConsent.disclosureVersion!=='2')throw new ProviderError('Update FragOut to review the current photo destination before uploading.',409);
+     if(!qwen.configured)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
+     if(qwen.cost==='free'&&!await db.limit('free-vision-installation-minute',2,60000))throw new ProviderError('Free photo analysis is busy. Describe your outfit or try again in a minute.',429);
+     if(!await db.limit('hosted-vision-user:'+user.id,10,86400000)||!await db.limit('hosted-vision-installation',qwen.cost==='free'?50:150,86400000))throw new ProviderError('Hosted photo allowance reached. Describe your outfit or try again tomorrow.',429);
+    }
     const connection=provider==='qwen'?null:await vault.get(user.id,provider);
     const currentProvider=await vault.selected(user.id);
     await verifySession();
@@ -83,6 +85,10 @@ export async function handleAiApi(
     const authorizeTransport=async()=>{
      await verifySession();
      if(await vault.selected(user.id)!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
+     if(provider==='qwen'){
+      const current=qwenRuntime();
+      if((['model','destination','policyVersion'] as const).some(field=>current[field]!==qwen[field]))throw new ProviderError('Analysis destination changed. Review the current model before sending this photo.',409);
+     }
      await verifySession();
     };
     if(route==='vision/bottle'){

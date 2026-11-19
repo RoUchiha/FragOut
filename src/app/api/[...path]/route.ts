@@ -76,7 +76,7 @@ async function handleRequest(req:NextRequest){
     const cookieName=policy.secureCookie?SECURE_COOKIE:COOKIE;
     const clearCookies=(res:NextResponse)=>{res.cookies.delete(COOKIE);res.cookies.set(SECURE_COOKIE,'',{httpOnly:true,secure:true,sameSite:'lax',path:'/',maxAge:0});return res;};
     const path=req.nextUrl.pathname.replace('/api/','').split('/'),method=req.method,authRoute=path.length===1&&path[0]==='auth';
-    if(method==='GET'&&path.length===1&&path[0]==='health')return reply({status:'ok',environment:runtimeEnvironment(process.env),revision:releaseIdentity(process.env),engine:ENGINE_VERSION,weather:'manual',photoIdentification:'provider-selectable',outfit:'enabled'});
+    if(method==='GET'&&path.length===1&&path[0]==='health')return reply({status:'ok',environment:runtimeEnvironment(process.env),revision:releaseIdentity(process.env),engine:ENGINE_VERSION,weather:'manual',photoIdentification:'provider-selectable',outfit:'enabled',capabilities:{freeHostedVision:true,paidAiSwitch:true},paidAiEnabled:process.env.FRAGOUT_PAID_AI_ENABLED==='true'});
     if(method==='GET'&&path.length===1&&path[0]==='ready'){
       const db=getStore();await assertDatabaseEnvironment(db.db,runtimeEnvironment(process.env));
       return reply({status:'ready',environment:runtimeEnvironment(process.env),revision:releaseIdentity(process.env)});

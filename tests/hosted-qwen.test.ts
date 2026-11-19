@@ -15,7 +15,7 @@ const model='alibaba/qwen3.8-27b';
 const invocationToken=(tag:string)=>[Buffer.from('{"alg":"none"}').toString('base64url'),Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600,sub:tag})).toString('base64url'),'synthetic-signature'].join('.');
 const syntheticToken=invocationToken('synthetic-deployment-token');
 function hosted(t:TestContext,extra:Record<string,string|undefined>={}){
- const values={FRAGOUT_QWEN_BACKEND:'gateway',FRAGOUT_ENVIRONMENT:'production',VERCEL_OIDC_TOKEN:syntheticToken,...extra};
+ const values={FRAGOUT_QWEN_BACKEND:'gateway',FRAGOUT_PAID_AI_ENABLED:'true',FRAGOUT_ENVIRONMENT:'production',VERCEL_OIDC_TOKEN:syntheticToken,...extra};
  const previous=Object.fromEntries(Object.keys(values).map(key=>[key,process.env[key]]));
  for(const [key,value] of Object.entries(values)){if(value===undefined)delete process.env[key];else process.env[key]=value;}
  t.after(()=>{for(const [key,value] of Object.entries(previous)){if(value===undefined)delete process.env[key];else process.env[key]=value;}});
@@ -90,9 +90,10 @@ test('hosted status exposes destination metadata without deployment credentials 
   const metadata=await status!.json();assert.equal(metadata.qwen.mode,'hosted');assert.equal(metadata.qwen.model,model);
   assert.ok(!JSON.stringify(metadata).includes(syntheticToken));
   for(let i=0;i<10;i++)assert.ok(await db.limit('hosted-vision-user:'+user.id,10,86400000));
-  const image={mime:'image/png',data:Buffer.from('must-not-reach-image-processing').toString('base64')};
+  const image={mime:'image/png',data:(await sharp({create:{width:8,height:8,channels:3,background:'white'}}).png().toBuffer()).toString('base64')};
+  let calls=0;const previous=globalThis.fetch;globalThis.fetch=async()=>{calls++;throw new Error('Quota must prevent transport.');};t.after(()=>{globalThis.fetch=previous;});
   const denied=await handleAiApi(new NextRequest('https://fragout.example/api/outfit/analyze',{method:'POST'}),['outfit','analyze'],{provider:'qwen',image,cloudConsent:{destination:'Vercel AI Gateway',model,policyVersion:'qwen-cloud-v1'}},user,db);
-  assert.equal(denied?.status,429);assert.equal((await db.db.get<{n:number}>('SELECT count(*) AS n FROM private_photos'))?.n,0);
+  assert.equal(denied?.status,429);assert.equal(calls,0);assert.equal((await db.db.get<{n:number}>('SELECT count(*) AS n FROM private_photos'))?.n,0);
  }finally{await db.close();}
 });
 
