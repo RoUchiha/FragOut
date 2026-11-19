@@ -58,7 +58,7 @@ export async function handleAiApi(
   }
   if((route==='outfit/analyze'||route==='vision/bottle')&&method==='POST'){
    if(!await db.limit('vision:'+user.id,8,60000))return json({error:'Analysis limit reached. Please wait a minute.'},429);
-   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false),cloudConsent:z.object({destination:z.string().max(100),model:z.string().max(120),policyVersion:z.string().max(60)}).strict().optional()}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
+   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false),cloudConsent:z.object({destination:z.string().max(100),model:z.string().max(120),policyVersion:z.string().max(60),disclosureVersion:z.literal('2').optional()}).strict().optional()}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
    if(route==='vision/bottle'&&input.archivePhoto)throw new ProviderError('Bottle photos cannot be archived.',400);
    const archiveConsent=input.image&&input.archivePhoto?await db.archiveConsent(user.id):null;
    const provider=await vault.selected(user.id);
@@ -71,6 +71,7 @@ export async function handleAiApi(
     if(body&&typeof body==='object'&&'image' in body&&body.image&&typeof body.image==='object'&&'data' in body.image)body.image.data='';
     if(provider==='qwen'&&qwen.mode==='hosted'&&image){
      if(!input.cloudConsent||(['destination','model','policyVersion'] as const).some(field=>input.cloudConsent![field]!==qwen[field]))throw new ProviderError('Review the hosted Qwen photo destination before sending this image.',409);
+     if(qwen.transport==='groq'&&input.cloudConsent.disclosureVersion!=='2')throw new ProviderError('Update FragOut to review the current photo destination before uploading.',409);
      if(!qwen.configured)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
      if(qwen.cost==='free'&&!await db.limit('free-vision-installation-minute',2,60000))throw new ProviderError('Free photo analysis is busy. Describe your outfit or try again in a minute.',429);
      if(!await db.limit('hosted-vision-user:'+user.id,10,86400000)||!await db.limit('hosted-vision-installation',qwen.cost==='free'?50:150,86400000))throw new ProviderError('Hosted photo allowance reached. Describe your outfit or try again tomorrow.',429);

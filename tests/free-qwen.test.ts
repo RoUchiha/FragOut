@@ -50,7 +50,7 @@ test('app users cannot turn on paid mode and the free installation quota stops f
  const image={mime:'image/png',data:(await sharp({create:{width:8,height:8,channels:3,background:'white'}}).png().toBuffer()).toString('base64')};
  let calls=0;const previous=globalThis.fetch;globalThis.fetch=async url=>{assert.equal(String(url),'https://api.groq.com/openai/v1/chat/completions');calls++;return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(parseOutfitText('White shirt'))}}]}));};
  t.after(()=>{globalThis.fetch=previous;});
- const input={provider:'qwen',cloudConsent:{destination:'Groq',model,policyVersion:'qwen-groq-free-v1'}};
+ const input={provider:'qwen',cloudConsent:{destination:'Groq',model,policyVersion:'qwen-groq-free-v1',disclosureVersion:'2'}};
  const call=(extra:object={})=>handleAiApi(new NextRequest('https://fragout.example/api/outfit/analyze',{method:'POST'}),['outfit','analyze'],{...input,image:{...image},...extra},user,db);
  try{
   assert.equal((await call({paidEnabled:true}))?.status,400);assert.equal(calls,0);
@@ -68,5 +68,16 @@ test('malformed photos are rejected before hosted availability and consent check
  try{
   const response=await handleAiApi(new NextRequest('https://fragout.example/api/outfit/analyze',{method:'POST'}),['outfit','analyze'],{provider:'qwen',image:{mime:'image/png',data:Buffer.from('bad photo').toString('base64')}},user,db);
   assert.equal(response?.status,400);assert.equal(calls,0);
+ }finally{await db.close();}
+});
+
+test('legacy clients that displayed the previous host cannot upload to Groq by echoing status metadata',async t=>{
+ free(t,{FRAGOUT_VAULT_KEY:Buffer.alloc(32,23).toString('base64')});
+ const db=new Store(':memory:'),user=await db.register('Synthetic legacy member','legacy@example.test','synthetic-password');
+ const image={mime:'image/png',data:(await sharp({create:{width:8,height:8,channels:3,background:'white'}}).png().toBuffer()).toString('base64')};
+ let calls=0;const previous=globalThis.fetch;globalThis.fetch=async()=>{calls++;return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(parseOutfitText('White shirt'))}}]}));};t.after(()=>{globalThis.fetch=previous;});
+ try{
+  const response=await handleAiApi(new NextRequest('https://fragout.example/api/outfit/analyze',{method:'POST'}),['outfit','analyze'],{provider:'qwen',image,cloudConsent:{destination:'Groq',model,policyVersion:'qwen-groq-free-v1'}},user,db);
+  assert.equal(response?.status,409);assert.equal(calls,0);
  }finally{await db.close();}
 });
