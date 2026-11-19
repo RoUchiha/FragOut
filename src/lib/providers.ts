@@ -6,6 +6,7 @@ import {readBottleLabel} from './bottle-label-ocr.ts';
 import {DEFAULT_MODELS} from './vault.ts';
 import type {AiProvider} from './types.ts';
 import {localModelUrl} from './security.ts';
+import {qwenRuntime,qwenAccessToken} from './qwen-runtime.ts';
 export class ProviderError extends Error {status:number;constructor(message:string,status=503){super(message);this.status=status;}}
 export const LOCAL_MODEL=process.env.FRAGOUT_QWEN_MODEL??DEFAULT_MODELS.qwen;
 const LOCAL_URL=localModelUrl();
@@ -22,6 +23,11 @@ export async function prepareImage(input:ImageInput):Promise<ImageInput>{
 export function buildProviderRequest(provider:AiProvider,model:string,key:string|undefined,task:keyof typeof prompts,input:{text?:string;image?:ImageInput}):{url:string;headers:Record<string,string>;body:Record<string,unknown>}{
  const schema=z.toJSONSchema(task==='outfit'?outfitSchema:modelBottleSchema);
  const text=input.text?.trim()||'Describe the clothing in this photo.';
+ if(provider==='qwen'&&qwenRuntime().mode==='hosted'){
+  const runtime=qwenRuntime();
+  if(!key||model!==runtime.model)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
+  return {url:'https://ai-gateway.vercel.sh/v1/chat/completions',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:{model,store:false,max_tokens:900,temperature:0,reasoning_effort:'none',response_format:{type:'json_schema',json_schema:{name:'fragout_'+task,strict:true,schema}},providerOptions:{gateway:{only:['wafer','parasail'],zeroDataRetention:true,disallowPromptTraining:true}},messages:[{role:'system',content:prompts[task]},{role:'user',content:[{type:'text',text},...(input.image?[{type:'image_url',image_url:{url:`data:${input.image.mime};base64,${input.image.data}`}}]:[])]}]}};
+ }
  if(provider==='qwen')return {url:LOCAL_URL+'/api/chat',headers:{'Content-Type':'application/json'},body:{model,stream:false,think:false,keep_alive:0,format:schema,options:{temperature:0,num_ctx:2048,num_predict:700},messages:[{role:'system',content:prompts[task]},{role:'user',content:text,...(input.image?{images:[input.image.data]}:{})}]}};
  if(!key)throw new ProviderError('Connect your own API key in settings first.',409);
  if(provider==='openai')return {url:'https://api.openai.com/v1/responses',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:{model,store:false,max_output_tokens:900,instructions:prompts[task],input:[{role:'user',content:[{type:'input_text',text},...(input.image?[{type:'input_image',image_url:`data:${input.image.mime};base64,${input.image.data}`,detail:'low'}]:[])]}],text:{format:{type:'json_schema',name:'fragout_'+task,strict:true,schema}}}};
@@ -32,8 +38,8 @@ export async function localModelStatus(fetcher:typeof fetch=fetch){
   const data=await r.json() as {models?:{name:string}[]};return {reachable:true,installed:!!data.models?.some(m=>m.name===LOCAL_MODEL||m.name===LOCAL_MODEL+':latest'),model:LOCAL_MODEL};
  }catch{return {reachable:false,installed:false,model:LOCAL_MODEL};}
 }
-export async function runVision(provider:AiProvider,model:string,key:string|undefined,task:'outfit'|'bottle',input:{text?:string;image?:ImageInput},fetcher:typeof fetch=fetch){
- if(task==='outfit')return modelOutput(provider,model,key,task,input,fetcher).then(output=>{
+export async function runVision(provider:AiProvider,model:string,key:string|undefined,task:'outfit'|'bottle',input:{text?:string;image?:ImageInput},fetcher:typeof fetch=fetch,beforeTransport?:()=>Promise<void>){
+ if(task==='outfit')return modelOutput(provider,model,key,task,input,fetcher,beforeTransport).then(output=>{
   const parsed=outfitSchema.parse(output);
   return reviewPhotoOutfit(parsed);
  }).catch(error=>{
@@ -45,24 +51,33 @@ export async function runVision(provider:AiProvider,model:string,key:string|unde
  const fromLabel=groundedBottleCandidates(readings,[]);
  if(!readings.length||fromLabel.candidates.length===1)return fromLabel;
  let proposal:z.infer<typeof modelBottleSchema>['candidates']=[];
- try { proposal=modelBottleSchema.parse(await modelOutput(provider,model,key,task,input,fetcher)).candidates; }
- catch(error){if(provider!=='qwen'&&error instanceof ProviderError)throw error;}
+ try { proposal=modelBottleSchema.parse(await modelOutput(provider,model,key,task,input,fetcher,beforeTransport)).candidates; }
+ catch(error){if(error instanceof ProviderError&&(provider!=='qwen'||qwenRuntime().mode==='hosted'||[401,409].includes(error.status)))throw error;}
  return groundedBottleCandidates(readings,proposal);
 }
 
-async function modelOutput(provider:AiProvider,model:string,key:string|undefined,task:'outfit'|'bottle',input:{text?:string;image?:ImageInput},fetcher:typeof fetch){
- const request=buildProviderRequest(provider,model,key,task,input);let response:Response;
+async function modelOutput(provider:AiProvider,model:string,key:string|undefined,task:'outfit'|'bottle',input:{text?:string;image?:ImageInput},fetcher:typeof fetch,beforeTransport?:()=>Promise<void>){
+ const hosted=provider==='qwen'&&qwenRuntime().mode==='hosted';
+ const request=buildProviderRequest(provider,model,hosted?await qwenAccessToken():key,task,input);let response:Response;
+ await beforeTransport?.();
  try{response=await fetcher(request.url,{method:'POST',headers:request.headers,body:JSON.stringify(request.body),signal:AbortSignal.timeout(provider==='qwen'?150000:60000),redirect:'error'});}
- catch{throw new ProviderError(provider==='qwen'?'Qwen is not available. Start the local model, or choose your own provider.':'Provider request failed. Check your connection and try again.');}
+ catch{throw new ProviderError(hosted?'Hosted photo analysis is unavailable. Describe your outfit or try again later.':provider==='qwen'?'Qwen is not available. Start the local model, or choose your own provider.':'Provider request failed. Check your connection and try again.');}
+ if(hosted&&!response.ok)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.',response.status===429?429:503);
  if(!response.ok)throw new ProviderError(response.status===401||response.status===403?'API key rejected. Update the connection in settings.':response.status===429?'Provider limit reached. Try again later.':provider==='qwen'?'Qwen could not analyze this input. Check that the vision model is installed.':'Provider could not analyze this input.',response.status===429?429:503);
  try{
   const data=await response.json();
-  if(provider==='qwen')return JSON.parse(data.message?.content??'') as unknown;
+  if(provider==='qwen')return JSON.parse(hosted?data.choices?.[0]?.message?.content??'':data.message?.content??'') as unknown;
   if(provider==='openai'){const content=data.output?.flatMap((o:{content?:unknown[]})=>o.content??[])??[];const text=content.find((c:{type?:string})=>c.type==='output_text')?.text;return JSON.parse(text??'') as unknown;}
   return data.content?.find((c:{type?:string;name?:string})=>c.type==='tool_use'&&c.name==='describe_'+task)?.input as unknown;
  }catch{throw new ProviderError('The model returned an unclear result. Retake the photo or describe the outfit.');}
 }
 export async function testProvider(provider:AiProvider,model:string,key?:string){
+ if(provider==='qwen'&&qwenRuntime().mode==='hosted'){
+  const token=await qwenAccessToken();if(!token)throw new ProviderError('Hosted photo analysis is not configured.');
+  let response:Response;try{response=await fetch('https://ai-gateway.vercel.sh/v1/credits',{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(10000),cache:'no-store',redirect:'error'});}catch{throw new ProviderError('Hosted analysis could not be reached.');}
+  if(!response.ok)throw new ProviderError('Hosted analysis access could not be verified.');
+  const credits=await response.json();if(!(Number(credits.balance)>0))throw new ProviderError('Hosted analysis credits are unavailable. Contact the app owner.');return;
+ }
  if(provider==='qwen'){const state=await localModelStatus();if(!state.installed)throw new ProviderError('Install and start '+LOCAL_MODEL+' in Ollama first.');return;}
  const url=provider==='openai'?'https://api.openai.com/v1/models/':'https://api.anthropic.com/v1/models/';
  const headers:Record<string,string>=provider==='openai'?{Authorization:'Bearer '+key}:{'x-api-key':key??'','anthropic-version':'2023-06-01'};

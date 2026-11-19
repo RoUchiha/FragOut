@@ -9,6 +9,7 @@ import {imageSchema,outfitSchema,parseOutfitText,rankForOutfit} from './outfit.t
 import {LOCAL_MODEL,ProviderError,localModelStatus,prepareImage,runVision,testProvider} from './providers.ts';
 import {intentFields} from './validation.ts';
 import {enrichRecommendationBottles,reviewedPairsFor} from './recommendation-evidence.ts';
+import {qwenRuntime} from './qwen-runtime.ts';
 const json=(data:unknown,status=200)=>NextResponse.json(data,{status,headers:{'Cache-Control':'no-store','Vary':'Cookie, Authorization','Referrer-Policy':'no-referrer'}});
 const providerSchema=z.enum(['qwen','openai','claude']);
 const occasionSchema=z.enum(['GENERAL','GYM','DATE','WORK','PARTY','ERRANDS','CUSTOM']);
@@ -33,10 +34,10 @@ export async function handleAiApi(
  try{
   await verifySession();const key=installationKey(),vault=new CredentialVault(db.db,key),looks=new PrivateLooks(db,key),method=req.method;
   if(route==='ai/status'&&method==='GET'){
-   const local=await localModelStatus();
+   const qwen=qwenRuntime(),local=qwen.mode==='local'?await localModelStatus():{reachable:false,installed:false,model:LOCAL_MODEL};
    await verifySession();
    const [selected,connections]=await Promise.all([vault.selected(user.id),vault.metadata(user.id)]);
-   return await privateJson({selected,connections,local});
+   return await privateJson({selected,connections:connections.map(connection=>connection.provider==='qwen'?{...connection,model:qwen.model,configured:qwen.configured}:connection),local,qwen});
   }
   if(route==='ai/connection'&&method==='POST'){
    if(req.nextUrl.protocol!=='https:'&&!['localhost','127.0.0.1','[::1]'].includes(req.nextUrl.hostname))return json({error:'API key connections require HTTPS. Open the mobile preview on this computer or configure HTTPS.'},400);
@@ -52,16 +53,22 @@ export async function handleAiApi(
    const d=z.object({provider:providerSchema}).strict().parse(body),connection=d.provider==='qwen'?null:await vault.get(user.id,d.provider);
    await verifySession();
    if(d.provider!=='qwen'&&!connection)throw new ProviderError('Connect your own API key first.',409);
-   await testProvider(d.provider,connection?.model??LOCAL_MODEL,connection?.key);
+   await testProvider(d.provider,connection?.model??qwenRuntime().model,connection?.key);
    return await privateJson({ok:true});
   }
   if((route==='outfit/analyze'||route==='vision/bottle')&&method==='POST'){
    if(!await db.limit('vision:'+user.id,8,60000))return json({error:'Analysis limit reached. Please wait a minute.'},429);
-   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false)}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
+   const input=z.object({provider:providerSchema,text:z.string().trim().max(1800).optional(),image:imageSchema.optional(),archivePhoto:z.boolean().default(false),cloudConsent:z.object({destination:z.string().max(100),model:z.string().max(120),policyVersion:z.string().max(60)}).strict().optional()}).strict().refine(d=>!!d.text||!!d.image,'Add a photo or describe your outfit.').parse(body);
    if(route==='vision/bottle'&&input.archivePhoto)throw new ProviderError('Bottle photos cannot be archived.',400);
    const archiveConsent=input.image&&input.archivePhoto?await db.archiveConsent(user.id):null;
    const provider=await vault.selected(user.id);
    if(input.provider!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
+   const qwen=qwenRuntime();
+   if(provider==='qwen'&&qwen.mode==='hosted'&&input.image){
+    if(!input.cloudConsent||(['destination','model','policyVersion'] as const).some(field=>input.cloudConsent![field]!==qwen[field]))throw new ProviderError('Review the hosted Qwen photo destination before sending this image.',409);
+    if(!qwen.configured)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
+    if(!await db.limit('hosted-vision-user:'+user.id,10,86400000)||!await db.limit('hosted-vision-installation',150,86400000))throw new ProviderError('Hosted photo allowance reached. Describe your outfit or try again tomorrow.',429);
+   }
    let image;
    try{
     image=input.image?await prepareImage(input.image):undefined;
@@ -72,10 +79,15 @@ export async function handleAiApi(
     await verifySession();
     if(currentProvider!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
     if(provider!=='qwen'&&!connection)throw new ProviderError('Connect your own API key first.',409);
-    const model=provider==='qwen'?LOCAL_MODEL:connection!.model;
+    const model=provider==='qwen'?qwen.model:connection!.model;
+    const authorizeTransport=async()=>{
+     await verifySession();
+     if(await vault.selected(user.id)!==provider)throw new ProviderError('Provider changed. Review the selected connection before analyzing.',409);
+     await verifySession();
+    };
     if(route==='vision/bottle'){
      if(!image)throw new ProviderError('Take or choose a bottle photo.',400);
-     const result=await runVision(provider,model,connection?.key,'bottle',{image,text:'Read the exact visible fragrance label. Return only uncertain candidates.'});
+     const result=await runVision(provider,model,connection?.key,'bottle',{image,text:'Read the exact visible fragrance label. Return only uncertain candidates.'},undefined,authorizeTransport);
      return await privateJson({...result,provider,model});
     }
     let profile,method:'model'|'offline_rules'='model';
@@ -83,7 +95,7 @@ export async function handleAiApi(
      profile=parseOutfitText(input.text);
      method='offline_rules';
     }else{
-     profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image}));
+     profile=outfitSchema.parse(await runVision(provider,model,connection?.key,'outfit',{text:input.text,image},undefined,authorizeTransport));
     }
     await verifySession();
     const receipt:OutfitReceipt={id:randomUUID(),profile,provider,model:method==='model'?model:'offline-description-rules',method,createdAt:new Date().toISOString()};
