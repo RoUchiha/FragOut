@@ -87,6 +87,13 @@ function screen(name: 'Collection' | 'Outfit', provider: Provider, qwen?:{mode:'
 
 const hostedQwen={mode:'hosted' as const,configured:true,destination:'Vercel AI Gateway',model:'alibaba/qwen3.8-27b',policyVersion:'qwen-cloud-v1'};
 const qwenConsent={destination:hostedQwen.destination,model:hostedQwen.model,policyVersion:hostedQwen.policyVersion};
+test('free Qwen disclosure names Groq and sends only its reviewed destination',async()=>{
+ const qwen={...hostedQwen,destination:'Groq',model:'qwen/qwen3.8-27b',policyVersion:'qwen-groq-free-v1',cost:'free' as const,paidEnabled:false};
+ const app=screen('Outfit','qwen',qwen);await app.flush();app.action('Take selfie');await app.flush();
+ assert.ok(app.disclosure(/outfit photo.*Qwen Cloud.*Groq/i));assert.deepEqual(app.requests,[]);
+ app.action('Send to Qwen Cloud');await app.flush();
+ assert.deepEqual(app.requests,[{path:'outfit/analyze',body:{provider:'qwen',archivePhoto:false,image:{data:'synthetic',mime:'image/jpeg'},cloudConsent:{destination:'Groq',model:'qwen/qwen3.8-27b',policyVersion:'qwen-groq-free-v1'}}}]);
+});
 test('hosted Qwen bottle scanning waits for cloud permission and binds the approved destination',async()=>{
  const app=screen('Collection','qwen',hostedQwen);await app.flush();app.action('Scan bottle');await app.flush();
  assert.deepEqual(app.requests,[]);assert.ok(app.disclosure(/bottle photo.*Qwen Cloud/i));

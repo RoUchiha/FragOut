@@ -47,7 +47,9 @@ The catalog includes 218 exact editions with corroborated notes and one bundled 
 
 ## Free default, optional personal providers
 
-**Qwen3-VL 2B Instruct through Ollama is the default.** It runs on the FragOut server with no API fee. The first download is approximately 1.9 GB.
+**Production defaults to Qwen3.8 27B through Groq Free.** Activation requires an operator's dedicated Free account/key, no payment method, and Zero Data Retention enabled in Groq Data Controls. It stays unavailable until these are configured. Quotas apply; failures never trigger paid requests. [Protected setup and paid on/off switch](docs/OPERATIONS.md#hosted-photo-analysis).
+
+**Local development and private test use Qwen3-VL 2B Instruct through Ollama** with no API fee. The first download is approximately 1.9 GB.
 
 Install [Ollama](https://ollama.com/download), then:
 
@@ -85,7 +87,7 @@ Enable **Settings → Photo privacy → Archive outfit-fragrance looks** to keep
 
 Unsaved clothing descriptions and their recommendation copies expire after 15 minutes. The local server purges expired data on access and on a timer. Hosted FragOut also runs scheduled cleanup in Postgres. Saved looks remain until deletion or archive opt-out. Export includes the full journal, current descriptions and saved-look metadata, without passwords, tokens, provider keys or photo bytes. Native export copies use separate operation filenames, are removed after sharing, and cannot continue across account/server changes.
 
-Images are resized and stripped of EXIF before reaching the selected model. Qwen requests unload their local model context after use. OpenAI requests use `store:false`; cloud processing still follows the provider's separate retention policy. Speech recognition uses the device/browser service; FragOut receives the transcript, not a recorded audio upload.
+Images are resized and stripped of EXIF before reaching the selected model. Local Qwen requests unload their model context after use. Groq hosting requires account-level Zero Data Retention; paid Gateway hosting restricts routing to zero-retention, no-training providers. OpenAI requests use `store:false`. Cloud processing follows the selected provider's separate policy, disclosed before upload. Speech recognition uses the device/browser service; FragOut receives the transcript, not a recorded audio upload.
 
 Local FragOut uses SQLite at `data/fragout.sqlite`. Use a dedicated data directory. Startup rejects unrelated files and links and restricts permissions to the service user plus Windows SYSTEM and Administrators, or 700/600 on POSIX. Provider credentials and archived photos use AES-256-GCM with separate keys and owner-bound authentication. Preserve the installation key securely with your backups. The current account flow uses a password without email verification or recovery.
 
@@ -121,4 +123,4 @@ The current build passed 191 automated tests, 45 production HTTP checks and 173 
 
 Remaining production work includes signed phone builds and device acceptance, broader catalog and layering evidence, measured recommendation and vision quality, live weather, managed identity and recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database.
 
-Provider references: [Ollama chat API](https://docs.ollama.com/api/chat), [Qwen model](https://ollama.com/library/qwen3-vl:2b-instruct), [OpenAI image input](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses), [Claude vision](https://platform.claude.com/docs/en/build-with-claude/vision).
+Provider references: [Groq Qwen model](https://console.groq.com/docs/model/qwen/qwen3.8-27b), [Groq free limits](https://console.groq.com/docs/rate-limits), [Groq data controls](https://console.groq.com/docs/your-data), [Ollama chat API](https://docs.ollama.com/api/chat), [Qwen local model](https://ollama.com/library/qwen3-vl:2b-instruct), [OpenAI image input](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses), [Claude vision](https://platform.claude.com/docs/en/build-with-claude/vision).

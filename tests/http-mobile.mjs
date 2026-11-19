@@ -20,7 +20,7 @@ try{
  assert.equal((await call('state',{cookie:web.cookie})).status,200);pass('native logout without bearer cannot revoke companion cookie');
  assert.equal((await call('state',{token})).body.user.id,mobile.body.user.id);pass('native bearer authenticates its isolated account');
  const status=await call('ai/status',{token});assert.equal(status.body.selected,'qwen');
- assert.ok(status.body.connections.filter(c=>c.provider!=='qwen').every(c=>!c.configured));pass('new user defaults to free local Qwen with no borrowed paid key');
+ assert.ok(status.body.connections.filter(c=>c.provider!=='qwen').every(c=>!c.configured));pass('new user defaults to Qwen with no borrowed paid key');
  assert.equal((await call('ai/provider',{method:'PUT',token,data:{provider:'openai'}})).status,409);pass('paid provider requires that user connection');
  const fakeKey='sk-fixture-'+randomUUID();
  assert.equal((await call('ai/connection',{method:'POST',token,data:{provider:'openai',key:fakeKey}})).status,200);

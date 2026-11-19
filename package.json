@@ -8,6 +8,8 @@
     "build": "next build --webpack && node scripts/exclude-private-runtime.mjs && node scripts/check-public-build.mjs && node scripts/check-server-artifact.mjs",
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "start:cloud": "node --experimental-strip-types scripts/start-cloud.mjs",
+    "ai:paid": "node scripts/set-paid-ai.mjs",
+    "ai:configure-free": "node --experimental-strip-types scripts/configure-free-ai.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "catalog:scrape": "node --experimental-strip-types scripts/scrape-fragrance-catalog.mjs",

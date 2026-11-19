@@ -25,7 +25,8 @@ export function buildProviderRequest(provider:AiProvider,model:string,key:string
  const text=input.text?.trim()||'Describe the clothing in this photo.';
  if(provider==='qwen'&&qwenRuntime().mode==='hosted'){
   const runtime=qwenRuntime();
-  if(!key||model!==runtime.model)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
+  if(!runtime.configured||!key||model!==runtime.model)throw new ProviderError('Hosted photo analysis is unavailable. Describe your outfit or try again later.');
+  if(runtime.transport==='groq')return {url:'https://api.groq.com/openai/v1/chat/completions',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:{model,max_completion_tokens:900,temperature:0,reasoning_effort:'none',response_format:{type:'json_schema',json_schema:{name:'fragout_'+task,strict:true,schema}},messages:[{role:'system',content:prompts[task]},{role:'user',content:[{type:'text',text},...(input.image?[{type:'image_url',image_url:{url:`data:${input.image.mime};base64,${input.image.data}`}}]:[])]}]}};
   return {url:'https://ai-gateway.vercel.sh/v1/chat/completions',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:{model,store:false,max_tokens:900,temperature:0,reasoning_effort:'none',response_format:{type:'json_schema',json_schema:{name:'fragout_'+task,strict:true,schema}},providerOptions:{gateway:{only:['wafer','parasail'],zeroDataRetention:true,disallowPromptTraining:true}},messages:[{role:'system',content:prompts[task]},{role:'user',content:[{type:'text',text},...(input.image?[{type:'image_url',image_url:{url:`data:${input.image.mime};base64,${input.image.data}`}}]:[])]}]}};
  }
  if(provider==='qwen')return {url:LOCAL_URL+'/api/chat',headers:{'Content-Type':'application/json'},body:{model,stream:false,think:false,keep_alive:0,format:schema,options:{temperature:0,num_ctx:2048,num_predict:700},messages:[{role:'system',content:prompts[task]},{role:'user',content:text,...(input.image?{images:[input.image.data]}:{})}]}};
@@ -74,6 +75,11 @@ async function modelOutput(provider:AiProvider,model:string,key:string|undefined
 export async function testProvider(provider:AiProvider,model:string,key?:string){
  if(provider==='qwen'&&qwenRuntime().mode==='hosted'){
   const token=await qwenAccessToken();if(!token)throw new ProviderError('Hosted photo analysis is not configured.');
+  if(qwenRuntime().transport==='groq'){
+   let response:Response;try{response=await fetch('https://api.groq.com/openai/v1/models',{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(10000),cache:'no-store',redirect:'error'});}catch{throw new ProviderError('Free hosted analysis could not be reached.');}
+   if(!response.ok)throw new ProviderError('Free hosted analysis access could not be verified.');
+   const data=await response.json();if(!data.data?.some((entry:{id?:string})=>entry.id===qwenRuntime().model))throw new ProviderError('The free vision model is not available on this account.');return;
+  }
   let response:Response;try{response=await fetch('https://ai-gateway.vercel.sh/v1/credits',{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(10000),cache:'no-store',redirect:'error'});}catch{throw new ProviderError('Hosted analysis could not be reached.');}
   if(!response.ok)throw new ProviderError('Hosted analysis access could not be verified.');
   const credits=await response.json();if(!(Number(credits.balance)>0))throw new ProviderError('Hosted analysis credits are unavailable. Contact the app owner.');return;
