@@ -27,10 +27,9 @@ const garmentGroups=[
 export function garmentFacts(values:string[]){
  return [...new Set(values.flatMap(value=>{
   const text=normalized(value);
-  // One array item names a garment; a dress's skirt is not another item.
-  if(/\bdress(?:es)?\b/.test(text))return ['dress'];
-  if(garmentGroups.find(([name])=>name==='hoodie')![1].test(text))return ['hoodie'];
-  const matches=garmentGroups.filter(([,pattern])=>pattern.test(text)).map(([name])=>name as string);
+  // Suppress garment parts/synonyms, but still penalize unrelated extra items.
+  const primaryDress=/\bdress(?:es)?\b/.test(text),primaryHoodie=garmentGroups.find(([name])=>name==='hoodie')![1].test(text);
+  const matches=garmentGroups.filter(([name,pattern])=>pattern.test(text)&&!(primaryDress&&name==='skirt')&&!(primaryHoodie&&name==='shirt')).map(([name])=>name as string);
   if(/\bsuits?\b/.test(text))matches.push('blazer','trousers');
   return matches.length?matches:['other:'+text];
  }))];

@@ -22,6 +22,8 @@ Goal: establish whether the available local Qwen3-VL 2B produces useful, grounde
 - [x] Run local Qwen and request independent 6.1 Sol outputs on identical cases; preserve raw output, versions, image hashes and timing.
 - [x] Score grounding/utility/agreement and recommendation boundaries. Investigate failures; do not lower the criteria after seeing outputs.
 - [x] If a production defect is established, add a failing regression, fix narrowly and rerun affected live cases plus relevant source checks.
-- [ ] Commit a reproducible report, evaluator/fixtures as appropriate, and update PROJECT_CONTEXT.md. Obtain read-only review and required CI before merging.
+- [x] Commit a reproducible report/evaluator/fixtures and update PROJECT_CONTEXT.md. Obtain fresh read-only review and resolve findings.
+
+Protected release gate: required CI must pass on the final commit before merging. Track its exact-head result and release evidence under [PR 16](https://github.com/RoUchiha/FragOut/pull/16) and PROJECT_CONTEXT.md. Local final verification passed 312 tests, source/build/publication checks, private journeys and 173 security assertions. Final read-only review passed 68 focused tests and found no remaining issues. Raw Qwen weaknesses remain documented in [the report](../../MODEL_COMPARISON.md).
 
 Limits: this is a small controlled benchmark, not statistical equivalence or proof of real-world selfie accuracy. Synthetic illustration inputs and catalog packshots do not replace physical-device/natural-photo acceptance. The reference is the session model, not a separately configured OpenAI API adapter.

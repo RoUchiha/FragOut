@@ -112,6 +112,19 @@ test('independent OCR passes can corroborate the same label',()=>{
  assert.deepEqual(groundedBottleCandidates(['SAUVAGE\nDior'],[]).candidates.map(candidate=>candidate.concentration),['UNKNOWN']);
 });
 
+test('format-only labels cannot become scent names while named scents retain format words',()=>{
+ for(const name of ['Body Mist','Hair Mist','Perfume Mist','Fragrance Mist','Perfume Oil','Fragrance Oil','Pure Perfume','Eau de Parfum Natural Spray','Eau de Toilette Vaporisateur','Elixir']){
+  for(const proposal of [name,'TEST ATELIER '+name]){
+   const result=groundedBottleCandidates(['TEST ATELIER\n'+name],[{brand:'TEST ATELIER',name:proposal}]);
+   assert.deepEqual(result.candidates,[],name+' must not substitute for a missing fragrance name');
+  }
+ }
+ for(const name of ['Not A Perfume','Velvet Quay Perfume Oil','Sauvage Elixir']){
+  const result=groundedBottleCandidates(['TEST ATELIER\n'+name],[{brand:'TEST ATELIER',name}]);
+  assert.equal(result.candidates.length,1);assert.equal(result.candidates[0].name,name);
+ }
+});
+
 test('consecutive lines in one OCR pass can identify the exact printed catalog name',()=>{
  const label='BLEU\nDE\nCHANEL\nEAU DE PARFUM';
  const result=groundedBottleCandidates([label],[]);

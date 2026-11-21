@@ -121,7 +121,7 @@ node --experimental-strip-types scripts/check-qwen-photo.mjs
 node --experimental-strip-types --test scripts/check-qwen-grounding.mjs
 ```
 
-The November 21 model-comparison change passed 306 automated tests. Production builds also check deployment traces and public assets for private files. Dated release, HTTP and security results are maintained in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md#13-verification-and-evidence); older reports retain their original counts. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
+The November 21 model-comparison change passed 312 automated tests. Production builds also check deployment traces and public assets for private files. Dated release, HTTP and security results are maintained in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md#13-verification-and-evidence); older reports retain their original counts. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
 Remaining work includes signed phone builds and device acceptance, hosted free-model activation and measurement, broader natural-photo/catalog/layering evidence, live weather, managed identity and recovery, operational review and a full accessibility audit. Production uses HTTPS and managed storage; a local SQLite installation requires a persistent single-host Node process.
 

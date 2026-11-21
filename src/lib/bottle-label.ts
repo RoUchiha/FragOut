@@ -31,6 +31,14 @@ const concentrations=[
  ['PARFUM',/^parfum$/],
 ] as const;
 const concentrationPrefixes=/^(?:eau(?: de)?|extrait de)$/;
+const formatPrefix=/^(?:(?:perfume|fragrance|body|hair) mist|(?:perfume|fragrance) oil|pure perfume|natural spray|vaporisateur|extrait(?: de parfum)?|(?:eau de )?(?:parfum|perfume|toilette|cologne)|edp|edt|edc|elixir)(?: |$)/;
+const isFormatOnlyName=(name:string)=>{
+ // Consume whole format phrases, including combinations such as
+ // "eau de parfum natural spray". Preserve names containing other words.
+ let remaining=name;
+ while(formatPrefix.test(remaining))remaining=remaining.replace(formatPrefix,'');
+ return remaining.length===0;
+};
 
 export function groundedBottleCandidates(readings:string[],proposal:z.infer<typeof modelBottleSchema>['candidates']) {
  const labelLines:string[]=[];
@@ -76,7 +84,7 @@ export function groundedBottleCandidates(readings:string[],proposal:z.infer<type
   const house=normalize(candidate.brand);
   const normalizedName=normalize(candidate.name);
   const printedName=normalizedName.startsWith(house+' ')?normalizedName.slice(house.length+1):normalizedName;
-  if(/^(?:(?:eau de )?(?:parfum|toilette|cologne)|extrait(?: de parfum)?|edp|edt|edc|natural spray|vaporisateur)$/.test(printedName))continue;
+  if(isFormatOnlyName(printedName))continue;
   if(house&&printedName!==house&&hasVisibleBrand(house)&&(printedNames.has(printedName)||printedNames.has(house+' '+printedName))){
    add(candidate.brand,candidate.name);
   }

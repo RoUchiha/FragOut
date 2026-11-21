@@ -21,6 +21,12 @@ test('evaluation normalizes only declared garment and color synonyms',()=>{
  assert.deepEqual(garmentFacts(['Red dress with a flared skirt','Green hooded top']),['dress','hoodie']);
 });
 
+test('primary-garment normalization preserves unrelated extra garments in the same item',()=>{
+ assert.deepEqual(garmentFacts(['Red dress with a flared skirt and a black hat']),['dress','hat']);
+ assert.deepEqual(garmentFacts(['Green hooded top with a tie']),['hoodie','tie']);
+ assert.equal(factScore(garmentFacts(['Red dress with a flared skirt and a black hat']),['dress']).precision,.5);
+});
+
 test('evaluation reports raw unsupported outfit claims separately from a safe app abstention',()=>{
  const raw={...parseOutfitText('white shirt'),garments:['fragrance bottle'],colors:['brown'],hasOutfit:true};
  const result=evaluateOutfit(raw,{hasOutfit:false,garments:[],colors:[]});
