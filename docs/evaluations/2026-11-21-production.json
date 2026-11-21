@@ -1,0 +1,40 @@
+{
+  "at": "2026-11-21T08:42:05.482Z",
+  "origin": "https://fragout-wardrobe.vercel.app",
+  "revision": "905c925b4ae0",
+  "environment": "production",
+  "paidAiEnabled": false,
+  "readOnly": true,
+  "modelInference": false,
+  "productionDataWrites": false,
+  "checks": [
+    {
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "path": "/api/ready",
+      "status": 200
+    },
+    {
+      "path": "/mobile",
+      "status": 200
+    },
+    {
+      "path": "/privacy",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "path": "/api/ai/status",
+      "status": 401
+    },
+    {
+      "path": "/api/looks",
+      "status": 401
+    }
+  ]
+}

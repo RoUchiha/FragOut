@@ -1,0 +1,20 @@
+{
+  "at": "2026-11-21T08:42:12.108Z",
+  "productionSecrets": [
+    {
+      "name": "FRAGOUT_DATABASE_URL",
+      "type": "sensitive",
+      "scope": "production only"
+    },
+    {
+      "name": "FRAGOUT_VAULT_KEY",
+      "type": "sensitive",
+      "scope": "production only"
+    }
+  ],
+  "testHasProductionSecrets": false,
+  "localTextFiles": 37,
+  "referencedLiveAssets": 12,
+  "privatePathsDenied": 7,
+  "knownCredentialMatches": 0
+}
