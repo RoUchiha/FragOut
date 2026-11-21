@@ -6,6 +6,11 @@ import {join} from 'node:path';
 import vm from 'node:vm';
 import ts from 'typescript';
 import sharp from 'sharp';
+import {readBottleLabel} from '../src/lib/bottle-label-ocr.ts';
+import {groundedBottleCandidates} from '../src/lib/bottle-label.ts';
+import {findCatalogProfile} from '../src/lib/catalog.ts';
+import * as ocrLines from '../src/lib/bottle-ocr-lines.ts';
+import {prepareImage} from '../src/lib/providers.ts';
 
 const require=createRequire(import.meta.url);
 function load(){
@@ -13,6 +18,7 @@ function load(){
  const source=readFileSync(new URL('../src/lib/bottle-label-ocr.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText,{
   module,exports:module.exports,Buffer,process,setTimeout,clearTimeout,require:(name:string)=>{
+   if(name==='./bottle-ocr-lines.ts')return ocrLines;
    if(name==='@tesseract.js-data/eng')throw new Error('Language module is not resolvable in this serverless package');
    if(name==='tesseract.js')return {OEM:{LSTM_ONLY:1},PSM:{SPARSE_TEXT:11},createWorker:async(_language:string,_engine:number,options:{langPath:string})=>{
     calls.push({path:options.langPath});return {setParameters:async()=>{},recognize:async()=>({data:{tsv:'5\t1\t1\t1\t1\t1\t0\t0\t0\t0\t95\tDior'}}),terminate:async()=>{}};
@@ -32,4 +38,11 @@ test('OCR uses the local traced English data rather than a package alias or remo
  const result=await h.read({data:png.toString('base64'),mime:'image/png'});
  assert.ok(result.includes('Dior'));assert.equal(h.calls[0].path,join(process.cwd(),'node_modules','@tesseract.js-data','eng','4.0.0_best_int'));
  assert.ok(existsSync(join(h.calls[0].path,'eng.traineddata.gz')));
+});
+
+test('the bundled three-line bottle label keeps its small connector word without guessing identity',async()=>{
+ const profile=findCatalogProfile({brand:'Chanel',name:'Bleu de Chanel',concentration:'EDP'})!;
+ const image=await prepareImage({mime:'image/jpeg',data:readFileSync(new URL('../public'+profile.photo!.path,import.meta.url)).toString('base64')});
+ const readings=await readBottleLabel(image),result=groundedBottleCandidates(readings,[]);
+ assert.equal(result.candidates.length,1);assert.equal(result.candidates[0].name,'Bleu de Chanel');
 });

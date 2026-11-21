@@ -99,7 +99,7 @@ The private test runtime has a separate local database, key and address. Product
 
 ## Verification and limits
 
-See the [web, iOS and model grounding report](docs/WEB_IOS_ACCEPTANCE.md) for the latest results and the [12 November 2026 acceptance report](docs/ACCEPTANCE_REPORT.md) for Android and cloud checks.
+See the [November 21 Qwen versus 6.1 Sol comparison](docs/MODEL_COMPARISON.md) and maintained [current verification state](PROJECT_CONTEXT.md#13-verification-and-evidence). Earlier evidence is in the [web/iOS report](docs/WEB_IOS_ACCEPTANCE.md) and [November 12 acceptance report](docs/ACCEPTANCE_REPORT.md).
 
 ```powershell
 npm.cmd run typecheck
@@ -121,8 +121,8 @@ node --experimental-strip-types scripts/check-qwen-photo.mjs
 node --experimental-strip-types --test scripts/check-qwen-grounding.mjs
 ```
 
-The current build passed 191 automated tests, 45 production HTTP checks and 173 privacy and session assertions. Production builds also check deployment traces and public assets for private files. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
+The November 21 model-comparison change passed 312 automated tests. Production builds also check deployment traces and public assets for private files. Dated release, HTTP and security results are maintained in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md#13-verification-and-evidence); older reports retain their original counts. See the [security assessment](docs/SECURITY_REPORT.md), [original mobile verification](docs/MOBILE_VERIFICATION.md) and [mobile build instructions](mobile/README.md).
 
-Remaining production work includes signed phone builds and device acceptance, broader catalog and layering evidence, measured recommendation and vision quality, live weather, managed identity and recovery, HTTPS hosting, operational review and a full accessibility audit. Use a persistent single-host Node process for the local database.
+Remaining work includes signed phone builds and device acceptance, hosted free-model activation and measurement, broader natural-photo/catalog/layering evidence, live weather, managed identity and recovery, operational review and a full accessibility audit. Production uses HTTPS and managed storage; a local SQLite installation requires a persistent single-host Node process.
 
 Provider references: [Groq Qwen model](https://console.groq.com/docs/model/qwen/qwen3.8-27b), [Groq free limits](https://console.groq.com/docs/rate-limits), [Groq data controls](https://console.groq.com/docs/your-data), [Ollama chat API](https://docs.ollama.com/api/chat), [Qwen local model](https://ollama.com/library/qwen3-vl:2b-instruct), [OpenAI image input](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses), [Claude vision](https://platform.claude.com/docs/en/build-with-claude/vision).
