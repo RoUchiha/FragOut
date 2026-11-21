@@ -16,7 +16,7 @@ export function validateImage(input:unknown){
  if(!(image.mime==='image/jpeg'&&jpeg||image.mime==='image/png'&&png||image.mime==='image/webp'&&webp))throw new Error('Image type does not match its contents.');
  return bytes;
 }
-const garmentWords=/\b(t-?shirts?|shirts?|blouses?|tops?|polos?|blazers?|suits?|tuxedos?|dresses?|skirt[s]?|jeans|trousers|pants|shorts|hoodies?|sweaters?|jumpers?|jackets?|coats?|sneakers?|trainers?|boots?|loafers?|heels?|chinos|leggings|tracksuits?|shoes?|socks?|sandals?|scarves?|scarfs?|hats?|caps?|ties?|cardigans?|vests?|uniforms?|outfits?|bodysuits?|jumpsuits?|abaya[s]?|kimonos?)\b/i;
+const garmentWords=/\b(t-?shirts?|shirts?|blouses?|tops?|polos?|blazers?|suits?|tuxedos?|dress(?:es)?|skirt[s]?|jeans|trousers|pants|shorts|hoodies?|sweatshirts?|sweaters?|jumpers?|jackets?|coats?|sneakers?|trainers?|boots?|loafers?|heels?|chinos|leggings|tracksuits?|shoes?|socks?|sandals?|scarves?|scarfs?|hats?|caps?|ties?|cardigans?|vests?|uniforms?|outfits?|bodysuits?|jumpsuits?|abaya[s]?|kimonos?)\b/i;
 const colorWords=/\b(black|white|grey|gray|navy|blue|green|red|pink|yellow|orange|beige|cream|brown|purple|burgundy|olive|tan|teal|gold|silver)\b/gi;
 const unique=(items:string[])=>[...new Map(items.map(s=>[s.toLowerCase(),s])).values()];
 const paletteFor=(colors:string[]):OutfitProfile['palette']=>{
@@ -34,19 +34,22 @@ export function parseOutfitText(text:string):OutfitProfile {
  if(!garments.length)return unidentifiedOutfit;
  const colors=unique(positive.match(colorWords)??[]).slice(0,8);
  const tags:OutfitProfile['styleTags']=[];
- if(/\b(tuxedos?|suits?|blazers?|tailored)\b/.test(positive))tags.push('tailored');
- if(/\b(hoodies?|jeans|t-?shirts?|casual|sneakers?|trainers?)\b/.test(positive))tags.push('casual');
+ const lapelledJacket=/\bjackets?\b/.test(positive)&&/\blapels?\b/.test(positive);
+ if(lapelledJacket||/\b(tuxedos?|suits?|blazers?|tailored)\b/.test(positive))tags.push('tailored');
+ if(/\b(hoodies?|hooded\s+(?:sweatshirts?|tops?)|sweatshirts?|shorts|jeans|t-?shirts?|casual|sneakers?|trainers?)\b/.test(positive))tags.push('casual');
  if(/\b(sporty|gym|tracksuits?|leggings|athletic)\b/.test(positive))tags.push('sporty');
  if(/\b(minimal|monochrome)\b/.test(positive))tags.push('minimal');
  if(/\b(evening|dinner|party|club)\b/.test(positive))tags.push('evening');
  if(/\b(streetwear|oversized)\b/.test(positive))tags.push('streetwear');
  if(/\b(floral|romantic|lace)\b/.test(positive))tags.push('romantic');
  if(/\b(hiking|outdoors|trail)\b/.test(positive))tags.push('outdoors');
- return {summary:input.slice(0,300),garments,colors,styleTags:tags,formality:/\b(tuxedos?|formal|suits?)\b/.test(positive)?'formal':/\b(smart|tailored|blazers?)\b/.test(positive)?'smart':'casual',palette:paletteFor(colors),hasOutfit:true,uncertainty:[]};
+ return {summary:input.slice(0,300),garments,colors,styleTags:tags,formality:/\b(tuxedos?|formal|suits?)\b/.test(positive)?'formal':lapelledJacket||/\b(smart|tailored|blazers?)\b/.test(positive)?'smart':'casual',palette:paletteFor(colors),hasOutfit:true,uncertainty:[]};
 }
 
 export function reviewPhotoOutfit(candidate:OutfitProfile):OutfitProfile {
- if(!candidate.hasOutfit)return unidentifiedOutfit;
+ // A presence claim cannot override the model's own explicit absence evidence.
+ // This is a conservative contradiction check, not an image/text classifier.
+ if(!candidate.hasOutfit||/\bno(?:\s+visible)?\s+(?:clothing|clothes|garments?|outfit)\b|\b(?:text[- ]only|only(?:\s+a)?\s+text)\b/i.test(candidate.summary))return unidentifiedOutfit;
  const garments=unique(candidate.garments.filter(item=>garmentWords.test(item)));
  if(!garments.length)return unidentifiedOutfit;
  const colors=unique(candidate.colors.flatMap(color=>color.toLowerCase().match(colorWords)??[])).slice(0,8);

@@ -1,6 +1,6 @@
 # FragOut: maintained project context and chat handoff
 
-**Last context review:** 2026-11-19 UTC (18 November in the owner's America/Chicago time zone).
+**Last context review:** 2026-11-21 UTC.
 
 **Last substantive application release:** PR [#14](https://github.com/RoUchiha/FragOut/pull/14), main commit **601ce95d42f1146d3d4c5df011faa8e2a69fd43e**, reviewed feature head **a327a4a** with the same tree. This document is introduced afterward by a documentation change. Use Git and the live health endpoint for the exact current documentation/deployment SHA; do not try to put this file's own commit hash inside itself.
 
@@ -106,7 +106,7 @@ Do not rebuild over a running private test server. Identify and stop only this c
 | Area | State at the last substantive release |
 | --- | --- |
 | Public web app | Deployed at [fragout-wardrobe.vercel.app](https://fragout-wardrobe.vercel.app); primary mobile web interface at [/mobile](https://fragout-wardrobe.vercel.app/mobile). |
-| API/storage | Production private Supabase schema and vault configured; public liveness and readiness returned 200 again during this handoff review. |
+| API/storage | Production private Supabase schema and vault configured; public liveness/readiness returned 200 on November 19 and on the November 21 comparison's initial read (revision 6c4adf8c2d0f). |
 | App-funded paid AI | Explicitly OFF. Production backend preference is auto; exact paid opt-in is false. No AI credit purchase or paid upgrade was performed. |
 | Free hosted selfie model | Groq Qwen3.8 27B adapter deployed, but **not activated** at the last authenticated check. Dedicated Free key and Free/ZDR confirmations remain outstanding. Do not claim live hosted photo inference works yet. |
 | Typed/dictated outfits | Verified offline clothing parser; no hosted inference required under Qwen. Recommendations remain grounded in owned bottles and recorded source evidence. |
@@ -120,6 +120,8 @@ Do not rebuild over a running private test server. Identify and stop only this c
 **Immediate unfinished service task:** complete protected Groq Free/ZDR/key setup, then run an actual synthetic-photo smoke test through the published app. Keep paid off. Do not spend money as a shortcut.
 
 **Immediate native task after activation:** verify the latest signed client includes the Groq-specific destination disclosure; older clients are deliberately rejected before a Groq upload. Establish a real TestFlight build and physical-iPhone acceptance instead of calling bundle exports “published.”
+
+**Model comparison (November 21):** completed actual local qwen3-vl:2b-instruct versus the requested blind gpt-6.1-sol session reference on 15 image and four typed cases. The checked app pipeline passes the fixed small-corpus criteria after parser/OCR/validation fixes: 3/3 readable labels, 3/3 unsuitable-image abstentions, no unsupported grounded bottle identity, and 14/14 top-solo comparisons (seven photos in two wardrobes). Raw Qwen is materially weaker: image-only bottle recall 0/3 versus 3/3, OCR-assisted raw recall 1/3 versus 3/3, strict raw unsuitable-image abstention 1/3 versus 3/3. Local CPU median/p95 model calls were 30.30/33.21 seconds. Do not claim raw equivalence, general prompt-injection immunity or natural-selfie certification. The session reference requires no OpenAI API key and is not an API sampling/latency benchmark. Hosted Qwen3.8 27B remains untested and unconfigured (metadata rechecked November 21). See [the full report](docs/MODEL_COMPARISON.md) and [fixed plan](docs/superpowers/plans/2026-11-21-model-comparison.md). Source/release verification is tracked in section 13.
 
 The owner later requested this maintained handoff. Adding it does not authorize enabling paid AI, buying credits, accepting new terms, changing database hosting or making unrelated product changes.
 
@@ -530,7 +532,15 @@ Focused regressions worth retaining:
 - backups.test.ts: complete coverage, schema drift, tampering, restored byte/owner/FK integrity and one-way refresh.
 - catalog/photo/layering tests: exact editions, provenance, source restrictions, admin precedence and evidence tiers.
 
-### Last substantive release evidence
+### November 21 model-comparison evidence
+
+- Full local comparison and sanitized raw outputs: [docs/MODEL_COMPARISON.md](docs/MODEL_COMPARISON.md), [final JSON](docs/evaluations/2026-11-21-vision.json), [valid standalone bottle baseline](docs/evaluations/2026-11-21-standalone-bottles.json) and [actual processing checks](docs/evaluations/2026-11-21-live-provider.json).
+- New evaluator/fixture/runner code is in scripts/model-evaluation.ts, model-fixtures.mjs and compare-vision.mjs. Both model inputs are fingerprinted; the session reference is blind. Typed Qwen-route cases use offline rules. Future fresh runs record exact model weights and refuse implicit reuse of old outputs.
+- Fixed singular dress and sweatshirt vocabulary, casual shorts/lapelled-jacket interpretation, explicit no-clothing contradictions, small actually-read OCR connector words, bounded untrusted OCR context for Qwen bottles, and generic concentration-as-name proposals. Real OCR and exact brand/name grounding remain mandatory. OpenAI/Claude transport behavior is unchanged; privacy disclosure now includes the OCR transcript.
+- Root suite: **306/306 passed**; root TypeScript, mobile lint/TypeScript and root/mobile dependency audits passed (zero advisories). Web and Android/iOS JavaScript/Hermes exports passed. Web build passed publication checks (11 traces/248 public assets) and isolated OCR/API loading. Private HTTPS passed 30 operational, 20 web, 17 mobile/API and 133 discovery assertions with disposable-account cleanup. The isolated synthetic attack lab passed 173 assertions across 12 groups. Fresh review and protected CI/release are still in progress; do not interpret exports as a signed phone release.
+- No OpenAI API call/key, paid enablement, hosted inference, production-data mutation or personal photo was used. Work artifacts are synthetic/public packshots under work/fragout-model-comparison-2026-11-21 outside Git. The initial bottle harness text was wrong and excluded; the valid five-bottle baseline and later same-input OCR-assisted reruns are documented rather than hidden.
+
+### November 19 substantive release evidence (historical baseline)
 
 | Check | Verified result and limit |
 | --- | --- |
@@ -548,7 +558,7 @@ Focused regressions worth retaining:
 
 Passing remote quality evidence: [feature branch](https://github.com/RoUchiha/FragOut/actions/runs/44453130186), [PR](https://github.com/RoUchiha/FragOut/actions/runs/44453138093), [merged main](https://github.com/RoUchiha/FragOut/actions/runs/44453555933).
 
-The public health/readiness endpoints were read again during this handoff review and both returned 200 for feature baseline 601ce95d42f1, with paidAiEnabled false. Exact current deployment revision may advance with this documentation change; recheck instead of treating the stored ID as permanent.
+The public health/readiness endpoints were read again during the November 19 handoff review and both returned 200 for feature baseline 601ce95d42f1, with paidAiEnabled false. Exact current deployment revision advances; recheck instead of treating the stored ID as permanent.
 
 Initial handoff-document verification on November 19 checked **88 local file/heading links**, staged whitespace/diff validity and a redacted Gitleaks scan of all four changed documents; all passed with no leak findings. Repository visibility, remote main, required-check protection and latest quality/backup run metadata were read again. No application code, secret configuration, database or native release was changed by this documentation task. Its PR/CI outcome is discoverable in GitHub rather than fabricated as part of the earlier 291-test release.
 
@@ -605,6 +615,7 @@ For bad code, roll back to a verified prior Vercel production deployment. Inspec
 | Native simulator session would not persist | Keychain entitlement must be embedded during Xcode build. Simulator signing identity is isolated from distribution signing. |
 | Keyboard hid account controls on iOS | Keyboard avoidance moved to the full sheet; keep native regression flows. |
 | Catalog/thumbnail promises looked complete | Identity coverage, full profile coverage, supported score coverage and image certainty are distinct. N/A or abstention is safer than fabricated facts/wrong-release photos. |
+| Singular “dress” disappeared from clothing input | The old dresses? expression did not match singular dress. A failing regression reproduced it; dress(?:es)? preserves both singular and plural. The November 21 comparison also tests a visible dress and typed dress input. |
 
 If an approval tool rejects an operation, finish unaffected work, report the exact blocked action/reason and seek only the missing authorization. Earlier rejected credential transfers were later explicitly approved for the listed destinations; do not resurrect resolved blockers.
 
@@ -639,6 +650,7 @@ Do not casually reopen settled decisions: local test storage, no production-to-t
 | Mobile run/release/ads | [mobile/README.md](mobile/README.md), [docs/APP_STORE.md](docs/APP_STORE.md) |
 | Privacy/session/security evidence | [docs/SECURITY_REPORT.md](docs/SECURITY_REPORT.md) |
 | Historical web/iOS/model acceptance | [docs/WEB_IOS_ACCEPTANCE.md](docs/WEB_IOS_ACCEPTANCE.md), [docs/ACCEPTANCE_REPORT.md](docs/ACCEPTANCE_REPORT.md) |
+| November 21 local Qwen / blind 6.1 Sol comparison | [docs/MODEL_COMPARISON.md](docs/MODEL_COMPARISON.md), [docs/evaluations](docs/evaluations/2026-11-21-vision.json) |
 | Parfumo workflows and verification | [docs/PARFUMO_RESEARCH.md](docs/PARFUMO_RESEARCH.md), [docs/PARFUMO_VERIFICATION.md](docs/PARFUMO_VERIFICATION.md) |
 | Bottle source investigations | [docs/PARFUMO_IMAGES.md](docs/PARFUMO_IMAGES.md), [docs/MANUFACTURER_IMAGES.md](docs/MANUFACTURER_IMAGES.md) |
 | Latest free-route implementation plan | [docs/superpowers/plans/2026-11-18-free-vision-switch.md](docs/superpowers/plans/2026-11-18-free-vision-switch.md) |
@@ -682,6 +694,7 @@ Keep this short and useful. New entries should record decisions/outcomes, not a 
 | PR [#13](https://github.com/RoUchiha/FragOut/pull/13), code 8a10724 | Production hosted Qwen through invocation-scoped OIDC, private routing, exact cloud consent and late authorization checks. Credits were not purchased. |
 | PR [#14](https://github.com/RoUchiha/FragOut/pull/14), code 601ce95 | Free Groq adapter + default paid-off switch, protected owner setup, Production-only scope guard and updated-client disclosure marker. 291 tests and Linux/public/private checks passed; live Groq activation still awaits owner account/key/ZDR. |
 | 2026-11-19 UTC handoff documentation | Owner requested a full maintained context for all future chats. Added this authoritative file, root AGENTS/CLAUDE discovery instructions and README pointer. Re-read source/runbooks, confirmed public repository/main, passing feature CI and initial backup run, and public production health/readiness 200 with paid off. Application behavior unchanged; documentation verification belongs to this change, prior runtime evidence remains dated above. |
+| 2026-11-21 model comparison | Compared actual local 2B Qwen with blind 6.1 Sol on 15 images/four typed descriptions. Raw Qwen had bottle/abstention failures; targeted parser, OCR and validation fixes make the checked app pass this small corpus, including 14/14 recommendation comparisons. Preserved weak raw results and documented phased reruns, limits and CPU timing. Added reusable evaluator/regressions; 306 tests, source/build/bundle checks, private HTTPS journeys and 173 isolated security assertions pass. Hosted 27B, paid flag, provider credentials and production data unchanged. Review/required CI and release checks remain in progress in section 13. |
 
 ### Completion checklist for future handoffs
 

@@ -1,0 +1,86 @@
+{
+  "at": "2026-11-21T08:11:06.294Z",
+  "model": "qwen3-vl:2b-instruct",
+  "rows": [
+    {
+      "id": "c03",
+      "elapsedMs": 34086,
+      "result": {
+        "summary": "Green hooded sweatshirt, Dark blue pants, White shoes. Colors: green, blue, white.",
+        "garments": [
+          "Green hooded sweatshirt",
+          "Dark blue pants",
+          "White shoes"
+        ],
+        "colors": [
+          "green",
+          "blue",
+          "white"
+        ],
+        "styleTags": [
+          "casual"
+        ],
+        "formality": "casual",
+        "palette": "neutral",
+        "hasOutfit": true,
+        "uncertainty": [
+          "Check the clothing and colors against your photo before continuing."
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "elapsedMs": 34625,
+      "result": {
+        "summary": "",
+        "garments": [],
+        "colors": [],
+        "styleTags": [],
+        "formality": "casual",
+        "palette": "neutral",
+        "hasOutfit": false,
+        "uncertainty": []
+      }
+    },
+    {
+      "id": "c11",
+      "elapsedMs": 31311,
+      "result": {
+        "candidates": [
+          {
+            "brand": "TEST ATELIER",
+            "name": "VELVET QUAY",
+            "concentration": "EDP",
+            "confidence": "uncertain",
+            "clue": "Compare these label details with your bottle."
+          }
+        ],
+        "message": "Check the exact label before saving."
+      }
+    },
+    {
+      "id": "c13",
+      "elapsedMs": 841,
+      "result": {
+        "candidates": [
+          {
+            "brand": "Chanel",
+            "name": "Bleu de Chanel",
+            "concentration": "EDP",
+            "confidence": "uncertain",
+            "clue": "Compare these label details with your bottle."
+          }
+        ],
+        "message": "Check the exact label before saving."
+      }
+    },
+    {
+      "id": "c14",
+      "elapsedMs": 29543,
+      "result": {
+        "candidates": [],
+        "message": "No readable fragrance label. Retake the photo or enter it manually."
+      }
+    }
+  ]
+}

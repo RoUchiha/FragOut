@@ -42,6 +42,27 @@ test('provider failure cannot spill provider response content or silently call a
  assert.equal(calls,1);
 });
 
+test('a readable unfamiliar bottle supplies bounded OCR data and keeps the resulting candidate grounded',async()=>{
+ const source=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="700" height="760"><rect width="700" height="760" fill="white"/><rect x="120" y="150" width="460" height="520" fill="#333"/><rect x="150" y="310" width="400" height="180" fill="white"/><g text-anchor="middle" font-family="Arial" font-weight="bold"><text x="350" y="360" font-size="37">TEST ATELIER</text><text x="350" y="411" font-size="44">VELVET QUAY</text><text x="350" y="458" font-size="25">EAU DE PARFUM</text></g></svg>');
+ const image=await prepareImage({mime:'image/png',data:(await sharp(source).png().toBuffer()).toString('base64')});
+ let calls=0;
+ const fake:typeof fetch=async(_url,options)=>{
+  calls++;const request=JSON.parse(String(options?.body)),text=request.messages[1].content;
+  const available=text.includes('TEST ATELIER')&&text.includes('VELVET QUAY');
+  return new Response(JSON.stringify({message:{content:JSON.stringify({candidates:available?[{brand:'TEST ATELIER',name:'VELVET QUAY'}]:[]})}}));
+ };
+ const result=await runVision('qwen','test',undefined,'bottle',{image},fake);
+ assert.equal(calls,1);assert.ok('candidates' in result);assert.equal(result.candidates.length,1);
+ assert.equal(result.candidates[0].name,'VELVET QUAY');assert.equal(result.candidates[0].confidence,'uncertain');
+});
+
+test('a concentration label cannot become an unfamiliar fragrance name even when a model proposes it',()=>{
+ for(const name of ['Eau de Parfum','Eau de Toilette','Extrait de Parfum']){
+  const result=groundedBottleCandidates(['TEST ATELIER\n'+name],[{brand:'TEST ATELIER',name}]);
+  assert.deepEqual(result.candidates,[]);
+ }
+});
+
 const replyFromQwen=(output:unknown):typeof fetch=>async()=>new Response(JSON.stringify({message:{content:JSON.stringify(output)}}));
 
 test('outfit abstention removes unrelated photo objects and inferred style fields',async()=>{

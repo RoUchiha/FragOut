@@ -76,6 +76,7 @@ export function groundedBottleCandidates(readings:string[],proposal:z.infer<type
   const house=normalize(candidate.brand);
   const normalizedName=normalize(candidate.name);
   const printedName=normalizedName.startsWith(house+' ')?normalizedName.slice(house.length+1):normalizedName;
+  if(/^(?:(?:eau de )?(?:parfum|toilette|cologne)|extrait(?: de parfum)?|edp|edt|edc|natural spray|vaporisateur)$/.test(printedName))continue;
   if(house&&printedName!==house&&hasVisibleBrand(house)&&(printedNames.has(printedName)||printedNames.has(house+' '+printedName))){
    add(candidate.brand,candidate.name);
   }
