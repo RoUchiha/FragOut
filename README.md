@@ -99,7 +99,7 @@ The private test runtime has a separate local database, key and address. Product
 
 ## Verification and limits
 
-See the [November 21 Qwen versus 6.1 Sol comparison](docs/MODEL_COMPARISON.md) and maintained [current verification state](PROJECT_CONTEXT.md#13-verification-and-evidence). Earlier evidence is in the [web/iOS report](docs/WEB_IOS_ACCEPTANCE.md) and [November 12 acceptance report](docs/ACCEPTANCE_REPORT.md).
+See the [direct layering model comparison](docs/LAYERING_MODEL_COMPARISON.md), [November 21 vision comparison](docs/MODEL_COMPARISON.md) and maintained [current verification state](PROJECT_CONTEXT.md#13-verification-and-evidence). Earlier evidence is in the [web/iOS report](docs/WEB_IOS_ACCEPTANCE.md) and [November 12 acceptance report](docs/ACCEPTANCE_REPORT.md).
 
 ```powershell
 npm.cmd run typecheck

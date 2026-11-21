@@ -1,0 +1,1087 @@
+{
+  "snapshotSha256": "3854da2c335a98fe0ec3bfa679b9a49deb38472598007f317d9dbf9ab2f3cebb",
+  "snapshots": [
+    {
+      "bottle": {
+        "id": "f01",
+        "variantId": "jo-malone-london-wood-sage-and-sea-salt-edc",
+        "brand": "Jo Malone London",
+        "name": "Wood Sage & Sea Salt",
+        "concentration": "EDC",
+        "notes": [
+          "Ambrette",
+          "Salt",
+          "Sage"
+        ],
+        "strength": 1,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "jo-malone-london-wood-sage-and-sea-salt-edc",
+        "brand": "Jo Malone London",
+        "name": "Wood Sage & Sea Salt",
+        "concentration": "EDC",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Ambrette",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          },
+          {
+            "name": "Salt",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          },
+          {
+            "name": "Sage",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [],
+        "links": [
+          {
+            "label": "Search Jomashop",
+            "url": "https://www.jomashop.com/search?q=Jo+Malone+London+Wood+Sage+%26+Sea+Salt+EDC"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.jomalone.com/product/25946/32241/colognes/wood-sage-sea-salt-cologne"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Jo Malone London",
+            "url": "https://www.jomalone.com/product/25946/32241/colognes/wood-sage-sea-salt-cologne",
+            "kind": "house"
+          },
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfume-database/perfumes/jo-malone-wood-sage-and-sea-salt",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Jo_Malone/Wood_Sage__Sea_Salt_Cologne",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "photo": {
+          "path": "/catalog/bottles/jo-malone-london-wood-sage-and-sea-salt-edc-c8223764db3c.jpg",
+          "caption": "Jo Malone London Wood Sage & Sea Salt EDC bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f02",
+        "variantId": "juliette-has-a-gun-not-a-perfume-edp",
+        "brand": "Juliette Has a Gun",
+        "name": "Not a Perfume",
+        "concentration": "EDP",
+        "notes": [
+          "Cetalox"
+        ],
+        "strength": 1,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "juliette-has-a-gun-not-a-perfume-edp",
+        "brand": "Juliette Has a Gun",
+        "name": "Not a Perfume",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Cetalox",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [],
+        "links": [
+          {
+            "label": "Search Jomashop",
+            "url": "https://www.jomashop.com/search?q=Juliette+Has+a+Gun+Not+a+Perfume+EDP"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.juliettehasagun.com/en/products/not-a-perfume-parfum"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Juliette Has a Gun",
+            "url": "https://www.juliettehasagun.com/en/products/not-a-perfume-parfum",
+            "kind": "house"
+          },
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/not-a-perfume-juliette-has-a-gun",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Juliette_Has_a_Gun/not-a-perfume-eau-de-parfum",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "photo": {
+          "path": "/catalog/bottles/juliette-has-a-gun-not-a-perfume-edp-d5bfe8cf36bc.jpg",
+          "caption": "Juliette Has a Gun Not a Perfume EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f03",
+        "variantId": "jo-malone-london-nectarine-blossom-and-honey-edc",
+        "brand": "Jo Malone London",
+        "name": "Nectarine Blossom & Honey",
+        "concentration": "EDC",
+        "notes": [
+          "Blackcurrant",
+          "Honey",
+          "Peach"
+        ],
+        "strength": 1,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "jo-malone-london-nectarine-blossom-and-honey-edc",
+        "brand": "Jo Malone London",
+        "name": "Nectarine Blossom & Honey",
+        "concentration": "EDC",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Blackcurrant",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          },
+          {
+            "name": "Honey",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          },
+          {
+            "name": "Peach",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [],
+        "links": [
+          {
+            "label": "Search Jomashop",
+            "url": "https://www.jomashop.com/search?q=Jo+Malone+London+Nectarine+Blossom+%26+Honey+EDC"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.jomalone.com/product/25946/10079/colognes/nectarine-blossom-honey-cologne"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Jo Malone London",
+            "url": "https://www.jomalone.com/product/25946/10079/colognes/nectarine-blossom-honey-cologne",
+            "kind": "house"
+          },
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfume-database/perfumes/jo-malone-nectarine-blossom-and-honey",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Jo_Malone/Nectarine_Blossom__Honey_Cologne",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "photo": {
+          "path": "/catalog/bottles/jo-malone-london-nectarine-blossom-and-honey-edc-cf3fa08df8e9.jpg",
+          "caption": "Jo Malone London Nectarine Blossom & Honey EDC bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f04",
+        "variantId": "maison-francis-kurkdjian-baccarat-rouge-540-edp",
+        "brand": "Maison Francis Kurkdjian",
+        "name": "Baccarat Rouge 540",
+        "concentration": "EDP",
+        "notes": [
+          "Jasmine",
+          "Saffron",
+          "Ambergris",
+          "Cedar"
+        ],
+        "strength": 3,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "maison-francis-kurkdjian-baccarat-rouge-540-edp",
+        "brand": "Maison Francis Kurkdjian",
+        "name": "Baccarat Rouge 540",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Jasmine",
+            "stage": "top",
+            "sourceIds": [
+              "house",
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Saffron",
+            "stage": "top",
+            "sourceIds": [
+              "house",
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Ambergris",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Cedar",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 5,
+            "basis": "10–12 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 5,
+            "basis": "Very strong"
+          }
+        ],
+        "links": [
+          {
+            "label": "View on Fragrantica",
+            "url": "https://www.fragrantica.com/perfume/Maison-Francis-Kurkdjian/Baccarat-Rouge-540-33519.html"
+          },
+          {
+            "label": "View on Jomashop",
+            "url": "https://www.jomashop.com/maison-francis-kurkdjian-unisex-baccarat-rouge-540-edp-spray-1-2-oz-fragrances-3700559608654.html",
+            "kind": "jomashop-listing"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.franciskurkdjian.com/us-en/p/baccarat-rouge-540-eau-de-parfum-RA12232.html"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Maison Francis Kurkdjian",
+            "url": "https://www.franciskurkdjian.com/us-en/p/baccarat-rouge-540-eau-de-parfum-RA12232.html",
+            "kind": "house"
+          },
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/baccarat-rouge-540-maison-francis-kurkdjian",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "photo",
+            "publisher": "scentira.in",
+            "url": "https://scentira.in/products/maison-francis-kurkdijan-baccarat-rouge-540-eau-de-parfum",
+            "kind": "photo",
+            "credit": "Product photo via scentira.in · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2015,
+        "photo": {
+          "path": "/catalog/bottles/maison-francis-kurkdjian-baccarat-rouge-540-edp-b3dc4364282a.jpg",
+          "caption": "Baccarat Rouge 540 Eau de Parfum bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f05",
+        "variantId": "tom-ford-tobacco-vanille-edp",
+        "brand": "Tom Ford",
+        "name": "Tobacco Vanille",
+        "concentration": "EDP",
+        "notes": [
+          "Tobacco",
+          "Tonka bean"
+        ],
+        "strength": 3,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "tom-ford-tobacco-vanille-edp",
+        "brand": "Tom Ford",
+        "name": "Tobacco Vanille",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Tobacco",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Tonka bean",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 5,
+            "basis": "10–12 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 4,
+            "basis": "Strong"
+          }
+        ],
+        "links": [
+          {
+            "label": "View on Jomashop",
+            "url": "https://www.jomashop.com/tom-ford-unisex-tobacco-vanille-edp-spray-1-0-oz-fragrances-888066080705.html",
+            "kind": "jomashop-listing"
+          }
+        ],
+        "sources": [
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/tobacco-vanille-tom-ford",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Vanille_Eau_de_Parfum",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2007,
+        "photo": {
+          "path": "/catalog/bottles/tom-ford-tobacco-vanille-edp-2fbe5131321c.jpg",
+          "caption": "Tom Ford Tobacco Vanille EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f06",
+        "variantId": "tom-ford-oud-wood-edp",
+        "brand": "Tom Ford",
+        "name": "Oud Wood",
+        "concentration": "EDP",
+        "notes": [
+          "Cardamom",
+          "Amber",
+          "Oud",
+          "Tonka bean"
+        ],
+        "strength": 2,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "tom-ford-oud-wood-edp",
+        "brand": "Tom Ford",
+        "name": "Oud Wood",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Cardamom",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Amber",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Oud",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Tonka bean",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 3,
+            "basis": "5–7 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 3,
+            "basis": "Moderate"
+          }
+        ],
+        "links": [
+          {
+            "label": "View on Jomashop",
+            "url": "https://www.jomashop.com/tom-ford-private-blend-oud-wood-eau-de-parfum-spray-100ml-3-4oz-888066004510.html",
+            "kind": "jomashop-listing"
+          }
+        ],
+        "sources": [
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/oud-wood-tom-ford",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Wood_Eau_de_Parfum",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2007,
+        "photo": {
+          "path": "/catalog/bottles/tom-ford-oud-wood-edp-2a765c896187.jpg",
+          "caption": "Tom Ford Oud Wood EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f07",
+        "variantId": "dior-sauvage-edp",
+        "brand": "Dior",
+        "name": "Sauvage",
+        "concentration": "EDP",
+        "notes": [
+          "Bergamot",
+          "Vanilla"
+        ],
+        "strength": 2,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "dior-sauvage-edp",
+        "brand": "Dior",
+        "name": "Sauvage",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Bergamot",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          },
+          {
+            "name": "Vanilla",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "scento"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [],
+        "links": [
+          {
+            "label": "View on Fragrantica",
+            "url": "https://www.fragrantica.com/perfume/Dior/Dior-Sauvage-Eau-de-Parfum-48100.html"
+          },
+          {
+            "label": "View on Jomashop",
+            "url": "https://www.jomashop.com/christian-dior-fragrances-svgmes34-3-4oz.html",
+            "kind": "jomashop-listing"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html"
+          },
+          {
+            "label": "View on Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Dior",
+            "url": "https://www.dior.com/en_us/beauty/products/sauvage-eau-de-parfum-Y0785220.html",
+            "kind": "house"
+          },
+          {
+            "id": "release",
+            "publisher": "Dior 2018 annual report",
+            "url": "https://www.dior-finance.com/pdf/d/1/252/Rapport-annuel-au-31-decembre-2018.pdf",
+            "kind": "reference"
+          },
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/sauvage-eau-de-parfum-dior",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "community",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum",
+            "kind": "community"
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Dior/Sauvage_Eau_de_Parfum",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2018,
+        "photo": {
+          "path": "/catalog/bottles/dior-sauvage-edp-7253168d69fc.jpg",
+          "caption": "Dior Sauvage EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f08",
+        "variantId": "maison-margiela-replica-by-the-fireplace-edt",
+        "brand": "Maison Margiela",
+        "name": "Replica By the Fireplace",
+        "concentration": "EDT",
+        "notes": [
+          "Clove",
+          "Chestnut",
+          "Guaiac wood",
+          "Vanilla",
+          "Cashmeran"
+        ],
+        "strength": 2,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "maison-margiela-replica-by-the-fireplace-edt",
+        "brand": "Maison Margiela",
+        "name": "Replica By the Fireplace",
+        "concentration": "EDT",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Clove",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Chestnut",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Guaiac wood",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Vanilla",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Cashmeran",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 3,
+            "basis": "5–7 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 3,
+            "basis": "Moderate"
+          }
+        ],
+        "links": [
+          {
+            "label": "Search Jomashop",
+            "url": "https://www.jomashop.com/search?q=Maison+Margiela+Replica+By+the+Fireplace+EDT"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.maisonmargiela-fragrances.us/fragrances/replica-eau-de-toilette/replica-by-the-fireplace/MM005.html"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Maison Margiela",
+            "url": "https://www.maisonmargiela-fragrances.us/fragrances/replica-eau-de-toilette/replica-by-the-fireplace/MM005.html",
+            "kind": "house"
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Maison_Margiela/by-the-fireplace",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2015,
+        "photo": {
+          "path": "/catalog/bottles/maison-margiela-replica-by-the-fireplace-edt-97b204a4d354.jpg",
+          "caption": "Maison Margiela Replica By the Fireplace EDT bottle",
+          "sourceId": "photo"
+        },
+        "aliases": [
+          "By the Fireplace"
+        ]
+      }
+    },
+    {
+      "bottle": {
+        "id": "f09",
+        "variantId": "tom-ford-lost-cherry-edp",
+        "brand": "Tom Ford",
+        "name": "Lost Cherry",
+        "concentration": "EDP",
+        "notes": [
+          "Tonka bean"
+        ],
+        "strength": 2,
+        "ownership": "WISHLIST",
+        "profileKnown": true,
+        "available": true
+      },
+      "catalog": {
+        "id": "tom-ford-lost-cherry-edp",
+        "brand": "Tom Ford",
+        "name": "Lost Cherry",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Tonka bean",
+            "stage": "listed",
+            "sourceIds": [
+              "scento",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 4.5,
+            "basis": "8–10 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 4,
+            "basis": "Strong"
+          }
+        ],
+        "links": [
+          {
+            "label": "View on Jomashop",
+            "url": "https://www.jomashop.com/tom-ford-lost-cherry-eau-de-parfum-1-7oz-888066082341.html",
+            "kind": "jomashop-listing"
+          }
+        ],
+        "sources": [
+          {
+            "id": "scento",
+            "publisher": "Scento",
+            "url": "https://www.scento.com/perfumes/lost-cherry-tom-ford",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "Scento — Perfume Database. Matching notes selected and standardized."
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Lost_Cherry",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2018,
+        "photo": {
+          "path": "/catalog/bottles/tom-ford-lost-cherry-edp-5347d575667e.jpg",
+          "caption": "Tom Ford Lost Cherry EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    },
+    {
+      "bottle": {
+        "id": "f11",
+        "variantId": "chanel-bleu-de-chanel-edp",
+        "brand": "Chanel",
+        "name": "Bleu de Chanel",
+        "concentration": "EDP",
+        "notes": [
+          "Cedar",
+          "Musk",
+          "Sandalwood"
+        ],
+        "strength": 2,
+        "ownership": "OWNED",
+        "profileKnown": true,
+        "available": false
+      },
+      "catalog": {
+        "id": "chanel-bleu-de-chanel-edp",
+        "brand": "Chanel",
+        "name": "Bleu de Chanel",
+        "concentration": "EDP",
+        "checkedAt": "2026-11-09",
+        "notes": [
+          {
+            "name": "Cedar",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Musk",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          },
+          {
+            "name": "Sandalwood",
+            "stage": "listed",
+            "sourceIds": [
+              "house",
+              "mysecretcart"
+            ]
+          }
+        ],
+        "performance": [],
+        "ratings": [
+          {
+            "facet": "longevity",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 4.5,
+            "basis": "8–10 h"
+          },
+          {
+            "facet": "sillage",
+            "sourceId": "mysecretcart",
+            "kind": "estimate",
+            "score": 4,
+            "basis": "Strong"
+          }
+        ],
+        "links": [
+          {
+            "label": "View on Fragrantica",
+            "url": "https://www.fragrantica.com/perfume/Chanel/Bleu-de-Chanel-Eau-de-Parfum-25967.html"
+          },
+          {
+            "label": "Search Jomashop",
+            "url": "https://www.jomashop.com/search?q=Chanel+Bleu+de+Chanel+EDP"
+          },
+          {
+            "label": "View official page",
+            "url": "https://www.chanel.com/us/fragrance/p/107360/bleu-de-chanel-eau-de-parfum-spray/"
+          },
+          {
+            "label": "View on Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Eau_de_Parfum"
+          }
+        ],
+        "sources": [
+          {
+            "id": "house",
+            "publisher": "Chanel",
+            "url": "https://www.chanel.com/us/fragrance/p/107360/bleu-de-chanel-eau-de-parfum-spray/",
+            "kind": "house"
+          },
+          {
+            "id": "mysecretcart",
+            "publisher": "MySecretCart",
+            "url": "https://mysecretcart.com/fragrance-study",
+            "kind": "reference",
+            "license": {
+              "name": "CC BY 4.0",
+              "url": "https://creativecommons.org/licenses/by/4.0/"
+            },
+            "credit": "MySecretCart — Fragrance Study. Selected notes and typical wear estimates reformatted."
+          },
+          {
+            "id": "community",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Eau_de_Parfum",
+            "kind": "community"
+          },
+          {
+            "id": "photo",
+            "publisher": "Parfumo",
+            "url": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Eau_de_Parfum",
+            "kind": "photo",
+            "credit": "Curated main bottle image via Parfumo · JPEG optimized"
+          }
+        ],
+        "releaseYear": 2014,
+        "photo": {
+          "path": "/catalog/bottles/chanel-bleu-de-chanel-edp-9e12d9af3fa0.jpg",
+          "caption": "Chanel Bleu de Chanel EDP bottle",
+          "sourceId": "photo"
+        }
+      }
+    }
+  ]
+}
