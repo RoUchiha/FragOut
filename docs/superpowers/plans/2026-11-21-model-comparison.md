@@ -26,4 +26,6 @@ Goal: establish whether the available local Qwen3-VL 2B produces useful, grounde
 
 Protected release gate: required CI must pass on the final commit before merging. Track its exact-head result and release evidence under [PR 16](https://github.com/RoUchiha/FragOut/pull/16) and PROJECT_CONTEXT.md. Local final verification passed 312 tests, source/build/publication checks, private journeys and 173 security assertions. Final read-only review passed 68 focused tests and found no remaining issues. Raw Qwen weaknesses remain documented in [the report](../../MODEL_COMPARISON.md).
 
+Completed: final-head 80976fd passed both required runs; PR 16 merged as 905c925 and main Quality passed. That production deployment reached READY and read-only release/credential checks passed at 08:42 UTC November 21. Hosted 27B remains unconfigured and untested; no paid activation or production-data write was used.
+
 Limits: this is a small controlled benchmark, not statistical equivalence or proof of real-world selfie accuracy. Synthetic illustration inputs and catalog packshots do not replace physical-device/natural-photo acceptance. The reference is the session model, not a separately configured OpenAI API adapter.
