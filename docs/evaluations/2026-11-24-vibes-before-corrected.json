@@ -1,0 +1,1734 @@
+{
+  "at": "2026-11-24T19:16:13.120Z",
+  "engineVersion": "1.3.0",
+  "scope": "Fixed-profile heuristic direction audit; not an olfactory trial or new model inference.",
+  "rows": [
+    {
+      "id": "l01",
+      "mood": "HAPPY",
+      "vibe": "CLEAN",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f02"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l02",
+      "mood": "TIRED",
+      "vibe": "FRESH",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f07"
+        ],
+        "supporting": [
+          "f02",
+          "f03"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f07",
+        "f01",
+        "f02"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f07",
+            "f01"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        },
+        {
+          "ids": [
+            "f07",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        },
+        {
+          "ids": [
+            "f07",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f07",
+            "f01"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        },
+        {
+          "ids": [
+            "f07",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        },
+        {
+          "ids": [
+            "f07",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Tired · Fresh.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 86.45
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l03",
+      "mood": "SAD",
+      "vibe": "COZY",
+      "expectations": {
+        "primary": [
+          "f03",
+          "f05",
+          "f06",
+          "f07",
+          "f08"
+        ],
+        "supporting": [
+          "f01",
+          "f02"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f07",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Vanilla. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Vanilla. Experimental pairing. Scent direction: Sad · Cozy.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l04",
+      "mood": "CALM",
+      "vibe": "CLEAN",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f02"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Calm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Calm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Calm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Calm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l05",
+      "mood": "CONFIDENT",
+      "vibe": "MYSTERIOUS",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": [
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 4,
+      "outfitQuality": 4,
+      "solo": [
+        "f04",
+        "f06",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 98.56666666666666
+        },
+        {
+          "ids": [
+            "f04",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 98.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.23333333333333
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 98.56666666666666
+        },
+        {
+          "ids": [
+            "f04",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 98.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Confident · Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.23333333333333
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l06",
+      "mood": "ANY",
+      "vibe": "ROMANTIC",
+      "expectations": {
+        "primary": [
+          "f03",
+          "f04",
+          "f07",
+          "f08"
+        ],
+        "supporting": [
+          "f02"
+        ]
+      },
+      "bestAvailableDirection": 4,
+      "topQuality": 1,
+      "outfitQuality": 1,
+      "solo": [
+        "f07",
+        "f08",
+        "f01"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l07",
+      "mood": "ANY",
+      "vibe": "WARM",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f07",
+          "f08"
+        ],
+        "supporting": [
+          "f03",
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f07",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Vanilla. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Vanilla. Experimental pairing. Scent direction: Warm.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l08",
+      "mood": "ANY",
+      "vibe": "BOLD",
+      "expectations": {
+        "primary": [
+          "f04",
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f04",
+        "f05"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f04"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 83.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Tonka bean. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 83.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 80.23333333333333
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f04"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 83.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Both profiles list Tonka bean. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 83.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Bold.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 80.23333333333333
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l09",
+      "mood": "ANY",
+      "vibe": "FRESH",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f07"
+        ],
+        "supporting": [
+          "f02",
+          "f03"
+        ]
+      },
+      "bestAvailableDirection": 4,
+      "topQuality": 4,
+      "outfitQuality": 4,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 85.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f09"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "mood": "ANY",
+      "vibe": "MYSTERIOUS",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": [
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f08",
+        "f04"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f08",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        },
+        {
+          "ids": [
+            "f06",
+            "f01"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.45
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f08",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        },
+        {
+          "ids": [
+            "f06",
+            "f01"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Combines supplied profile and supplied profile. Experimental pairing. Scent direction: Mysterious.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.45
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f05"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "cases": 10,
+    "backendBestFirst": 8,
+    "outfitBestFirst": 8
+  },
+  "rubricCorrection": {
+    "case": "l03",
+    "addedPrimary": [
+      "f07"
+    ],
+    "addedSupporting": [
+      "f01"
+    ],
+    "reason": "Supplied Vanilla and Ambrette were omitted from the cozy note rubric. Original choices, scores, explanations and raw model outputs are unchanged; original snapshots remain retained.",
+    "sourceArtifact": "2026-11-24-vibes-before.json",
+    "sourceSha256": "ba8da9d28897f6aaab3f714dd1834623a59d17d32b063a2c8dade541438f6ab1",
+    "reclassifiedAt": "2026-11-24T19:57:57.189Z"
+  }
+}
