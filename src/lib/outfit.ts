@@ -1,6 +1,7 @@
 import {z} from 'zod';
 import {rankSolo,rankCombos} from './engine.ts';
-import {layeringReferenceFor} from './layering-catalog.ts';
+import {createLayeringReferenceLookup} from './layering-catalog.ts';
+import {createIntentRanking} from './intent.ts';
 import type {Bottle,OutfitProfile,PairRecord,Preferences,WearContext} from './types.ts';
 const strings=(max:number,length:number)=>z.array(z.string().trim().max(length)).max(max);
 export const outfitSchema=z.object({summary:z.string().trim().max(300),garments:strings(10,80),colors:strings(8,30),styleTags:z.array(z.enum(['casual','tailored','minimal','sporty','evening','streetwear','romantic','outdoors'])).max(8),formality:z.enum(['casual','smart','formal']),palette:z.enum(['light','dark','bright','neutral','mixed']),hasOutfit:z.boolean(),uncertainty:strings(5,160)}).strict();
@@ -73,11 +74,12 @@ function styleScore(b:Bottle,p:OutfitProfile){
 }
 export function rankForOutfit(bottles:Bottle[],context:WearContext,prefs:Preferences,profile:OutfitProfile,mode:'solo'|'combo'|'both',evidenceMode:'evidence'|'single'|'experimental',records:PairRecord[],excludedPairs:string[][]=[]){
  if(!profile.hasOutfit)return {solo:[],combos:[]};
+ const intentRanking=createIntentRanking(context);
  const solo=mode==='combo'?[]:rankSolo(bottles,context,prefs,100).map(r=>{
   const style=styleScore(r.bottle,profile);
   const reason=style>0?'Style heuristic uses your reviewed clothing details and this fragrance profile.':'Uses your fragrance profile, occasion and preferences.';
   return {...r,score:r.score+style,reasons:[...r.reasons,{ruleId:'v1.outfit',text:reason}]};
- }).sort((a,b)=>b.score-a.score).slice(0,3);
- const combos=mode==='solo'?[]:rankCombos(bottles,context,prefs,evidenceMode,records,excludedPairs,Number.MAX_SAFE_INTEGER,undefined,layeringReferenceFor).map(r=>({...r,score:r.score+(styleScore(r.a,profile)+styleScore(r.b,profile))/2})).sort((a,b)=>b.score-a.score).slice(0,3);
+ }).sort(intentRanking.outfitSolo).slice(0,3);
+ const combos=mode==='solo'?[]:rankCombos(bottles,context,prefs,evidenceMode,records,excludedPairs,3,undefined,createLayeringReferenceLookup(),b=>styleScore(b,profile));
  return {solo,combos};
 }
