@@ -10,7 +10,7 @@ import {demoBottles,defaultContext,defaultPreferences} from '../src/lib/seed.ts'
 const scenarios=[
  ['l01','HAPPY','CLEAN',23,['f01','f02'],[]],
  ['l02','TIRED','FRESH',29,['f01','f07'],['f02','f03']],
- ['l03','SAD','COZY',17,['f03','f05','f06','f08'],['f02']],
+ ['l03','SAD','COZY',17,['f03','f05','f06','f07','f08'],['f01','f02']],
  ['l04','CALM','CLEAN',22,['f01','f02'],[]],
  ['l05','CONFIDENT','MYSTERIOUS',12,['f05','f06','f08'],['f04']],
  ['l06','ANY','ROMANTIC',22,['f03','f04','f07','f08'],['f02']],
