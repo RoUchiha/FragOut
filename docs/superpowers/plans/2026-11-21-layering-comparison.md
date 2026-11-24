@@ -21,6 +21,10 @@ Execute inline; the user asked both existing models for layering combinations ac
 - [x] Prepare fixed catalog-backed inputs and independent valid-pair oracle; record hashes before models run.
 - [x] Obtain actual local Qwen and blind 6.1 Sol proposals; preserve failures and two Qwen repeats.
 - [x] Score, manually audit factual claims and publish a comparison with actual examples and limitations.
-- [ ] Update PROJECT_CONTEXT.md, run appropriate checks, obtain read-only review and protected CI before integrating the report/tools. No application behavior or native release change is planned.
+- [x] Update PROJECT_CONTEXT.md, run appropriate local checks and obtain read-only review of the report/tools. No application behavior or native release change is planned.
+
+Protected release gate: [PR 18](https://github.com/RoUchiha/FragOut/pull/18) may merge only after required CI passes on its final head. The PR records that exact-head outcome; do not bypass branch protection.
 
 Outcome: raw similarity criterion failed (12.5% mean three-slot overlap across eight discretionary cases, no same first pair; Qwen violates three abstention controls). Comma-list diagnostics were added after inspection solely to distinguish supplied-note formatting from unsupported ingredients; they do not relax the original criterion or alter model prompts/outputs. All 14 cases and both repeats were preserved without prompt tuning or reruns for a better score. Nine focused tests and the full 321-test suite plus TypeScript passed. See the direct report for the up-to-three quantity caveat and the distinction from prior deterministic app ranking.
+
+November 24 UTC review follow-up: selected-bottle eligibility now precedes edition normalization, malformed model data produces a failed report instead of a scanner crash, every request rejects redirects, and even-sized median averages its middle observations. Jaccard is labeled as comparing eligible returned pairs. All fixes had failing-then-passing regressions; 13 focused tests, the full 325-test suite and TypeScript pass. Regrading preserved every original case/proposal/hash and primary result; only median calculation and explanatory metric labeling changed. No inference was rerun.

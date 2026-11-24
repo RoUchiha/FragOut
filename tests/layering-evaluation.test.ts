@@ -24,6 +24,20 @@ test('layering constraints reject wishlist, unknown, empty, strong and avoided-n
  assert.equal(evaluateLayering(output([combo('a-copy','b')]),collection,{...context,rejectedPairs:[['a','b']]}).constraintsValid,false);
 });
 
+test('an eligible edition alias cannot hide a selected bottle that is excluded or ineligible',()=>{
+ const quiet={...context,occasion:'WORK',excludedNotes:['Vanilla']};
+ for(const extra of [{available:false},{ownership:'WISHLIST'},{profileKnown:false},{notes:['Vanilla']},{strength:3},{strength:2}]){
+  const bottles=collection.map(b=>b.id==='a-copy'?{...b,...extra}:b);
+  assert.ok(eligiblePairs(bottles,quiet).includes(pairKey(bottles,'a','b')!));
+  const result=evaluateLayering(output([combo('a-copy','b')]),bottles,quiet);
+  assert.equal(result.constraintsValid,false,JSON.stringify(extra));assert.deepEqual(result.pairKeys,[]);
+ }
+ const excluded={...quiet,excludedIds:['a-copy']};
+ assert.ok(eligiblePairs(collection,excluded).includes(pairKey(collection,'a','b')!));
+ assert.equal(evaluateLayering(output([combo('a-copy','b')]),collection,excluded).constraintsValid,false);
+ assert.equal(evaluateLayering(output([combo('a','b')]),collection,excluded).constraintsValid,true);
+});
+
 test('note citations must belong to the corresponding bottle, independently of valid pair IDs',()=>{
  const c=[bottle('a',{notes:['Sage']}),bottle('b',{notes:['Musk']})];
  assert.equal(evaluateLayering(output([combo('a','b',{noteA:'Sage',noteB:'Musk'})]),c,context).notesValid,true);

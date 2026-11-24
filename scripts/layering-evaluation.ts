@@ -4,21 +4,25 @@ export interface LayerBottle {id:string;variantId:string;brand:string;name:strin
 export interface LayerContext {occasion:string;policy:string;maxStrength:number;excludedNotes:string[];excludedIds:string[];rejectedPairs:string[][];evidenceOnly:boolean}
 export const layeringSchema=z.object({combos:z.array(z.object({a:z.string().min(1).max(60),b:z.string().min(1).max(60),noteA:z.string().min(1).max(80),noteB:z.string().min(1).max(80),why:z.string().min(1).max(160)}).strict()).max(3),message:z.string().max(160)}).strict();
 const normal=(value:string)=>value.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().trim();
+const quietContext=(context:LayerContext)=>context.policy==='LOW_SCENT'||['GYM','WORK','DATE'].includes(context.occasion);
+function eligibleBottle(bottle:LayerBottle,context:LayerContext){
+ const light=context.policy==='LOW_SCENT'||context.occasion==='GYM';
+ const excluded=new Set(context.excludedNotes.map(normal));
+ return context.policy!=='NO_FRAGRANCE'&&!context.evidenceOnly&&bottle.ownership==='OWNED'&&bottle.profileKnown&&bottle.available&&bottle.notes.length>0&&bottle.strength<=context.maxStrength&&(!light||bottle.strength<=1)&&(!quietContext(context)||bottle.strength<=2)&&!context.excludedIds.includes(bottle.id)&&!bottle.notes.some(note=>excluded.has(normal(note)));
+}
+const pairStrengthAllowed=(a:LayerBottle,b:LayerBottle,context:LayerContext)=>!quietContext(context)||a.strength+b.strength<=2;
 export function pairKey(collection:LayerBottle[],a:string,b:string){
  const left=collection.find(item=>item.id===a),right=collection.find(item=>item.id===b);
  return !left||!right||left.variantId===right.variantId?null:JSON.stringify([left.variantId,right.variantId].sort());
 }
 export function eligiblePairs(collection:LayerBottle[],context:LayerContext){
  if(context.policy==='NO_FRAGRANCE'||context.evidenceOnly)return [];
- const light=context.policy==='LOW_SCENT'||context.occasion==='GYM';
- const quiet=light||['WORK','DATE'].includes(context.occasion);
- const excluded=new Set(context.excludedNotes.map(normal));
- const bottles=collection.filter(b=>b.ownership==='OWNED'&&b.profileKnown&&b.available&&b.notes.length&&b.strength<=context.maxStrength&&(!light||b.strength<=1)&&(!quiet||b.strength<=2)&&!context.excludedIds.includes(b.id)&&!b.notes.some(n=>excluded.has(normal(n))));
+ const bottles=collection.filter(b=>eligibleBottle(b,context));
  const rejected=new Set(context.rejectedPairs.map(([a,b])=>pairKey(collection,a,b)));
  const pairs=new Set<string>();
  for(let i=0;i<bottles.length;i++)for(let j=i+1;j<bottles.length;j++){
   const a=bottles[i],b=bottles[j],key=pairKey(collection,a.id,b.id);
-  if(key&&!rejected.has(key)&&(!quiet||a.strength+b.strength<=2))pairs.add(key);
+  if(key&&!rejected.has(key)&&pairStrengthAllowed(a,b,context))pairs.add(key);
  }
  return [...pairs].sort();
 }
@@ -29,7 +33,9 @@ export function evaluateLayering(raw:unknown,collection:LayerBottle[],context:La
  let firstPair:string|null=null;
  for(const [index,combo] of parsed.data.combos.entries()){
   const key=pairKey(collection,combo.a,combo.b);
-  if(!key||!eligible.includes(key))violations.push('ineligible_pair:'+combo.a+'+'+combo.b);
+  const selectedA=collection.find(b=>b.id===combo.a),selectedB=collection.find(b=>b.id===combo.b);
+  const selectedAllowed=selectedA&&selectedB&&eligibleBottle(selectedA,context)&&eligibleBottle(selectedB,context)&&pairStrengthAllowed(selectedA,selectedB,context);
+  if(!selectedAllowed||!key||!eligible.includes(key))violations.push('ineligible_pair:'+combo.a+'+'+combo.b);
   else if(pairKeys.includes(key))violations.push('duplicate_pair:'+combo.a+'+'+combo.b);
   else{pairKeys.push(key);if(index===0)firstPair=key;}
   for(const [id,note] of [[combo.a,combo.noteA],[combo.b,combo.noteB]]){

@@ -21,7 +21,7 @@ The [plan and criteria](superpowers/plans/2026-11-21-layering-comparison.md) wer
 | Shared valid pairs across discretionary comparison slots | **3/24 = 12.5%** |
 | Discretionary cases with at least one shared pair | **2/8 = 25%** |
 | Same first valid pair, discretionary cases | **0/8** |
-| Mean returned-set Jaccard, discretionary cases | **10.4%** |
+| Mean eligible returned-set Jaccard, discretionary cases | **10.4%** |
 | Valid JSON/schema | Qwen **14/14**; Sol **14/14** |
 | All pair constraints respected in a case | Qwen **7/14**; Sol **14/14** |
 | Correct abstention on three zero-eligible-pair controls | Qwen **0/3**; Sol **3/3** |
@@ -32,7 +32,7 @@ The [plan and criteria](superpowers/plans/2026-11-21-layering-comparison.md) wer
 
 The single-note result needs care: Qwen mostly copied entire note lists into fields requesting **one** note. It does **not** mean every cited ingredient was invented. Splitting those lists diagnostically leaves one case with an unsupported note: Qwen assigned Tobacco to an unidentified sample whose profile had no notes. The stricter original citation criterion remains failed. Some explanations also mix in unselected fragrances, independently of this formatting issue.
 
-The prompt permits **up to three** pairs. Returning fewer can be a valid cautious answer; the three-slot completeness target is a conservative comparison criterion, not a safety/schema violation. Returned-set Jaccard separately measures agreement without assuming all slots were filled. Similarity still fails on pair selection and safety constraints, regardless of the quantity or citation-format criteria.
+The prompt permits **up to three** pairs. Returning fewer can be a valid cautious answer; the three-slot completeness target is a conservative comparison criterion, not a safety/schema violation. Eligible returned-set Jaccard separately measures agreement without assuming all slots were filled. Its union excludes ineligible selections; those still fail constraint compliance. It is not a raw-output set metric. Similarity still fails on pair selection and safety constraints, regardless of the quantity or citation-format criteria.
 
 ## Actual pair choices
 
@@ -91,7 +91,7 @@ The hostile response echoes a request to claim external verification/12-hour per
 
 Full raw JSON proposals, per-case validation, hashes, token counts and repeats: [layering results](evaluations/2026-11-21-layering.json). Catalog/source metadata used to prepare the cards: [frozen catalog snapshot](evaluations/2026-11-21-layering-catalog.json). Snapshot SHA-256: `3854da2c335a98fe0ec3bfa679b9a49deb38472598007f317d9dbf9ab2f3cebb`.
 
-Qwen's 14 primary calls had **19.45 s median / 22.93 s p95** on this PC. Source checks ran during part of the experiment, so these are observed elapsed times, not an isolated latency benchmark. Prompts used 1,174–1,197 tokens and outputs 117–339 tokens; all 16 calls reported `stop`, with no execution errors. They did not hit the 700-token output limit. Many explanation fields still end mid-sentence within the 160-character schema bound. There is no comparable Sol API latency measurement.
+Qwen's 14 primary calls had **19.40 s median / 22.93 s p95** on this PC. The median averages the two middle observations: 19,402.5 ms. Source checks ran during part of the experiment, so these are observed elapsed times, not an isolated latency benchmark. Prompts used 1,174–1,197 tokens and outputs 117–339 tokens; all 16 calls reported `stop`, with no execution errors. They did not hit the 700-token output limit. Many explanation fields still end mid-sentence within the 160-character schema bound. There is no comparable Sol API latency measurement.
 
 ```powershell
 # Node 24; existing dependencies; a NEW empty directory outside the repository.
@@ -106,4 +106,6 @@ node --experimental-strip-types --test tests/layering-evaluation.test.ts tests/l
 
 The runner refuses overwriting existing results and nonlocal model routing. It verifies input fingerprints, recorded weights/settings, completed coverage/repeats, catalog snapshot integrity and identical grading facts. Future catalog updates can produce a different snapshot; use this change's recorded snapshot/revision when comparing historical results. The session reference is not an unattended API-reproduction mechanism.
 
-Source verification passed **321 automated tests** and TypeScript. Independent read-only review and protected CI govern integration of the offline evaluator/report. Production app behavior, provider configuration, paid switch and native bundles were not changed by this follow-up. **Do not replace the app's eligibility/source checks with raw local 2B Qwen layering output.** A separately configured stronger hosted model needs this same test before any quality claim.
+During the November 23 local / November 24 UTC resumption, independent review found two evaluator issues: a selected ineligible bottle could inherit eligibility from another bottle of the same edition, and malformed schema-invalid output could crash claim scanning. Both were reproduced with failing tests and fixed. Metadata redirects now fail closed, and the even-sized timing median was corrected. Regrading preserves all recorded case scores, inputs, proposals and the failed similarity finding; no model inference was repeated.
+
+Source verification passed **325 automated tests**, including **13 focused scorer/runner tests**, and TypeScript. Independent read-only review and protected [PR 18](https://github.com/RoUchiha/FragOut/pull/18) govern integration of the offline evaluator/report. Production app behavior, provider configuration, paid switch and native bundles were not changed by this follow-up. **Do not replace the app's eligibility/source checks with raw local 2B Qwen layering output.** A separately configured stronger hosted model needs this same test before any quality claim.
