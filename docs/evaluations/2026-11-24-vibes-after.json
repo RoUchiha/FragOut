@@ -1,0 +1,1724 @@
+{
+  "at": "2026-11-24T19:37:16.713Z",
+  "engineVersion": "1.4.0",
+  "scope": "Fixed-profile heuristic direction audit; not an olfactory trial or new model inference.",
+  "rows": [
+    {
+      "id": "l01",
+      "mood": "HAPPY",
+      "vibe": "CLEAN",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f02"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l02",
+      "mood": "TIRED",
+      "vibe": "FRESH",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f07"
+        ],
+        "supporting": [
+          "f02",
+          "f03"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f01",
+        "f07",
+        "f02"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Fresh cues: Salt + Bergamot. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.45
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Blackcurrant. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.4
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Fresh cues: Salt + Bergamot. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.45
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Blackcurrant. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 91.4
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l03",
+      "mood": "SAD",
+      "vibe": "COZY",
+      "expectations": {
+        "primary": [
+          "f03",
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": [
+          "f02"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f03",
+        "f06",
+        "f07"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f03",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Tonka bean. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        },
+        {
+          "ids": [
+            "f03",
+            "f07"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        },
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Chestnut. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f03",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Tonka bean. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        },
+        {
+          "ids": [
+            "f03",
+            "f07"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        },
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Cozy cues: Honey + Chestnut. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 103.45
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l04",
+      "mood": "CALM",
+      "vibe": "CLEAN",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f02"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 106.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 106.9
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Ambrette. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Clean cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l05",
+      "mood": "CONFIDENT",
+      "vibe": "MYSTERIOUS",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": [
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f05",
+        "f06",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Tobacco + Oud. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.56666666666666
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Tobacco + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.23333333333333
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Tobacco + Oud. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.56666666666666
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Tobacco + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.56666666666666
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.23333333333333
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l06",
+      "mood": "ANY",
+      "vibe": "ROMANTIC",
+      "expectations": {
+        "primary": [
+          "f03",
+          "f04",
+          "f07",
+          "f08"
+        ],
+        "supporting": [
+          "f02"
+        ]
+      },
+      "bestAvailableDirection": 4,
+      "topQuality": 4,
+      "outfitQuality": 4,
+      "solo": [
+        "f03",
+        "f07",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f03",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Romantic cues: Honey + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f03",
+            "f01"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Romantic cues: Honey. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f01"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          },
+          "reason": "Romantic cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 90.4
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f03",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Romantic cues: Honey + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f03",
+            "f01"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Romantic cues: Honey. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 94.9
+        },
+        {
+          "ids": [
+            "f02",
+            "f01"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          },
+          "reason": "Romantic cues: Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 90.4
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l07",
+      "mood": "ANY",
+      "vibe": "WARM",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f07",
+          "f08"
+        ],
+        "supporting": [
+          "f03",
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f07",
+        "f08"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Cardamom + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Cardamom + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Cardamom + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Cardamom + Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f07",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Warm cues: Vanilla. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f04"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f07"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f03",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f03",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "l08",
+      "mood": "ANY",
+      "vibe": "BOLD",
+      "expectations": {
+        "primary": [
+          "f04",
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": []
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f04",
+        "f05",
+        "f06"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f04",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.9
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Amber. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 92.56666666666666
+        },
+        {
+          "ids": [
+            "f04",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Clove. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 92.56666666666666
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f04",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 95.9
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Amber. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 92.56666666666666
+        },
+        {
+          "ids": [
+            "f04",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Bold cues: Saffron + Clove. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 92.56666666666666
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "l09",
+      "mood": "ANY",
+      "vibe": "FRESH",
+      "expectations": {
+        "primary": [
+          "f01",
+          "f07"
+        ],
+        "supporting": [
+          "f02",
+          "f03"
+        ]
+      },
+      "bestAvailableDirection": 4,
+      "topQuality": 4,
+      "outfitQuality": 4,
+      "solo": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Blackcurrant. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Fresh cues: Salt. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Cetalox. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          },
+          "reason": "Fresh cues: Salt + Blackcurrant. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 99.4
+        },
+        {
+          "ids": [
+            "f01",
+            "f04"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          },
+          "reason": "Fresh cues: Salt. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 88
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f09"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f01",
+            "f02"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        },
+        {
+          "ids": [
+            "f02",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "mood": "ANY",
+      "vibe": "MYSTERIOUS",
+      "expectations": {
+        "primary": [
+          "f05",
+          "f06",
+          "f08"
+        ],
+        "supporting": [
+          "f04"
+        ]
+      },
+      "bestAvailableDirection": 6,
+      "topQuality": 6,
+      "outfitQuality": 6,
+      "solo": [
+        "f06",
+        "f08",
+        "f05"
+      ],
+      "backend": [
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        },
+        {
+          "ids": [
+            "f08",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Guaiac wood + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        }
+      ],
+      "outfit": [
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Guaiac wood. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 97
+        },
+        {
+          "ids": [
+            "f06",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Oud + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        },
+        {
+          "ids": [
+            "f08",
+            "f05"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          },
+          "reason": "Mysterious cues: Guaiac wood + Tobacco. Experimental pairing.",
+          "tier": "model_hypothesis",
+          "sources": [],
+          "score": 93.55000000000001
+        }
+      ],
+      "rawQwen": [
+        {
+          "ids": [
+            "f01",
+            "f03"
+          ],
+          "direction": {
+            "primary": 0,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f06"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f01",
+            "f08"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 0
+          }
+        }
+      ],
+      "rawSol": [
+        {
+          "ids": [
+            "f05",
+            "f06"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f06",
+            "f08"
+          ],
+          "direction": {
+            "primary": 2,
+            "supporting": 0
+          }
+        },
+        {
+          "ids": [
+            "f04",
+            "f05"
+          ],
+          "direction": {
+            "primary": 1,
+            "supporting": 1
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "cases": 10,
+    "backendBestFirst": 10,
+    "outfitBestFirst": 10
+  },
+  "baseline": {
+    "cases": 10,
+    "backendBestFirst": 7,
+    "outfitBestFirst": 7
+  }
+}

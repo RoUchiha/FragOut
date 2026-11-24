@@ -1,6 +1,6 @@
 # FragOut: maintained project context and chat handoff
 
-**Last context review:** 2026-11-24 UTC (November 23 in America/Chicago).
+**Last context review:** 2026-11-24 UTC (November 24 in America/Chicago).
 
 **Last substantive application release:** PR [#16](https://github.com/RoUchiha/FragOut/pull/16), main commit **905c925b4ae07c18217938053a7c8a8d89f6c1e3**, reviewed feature head **80976fde5c924100aac7bab33221bae76f887d3b** with the same tree. Later documentation changes record the verified release outcome. Use Git and the live health endpoint for the exact current documentation/deployment SHA; do not try to put this file's own commit hash inside itself.
 
@@ -112,7 +112,7 @@ Do not rebuild over a running private test server. Identify and stop only this c
 | Typed/dictated outfits | Verified offline clothing parser; no hosted inference required under Qwen. Recommendations remain grounded in owned bottles and recorded source evidence. |
 | Private test | Separate local SQLite/key, HTTPS private Wi-Fi server at 192.168.68.82:3444; local loopback Qwen. Depends on this PC and certificate trust. |
 | Backups | Dedicated SELECT-only reader, encrypted local/off-site snapshots and encrypted vault escrow activated. Daily workflow configured for 06:17 UTC; successful initial manual run verified. |
-| Native clients | Web, Android and iOS JavaScript/Hermes exports passed for the November 21 comparison/fixes (PR 16). This is **not** evidence of a new signed APK/IPA or TestFlight/App Store delivery. |
+| Native clients | Web, Android and iOS JavaScript/Hermes exports passed again for the November 24 vibe-backend change. This is **not** evidence of a new signed APK/IPA or TestFlight/App Store delivery. |
 | Mobile store release | User chose TestFlight for iPhone testing. Signing, current device build/upload, Apple processing and physical-device acceptance still need their own verified release evidence. |
 | FragDex | 218 fully profiled, cross-checked editions with bundled bottle photos; broader searchable identity catalog; 241 reviewed dupe relationships; 249 Will It Layer source-pair references. Coverage is finite. |
 | Ads | Native AdMob banner integration exists; empty/unloaded slots collapse and receive no interaction. Live publisher configuration and device verification are separate. |
@@ -128,6 +128,8 @@ Do not rebuild over a running private test server. Identify and stop only this c
 The owner later requested this maintained handoff. Adding it does not authorize enabling paid AI, buying credits, accepting new terms, changing database hosting or making unrelated product changes.
 
 ## 4. User intent and settled product decisions
+
+**November 24 vibe tuning:** the user asks about broad scent directions and wants the production backend improved. [The detailed follow-up](docs/VIBE_GROUNDING.md) distinguishes partial fresh-direction overlap from reliable matching: the prior raw proposals have a primary requested-vibe cue in 15/26 Qwen pairs versus 28/30 Sol pairs across ten thematic cases. This is a heuristic note audit, not an olfactory trial. The raw-model acceptance failure remains unchanged. Engine 1.4.0 is implemented in intent.ts, engine.ts and outfit.ts: direct primary notes outrank supporting/family cues, whole-pair alignment leads secondary numeric scores, and the same comparator survives outfit/search reranking. Actual selected cues explain the pair; evidence/eligibility filters still run first. The fixed backend before/after audit improves from 7/10 to 10/10 best-available directions first, including after outfit styling. No new provider call, collection disclosure, paid activation, schema or model-weight change. Source checks pass (346 tests, root/mobile types, mobile lint, clean dependency audits). Independent review passed 74 focused tests and compatibility/source-equivalence checks. Web/native exports, final production build/publication/OCR checks, private HTTPS journeys (30 operational / 20 web / 17 mobile / 133 discovery), nine local mood/vibe API groups and 173 isolated security assertions pass; protected CI and release verification are pending. The old 100-bottle pair cutoff is repaired with all eligible candidates and bounded top-k results; outfit style scoring precedes the final limit, and catalog identity/dupe lookup caching is request-scoped. See [the plan](docs/superpowers/plans/2026-11-24-vibe-grounding.md).
 
 The app began from the supplied FragOut specification folder, copied into [docs/original-spec](docs/original-spec/README.md). The user subsequently approved following the specifications and delegated routine implementation decisions. Later requests refine or supersede earlier suggestions.
 

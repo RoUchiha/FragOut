@@ -63,15 +63,28 @@ function reference(entry:ImportedPair,dupeAdapted=false):LayeringReference {
  };
 }
 
+export function createLayeringReferenceLookup(){
+ // Scope identity/dupe work to this recommendation request, never user globals.
+ const cache=new WeakMap<Bottle,{ids:string[];named:ReturnType<typeof names>;directId:string|undefined}>();
+ const facts=(bottle:Bottle)=>{
+  let value=cache.get(bottle);
+  if(!value){value={ids:origins(bottle),named:names(bottle),directId:findPublicCatalogEdition(bottle)?.id};cache.set(bottle,value);}
+  return value;
+ };
+ return (a:Bottle,b:Bottle):LayeringReference|undefined=>{
+  const firstFacts=facts(a),secondFacts=facts(b);
+  for(const first of firstFacts.ids)for(const second of secondFacts.ids){
+   const entry=pairIndex.get(pairKey(first,second));
+   if(entry)return reference(entry,firstFacts.directId!==first||secondFacts.directId!==second);
+  }
+  for(const first of firstFacts.named)for(const second of secondFacts.named){
+   const entry=namedPairIndex.get(pairKey(first.key,second.key));
+   if(entry)return reference(entry,first.substitute||second.substitute);
+  }
+ };
+}
 export function layeringReferenceFor(a:Bottle,b:Bottle):LayeringReference|undefined {
- for(const first of origins(a))for(const second of origins(b)) {
-  const entry=pairIndex.get(pairKey(first,second));
-  if(entry)return reference(entry,findPublicCatalogEdition(a)?.id!==first||findPublicCatalogEdition(b)?.id!==second);
- }
- for(const first of names(a))for(const second of names(b)) {
-  const entry=namedPairIndex.get(pairKey(first.key,second.key));
-  if(entry)return reference(entry,first.substitute||second.substitute);
- }
+ return createLayeringReferenceLookup()(a,b);
 }
 
 export function searchLayeringCatalog(bottles:Bottle[],query='',ownedOnly=false,offset=0) {

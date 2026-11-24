@@ -45,6 +45,7 @@ jobs:
           npm run lint --prefix mobile
           npm run typecheck --prefix mobile
           npm test
+          node --experimental-strip-types scripts/check-vibe-grounding.mjs verify "$RUNNER_TEMP/fragout-vibe-audit.json" docs/evaluations/2026-11-24-vibes-before.json
       - name: Build web, native bundles and the isolated server artifact
         run: |
           npm run export:web --prefix mobile
@@ -68,6 +69,7 @@ jobs:
           node tests/http.mjs
           node tests/http-mobile.mjs
           node tests/http-discovery.mjs
+          node tests/http-intent.mjs
       - name: Verify privacy and session attack cases in an isolated fixture server
         run: |
           unset FRAGOUT_PUBLIC_ORIGIN

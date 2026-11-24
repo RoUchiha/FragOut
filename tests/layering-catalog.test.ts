@@ -4,7 +4,7 @@ import snapshot from '../catalog/layering.json' with {type:'json'};
 import extraDupes from '../catalog/layering-dupes.json' with {type:'json'};
 import {catalogEditionById} from '../src/lib/catalog-editions.ts';
 import {findCatalogDupes} from '../src/lib/catalog.ts';
-import {layeringReferenceFor,searchLayeringCatalog} from '../src/lib/layering-catalog.ts';
+import {createLayeringReferenceLookup,layeringReferenceFor,searchLayeringCatalog} from '../src/lib/layering-catalog.ts';
 import {rankCombos} from '../src/lib/engine.ts';
 import {defaultContext,defaultPreferences,demoBottles} from '../src/lib/seed.ts';
 import type {Bottle} from '../src/lib/types.ts';
@@ -49,6 +49,17 @@ test('a verified dupe substitution retains the source pair and never inherits it
  assert.equal(pair.tier,'dupe_adapted_hypothesis');
  assert.ok(pair.reference?.dupeAdapted);
  assert.deepEqual(rankCombos([dupe,second],defaultContext,defaultPreferences,'evidence',[]),[]);
+});
+
+test('request-scoped reference lookup preserves source identity and refreshes changed profiles between requests',()=>{
+ const mutable={...first},lookup=createLayeringReferenceLookup();
+ const source=lookup(mutable,second);assert.ok(source);assert.equal(source.dupeAdapted,false);
+ assert.deepEqual(lookup(second,mutable),source);
+ const [alternative]=findCatalogDupes(first).alternatives;
+ const dupe={...first,...alternative,id:'request-dupe',variantId:'request-dupe'};
+ assert.equal(lookup(dupe,second)?.dupeAdapted,true);
+ mutable.brand='Unknown synthetic house';mutable.name='Unknown synthetic scent';
+ assert.equal(createLayeringReferenceLookup()(mutable,second),undefined);
 });
 
 test('layering search paginates without duplicates and scopes owned matches to its input collection',()=>{

@@ -14,7 +14,7 @@ import {findCatalogDupes,findCatalogProfile} from '@/lib/catalog';
 import {catalogEditionById,findPublicCatalogEdition} from '@/lib/catalog-editions';
 import {findAutomaticCatalogPhoto} from '@/lib/catalog-photo-selector';
 import {lookupFragellaRatings} from '@/lib/fragella';
-import {layeringReferenceFor,searchLayeringCatalog} from '@/lib/layering-catalog';
+import {createLayeringReferenceLookup,searchLayeringCatalog} from '@/lib/layering-catalog';
 import {imageSchema,validateImage,type ImageInput} from '@/lib/outfit';
 import {discoverCatalog,compareProfiles,similarCatalog} from '@/lib/catalog-discovery';
 import {journalCsv} from '@/lib/journal';
@@ -291,7 +291,7 @@ async function handleRequest(req:NextRequest){
       const soloPool = matching ? bottles.filter(bottle => matching.has(bottle.id)) : bottles;
       const solo = data.mode==='solo' ? rankSolo(soloPool,context,prefs) : [];
       const rejectedPairs = s.history.filter(event => event.reaction==='disliked' && event.bottleIds.length===2).map(event => event.bottleIds);
-      const combos = data.mode==='combo' ? rankCombos(bottles,context,prefs,data.evidenceMode,reviewedPairsFor(bottles),rejectedPairs,3,matching??undefined,layeringReferenceFor) : [];
+      const combos = data.mode==='combo' ? rankCombos(bottles,context,prefs,data.evidenceMode,reviewedPairsFor(bottles),rejectedPairs,3,matching??undefined,createLayeringReferenceLookup()) : [];
       if(!await isActive())return signInRequired();
       const requestId=await db.recordRecommendation(user.id,context,[...new Set([...solo.map(r=>r.bottle.id),...combos.flatMap(r=>[r.a.id,r.b.id])])]);
       return await privateReply({solo,combos,context,requestId,engine:ENGINE_VERSION});

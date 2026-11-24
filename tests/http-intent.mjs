@@ -35,7 +35,7 @@ try{
  check('intent changes pair order without manufacturing evidence',()=>{
   assert.deepEqual(evidence.body.combos,[]);assert.ok(experiments.body.combos.length>0);
   assert.ok(experiments.body.combos.every(r=>r.tier==='model_hypothesis'&&!r.sources.length&&owned.has(r.a.id)&&owned.has(r.b.id)&&r.a.strength+r.b.strength<=2));
-  assert.ok(experiments.body.combos.some(r=>/scent direction: .*clean/i.test(r.reason)));
+  assert.ok(experiments.body.combos.some(r=>/clean cues: /i.test(r.reason)));
  });
  assert.equal((await call('settings','PUT',{preferences:{...state.body.preferences,archiveOutfits:true}})).status,200);
  const analysis=await call('outfit/analyze','POST',{provider:'qwen',text:'White shirt and navy trousers'});assert.equal(analysis.status,200);
@@ -49,5 +49,27 @@ try{
  check('an explicitly archived outfit preserves intent without retaining a photo',()=>{
   assert.equal(look.status,201);assert.equal(look.body.context.mood,'SAD');assert.equal(look.body.context.vibe,'MYSTERIOUS');assert.equal(look.body.photoAvailable,false);
  });
+ // Independent profiles make a conflicting favorite/mood/style preference
+ // observable through both real recommendation routes, without any LLM call.
+ for(const bottle of auth.body.bottles)assert.equal((await call('bottles/'+bottle.id,'DELETE')).status,200);
+ const template={brand:'Synthetic intent test',concentration:'EDP',ownership:'OWNED',family:'Personal',strength:1,climate:'BALANCED',profileKnown:true,provenance:'personal',color:'#aabb88',shape:'square',sizeMl:100,fillPct:75,rating:1,favorite:false,memo:'Disposable API fixture'};
+ const added=[];
+ for(const [name,note,favorite] of [['Fresh A','Bergamot',true],['Fresh B','Neroli',true],['Cozy A','Chestnut',false],['Cozy B','Honey',false]]){
+  const bottle=await call('bottles','POST',{...template,name,notes:[note],favorite,rating:favorite?5:1,climate:favorite?'FRESH':'WARM'});
+  assert.equal(bottle.status,201);added.push(bottle.body);
+ }
+ const cozyIds=added.slice(2).map(b=>b.id).sort();
+ const assertCozyPair=result=>{
+  assert.equal(result.status,200);assert.deepEqual([result.body.combos[0].a.id,result.body.combos[0].b.id].sort(),cozyIds);
+  assert.match(result.body.combos[0].reason,/Chestnut.*Honey|Honey.*Chestnut/i);
+  assert.equal(result.body.combos[0].tier,'model_hypothesis');assert.deepEqual(result.body.combos[0].sources,[]);
+ };
+ const assertCozySolo=result=>{assert.equal(result.status,200);assert.ok(cozyIds.includes(result.body.solo[0].bottle.id));};
+ const intent={occasion:'GENERAL',evidenceMode:'experimental',mood:'TIRED',vibe:'COZY'};
+ const cozy=await call('recommend','POST',{...intent,mode:'combo'}),cozySolo=await call('recommend','POST',{...intent,mode:'solo'});
+ check('explicit cozy pair cues outrank conflicting favorites and tired mood on the API',()=>{assertCozyPair(cozy);assertCozySolo(cozySolo);});
+ const casual=await call('outfit/analyze','POST',{provider:'qwen',text:'White t-shirt, jeans and trainers'});assert.equal(casual.status,200);
+ const cozyOutfit=await call('outfit/recommend','POST',{...intent,mode:'both',analysisId:casual.body.id,profile:casual.body.profile});
+ check('outfit reranking preserves the same explicit cozy pair and factual explanation',()=>{assertCozyPair(cozyOutfit);assertCozySolo(cozyOutfit);});
  console.log(`${checks}/${checks} mood/vibe HTTP checks passed.`);
 }finally{if(token)await call('account','DELETE');}
